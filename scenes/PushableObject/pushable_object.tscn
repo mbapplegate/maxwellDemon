@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://beic3gevjusuj"]
+
+[ext_resource type="Script" path="res://scenes/PushableObject/pushable_object.gd" id="1_7cdvg"]
+[ext_resource type="Texture2D" uid="uid://bgymj3oij7qi8" path="res://tiles/pushable/pushableBase_BACKGROUND_NORMAL.png" id="2_agr0u"]
+[ext_resource type="Texture2D" uid="uid://cgjtrccysxn8j" path="res://tiles/pushable/pushableBase_NO_EN.png" id="3_115ma"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xg5wh"]
+size = Vector2(32, 32)
+
+[node name="PushableObject" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_7cdvg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_xg5wh")
+
+[node name="Background" type="Sprite2D" parent="."]
+texture = ExtResource("2_agr0u")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("3_115ma")
