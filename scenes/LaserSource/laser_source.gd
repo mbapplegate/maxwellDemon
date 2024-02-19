@@ -8,7 +8,7 @@ extends pushableObject
 
 var rng = RandomNumberGenerator.new()
 var laserParent= null
-const halfHeight = 4.0
+const halfHeight = 16.0
 
 func _ready():
 	#halfHeight = BARREL_WIDTH * self.scale.x
@@ -27,7 +27,7 @@ func _on_timer_timeout():
 	var instance 
 	var yLoc
 	if (isEnergized):
-		var barrelPosition = Vector2(barrelShape.position.x+(barrelShape.shape.size[0]/2.0+1.0)*cos(sprite.rotation),barrelShape.position.y+(barrelShape.shape.size[0]/2.0+1.0)*sin(sprite.rotation))
+		var barrelPosition = Vector2(barrelShape.position.x+(barrelShape.shape.size[0]/2.0+1.0)*cos(sprite.rotation),barrelShape.position.y-(barrelShape.shape.size[0]/2.0+1.0)*sin(sprite.rotation))
 		for i in numRaysPerTimeout:
 			if halfAngle > 0:
 				angle = rng.randf_range(-halfAngle,halfAngle)
@@ -36,10 +36,10 @@ func _on_timer_timeout():
 			#print("Timeout. Angle: ",angle)
 			instance = ray.instantiate()
 			instance.propDir = Vector2(cos(angle+sprite.rotation),sin(angle+sprite.rotation))
-			instance.position = to_global(Vector2(barrelPosition.x+yLoc*sin(sprite.rotation), barrelPosition.y+yLoc*cos(sprite.rotation)))
+			instance.position = to_global(Vector2(barrelPosition.x+yLoc*sin(sprite.rotation), -barrelPosition.y-yLoc*cos(sprite.rotation)))
+			print(barrelPosition)
 			instance.rayColor = rayColor
 			instance.scale[0] = 1.0/self.scale[0]
 			instance.scale[1] = 1.0 / self.scale[1]
-			print(instance.position)
 			if laserParent:
 				laserParent.add_child(instance)
