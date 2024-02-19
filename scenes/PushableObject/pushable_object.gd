@@ -80,12 +80,18 @@ func update_texture():
 		bg.texture = load("res://tiles/pushable/pushableBase_BACKGROUND_STATIC.png")
 	
 	if isEnergizeable:
-		if isEnergized:
-			sprite.texture = load("res://tiles/pushable/pushableBase_ON.png")
+		if isRotatable:
+			if isEnergized:
+				sprite.texture = load("res://tiles/pushable/pushableBase_ON.png")
+			else:
+				sprite.texture = load("res://tiles/pushable/pushableBase_OFF.png")
 		else:
-			sprite.texture = load("res://tiles/pushable/pushableBase_OFF.png")
+			if isEnergized:
+				sprite.texture = load("res://tiles/pushable/squareStage_ON.png")
+			else:
+				sprite.texture = load("res://tiles/pushable/squareStage_OFF.png")			
 	else:
-		sprite.texture = load("res://tiles/pushable/pushableBase_NO_EN.png")
+		sprite.texture = load("res://tiles/pushable/squareStage_NO_EN.png")
 			
 func rotateCW():
 	if isRotatable:

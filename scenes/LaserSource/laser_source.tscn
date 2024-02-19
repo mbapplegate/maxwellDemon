@@ -16,6 +16,7 @@ numRaysPerTimeout = 1
 rayColor = Vector3(1, 0, 1)
 
 [node name="barrelSprite" type="Sprite2D" parent="Sprite2D" index="0"]
+z_index = 1
 texture = ExtResource("2_h28ci")
 
 [node name="barrelArea" type="Area2D" parent="Sprite2D/barrelSprite" index="0"]
@@ -27,7 +28,7 @@ position = Vector2(-0.666667, -2.38419e-07)
 shape = SubResource("RectangleShape2D_g38jr")
 
 [node name="Timer" type="Timer" parent="." index="3"]
-wait_time = 0.25
+wait_time = 0.5
 autostart = true
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
