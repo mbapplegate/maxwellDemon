@@ -8,7 +8,7 @@ extends pushableObject
 
 var rng = RandomNumberGenerator.new()
 var laserParent= null
-const halfHeight = 16.0
+const halfHeight = 12.0
 
 func _ready():
 	#halfHeight = BARREL_WIDTH * self.scale.x
