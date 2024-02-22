@@ -44,9 +44,8 @@ scale = Vector2(1, 1)
 
 [node name="PushableObject" parent="." instance=ExtResource("4_qlahv")]
 position = Vector2(320, 256)
-isEnergizeable = false
+isEnergized = true
 
 [node name="PushableObject2" parent="." instance=ExtResource("4_qlahv")]
 position = Vector2(344, 416)
 isRotatable = false
-isEnergizeable = false

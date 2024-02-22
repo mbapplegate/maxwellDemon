@@ -11,8 +11,9 @@ const ROTATION_INCREMENT = deg_to_rad(15)
 @export var isEnergizeable = true
 @export var isEnergized = false
 
-@onready var sprite = $Sprite2D
+@onready var sprite = $Stage
 @onready var bg = $Background
+@onready var indicator = $Indicator
 
 var isActive = false
 
@@ -21,7 +22,6 @@ var isSliding : bool = false
 func initialize():
 	#print(position.snapped(Vector2(TILE_SIZE,TILE_SIZE)))
 	self.position = position.snapped(Vector2(TILE_SIZE,TILE_SIZE))
-	#self.position += Vector2.ONE * TILE_SIZE/2.0
 	update_texture()
 	
 func calculate_destination(dir:Vector2):
@@ -32,6 +32,7 @@ func calculate_destination(dir:Vector2):
 func push(motion:Vector2):
 	if isSliding or not isPushable:
 		return false
+		
 	if can_move(motion):
 		var tween = get_tree().create_tween()
 		
@@ -44,27 +45,9 @@ func push(motion:Vector2):
 		return true
 	else:
 		return false
-		
-func pull(motion:Vector2):
-	if isSliding or not isPushable:
-		return
-	var move_to = calculate_destination(motion.normalized())
-	#print("CanMove: ", can_move(move_to), ", ", move_to, ", ", motion)
-	
-	var tween = get_tree().create_tween()
-	tween.tween_property(self,"global_position",move_to,sliding_time)
-	tween.set_ease(Tween.EASE_OUT)
-	tween.set_trans(Tween.TRANS_CUBIC)
-	isSliding = true
-	await tween.finished
-	isSliding = false
-		
-#	else:
-#		return
 
 func can_move(localDestination:Vector2):
-	var coll = move_and_collide(localDestination, true)
-	if coll:
+	if move_and_collide(localDestination, true):
 		return false
 	else:
 		return true
@@ -84,6 +67,13 @@ func update_texture():
 	else:
 		sprite.texture = load("res://tiles/pushable/squareBase.png")
 	
+	if isEnergizeable:
+		if isEnergized:
+			indicator.texture = load("res://tiles/pushable/onButton.png")
+		else:
+			indicator.texture = load("res://tiles/pushable/offButton.png")
+	else:
+		indicator.texture = null
 	#if isEnergizeable:
 		#if isRotatable:
 			#if isEnergized:
@@ -95,8 +85,6 @@ func update_texture():
 				#sprite.texture = load("res://tiles/pushable/squareStage_ON.png")
 			#else:
 				#sprite.texture = load("res://tiles/pushable/squareStage_OFF.png")			
-	
-			
 func rotateCW():
 	if isRotatable:
 		sprite.rotation -= ROTATION_INCREMENT
