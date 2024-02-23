@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://ciwb1o3jgik5o"]
+[gd_scene load_steps=11 format=3 uid="uid://ciwb1o3jgik5o"]
 
 [ext_resource type="Script" path="res://worlds/test_world.gd" id="1_0f5qq"]
 [ext_resource type="Texture2D" uid="uid://is28jambjmci" path="res://tiles/world/opticalTable_32x32.png" id="1_ggdl5"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://ojfv06ceqv2a" path="res://scenes/Player/player.tscn" id="3_y4irg"]
 [ext_resource type="PackedScene" uid="uid://beic3gevjusuj" path="res://scenes/PushableObject/pushable_object.tscn" id="4_qlahv"]
 [ext_resource type="PackedScene" uid="uid://2ai0r6raovox" path="res://scenes/LaserSource/laser_source.tscn" id="6_afde2"]
+[ext_resource type="PackedScene" uid="uid://ciufjrc1fmyfi" path="res://scenes/FlatMirror/flat_mirror.tscn" id="7_pojc5"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3e3qs"]
 resource_name = "Table"
@@ -47,10 +48,11 @@ scale = Vector2(1, 1)
 position = Vector2(320, 256)
 isEnergized = true
 
-[node name="PushableObject2" parent="." instance=ExtResource("4_qlahv")]
-position = Vector2(344, 416)
-isRotatable = false
-
 [node name="LaserSource" parent="." instance=ExtResource("6_afde2")]
 position = Vector2(328, 576)
 scale = Vector2(1, 1)
+
+[node name="FlatMirror" parent="." instance=ExtResource("7_pojc5")]
+position = Vector2(586.832, 566.558)
+initialAngle = 45.0
+isEnergizeable = false

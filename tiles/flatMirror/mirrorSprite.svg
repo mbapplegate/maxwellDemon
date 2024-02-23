@@ -31,15 +31,15 @@
          id="stop2118" />
       <stop
          id="stop2132"
-         offset="0.66258729"
+         offset="0.59163702"
          style="stop-color:#c5c5c5;stop-opacity:1" />
       <stop
          id="stop2126"
-         offset="0.73443443"
+         offset="0.66348416"
          style="stop-color:#f0f0f0;stop-opacity:1" />
       <stop
          style="stop-color:#c5c5c5;stop-opacity:1;"
-         offset="0.80477256"
+         offset="0.73382229"
          id="stop2130" />
       <stop
          style="stop-color:#afafaf;stop-opacity:1"
@@ -51,10 +51,11 @@
        xlink:href="#linearGradient2122"
        id="linearGradient2128"
        gradientUnits="userSpaceOnUse"
-       x1="5.7272782"
-       y1="279.97214"
-       x2="27.782314"
-       y2="279.99579" />
+       x1="4.199048"
+       y1="280.06665"
+       x2="29.546778"
+       y2="280.06665"
+       gradientTransform="matrix(1.1690725,0,0,0.99859198,-2.7923249,0.3943386)" />
   </defs>
   <sodipodi:namedview
      id="base"
@@ -63,9 +64,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="7.919596"
-     inkscape:cx="58.552606"
-     inkscape:cy="67.475502"
+     inkscape:zoom="11.2"
+     inkscape:cx="45.623794"
+     inkscape:cy="80.474234"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -117,14 +118,14 @@
        inkscape:label=""
        inkscape:color="rgb(0,0,255)" />
     <sodipodi:guide
-       position="4.2333334,16.933333"
+       position="2.1166667,16.933333"
        orientation="1,0"
        id="guide2110"
        inkscape:locked="false"
        inkscape:label=""
        inkscape:color="rgb(0,0,255)" />
     <sodipodi:guide
-       position="29.633334,16.933333"
+       position="31.75,16.933333"
        orientation="1,0"
        id="guide2112"
        inkscape:locked="false"
@@ -153,7 +154,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -163,11 +164,13 @@
      id="layer1"
      transform="translate(0,-263.13333)">
     <rect
-       style="fill:url(#linearGradient2128);fill-opacity:1;stroke:#282828;stroke-width:0.06614583;stroke-linecap:butt;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       style="fill:url(#linearGradient2128);fill-opacity:1;stroke:#282828;stroke-width:0.13229167;stroke-linecap:butt;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        id="rect2104"
-       width="25.286732"
-       height="3.7722239"
-       x="4.2295475"
-       y="278.18054" />
+       width="29.633333"
+       height="4.2333179"
+       x="2.1166668"
+       y="277.95001"
+       inkscape:export-xdpi="102.61"
+       inkscape:export-ydpi="102.61" />
   </g>
 </svg>

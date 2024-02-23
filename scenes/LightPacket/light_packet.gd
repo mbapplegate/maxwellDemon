@@ -64,9 +64,9 @@ func _process(delta):
 		#If the ray is alive (hasn't left the scene or hit an absorber)
 		if not rayDying:
 			#AAAND it's hitting something new
-			if (ray.get_collider().get_parent() != lastCollider):
+			if (_get_functional_collider(ray.get_collider()) != lastCollider):
 				#Update the last collider
-				lastCollider = ray.get_collider().get_parent()
+				lastCollider = _get_functional_collider(ray.get_collider())
 				#Send a signal to that collider to handle the collision depending on what it is
 				if not is_connected("hitSomething",lastCollider._ray_hit):
 					connect("hitSomething",lastCollider._ray_hit)
@@ -87,6 +87,16 @@ func _process(delta):
 		
 	_has_ray_left_screen()
 
+#Walks up the tree until something with a _ray_hit method is found
+#If no method is found -- return null which I think means the object is ignored
+func _get_functional_collider(collider:Object):
+	while not collider.has_method("_ray_hit") or collider == get_tree().root:
+		collider = collider.get_parent()
+	if collider == get_tree().root:
+		return null
+	else:
+		return collider
+		
 func _has_ray_left_screen():
 	var frontPoint = self.to_global(line.get_point_position(numPoints-1))
 	if (frontPoint.x < 0) or (frontPoint.y < 0) or (frontPoint.x > winSize[0]) or (frontPoint.y > winSize[1]):

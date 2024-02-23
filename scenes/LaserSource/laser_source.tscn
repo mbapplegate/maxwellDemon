@@ -14,6 +14,7 @@ script = ExtResource("2_3djyt")
 halfAngle = 0.0
 numRaysPerTimeout = 1
 rayColor = Vector3(1, 0, 1)
+initialAngle = 0.0
 
 [node name="Timer" type="Timer" parent="." index="0"]
 wait_time = 0.5

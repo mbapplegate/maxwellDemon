@@ -74,17 +74,8 @@ func update_texture():
 			indicator.texture = load("res://tiles/pushable/offButton.png")
 	else:
 		indicator.texture = null
-	#if isEnergizeable:
-		#if isRotatable:
-			#if isEnergized:
-				#sprite.texture = load("res://tiles/pushable/pushableBase_ON.png")
-			#else:
-				#sprite.texture = load("res://tiles/pushable/pushableBase_OFF.png")
-		#else:
-			#if isEnergized:
-				#sprite.texture = load("res://tiles/pushable/squareStage_ON.png")
-			#else:
-				#sprite.texture = load("res://tiles/pushable/squareStage_OFF.png")			
+
+
 func rotateCW():
 	if isRotatable:
 		sprite.rotation -= ROTATION_INCREMENT

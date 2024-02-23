@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://ciufjrc1fmyfi"]
+
+[ext_resource type="PackedScene" uid="uid://beic3gevjusuj" path="res://scenes/PushableObject/pushable_object.tscn" id="1_najvj"]
+[ext_resource type="Script" path="res://scenes/FlatMirror/flat_mirror.gd" id="2_th8rt"]
+[ext_resource type="Texture2D" uid="uid://c4id4lu5fuxut" path="res://tiles/flatMirror/flatMirror_120px.png" id="3_a0il1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6aj0s"]
+size = Vector2(120, 14)
+
+[node name="FlatMirror" instance=ExtResource("1_najvj")]
+script = ExtResource("2_th8rt")
+reflectivity = 1.0
+initialAngle = 0.0
+
+[node name="Sprite2D" type="Sprite2D" parent="Stage" index="0"]
+texture = ExtResource("3_a0il1")
+
+[node name="Area2D" type="Area2D" parent="Stage/Sprite2D" index="0"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Stage/Sprite2D/Area2D" index="0"]
+shape = SubResource("RectangleShape2D_6aj0s")
