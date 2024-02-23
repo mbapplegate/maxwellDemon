@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://b6navnb20xork"]
+
+[ext_resource type="PackedScene" uid="uid://beic3gevjusuj" path="res://scenes/PushableObject/pushable_object.tscn" id="1_5pv0u"]
+[ext_resource type="Script" path="res://scenes/Lens_PlanoConvex/lens_plano_convex.gd" id="2_ljto7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b5uwf"]
+size = Vector2(4, 120)
+
+[node name="LensPlanoConvex" instance=ExtResource("1_5pv0u")]
+script = ExtResource("2_ljto7")
+
+[node name="flatFaceArea" type="Area2D" parent="Stage" index="0"]
+
+[node name="flatFaceShape" type="CollisionShape2D" parent="Stage/flatFaceArea" index="0"]
+position = Vector2(-16, 0)
+shape = SubResource("RectangleShape2D_b5uwf")
+
+[node name="curveFaceArea" type="Area2D" parent="Stage" index="1"]
+
+[node name="curveFaceShape" type="CollisionPolygon2D" parent="Stage/curveFaceArea" index="0"]
+polygon = PackedVector2Array(7, -57, 8, 61, 19, 58, 25, 46, 31, 29, 34, 10, 31, -14, 25, -40, 18, -54)
