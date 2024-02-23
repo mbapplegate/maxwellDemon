@@ -2,10 +2,10 @@
 
 [ext_resource type="PackedScene" uid="uid://beic3gevjusuj" path="res://scenes/PushableObject/pushable_object.tscn" id="1_moxnu"]
 [ext_resource type="Script" path="res://scenes/LaserSource/laser_source.gd" id="2_3djyt"]
-[ext_resource type="Texture2D" uid="uid://ie7nju6w7xha" path="res://tiles/laser/laserBody_24px.png" id="3_mkkdr"]
+[ext_resource type="Texture2D" uid="uid://bmj32g8o7vpdm" path="res://tiles/laser/laserBody_64px.png" id="3_r2j4g"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_g38jr"]
-size = Vector2(29.333, 24)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ko6ym"]
+size = Vector2(126, 64)
 
 [node name="LaserSource" instance=ExtResource("1_moxnu")]
 position = Vector2(263, 352)
@@ -15,20 +15,16 @@ halfAngle = 0.0
 numRaysPerTimeout = 1
 rayColor = Vector3(1, 0, 1)
 
-[node name="barrelSprite" type="Sprite2D" parent="Sprite2D" index="0"]
-z_index = 1
-texture = ExtResource("3_mkkdr")
-
-[node name="barrelArea" type="Area2D" parent="Sprite2D/barrelSprite" index="0"]
-collision_layer = 3
-collision_mask = 3
-
-[node name="barrelShape" type="CollisionShape2D" parent="Sprite2D/barrelSprite/barrelArea" index="0"]
-position = Vector2(-0.666667, -2.38419e-07)
-shape = SubResource("RectangleShape2D_g38jr")
-
-[node name="Timer" type="Timer" parent="." index="3"]
+[node name="Timer" type="Timer" parent="." index="0"]
 wait_time = 0.5
 autostart = true
+
+[node name="laserBarrel" type="Sprite2D" parent="Stage" index="0"]
+texture = ExtResource("3_r2j4g")
+
+[node name="barrelArea" type="Area2D" parent="Stage/laserBarrel" index="0"]
+
+[node name="barrelShape" type="CollisionShape2D" parent="Stage/laserBarrel/barrelArea" index="0"]
+shape = SubResource("RectangleShape2D_ko6ym")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
