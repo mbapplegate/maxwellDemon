@@ -14,10 +14,9 @@ script = ExtResource("2_3djyt")
 halfAngle = 0.0
 numRaysPerTimeout = 1
 rayColor = Vector3(1, 0, 1)
-initialAngle = 0.0
 
 [node name="Timer" type="Timer" parent="." index="0"]
-wait_time = 0.5
+wait_time = 0.125
 autostart = true
 
 [node name="laserBarrel" type="Sprite2D" parent="Stage" index="0"]

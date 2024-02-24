@@ -6,6 +6,7 @@ const TILE_SIZE = 32
 const ROTATION_INCREMENT = deg_to_rad(15)
 
 @export var sliding_time = 0.2
+@export var initialAngle = 0.0
 @export var isPushable = true
 @export var isRotatable = true
 @export var isEnergizeable = true
@@ -22,6 +23,7 @@ var isSliding : bool = false
 func initialize():
 	#print(position.snapped(Vector2(TILE_SIZE,TILE_SIZE)))
 	self.position = position.snapped(Vector2(TILE_SIZE,TILE_SIZE))
+	sprite.rotation = deg_to_rad(initialAngle)
 	update_texture()
 	
 func calculate_destination(dir:Vector2):

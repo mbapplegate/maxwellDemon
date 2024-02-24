@@ -3,7 +3,6 @@ extends pushableObject
 @export var halfAngle = 0.0
 @export var numRaysPerTimeout : int = 1
 @export var rayColor : Vector3 = Vector3(1.0, 0, 1.0)
-@export var initialAngle : float = 0.0
 @onready var barrelShape = $Stage/laserBarrel/barrelArea/barrelShape
 @onready var ray = preload("res://scenes/LightPacket/light_packet.tscn")
 
@@ -16,7 +15,6 @@ func _ready():
 	#print(halfHeight)
 	#isEnergized = true
 	laserParent = get_parent()
-	sprite.rotation = deg_to_rad(initialAngle)
 	pass
 	
 func _ray_hit(photonObj:Object, _collPoint:Vector2, _collNormal:Vector2, _collider:Object):

@@ -6,7 +6,7 @@ const LENS_HEIGHT = 120
 const mediumIndex = 1.0
 
 var radius = 150
-@export var focalLength = 64
+@export var focalLength = 128
 @export var lensIndex = 2.0
 
 var halfAngle = 1.0
@@ -16,12 +16,17 @@ var lens_shape = PackedVector2Array()
 @onready var curveShape = $Stage/curveFaceArea/curveFaceShape
 @onready var flatShape = $Stage/flatFaceArea/flatFaceShape
 @onready var lensOutline = $Stage/LensOutline
+@onready var frontFocusSprite = $Stage/frontFocus
+@onready var rearFocusSprite = $Stage/rearFocus
 
 func _ready():
+	isEnergizeable = false
 	radius = focalLength * (lensIndex - mediumIndex)
 	set_geometry(radius,LENS_HEIGHT,Vector2.ZERO)
 	flatShape.shape.size = Vector2(FRONT_THICKNESS,LENS_HEIGHT)
 	flatShape.position = Vector2(-FRONT_THICKNESS/2.0,0.0)
+	frontFocusSprite.position = Vector2(focalLength,0.0)
+	rearFocusSprite.position = Vector2(-focalLength,0.0)
 	
 func set_geometry(newRadius:float, lens_height:float, center:Vector2):
 	radius = newRadius

@@ -55,8 +55,9 @@ scale = Vector2(1, 1)
 
 [node name="FlatMirror" parent="." instance=ExtResource("7_pojc5")]
 position = Vector2(1048, 576)
-initialAngle = 45.0
 isEnergizeable = false
 
 [node name="LensPlanoConvex" parent="." instance=ExtResource("8_t0pox")]
 position = Vector2(632, 576)
+focalLength = 64
+initialAngle = 45.0

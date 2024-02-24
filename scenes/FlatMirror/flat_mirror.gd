@@ -1,10 +1,10 @@
 extends pushableObject
 
 @export var reflectivity:float = 1.0 
-@export var initialAngle = 0.0
+
 
 func _ready():
-	sprite.rotation = deg_to_rad(initialAngle)
+	isEnergizeable = false
 
 func _ray_hit(photonObj:Object, collPoint:Vector2, collNormal:Vector2, _collider:Object):
 	var ref = randf()
