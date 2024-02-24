@@ -7,7 +7,10 @@
 size = Vector2(4, 120)
 
 [node name="LensPlanoConvex" instance=ExtResource("1_5pv0u")]
+position = Vector2(88, 77)
 script = ExtResource("2_ljto7")
+focalLength = 64
+lensIndex = 2.0
 
 [node name="flatFaceArea" type="Area2D" parent="Stage" index="0"]
 
@@ -19,3 +22,6 @@ shape = SubResource("RectangleShape2D_b5uwf")
 
 [node name="curveFaceShape" type="CollisionPolygon2D" parent="Stage/curveFaceArea" index="0"]
 polygon = PackedVector2Array(7, -57, 8, 61, 19, 58, 25, 46, 31, 29, 34, 10, 31, -14, 25, -40, 18, -54)
+
+[node name="LensOutline" type="Polygon2D" parent="Stage" index="2"]
+color = Color(0.0705882, 0.619608, 1, 0.501961)

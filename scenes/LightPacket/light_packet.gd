@@ -64,15 +64,16 @@ func _process(delta):
 		#If the ray is alive (hasn't left the scene or hit an absorber)
 		if not rayDying:
 			#AAAND it's hitting something new
-			if (_get_functional_collider(ray.get_collider()) != lastCollider):
+			if (ray.get_collider() != lastCollider):
 				#Update the last collider
-				lastCollider = _get_functional_collider(ray.get_collider())
+				lastCollider = ray.get_collider()
+				var collHandler = _get_functional_collider(lastCollider)
 				#Send a signal to that collider to handle the collision depending on what it is
-				if not is_connected("hitSomething",lastCollider._ray_hit):
-					connect("hitSomething",lastCollider._ray_hit)
+				if not is_connected("hitSomething",collHandler._ray_hit):
+					connect("hitSomething",collHandler._ray_hit)
 				hitSomething.emit(self, ray.get_collision_point(), ray.get_collision_normal(),  ray.get_collider())
 				#Disconnect the signal to keep things clean
-				disconnect("hitSomething",lastCollider._ray_hit)
+				disconnect("hitSomething",collHandler._ray_hit)
 				#Advance the first point to the collision point and the back point to the next point
 				_update_line_position(delta,to_local(ray.get_collision_point()),nextPointBack)
 			#We've collided with the same thing as before, so ignore the collision
