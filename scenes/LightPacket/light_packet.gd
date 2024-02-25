@@ -6,7 +6,7 @@ extends Node2D
 #@onready var circ2 = $DEBUG2
 
 const SPEED = 250
-const LEN = 150
+const LEN = 75
 const RAY_ENERGY_CUTOFF = .1
 
 @export var propDir:Vector2 = Vector2(1,0)
@@ -23,7 +23,25 @@ var lastCollider = null
 var numPoints = 0
 
 signal hitSomething(rayObject, collisionPoint, collisionNormal, collider)
-
+#
+#func clonePacket():
+	#var newPacket = self.duplicate()
+	#newPacket.propDir = propDir
+	#newPacket.rayColor = rayColor
+	#newPacket.index_of_refraction = index_of_refraction
+	#newPacket.energy = energy
+	#newPacket._ready()
+	#newPacket.proportionVisibleFront = proportionVisibleFront
+	#newPacket.proportionVisibleBack = proportionVisibleBack
+	#newPacket.lastCollider = lastCollider
+	#newPacket.rayDying = rayDying
+	#newPacket.numPoints = numPoints
+	#newPacket.line.position = line.position
+	#for i in numPoints:
+		#newPacket.line.set_point_position(i,line.get_point_position(i))
+	#newPacket.line.material.set_shader_parameter("propVisibleFront",proportionVisibleFront)
+	#newPacket.line.material.set_shader_parameter("propVisibleEnd",proportionVisibleBack)
+	#return newPacket
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	line.clear_points();
@@ -128,13 +146,14 @@ func _update_line_position(delta:float, nextPtFront:Vector2, nextPtBack:Vector2)
 				proportionVisibleBack = 0.0
 			line.material.set_shader_parameter("propVisibleEnd",proportionVisibleBack)
 		
-#func update_energy(newEnergy:float):
-#	if newEnergy > 1.0:
-#		energy = 1.0
-#	if newEnergy < RAY_ENERGY_CUTOFF:
-#		energy = 0
-#		propDir = Vector2.ZERO
-#	else:
-#		energy = newEnergy
-
-#	line.material.set_shader_parameter("energy",sqrt(energy))
+func update_energy(newEnergy:float):
+	if newEnergy > 1.0:
+		energy = 1.0
+	if newEnergy < RAY_ENERGY_CUTOFF:
+		energy = 0
+		propDir = Vector2.ZERO
+		rayDying = true
+	else:
+		energy = newEnergy
+		line.material.set_shader_parameter("energy",sqrt(energy))
+	

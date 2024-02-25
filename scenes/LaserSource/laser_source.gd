@@ -18,7 +18,6 @@ func _ready():
 	pass
 	
 func _ray_hit(photonObj:Object, _collPoint:Vector2, _collNormal:Vector2, _collider:Object):
-	print("Hit barrel")
 	photonObj.rayDying = true
 
 func _on_timer_timeout():
