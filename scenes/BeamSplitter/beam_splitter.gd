@@ -20,7 +20,9 @@ func _ray_hit(photonObj:Object, collPoint:Vector2, collNormal:Vector2, collider:
 		instance.rayColor = photonObj.rayColor
 		instance.energy = photonObj.energy
 		instance.index_of_refraction = photonObj.index_of_refraction
-		var newDir = photonObj.propDir.bounce(collNormal).normalized()
+		var newDir = photonObj.propDir
+		if collNormal:
+			newDir = photonObj.propDir.bounce(collNormal.normalized()).normalized()
 		instance.propDir =newDir
 		instance.global_position = collPoint
 		

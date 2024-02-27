@@ -1,11 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://ciwb1o3jgik5o"]
+[gd_scene load_steps=11 format=3 uid="uid://ciwb1o3jgik5o"]
 
 [ext_resource type="Script" path="res://worlds/test_world.gd" id="1_0f5qq"]
 [ext_resource type="Texture2D" uid="uid://is28jambjmci" path="res://tiles/world/opticalTable_32x32.png" id="1_ggdl5"]
 [ext_resource type="Texture2D" uid="uid://cgnar1vxyuyml" path="res://tiles/world/wall_32x32.png" id="2_2ej38"]
 [ext_resource type="PackedScene" uid="uid://ojfv06ceqv2a" path="res://scenes/Player/player.tscn" id="3_y4irg"]
-[ext_resource type="PackedScene" uid="uid://beic3gevjusuj" path="res://scenes/PushableObject/pushable_object.tscn" id="4_qlahv"]
-[ext_resource type="PackedScene" uid="uid://2ai0r6raovox" path="res://scenes/LaserSource/laser_source.tscn" id="6_afde2"]
+[ext_resource type="PackedScene" uid="uid://cadtm4ftf8bxq" path="res://scenes/PointSource/point_source.tscn" id="8_1t5aj"]
 [ext_resource type="PackedScene" uid="uid://cy88a0n33mko2" path="res://scenes/BeamSplitter/beam_splitter.tscn" id="8_78hy1"]
 [ext_resource type="PackedScene" uid="uid://b6navnb20xork" path="res://scenes/Lens_PlanoConvex/lens_plano_convex.tscn" id="8_t0pox"]
 
@@ -45,18 +44,16 @@ layer_0/tile_data = PackedInt32Array(65537, 0, 0, 131073, 0, 0, 196609, 0, 0, 26
 position = Vector2(192, 576)
 scale = Vector2(1, 1)
 
-[node name="PushableObject" parent="." instance=ExtResource("4_qlahv")]
-position = Vector2(320, 256)
-isEnergized = true
-
-[node name="LaserSource" parent="." instance=ExtResource("6_afde2")]
-position = Vector2(328, 576)
-scale = Vector2(1, 1)
+[node name="PointSource" parent="." instance=ExtResource("8_1t5aj")]
+position = Vector2(384, 576)
+angleRange = Vector2(-0.25, 0.25)
+numRaysPerTimeout = 4
+rayColor = Vector3(1, 0, 0)
+isRotatable = false
 
 [node name="LensPlanoConvex" parent="." instance=ExtResource("8_t0pox")]
-position = Vector2(560, 344)
-focalLength = 64
-initialAngle = 45.0
+position = Vector2(576, 568)
+focalLength = 256
 
 [node name="BeamSplitter" parent="." instance=ExtResource("8_78hy1")]
-position = Vector2(592, 576)
+position = Vector2(904, 248)
