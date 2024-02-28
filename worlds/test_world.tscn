@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://ciwb1o3jgik5o"]
+[gd_scene load_steps=14 format=3 uid="uid://ciwb1o3jgik5o"]
 
 [ext_resource type="Script" path="res://worlds/test_world.gd" id="1_0f5qq"]
 [ext_resource type="Texture2D" uid="uid://is28jambjmci" path="res://tiles/world/opticalTable_32x32.png" id="1_ggdl5"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://2ai0r6raovox" path="res://scenes/LaserSource/laser_source.tscn" id="8_a3hu6"]
 [ext_resource type="PackedScene" uid="uid://b6navnb20xork" path="res://scenes/Lens_PlanoConvex/lens_plano_convex.tscn" id="8_t0pox"]
 [ext_resource type="PackedScene" uid="uid://catkndynfd4s5" path="res://scenes/ParabolicMirror/parabolic_mirror.tscn" id="9_fpswf"]
+[ext_resource type="PackedScene" uid="uid://b18q2fk6kxyef" path="res://scenes/Iris/iris.tscn" id="9_l7d0q"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3e3qs"]
 resource_name = "Table"
@@ -51,18 +52,26 @@ position = Vector2(640, 576)
 angleRange = Vector2(-0.25, 0.25)
 rayColor = Vector3(1, 0, 0)
 isRotatable = false
+isEnergized = false
 
 [node name="LensPlanoConvex" parent="." instance=ExtResource("8_t0pox")]
-position = Vector2(632, 256)
+position = Vector2(1040, 808)
 LENS_HEIGHT = 120
 
 [node name="BeamSplitter" parent="." instance=ExtResource("8_78hy1")]
-position = Vector2(904, 248)
+position = Vector2(624, 808)
 
 [node name="LaserSource" parent="." instance=ExtResource("8_a3hu6")]
-position = Vector2(216, 352)
+position = Vector2(360, 808)
+numRaysPerTimeout = 2
+isEnergized = true
 
 [node name="parabolicMirror" parent="." instance=ExtResource("9_fpswf")]
-position = Vector2(768, 576)
+position = Vector2(1224, 616)
 mirrorHeight = 256.0
-initialAngle = 180.0
+initialAngle = 90.0
+
+[node name="Iris" parent="." instance=ExtResource("9_l7d0q")]
+position = Vector2(832, 808)
+total_height = 120
+isEnergizeable = false

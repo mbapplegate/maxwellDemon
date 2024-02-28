@@ -1,0 +1,44 @@
+[gd_scene load_steps=6 format=3 uid="uid://b18q2fk6kxyef"]
+
+[ext_resource type="PackedScene" uid="uid://beic3gevjusuj" path="res://scenes/PushableObject/pushable_object.tscn" id="1_tnojq"]
+[ext_resource type="Script" path="res://scenes/Iris/Iris.gd" id="2_rb1hw"]
+[ext_resource type="Texture2D" uid="uid://dd2o1bvfafs6f" path="res://scenes/Iris/IrisTile_16x16.png" id="3_ws33i"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1cfuo"]
+size = Vector2(16, 48)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2vg45"]
+size = Vector2(16, 48)
+
+[node name="Iris" instance=ExtResource("1_tnojq")]
+position = Vector2(114, 86)
+script = ExtResource("2_rb1hw")
+total_height = 256
+aperture_width = 24
+thickness = 8
+
+[node name="TopPart" type="StaticBody2D" parent="Stage" index="0"]
+
+[node name="TopPartShape" type="CollisionShape2D" parent="Stage/TopPart" index="0"]
+position = Vector2(0, 36)
+shape = SubResource("RectangleShape2D_1cfuo")
+
+[node name="TopPartSprite" type="Sprite2D" parent="Stage/TopPart" index="1"]
+texture_repeat = 2
+position = Vector2(0, -36)
+texture = ExtResource("3_ws33i")
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 48)
+
+[node name="BotPart" type="StaticBody2D" parent="Stage" index="1"]
+
+[node name="BotPartShape" type="CollisionShape2D" parent="Stage/BotPart" index="0"]
+position = Vector2(0, -36)
+shape = SubResource("RectangleShape2D_2vg45")
+
+[node name="BotPartSprite" type="Sprite2D" parent="Stage/BotPart" index="1"]
+texture_repeat = 2
+position = Vector2(0, 36)
+texture = ExtResource("3_ws33i")
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 48)
