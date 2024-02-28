@@ -10,7 +10,8 @@ size = Vector2(4, 120)
 [node name="LensPlanoConvex" instance=ExtResource("1_5pv0u")]
 position = Vector2(88, 77)
 script = ExtResource("2_ljto7")
-focalLength = 128
+LENS_HEIGHT = 64
+focalLength = 256
 lensIndex = 2.0
 
 [node name="flatFaceArea" type="Area2D" parent="Stage" index="0"]

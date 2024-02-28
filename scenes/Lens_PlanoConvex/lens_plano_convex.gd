@@ -2,10 +2,11 @@ extends pushableObject
 
 const NUM_POINTS = 64
 const FRONT_THICKNESS = 2
-const LENS_HEIGHT = 120
+
 const mediumIndex = 1.0
 
 var radius = 150
+@export var LENS_HEIGHT = 128
 @export var focalLength = 128
 @export var lensIndex = 2.0
 

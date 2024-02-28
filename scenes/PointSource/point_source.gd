@@ -15,9 +15,8 @@ func _ready():
 	sourceBall.modulate = Color(rayColor[0], rayColor[1],rayColor[2])
 
 func _on_timer_timeout():
-	var angle = 0
+	var angle = 0.0
 	var instance 
-	var yLoc
 	if (isEnergized):
 		for i in numRaysPerTimeout:
 			

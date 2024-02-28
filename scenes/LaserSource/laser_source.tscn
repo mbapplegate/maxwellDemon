@@ -8,8 +8,6 @@
 size = Vector2(126, 64)
 
 [node name="LaserSource" instance=ExtResource("1_moxnu")]
-position = Vector2(263, 352)
-scale = Vector2(3, 3)
 script = ExtResource("2_3djyt")
 halfAngle = 0.0
 numRaysPerTimeout = 1

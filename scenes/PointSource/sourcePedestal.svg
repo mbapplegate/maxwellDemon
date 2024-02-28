@@ -16,18 +16,21 @@
    version="1.1"
    id="svg4974"
    inkscape:version="0.92.5 (2060ec1f9f, 2020-04-08)"
-   sodipodi:docname="sourcePedestal.svg">
+   sodipodi:docname="sourcePedestal.svg"
+   inkscape:export-filename="C:\Users\Matthew\Documents\Godot\maxwellGithub\maxwellDemon\scenes\PointSource\sourcePedestal.png"
+   inkscape:export-xdpi="96.18"
+   inkscape:export-ydpi="96.18">
   <defs
      id="defs4968">
     <linearGradient
        inkscape:collect="always"
        id="linearGradient1973">
       <stop
-         style="stop-color:#ffffff;stop-opacity:1"
+         style="stop-color:#000000;stop-opacity:1"
          offset="0"
          id="stop1969" />
       <stop
-         style="stop-color:#505050;stop-opacity:1"
+         style="stop-color:#a0a0a0;stop-opacity:1"
          offset="1"
          id="stop1971" />
     </linearGradient>
@@ -41,7 +44,7 @@
        fy="280.06665"
        r="14.324769"
        gradientUnits="userSpaceOnUse"
-       gradientTransform="matrix(0.88805284,0,0,0.88805284,1.8956387,31.352666)" />
+       gradientTransform="matrix(0.72479646,-1.376449e-7,1.3410166e-7,0.70613881,4.660076,82.300726)" />
   </defs>
   <sodipodi:namedview
      id="base"
