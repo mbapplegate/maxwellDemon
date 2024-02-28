@@ -1,9 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://cadtm4ftf8bxq"]
+[gd_scene load_steps=6 format=3 uid="uid://cadtm4ftf8bxq"]
 
 [ext_resource type="PackedScene" uid="uid://beic3gevjusuj" path="res://scenes/PushableObject/pushable_object.tscn" id="1_2rrb0"]
 [ext_resource type="Texture2D" uid="uid://bgvgdxhdru3y2" path="res://scenes/PointSource/sourcePedestal.png" id="2_6jece"]
 [ext_resource type="Script" path="res://scenes/PointSource/point_source.gd" id="2_mk28k"]
 [ext_resource type="Texture2D" uid="uid://0dgf3cefecwr" path="res://scenes/PointSource/sourceCircle.png" id="4_6043a"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xtcof"]
+radius = 7.0
 
 [node name="PointSource" instance=ExtResource("1_2rrb0")]
 position = Vector2(103, 98)
@@ -22,5 +25,10 @@ autostart = true
 
 [node name="sourceBall" type="Sprite2D" parent="." index="6"]
 texture = ExtResource("4_6043a")
+
+[node name="Area2D" type="Area2D" parent="." index="7"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="0"]
+shape = SubResource("CircleShape2D_xtcof")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

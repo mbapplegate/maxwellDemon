@@ -9,6 +9,8 @@ extends pushableObject
 var sourceParent = null
 var rng = RandomNumberGenerator.new()
 
+const POINT_RADIUS = 8
+
 func _ready():
 	isRotatable = false
 	sourceParent = get_parent()
@@ -24,7 +26,7 @@ func _on_timer_timeout():
 		
 			#print("Timeout. Angle: ",angle)
 			instance = ray.instantiate()
-			instance.propDir = Vector2(cos(angle),sin(angle))
+			instance.propDir = Vector2(POINT_RADIUS*cos(angle),POINT_RADIUS*sin(angle))
 			instance.position = to_global(Vector2.ZERO)
 			instance.rayColor = rayColor
 			instance.scale[0] = 1.0/self.scale[0]
@@ -32,3 +34,5 @@ func _on_timer_timeout():
 			if sourceParent:
 				sourceParent.add_child(instance)
 
+func _ray_hit(photonObj:Object, _collPoint:Vector2, _collNormal:Vector2, _collider:Object):
+	photonObj.rayDying = true
