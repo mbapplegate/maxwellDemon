@@ -37,7 +37,7 @@ func _on_timer_timeout():
 			instance.position = to_global(Vector2(barrelPosition.x+yLoc*sin(sprite.rotation), -barrelPosition.y-yLoc*cos(sprite.rotation)))
 			
 			instance.rayColor = rayColor
-			instance.scale[0] = 1.0/self.scale[0]
-			instance.scale[1] = 1.0 / self.scale[1]
+			#instance.scale[0] = 1.0/self.scale[0]
+			#instance.scale[1] = 1.0 / self.scale[1]
 			if laserParent:
 				laserParent.add_child(instance)

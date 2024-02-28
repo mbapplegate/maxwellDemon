@@ -5,8 +5,8 @@ extends Node2D
 #@onready var circ = $DEBUG
 #@onready var circ2 = $DEBUG2
 
-const SPEED = 250
-const LEN = 75
+const SPEED = 450
+const LEN = 125
 const RAY_ENERGY_CUTOFF = .1
 
 @export var propDir:Vector2 = Vector2(1,0)

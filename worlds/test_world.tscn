@@ -49,7 +49,6 @@ scale = Vector2(1, 1)
 [node name="PointSource" parent="." instance=ExtResource("8_1t5aj")]
 position = Vector2(640, 576)
 angleRange = Vector2(-0.25, 0.25)
-numRaysPerTimeout = 4
 rayColor = Vector3(1, 0, 0)
 isRotatable = false
 
@@ -65,4 +64,5 @@ position = Vector2(216, 352)
 
 [node name="parabolicMirror" parent="." instance=ExtResource("9_fpswf")]
 position = Vector2(768, 576)
+mirrorHeight = 256.0
 initialAngle = 180.0
