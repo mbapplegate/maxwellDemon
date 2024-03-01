@@ -18,30 +18,31 @@ func _ready():
 func _ray_hit(photonObj:Object, collPoint:Vector2, collNormal:Vector2, collider:Object):
 	#If it's the center line
 	if collider == splitter:
-		#Create new ray
-		var instance = ray.instantiate()
-		#Color, energy, IOR, and direction are the same as the incoming ray
-		instance.rayColor = photonObj.rayColor
-		instance.energy = photonObj.energy
-		instance.index_of_refraction = photonObj.index_of_refraction
-		#Reflect off the splitter
-		var newDir = photonObj.propDir
-		#Sometimes the collision normal will be NULL, so check that
-		if collNormal:
-			newDir = photonObj.propDir.bounce(collNormal.normalized()).normalized()
-		#Update the direction
-		instance.propDir =newDir
-		instance.global_position = collPoint
-		#If the splitter isn't root then add the child to the parent
-		if splitterParent:
-			splitterParent.add_child(instance)
-		#Otherwise make it a child of itself (mostly for debugging)
-		else:
-			instance.position = to_local(collPoint)
-			add_child(instance)
+		if reflectivity > 0.1:
+			#Create new ray
+			var instance = ray.instantiate()
+			#Color, energy, IOR, and direction are the same as the incoming ray
+			instance.rayColor = photonObj.rayColor
+			instance.energy = photonObj.energy
+			instance.index_of_refraction = photonObj.index_of_refraction
+			#Reflect off the splitter
+			var newDir = photonObj.propDir
+			#Sometimes the collision normal will be NULL, so check that
+			if collNormal:
+				newDir = photonObj.propDir.bounce(collNormal.normalized()).normalized()
+			#Update the direction
+			instance.propDir =newDir
+			instance.global_position = collPoint
+			#If the splitter isn't root then add the child to the parent
+			if splitterParent:
+				splitterParent.add_child(instance)
+			#Otherwise make it a child of itself (mostly for debugging)
+			else:
+				instance.position = to_local(collPoint)
+				add_child(instance)
+			instance.update_energy(instance.energy*reflectivity)
 		#Update photon packet energies depending on reflectivity
 		photonObj.update_energy(photonObj.energy*(1-reflectivity))
-		instance.update_energy(instance.energy*reflectivity)
 	#Otherwise we've collided with the wall of the cube so need to refract
 	else:
 		var normalIn = -collNormal;
@@ -56,7 +57,9 @@ func _ray_hit(photonObj:Object, collPoint:Vector2, collNormal:Vector2, collider:
 			theta2 = asin(mediumIndex/splitterIndex*sin(theta1))
 			photonObj.index_of_refraction = splitterIndex
 		#Add the point to the photon packet
-		photonObj.ray_add_point(photonObj.to_local(collPoint))
+		
 		var newDir = normalIn.rotated(theta2)
 		photonObj.propDir = newDir
+		
+		photonObj.ray_add_point(photonObj.to_local(collPoint))
 	

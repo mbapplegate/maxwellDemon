@@ -77,7 +77,8 @@ func _ray_hit(photonObj:Object, collPoint:Vector2, collNormal:Vector2, _collider
 	else:
 		theta2 = asin(mediumIndex/lensIndex*sin(theta1))
 		photonObj.index_of_refraction = lensIndex
-	
-	photonObj.ray_add_point(photonObj.to_local(collPoint))
+		
 	var newDir = normalIn.rotated(theta2)
 	photonObj.propDir = newDir
+	photonObj.ray_add_point(photonObj.to_local(collPoint))
+	

@@ -2,11 +2,11 @@ extends Node2D
 
 @onready var line = $Line2D
 @onready var ray = $RayCast2D
-@onready var circ = $DEBUG
-@onready var circ2 = $DEBUG2
+#@onready var circ = $DEBUG
+#@onready var circ2 = $DEBUG2
 
-const SPEED = 125
-const LEN = 75
+const SPEED = 400
+const LEN = 250
 const RAY_ENERGY_CUTOFF = .1
 
 @export var propDir:Vector2 = Vector2(1,0)
@@ -49,8 +49,8 @@ func _ready():
 	line.add_point(-propDir.normalized() * LEN);
 	line.add_point(Vector2.ZERO)
 	line.position = Vector2.ZERO
-	circ.position = Vector2.ZERO
-	circ2.position = Vector2.ZERO
+	#circ.position = Vector2.ZERO
+	#circ2.position = Vector2.ZERO
 	numPoints = 2
 	winSize = DisplayServer.window_get_size()
 	
@@ -67,8 +67,12 @@ func _process(delta):
 	var currentPointFront = line.get_point_position(numPoints-1)           #Front of ray
 	var nextPointFront = currentPointFront + propDir.normalized()*SPEED*delta   #New position of front of ray
 	var currentPointBack = line.get_point_position(0)
-	var nextPointBack = currentPointBack+line.get_point_position(0).direction_to(line.get_point_position(1))*SPEED*delta
+	var startDirToNextPointBack = line.get_point_position(0).direction_to(line.get_point_position(1))
+	var nextPointBack = currentPointBack+startDirToNextPointBack*SPEED*delta
+	var endDirToNextPointBack = nextPointBack.direction_to(line.get_point_position(1))
 	
+	if not endDirToNextPointBack.is_equal_approx(startDirToNextPointBack):
+		nextPointBack = line.get_point_position(1)
 	#Adjust the raycast
 	ray.position = currentPointFront
 	ray.set_target_position(propDir.normalized()*SPEED*delta)
@@ -84,6 +88,7 @@ func _process(delta):
 		if not rayDying:
 			#AAAND it's hitting something new
 			if (ray.get_collider() != lastCollider):
+				#print(_get_packet_length(line.points))
 				#Update the last collider
 				lastCollider = ray.get_collider()
 				var collHandler = _get_functional_collider(lastCollider)
@@ -93,6 +98,11 @@ func _process(delta):
 				hitSomething.emit(self, ray.get_collision_point(), ray.get_collision_normal(),  ray.get_collider())
 				#Disconnect the signal to keep things clean
 				disconnect("hitSomething",collHandler._ray_hit)
+				var distFrontTraveled = currentPointFront.distance_to(to_local(ray.get_collision_point()))
+				nextPointBack = currentPointBack+startDirToNextPointBack*distFrontTraveled
+				endDirToNextPointBack = nextPointBack.direction_to(line.get_point_position(1))
+				if not endDirToNextPointBack.is_equal_approx(startDirToNextPointBack):
+					nextPointBack = line.get_point_position(1)
 				#Advance the first point to the collision point and the back point to the next point
 				_update_line_position(delta,to_local(ray.get_collision_point()),nextPointBack)
 			#We've collided with the same thing as before, so ignore the collision
@@ -125,12 +135,19 @@ func _has_ray_left_screen():
 func ray_add_point(newPt:Vector2):
 	line.add_point(newPt)
 	numPoints += 1
+	
+func _get_packet_length(pointArray:PackedVector2Array):
+	var lineLen = 0.0
+	for i in range(pointArray.size()-1):
+		lineLen += pointArray[i].distance_to(pointArray[i+1])
+	
+	return lineLen
 #
 func _update_line_position(delta:float, nextPtFront:Vector2, nextPtBack:Vector2):
 	line.set_point_position(numPoints-1,nextPtFront)
 	line.set_point_position(0,nextPtBack)
-	circ.position = nextPtFront
-	circ2.position = nextPtBack
+	#circ.position = nextPtFront
+	#circ2.position = nextPtBack
 	if numPoints > 2:
 		if line.get_point_position(0).distance_squared_to(line.get_point_position(1)) <= 9.0:
 				line.remove_point(0)
