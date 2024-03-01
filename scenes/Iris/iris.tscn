@@ -13,7 +13,7 @@ size = Vector2(16, 48)
 [node name="Iris" instance=ExtResource("1_tnojq")]
 position = Vector2(114, 86)
 script = ExtResource("2_rb1hw")
-total_height = 256
+total_height = 120
 aperture_width = 24
 thickness = 8
 

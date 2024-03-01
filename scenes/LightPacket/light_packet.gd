@@ -2,10 +2,10 @@ extends Node2D
 
 @onready var line = $Line2D
 @onready var ray = $RayCast2D
-#@onready var circ = $DEBUG
-#@onready var circ2 = $DEBUG2
+@onready var circ = $DEBUG
+@onready var circ2 = $DEBUG2
 
-const SPEED = 450
+const SPEED = 125
 const LEN = 75
 const RAY_ENERGY_CUTOFF = .1
 
@@ -21,6 +21,7 @@ var rayDying = false
 var winSize
 var lastCollider = null
 var numPoints = 0
+var lineLength = 0.0
 
 signal hitSomething(rayObject, collisionPoint, collisionNormal, collider)
 #
@@ -48,8 +49,8 @@ func _ready():
 	line.add_point(-propDir.normalized() * LEN);
 	line.add_point(Vector2.ZERO)
 	line.position = Vector2.ZERO
-#	circ.position = Vector2.ZERO
-#	circ2.position = Vector2.ZERO
+	circ.position = Vector2.ZERO
+	circ2.position = Vector2.ZERO
 	numPoints = 2
 	winSize = DisplayServer.window_get_size()
 	
@@ -128,11 +129,12 @@ func ray_add_point(newPt:Vector2):
 func _update_line_position(delta:float, nextPtFront:Vector2, nextPtBack:Vector2):
 	line.set_point_position(numPoints-1,nextPtFront)
 	line.set_point_position(0,nextPtBack)
-#	circ.position = nextPtFront
-#	circ2.position = nextPtBack
-	if line.get_point_position(0).distance_squared_to(line.get_point_position(1)) <= 5.0:
-			line.remove_point(0)
-			numPoints -= 1
+	circ.position = nextPtFront
+	circ2.position = nextPtBack
+	if numPoints > 2:
+		if line.get_point_position(0).distance_squared_to(line.get_point_position(1)) <= 9.0:
+				line.remove_point(0)
+				numPoints -= 1
 
 	if (proportionVisibleFront < 1.0):
 		proportionVisibleFront += (SPEED*delta) / LEN
@@ -145,6 +147,15 @@ func _update_line_position(delta:float, nextPtFront:Vector2, nextPtBack:Vector2)
 			if proportionVisibleBack < 0.0:
 				proportionVisibleBack = 0.0
 			line.material.set_shader_parameter("propVisibleEnd",proportionVisibleBack)
+	
+	#if numPoints > 2:
+		#lineLength = 0.0
+		#for i in numPoints-1:
+			#lineLength += line.get_point_position(i+1).distance_squared_to(line.get_point_position(i))
+		#if lineLength > (1.1*LEN)*(1.1*LEN):
+			#print("Point removed")
+			#line.remove_point(0)
+			#numPoints -= 1
 		
 func update_energy(newEnergy:float):
 	if newEnergy > 1.0:
