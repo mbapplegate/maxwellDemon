@@ -57,6 +57,7 @@ isEnergized = false
 [node name="LensPlanoConvex" parent="." instance=ExtResource("8_t0pox")]
 position = Vector2(512, 704)
 LENS_HEIGHT = 120
+focalLength = 64
 isEnergizeable = false
 
 [node name="BeamSplitter" parent="." instance=ExtResource("8_78hy1")]

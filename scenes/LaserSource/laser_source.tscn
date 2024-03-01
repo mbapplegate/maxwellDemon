@@ -18,6 +18,7 @@ wait_time = 0.125
 autostart = true
 
 [node name="laserBarrel" type="Sprite2D" parent="Stage" index="0"]
+z_index = 1
 texture = ExtResource("3_r2j4g")
 
 [node name="barrelArea" type="Area2D" parent="Stage/laserBarrel" index="0"]
