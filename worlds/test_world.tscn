@@ -48,37 +48,37 @@ position = Vector2(192, 576)
 scale = Vector2(1, 1)
 
 [node name="PointSource" parent="." instance=ExtResource("8_1t5aj")]
-position = Vector2(968, 448)
+position = Vector2(992, 448)
 angleRange = Vector2(-0.25, 0.25)
 rayColor = Vector3(1, 0, 0)
 isRotatable = false
 isEnergized = false
 
 [node name="LensPlanoConvex" parent="." instance=ExtResource("8_t0pox")]
-position = Vector2(520, 808)
+position = Vector2(512, 704)
 LENS_HEIGHT = 120
 isEnergizeable = false
 
 [node name="BeamSplitter" parent="." instance=ExtResource("8_78hy1")]
-position = Vector2(680, 808)
-reflectivity = 0.0
+position = Vector2(672, 704)
 
 [node name="LaserSource" parent="." instance=ExtResource("8_a3hu6")]
-position = Vector2(304, 808)
+position = Vector2(320, 704)
 rayColor = Vector3(1, 0, 0.1)
 isEnergized = true
 
 [node name="parabolicMirror" parent="." instance=ExtResource("9_fpswf")]
-position = Vector2(1472, 808)
-initialAngle = 160.0
+position = Vector2(1280, 704)
+initialAngle = 220.0
 isEnergizeable = false
 
 [node name="Iris" parent="." instance=ExtResource("9_l7d0q")]
-position = Vector2(832, 808)
+position = Vector2(832, 704)
 aperture_width = 12
+isEnergized = true
 
 [node name="LensPlanoConvex2" parent="." instance=ExtResource("8_t0pox")]
-position = Vector2(1088, 808)
+position = Vector2(1024, 704)
 LENS_HEIGHT = 120
 initialAngle = 180.0
 isEnergizeable = false
