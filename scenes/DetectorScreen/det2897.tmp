@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3 uid="uid://bn6aixjawlc7b"]
+
+[ext_resource type="Script" path="res://scenes/DetectorScreen/detector_screen.gd" id="1_l4oyw"]
+[ext_resource type="Texture2D" uid="uid://bw3lva5dt0wiw" path="res://scenes/DetectorScreen/screenOsc.png" id="2_cb8ey"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8ao4v"]
+size = Vector2(72, 128)
+
+[node name="detectorScreen" type="Node2D"]
+position = Vector2(96, 96)
+script = ExtResource("1_l4oyw")
+
+[node name="screenSprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_cb8ey")
+
+[node name="screenArea" type="Area2D" parent="screenSprite"]
+collision_layer = 2
+collision_mask = 2
+
+[node name="screenShape" type="CollisionShape2D" parent="screenSprite/screenArea"]
+shape = SubResource("RectangleShape2D_8ao4v")
+
+[node name="graphLine" type="Line2D" parent="screenSprite"]
+points = PackedVector2Array(-24, -59, -24, 59)
+width = 1.0
+default_color = Color(0.431373, 1, 0.588235, 1)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.25
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

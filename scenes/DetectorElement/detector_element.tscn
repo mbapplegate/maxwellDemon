@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://bg4msg2fafg6d"]
+
+[ext_resource type="Script" path="res://scenes/DetectorElement/detector_element.gd" id="1_jhq0d"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yp6se"]
+size = Vector2(4, 128)
+
+[node name="DetectorElement" type="Node2D"]
+position = Vector2(64, 96)
+script = ExtResource("1_jhq0d")
+
+[node name="detectorPoly" type="Polygon2D" parent="."]
+visible = false
+color = Color(0.0784314, 0.0784314, 0.0784314, 1)
+polygon = PackedVector2Array(-2, -64, 2, -64, 2, 64, -2, 64)
+
+[node name="detectorArea" type="Area2D" parent="detectorPoly"]
+
+[node name="detectorShape" type="CollisionShape2D" parent="detectorPoly/detectorArea"]
+shape = SubResource("RectangleShape2D_yp6se")

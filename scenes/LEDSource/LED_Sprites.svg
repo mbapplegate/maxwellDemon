@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="128"
+   height="128"
+   viewBox="0 0 33.866666 33.866668"
+   version="1.1"
+   id="svg4974"
+   inkscape:version="0.92.5 (2060ec1f9f, 2020-04-08)"
+   sodipodi:docname="LED_Sprites.svg">
+  <defs
+     id="defs4968" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="7.919596"
+     inkscape:cx="4.8511915"
+     inkscape:cy="68.139225"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     units="px"
+     inkscape:showpageshadow="false"
+     inkscape:snap-bbox="true"
+     inkscape:snap-bbox-midpoints="true"
+     inkscape:bbox-paths="true"
+     inkscape:bbox-nodes="true"
+     inkscape:window-width="2278"
+     inkscape:window-height="1352"
+     inkscape:window-x="266"
+     inkscape:window-y="266"
+     inkscape:window-maximized="0"
+     showguides="true"
+     inkscape:guide-bbox="true">
+    <sodipodi:guide
+       position="0,0"
+       orientation="0,128"
+       id="guide5519"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="33.866667,0"
+       orientation="-128,0"
+       id="guide5521"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="33.866667,33.866667"
+       orientation="0,-128"
+       id="guide5523"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="0,33.866667"
+       orientation="128,0"
+       id="guide5525"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="16.933333,16.933333"
+       orientation="0,1"
+       id="guide1387"
+       inkscape:locked="false"
+       inkscape:label=""
+       inkscape:color="rgb(0,0,255)" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata4971">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-263.13333)">
+    <rect
+       style="fill:#282828;fill-opacity:1;stroke:#000000;stroke-width:0.25519294;stroke-linecap:round;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect1383"
+       width="3.9781406"
+       height="25.144808"
+       x="2.7348177"
+       y="267.49426"
+       rx="0.49726757"
+       ry="0.5238502"
+       inkscape:export-xdpi="96.18"
+       inkscape:export-ydpi="96.18" />
+    <rect
+       style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.35277781;stroke-linecap:round;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect1385"
+       width="1.0583334"
+       height="4.2333336"
+       x="6.8405547"
+       y="277.95001"
+       rx="0.26458335"
+       ry="0.23518521"
+       inkscape:export-xdpi="96.18"
+       inkscape:export-ydpi="96.18" />
+  </g>
+</svg>
