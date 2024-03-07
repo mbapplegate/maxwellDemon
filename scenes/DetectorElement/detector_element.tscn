@@ -10,7 +10,6 @@ position = Vector2(64, 96)
 script = ExtResource("1_jhq0d")
 
 [node name="detectorPoly" type="Polygon2D" parent="."]
-visible = false
 color = Color(0.0784314, 0.0784314, 0.0784314, 1)
 polygon = PackedVector2Array(-2, -64, 2, -64, 2, 64, -2, 64)
 

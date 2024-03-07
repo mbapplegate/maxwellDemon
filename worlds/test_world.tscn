@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://ciwb1o3jgik5o"]
+[gd_scene load_steps=17 format=3 uid="uid://ciwb1o3jgik5o"]
 
 [ext_resource type="Script" path="res://worlds/test_world.gd" id="1_0f5qq"]
 [ext_resource type="Texture2D" uid="uid://is28jambjmci" path="res://tiles/world/opticalTable_32x32.png" id="1_ggdl5"]
@@ -11,6 +11,8 @@
 [ext_resource type="PackedScene" uid="uid://c3mpywrtffsf3" path="res://scenes/LEDSource/led_source.tscn" id="9_amk6m"]
 [ext_resource type="PackedScene" uid="uid://catkndynfd4s5" path="res://scenes/ParabolicMirror/parabolic_mirror.tscn" id="9_fpswf"]
 [ext_resource type="PackedScene" uid="uid://b18q2fk6kxyef" path="res://scenes/Iris/iris.tscn" id="9_l7d0q"]
+[ext_resource type="PackedScene" uid="uid://bn6aixjawlc7b" path="res://scenes/DetectorScreen/detector_screen.tscn" id="12_2cdtv"]
+[ext_resource type="PackedScene" uid="uid://bg4msg2fafg6d" path="res://scenes/DetectorElement/detector_element.tscn" id="13_8rq10"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3e3qs"]
 resource_name = "Table"
@@ -56,16 +58,18 @@ isRotatable = false
 isEnergized = false
 
 [node name="LensPlanoConvex" parent="." instance=ExtResource("8_t0pox")]
-position = Vector2(576, 896)
+position = Vector2(481, 895)
 LENS_HEIGHT = 120
 isEnergizeable = false
 
 [node name="BeamSplitter" parent="." instance=ExtResource("8_78hy1")]
-position = Vector2(672, 704)
+position = Vector2(535, 568)
 
 [node name="LaserSource" parent="." instance=ExtResource("8_a3hu6")]
-position = Vector2(320, 448)
+position = Vector2(341, 895)
+numRaysPerTimeout = 5
 rayColor = Vector3(1, 0, 0.1)
+isEnergized = true
 
 [node name="parabolicMirror" parent="." instance=ExtResource("9_fpswf")]
 position = Vector2(1280, 704)
@@ -84,5 +88,15 @@ initialAngle = 180.0
 isEnergizeable = false
 
 [node name="LEDSource" parent="." instance=ExtResource("9_amk6m")]
-position = Vector2(320, 896)
+position = Vector2(287, 664)
 scale = Vector2(0.5, 0.5)
+numRaysPerTimeout = 1
+isEnergized = false
+
+[node name="detectorScreen" parent="." instance=ExtResource("12_2cdtv")]
+position = Vector2(800, 896)
+multiplierFixed = true
+
+[node name="DetectorElement" parent="detectorScreen" instance=ExtResource("13_8rq10")]
+position = Vector2(-66.5092, 2.35608)
+absorbs = true

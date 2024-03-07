@@ -15,7 +15,7 @@ texture = ExtResource("2_cb8ey")
 
 [node name="screenArea" type="Area2D" parent="screenSprite"]
 collision_layer = 2
-collision_mask = 2
+collision_mask = 3
 
 [node name="screenShape" type="CollisionShape2D" parent="screenSprite/screenArea"]
 shape = SubResource("RectangleShape2D_8ao4v")
@@ -26,7 +26,6 @@ width = 1.0
 default_color = Color(0.431373, 1, 0.588235, 1)
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 0.125
 autostart = true
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
