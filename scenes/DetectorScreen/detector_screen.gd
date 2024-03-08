@@ -59,7 +59,7 @@ func _draw_graph():
 		if maxX < 0:
 			increaseMultiplier = true
 		
-		print("Avg: ", avgX, ", Max: ", maxX, ", Inc: ",increaseMultiplier, ", Dec: ", decreaseMultiplier, ", Mult: ",multiplier)
+		#print("Avg: ", avgX, ", Max: ", maxX, ", Inc: ",increaseMultiplier, ", Dec: ", decreaseMultiplier, ", Mult: ",multiplier)
 		
 func _add_noise(noiseScale:float):
 	for i in NUM_GRAPH_POINTS:

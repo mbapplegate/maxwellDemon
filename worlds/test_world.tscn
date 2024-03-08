@@ -95,8 +95,8 @@ isEnergized = false
 
 [node name="detectorScreen" parent="." instance=ExtResource("12_2cdtv")]
 position = Vector2(800, 896)
-multiplierFixed = true
 
 [node name="DetectorElement" parent="detectorScreen" instance=ExtResource("13_8rq10")]
 position = Vector2(-66.5092, 2.35608)
 absorbs = true
+detectorHeight = 32
