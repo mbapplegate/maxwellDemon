@@ -1,0 +1,40 @@
+[gd_scene load_steps=4 format=3 uid="uid://dn3852bgxqccu"]
+
+[ext_resource type="Script" path="res://scenes/DetectorMeterAnalog/detector_meter.gd" id="1_bm1kv"]
+[ext_resource type="Texture2D" uid="uid://obgbfx3xvawe" path="res://scenes/DetectorMeterAnalog/detectorMeterAnalog.png" id="1_wavw2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k0pt1"]
+size = Vector2(128, 72)
+
+[node name="DetectorMeter" type="Node2D"]
+position = Vector2(96, 64)
+script = ExtResource("1_bm1kv")
+integrationTime = 1.0
+
+[node name="meterSprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_wavw2")
+
+[node name="meterArea" type="Area2D" parent="meterSprite"]
+
+[node name="meterShape" type="CollisionShape2D" parent="meterSprite/meterArea"]
+shape = SubResource("RectangleShape2D_k0pt1")
+
+[node name="goalLine" type="Line2D" parent="."]
+points = PackedVector2Array(0, 32, 56, 32)
+width = 2.0
+default_color = Color(0.117647, 0.117647, 1, 1)
+
+[node name="averagePowerLine" type="Line2D" parent="."]
+points = PackedVector2Array(0, 32, 0, -26)
+width = 2.0
+default_color = Color(1, 0.117647, 0.117647, 1)
+
+[node name="currentPowerLine" type="Line2D" parent="."]
+points = PackedVector2Array(0, 32, -56, 32)
+width = 2.0
+default_color = Color(0.0392157, 0.0392157, 0.0392157, 1)
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
