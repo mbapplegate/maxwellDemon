@@ -79,7 +79,7 @@ isEnergized = false
 position = Vector2(1088, 896)
 scale = Vector2(2, 2)
 maxPower = 20.0
-goalPower = 10
+goalPower = 2
 integrationTime = 0.25
 
 [node name="PointDetector" parent="DetectorMeter" instance=ExtResource("13_8apwg")]

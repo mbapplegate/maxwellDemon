@@ -16,10 +16,12 @@ const NUM_POINTS_TO_AVG = 10
 @onready var avgLine = $averagePowerLine
 @onready var goalLine = $goalLine
 @onready var timer = $Timer
+@onready var light = $LightSprite
 
 var powerArray = []
 var arrayIndex = 0
 var currentEnergy = 0.0
+var goalMet = false
 
 func _ready():
 	for child in get_children():
@@ -50,12 +52,18 @@ func _packetDetected(energy:float):
 	currentEnergy += energy
 
 func _on_timer_timeout():
-	print(currentEnergy)
 	powerArray[arrayIndex] = currentEnergy
 	arrayIndex += 1
 	if (arrayIndex == NUM_POINTS_TO_AVG):
 		arrayIndex = 0
+	var currentAvg = _getArrayAvg()
 	currLine.set_point_position(1,_getPointLocation(currentEnergy))
-	avgLine.set_point_position(1,_getPointLocation(_getArrayAvg()))
+	avgLine.set_point_position(1,_getPointLocation(currentAvg))
 	currentEnergy = 0.0
+	if currentAvg >= goalPower:
+		light.texture = load("res://scenes/DetectorMeterAnalog/indicatorLight_ON.png")
+		goalMet = true
+	else:
+		light.texture = load("res://scenes/DetectorMeterAnalog/indicatorLight_OFF.png")
+		goalMet = false
 	
