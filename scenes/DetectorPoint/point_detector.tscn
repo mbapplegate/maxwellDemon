@@ -1,0 +1,45 @@
+[gd_scene load_steps=8 format=3 uid="uid://bq36hxil0t1vi"]
+
+[ext_resource type="Texture2D" uid="uid://dnpiyf3kbpvoo" path="res://scenes/DetectorPoint/pointDetector.png" id="1_3scko"]
+[ext_resource type="Script" path="res://scenes/DetectorPoint/point_detector.gd" id="1_i8r5l"]
+[ext_resource type="PackedScene" uid="uid://beic3gevjusuj" path="res://scenes/PushableObject/pushable_object.tscn" id="1_oe5i4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yaxwx"]
+size = Vector2(1.5, 14)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y73ug"]
+size = Vector2(30, 3)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_plt18"]
+size = Vector2(32, 3)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_djivk"]
+size = Vector2(4.5, 64)
+
+[node name="PointDetector" instance=ExtResource("1_oe5i4")]
+position = Vector2(365, 101)
+script = ExtResource("1_i8r5l")
+
+[node name="detSprite" type="Sprite2D" parent="Stage" index="0"]
+z_index = 1
+texture = ExtResource("1_3scko")
+
+[node name="activeArea" type="Area2D" parent="Stage/detSprite" index="0"]
+
+[node name="activeShape" type="CollisionShape2D" parent="Stage/detSprite/activeArea" index="0"]
+position = Vector2(-8.25, 0)
+shape = SubResource("RectangleShape2D_yaxwx")
+
+[node name="inactiveArea" type="Area2D" parent="Stage/detSprite" index="1"]
+
+[node name="inactiveShape1" type="CollisionShape2D" parent="Stage/detSprite/inactiveArea" index="0"]
+position = Vector2(0, -28)
+shape = SubResource("RectangleShape2D_y73ug")
+
+[node name="inactiveShape2" type="CollisionShape2D" parent="Stage/detSprite/inactiveArea" index="1"]
+position = Vector2(0, 28)
+shape = SubResource("RectangleShape2D_plt18")
+
+[node name="inactiveShape3" type="CollisionShape2D" parent="Stage/detSprite/inactiveArea" index="2"]
+position = Vector2(2.75, 0)
+shape = SubResource("RectangleShape2D_djivk")

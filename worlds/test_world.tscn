@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://ciwb1o3jgik5o"]
+[gd_scene load_steps=15 format=3 uid="uid://ciwb1o3jgik5o"]
 
 [ext_resource type="Script" path="res://worlds/test_world.gd" id="1_0f5qq"]
 [ext_resource type="Texture2D" uid="uid://is28jambjmci" path="res://tiles/world/opticalTable_32x32.png" id="1_ggdl5"]
@@ -9,10 +9,8 @@
 [ext_resource type="PackedScene" uid="uid://2ai0r6raovox" path="res://scenes/LaserSource/laser_source.tscn" id="8_a3hu6"]
 [ext_resource type="PackedScene" uid="uid://b6navnb20xork" path="res://scenes/Lens_PlanoConvex/lens_plano_convex.tscn" id="8_t0pox"]
 [ext_resource type="PackedScene" uid="uid://c3mpywrtffsf3" path="res://scenes/LEDSource/led_source.tscn" id="9_amk6m"]
-[ext_resource type="PackedScene" uid="uid://catkndynfd4s5" path="res://scenes/ParabolicMirror/parabolic_mirror.tscn" id="9_fpswf"]
-[ext_resource type="PackedScene" uid="uid://b18q2fk6kxyef" path="res://scenes/Iris/iris.tscn" id="9_l7d0q"]
-[ext_resource type="PackedScene" uid="uid://bn6aixjawlc7b" path="res://scenes/DetectorScreen/detector_screen.tscn" id="12_2cdtv"]
-[ext_resource type="PackedScene" uid="uid://bg4msg2fafg6d" path="res://scenes/DetectorElement/detector_element.tscn" id="13_8rq10"]
+[ext_resource type="PackedScene" uid="uid://dn3852bgxqccu" path="res://scenes/DetectorMeterAnalog/detector_meter.tscn" id="12_6rhjo"]
+[ext_resource type="PackedScene" uid="uid://bq36hxil0t1vi" path="res://scenes/DetectorPoint/point_detector.tscn" id="13_8apwg"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3e3qs"]
 resource_name = "Table"
@@ -71,32 +69,19 @@ numRaysPerTimeout = 5
 rayColor = Vector3(1, 0, 0.1)
 isEnergized = true
 
-[node name="parabolicMirror" parent="." instance=ExtResource("9_fpswf")]
-position = Vector2(1280, 704)
-initialAngle = 220.0
-isEnergizeable = false
-
-[node name="Iris" parent="." instance=ExtResource("9_l7d0q")]
-position = Vector2(832, 704)
-aperture_width = 12
-isEnergized = true
-
-[node name="LensPlanoConvex2" parent="." instance=ExtResource("8_t0pox")]
-position = Vector2(1024, 704)
-LENS_HEIGHT = 120
-initialAngle = 180.0
-isEnergizeable = false
-
 [node name="LEDSource" parent="." instance=ExtResource("9_amk6m")]
 position = Vector2(287, 664)
 scale = Vector2(0.5, 0.5)
 numRaysPerTimeout = 1
 isEnergized = false
 
-[node name="detectorScreen" parent="." instance=ExtResource("12_2cdtv")]
-position = Vector2(800, 896)
+[node name="DetectorMeter" parent="." instance=ExtResource("12_6rhjo")]
+position = Vector2(1088, 896)
+scale = Vector2(2, 2)
+maxPower = 20.0
+goalPower = 10
+integrationTime = 0.25
 
-[node name="DetectorElement" parent="detectorScreen" instance=ExtResource("13_8rq10")]
-position = Vector2(-66.5092, 2.35608)
-absorbs = true
-detectorHeight = 32
+[node name="PointDetector" parent="DetectorMeter" instance=ExtResource("13_8apwg")]
+position = Vector2(-160, 0)
+scale = Vector2(0.5, 0.5)

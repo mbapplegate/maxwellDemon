@@ -22,6 +22,10 @@ var arrayIndex = 0
 var currentEnergy = 0.0
 
 func _ready():
+	for child in get_children():
+		if child.name == "PointDetector":
+			child.photonDetected.connect(_packetDetected)	
+			
 	powerArray.resize(NUM_POINTS_TO_AVG)
 	powerArray.fill(0.0)
 	currLine.set_point_position(1,_getPointLocation(minPower))
@@ -33,6 +37,7 @@ func _ready():
 func _getPointLocation(currPower) -> Vector2:
 	var proportion = (currPower-minPower)/(maxPower-minPower)
 	var angle = proportion * (MAX_THETA-MIN_THETA) + MIN_THETA
+	angle = min(MAX_THETA,max(MIN_THETA,angle))
 	return LINE_ORIGIN+Vector2(LINE_LENGTH*cos(angle),LINE_LENGTH*sin(angle))
 
 func _getArrayAvg():
@@ -45,7 +50,7 @@ func _packetDetected(energy:float):
 	currentEnergy += energy
 
 func _on_timer_timeout():
-	currentEnergy = 5.75
+	print(currentEnergy)
 	powerArray[arrayIndex] = currentEnergy
 	arrayIndex += 1
 	if (arrayIndex == NUM_POINTS_TO_AVG):

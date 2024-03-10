@@ -100,11 +100,12 @@ func _process(delta):
 				disconnect("hitSomething",collHandler._ray_hit)
 				var distFrontTraveled = currentPointFront.distance_to(to_local(ray.get_collision_point()))
 				nextPointBack = currentPointBack+startDirToNextPointBack*distFrontTraveled
+				nextPointFront = to_local(ray.get_collision_point())
 				endDirToNextPointBack = nextPointBack.direction_to(line.get_point_position(1))
 				if not endDirToNextPointBack.is_equal_approx(startDirToNextPointBack):
 					nextPointBack = line.get_point_position(1)
 				#Advance the first point to the collision point and the back point to the next point
-				_update_line_position(delta,to_local(ray.get_collision_point()),nextPointBack)
+				_update_line_position(delta,nextPointFront,nextPointBack)
 			#We've collided with the same thing as before, so ignore the collision
 			else:
 				_update_line_position(delta,nextPointFront,nextPointBack)	
