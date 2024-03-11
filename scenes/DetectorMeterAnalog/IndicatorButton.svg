@@ -16,18 +16,21 @@
    version="1.1"
    id="svg5906"
    sodipodi:docname="IndicatorButton.svg"
-   inkscape:version="0.92.0 r15299">
+   inkscape:version="0.92.0 r15299"
+   inkscape:export-filename="C:\Users\matth\Documents\Godot\maxwellDemon\scenes\DetectorMeterAnalog\indicatorLight_ON.png"
+   inkscape:export-xdpi="95.93"
+   inkscape:export-ydpi="95.93">
   <defs
      id="defs5900">
     <linearGradient
        inkscape:collect="always"
        id="linearGradient6457">
       <stop
-         style="stop-color:#ffffaf;stop-opacity:1"
+         style="stop-color:#ffffd1;stop-opacity:1"
          offset="0"
          id="stop6453" />
       <stop
-         style="stop-color:#aaaa00;stop-opacity:1"
+         style="stop-color:#ffff16;stop-opacity:1"
          offset="1"
          id="stop6455" />
     </linearGradient>
@@ -41,7 +44,7 @@
        fy="112.35023"
        r="2.2029439"
        gradientUnits="userSpaceOnUse"
-       gradientTransform="matrix(-0.87513974,0.02395273,-0.02223425,-0.8123571,177.91332,200.89144)" />
+       gradientTransform="matrix(-0.8408653,0.02301464,-0.02136345,-0.78054154,174.50668,197.51926)" />
   </defs>
   <sodipodi:namedview
      id="base"
@@ -76,11 +79,12 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1">
-    <circle
-       style="fill:url(#radialGradient6459);fill-opacity:1;stroke:#000000;stroke-width:0.26458333;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+    <ellipse
+       style="fill:url(#radialGradient6459);fill-opacity:1;stroke:#000000;stroke-width:0.25422105;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        id="path6451"
-       cx="93.133339"
-       cy="112.58541"
-       r="2.0706522" />
+       cx="93.047058"
+       cy="112.67169"
+       rx="1.9895561"
+       ry="1.9895562" />
   </g>
 </svg>
