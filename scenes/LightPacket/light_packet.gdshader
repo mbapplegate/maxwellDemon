@@ -4,7 +4,7 @@ render_mode blend_add;
 const float END_WIDTH_UV = 0.005;
 uniform float red = 1.0;
 uniform float green = 0.0;
-uniform float blue = 0.0;
+uniform float blue = 1.0;
 uniform float energy = 1.0;
 uniform float propVisibleFront =1.0;
 uniform float propVisibleEnd = 1.0;

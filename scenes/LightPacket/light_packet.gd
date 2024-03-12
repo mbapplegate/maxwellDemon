@@ -81,7 +81,7 @@ func _process(delta):
 	#Detect interfaces
 	#Ray hasn't hit anything, so move the ray forward
 	if not ray.is_colliding():
-		_update_line_position(delta,nextPointFront,nextPointBack)
+		_update_line_position(currentPointFront,nextPointFront,nextPointBack)
 	#OK, the ray has hit something -- this is a big deal and we'll figure it out together
 	else:
 		#If the ray is alive (hasn't left the scene or hit an absorber)
@@ -105,12 +105,12 @@ func _process(delta):
 				if not endDirToNextPointBack.is_equal_approx(startDirToNextPointBack):
 					nextPointBack = line.get_point_position(1)
 				#Advance the first point to the collision point and the back point to the next point
-				_update_line_position(delta,nextPointFront,nextPointBack)
+				_update_line_position(currentPointFront,nextPointFront,nextPointBack)
 			#We've collided with the same thing as before, so ignore the collision
 			else:
-				_update_line_position(delta,nextPointFront,nextPointBack)	
+				_update_line_position(currentPointFront,nextPointFront,nextPointBack)	
 		else:
-			_update_line_position(delta,nextPointFront,nextPointBack)
+			_update_line_position(currentPointFront,nextPointFront,nextPointBack)
 	
 	#If the ray is dying and has fully been absorbed, kill the ray
 	if ((rayDying and proportionVisibleBack == 0.0) or numPoints == 1):
@@ -144,7 +144,7 @@ func _get_packet_length(pointArray:PackedVector2Array):
 	
 	return lineLen
 #
-func _update_line_position(delta:float, nextPtFront:Vector2, nextPtBack:Vector2):
+func _update_line_position(currentPtFront:Vector2, nextPtFront:Vector2, nextPtBack:Vector2):
 	line.set_point_position(numPoints-1,nextPtFront)
 	line.set_point_position(0,nextPtBack)
 	#circ.position = nextPtFront
@@ -155,16 +155,17 @@ func _update_line_position(delta:float, nextPtFront:Vector2, nextPtBack:Vector2)
 				numPoints -= 1
 
 	if (proportionVisibleFront < 1.0):
-		proportionVisibleFront += (SPEED*delta) / LEN
+		proportionVisibleFront += abs(nextPtFront.distance_to(currentPtFront)) / LEN
 		if proportionVisibleFront > 1.0:
 			proportionVisibleFront = 1.0
 		line.material.set_shader_parameter("propVisibleFront",proportionVisibleFront)
 	if (rayDying):
 		if (proportionVisibleBack > 0):
-			proportionVisibleBack -= (SPEED*delta)/LEN
+			proportionVisibleBack -= abs(nextPtFront.distance_to(currentPtFront))/LEN
 			if proportionVisibleBack < 0.0:
 				proportionVisibleBack = 0.0
 			line.material.set_shader_parameter("propVisibleEnd",proportionVisibleBack)
+	#print(proportionVisibleBack)
 	
 	#if numPoints > 2:
 		#lineLength = 0.0

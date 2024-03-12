@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://beic3gevjusuj" path="res://scenes/PushableObject/pushable_object.tscn" id="1_oe5i4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yaxwx"]
-size = Vector2(1.5, 14)
+size = Vector2(4.5, 14)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y73ug"]
 size = Vector2(30, 3)
@@ -27,7 +27,7 @@ texture = ExtResource("1_3scko")
 [node name="activeArea" type="Area2D" parent="Stage/detSprite" index="0"]
 
 [node name="activeShape" type="CollisionShape2D" parent="Stage/detSprite/activeArea" index="0"]
-position = Vector2(-8.25, 0)
+position = Vector2(-9.75, 0)
 shape = SubResource("RectangleShape2D_yaxwx")
 
 [node name="inactiveArea" type="Area2D" parent="Stage/detSprite" index="1"]
