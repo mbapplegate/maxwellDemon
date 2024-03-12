@@ -13,12 +13,14 @@ const NUM_POINTS_TO_AVG = 10
 @export var maxPower = 10.0
 @export var goalPower = 5
 @export var integrationTime = 0.5
+@export var IDColor = Color(1,0,0)
 
 @onready var currLine = $currentPowerLine
 @onready var avgLine = $averagePowerLine
 @onready var goalLine = $goalLine
 @onready var timer = $Timer
 @onready var light = $LightSprite
+@onready var idBall = $IDSprite
 
 var powerArray = []
 var arrayIndex = 0
@@ -26,9 +28,11 @@ var currentEnergy = 0.0
 var goalMet = false
 
 func _ready():
+	idBall.modulate = IDColor
 	for child in get_children():
 		if child.name == "PointDetector":
 			child.photonDetected.connect(_packetDetected)	
+			child.idIndicator.modulate = IDColor
 			
 	powerArray.resize(NUM_POINTS_TO_AVG)
 	powerArray.fill(0.0)

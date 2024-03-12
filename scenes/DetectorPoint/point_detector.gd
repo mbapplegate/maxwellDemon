@@ -2,6 +2,8 @@ extends pushableObject
 
 signal photonDetected(energy)
 
+@onready var idIndicator = $Stage/IDSprite
+
 func _ready():
 	isEnergizeable = false
 	

@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://dn3852bgxqccu"]
+[gd_scene load_steps=6 format=3 uid="uid://dn3852bgxqccu"]
 
 [ext_resource type="Script" path="res://scenes/DetectorMeterAnalog/detector_meter.gd" id="1_bm1kv"]
 [ext_resource type="Texture2D" uid="uid://bhx46wj470luo" path="res://scenes/DetectorMeterAnalog/detectorMeterAnalog_256px.png" id="2_nbrkn"]
 [ext_resource type="Texture2D" uid="uid://dtxyg0dsi5bmm" path="res://scenes/DetectorMeterAnalog/indicatorLight_256px_OFF.png" id="3_f8jfo"]
+[ext_resource type="Texture2D" uid="uid://0dgf3cefecwr" path="res://scenes/PointSource/sourceCircle.png" id="4_m2yyb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k0pt1"]
 size = Vector2(256, 128)
@@ -47,5 +48,9 @@ autostart = true
 [node name="LightSprite" type="Sprite2D" parent="."]
 position = Vector2(100, -37)
 texture = ExtResource("3_f8jfo")
+
+[node name="IDSprite" type="Sprite2D" parent="."]
+position = Vector2(-110, -47)
+texture = ExtResource("4_m2yyb")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

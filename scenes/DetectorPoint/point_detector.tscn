@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://bq36hxil0t1vi"]
+[gd_scene load_steps=9 format=3 uid="uid://bq36hxil0t1vi"]
 
 [ext_resource type="Texture2D" uid="uid://dnpiyf3kbpvoo" path="res://scenes/DetectorPoint/pointDetector.png" id="1_3scko"]
 [ext_resource type="Script" path="res://scenes/DetectorPoint/point_detector.gd" id="1_i8r5l"]
 [ext_resource type="PackedScene" uid="uid://beic3gevjusuj" path="res://scenes/PushableObject/pushable_object.tscn" id="1_oe5i4"]
+[ext_resource type="Texture2D" uid="uid://0dgf3cefecwr" path="res://scenes/PointSource/sourceCircle.png" id="4_qcnat"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yaxwx"]
 size = Vector2(4.5, 14)
@@ -43,3 +44,9 @@ shape = SubResource("RectangleShape2D_plt18")
 [node name="inactiveShape3" type="CollisionShape2D" parent="Stage/detSprite/inactiveArea" index="2"]
 position = Vector2(2.75, 0)
 shape = SubResource("RectangleShape2D_djivk")
+
+[node name="IDSprite" type="Sprite2D" parent="Stage" index="1"]
+z_index = 1
+position = Vector2(10, 0)
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("4_qcnat")
