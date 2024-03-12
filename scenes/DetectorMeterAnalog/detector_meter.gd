@@ -3,7 +3,9 @@ extends StaticBody2D
 const NUM_STEPS = 256
 const MIN_THETA =-PI+.1 
 const MAX_THETA = -.1
-const LINE_LENGTH = 105
+const CURR_LINE_LENGTH = 100
+const AVG_LINE_LENGTH = 90
+const GOAL_LINE_LENGTH = 64
 const LINE_ORIGIN = Vector2(0,56)
 const NUM_POINTS_TO_AVG = 10
 
@@ -30,17 +32,17 @@ func _ready():
 			
 	powerArray.resize(NUM_POINTS_TO_AVG)
 	powerArray.fill(0.0)
-	currLine.set_point_position(1,_getPointLocation(minPower))
-	avgLine.set_point_position(1,_getPointLocation(minPower))
-	goalLine.set_point_position(1,_getPointLocation(goalPower))
+	currLine.set_point_position(1,LINE_ORIGIN+CURR_LINE_LENGTH*_getPointDirection(minPower))
+	avgLine.set_point_position(1,LINE_ORIGIN+AVG_LINE_LENGTH*_getPointDirection(minPower))
+	goalLine.set_point_position(1,LINE_ORIGIN+GOAL_LINE_LENGTH*_getPointDirection(goalPower))
 	timer.wait_time = integrationTime
 	
 
-func _getPointLocation(currPower) -> Vector2:
+func _getPointDirection(currPower) -> Vector2:
 	var proportion = (currPower-minPower)/(maxPower-minPower)
 	var angle = proportion * (MAX_THETA-MIN_THETA) + MIN_THETA
 	angle = min(MAX_THETA,max(MIN_THETA,angle))
-	return LINE_ORIGIN+Vector2(LINE_LENGTH*cos(angle),LINE_LENGTH*sin(angle))
+	return Vector2(cos(angle),sin(angle)).normalized()
 
 func _getArrayAvg():
 	var sum = 0.0
@@ -57,8 +59,8 @@ func _on_timer_timeout():
 	if (arrayIndex == NUM_POINTS_TO_AVG):
 		arrayIndex = 0
 	var currentAvg = _getArrayAvg()
-	currLine.set_point_position(1,_getPointLocation(currentEnergy))
-	avgLine.set_point_position(1,_getPointLocation(currentAvg))
+	currLine.set_point_position(1,LINE_ORIGIN + CURR_LINE_LENGTH*_getPointDirection(currentEnergy))
+	avgLine.set_point_position(1,LINE_ORIGIN+AVG_LINE_LENGTH*_getPointDirection(currentAvg))
 	currentEnergy = 0.0
 	if currentAvg >= goalPower:
 		light.texture = load("res://scenes/DetectorMeterAnalog/indicatorLight_256px_ON.png")

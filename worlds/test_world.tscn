@@ -65,7 +65,7 @@ position = Vector2(535, 568)
 
 [node name="LaserSource" parent="." instance=ExtResource("8_a3hu6")]
 position = Vector2(341, 895)
-numRaysPerTimeout = 5
+numRaysPerTimeout = 2
 rayColor = Vector3(1, 0, 0.1)
 isEnergized = true
 
