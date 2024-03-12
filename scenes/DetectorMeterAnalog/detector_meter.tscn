@@ -1,45 +1,45 @@
 [gd_scene load_steps=5 format=3 uid="uid://dn3852bgxqccu"]
 
 [ext_resource type="Script" path="res://scenes/DetectorMeterAnalog/detector_meter.gd" id="1_bm1kv"]
-[ext_resource type="Texture2D" uid="uid://obgbfx3xvawe" path="res://scenes/DetectorMeterAnalog/detectorMeterAnalog.png" id="1_wavw2"]
-[ext_resource type="Texture2D" uid="uid://dtvrvqu5mgj33" path="res://scenes/DetectorMeterAnalog/indicatorLight_OFF.png" id="3_27rwx"]
+[ext_resource type="Texture2D" uid="uid://bhx46wj470luo" path="res://scenes/DetectorMeterAnalog/detectorMeterAnalog_256px.png" id="2_nbrkn"]
+[ext_resource type="Texture2D" uid="uid://dtxyg0dsi5bmm" path="res://scenes/DetectorMeterAnalog/indicatorLight_256px_OFF.png" id="3_f8jfo"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k0pt1"]
-size = Vector2(128, 72)
+size = Vector2(256, 128)
 
-[node name="DetectorMeter" type="Node2D"]
+[node name="DetectorMeter" type="StaticBody2D"]
 position = Vector2(96, 64)
+collision_layer = 2
+collision_mask = 2
 script = ExtResource("1_bm1kv")
 integrationTime = 1.0
 
-[node name="meterSprite" type="Sprite2D" parent="."]
-texture = ExtResource("1_wavw2")
-
-[node name="meterArea" type="Area2D" parent="meterSprite"]
-
-[node name="meterShape" type="CollisionShape2D" parent="meterSprite/meterArea"]
+[node name="meterShape" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_k0pt1")
 
+[node name="meterSprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_nbrkn")
+
 [node name="goalLine" type="Line2D" parent="."]
-points = PackedVector2Array(0, 32, 56, 32)
-width = 4.0
+points = PackedVector2Array(0, 56, 100, 32)
+width = 6.0
 default_color = Color(0.117647, 0.117647, 1, 1)
 
 [node name="averagePowerLine" type="Line2D" parent="."]
-points = PackedVector2Array(0, 32, 0, -26)
-width = 4.0
+points = PackedVector2Array(0, 56, 0, -26)
+width = 6.0
 default_color = Color(1, 0.117647, 0.117647, 1)
 
 [node name="currentPowerLine" type="Line2D" parent="."]
-points = PackedVector2Array(0, 32, -56, 32)
-width = 4.0
+points = PackedVector2Array(0, 56, -56, 32)
+width = 6.0
 default_color = Color(0.0392157, 0.0392157, 0.0392157, 1)
 
 [node name="Timer" type="Timer" parent="."]
 autostart = true
 
 [node name="LightSprite" type="Sprite2D" parent="."]
-position = Vector2(50, -22)
-texture = ExtResource("3_27rwx")
+position = Vector2(100, -37)
+texture = ExtResource("3_f8jfo")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

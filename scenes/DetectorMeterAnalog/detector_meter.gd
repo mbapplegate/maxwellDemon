@@ -1,10 +1,10 @@
-extends Node2D
+extends StaticBody2D
 
 const NUM_STEPS = 256
 const MIN_THETA =-PI+.1 
 const MAX_THETA = -.1
-const LINE_LENGTH = 56
-const LINE_ORIGIN = Vector2(0,32)
+const LINE_LENGTH = 105
+const LINE_ORIGIN = Vector2(0,56)
 const NUM_POINTS_TO_AVG = 10
 
 @export var minPower = 0.0
@@ -61,9 +61,9 @@ func _on_timer_timeout():
 	avgLine.set_point_position(1,_getPointLocation(currentAvg))
 	currentEnergy = 0.0
 	if currentAvg >= goalPower:
-		light.texture = load("res://scenes/DetectorMeterAnalog/indicatorLight_ON.png")
+		light.texture = load("res://scenes/DetectorMeterAnalog/indicatorLight_256px_ON.png")
 		goalMet = true
 	else:
-		light.texture = load("res://scenes/DetectorMeterAnalog/indicatorLight_OFF.png")
+		light.texture = load("res://scenes/DetectorMeterAnalog/indicatorLight_256px_OFF.png")
 		goalMet = false
 	

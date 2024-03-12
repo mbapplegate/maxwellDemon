@@ -15,7 +15,7 @@ texture = ExtResource("2_cb8ey")
 
 [node name="screenArea" type="Area2D" parent="screenSprite"]
 collision_layer = 2
-collision_mask = 3
+collision_mask = 2
 
 [node name="screenShape" type="CollisionShape2D" parent="screenSprite/screenArea"]
 shape = SubResource("RectangleShape2D_8ao4v")

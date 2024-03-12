@@ -77,11 +77,9 @@ isEnergized = false
 
 [node name="DetectorMeter" parent="." instance=ExtResource("12_6rhjo")]
 position = Vector2(1088, 896)
-scale = Vector2(2, 2)
 maxPower = 20.0
 goalPower = 2
 integrationTime = 0.25
 
 [node name="PointDetector" parent="DetectorMeter" instance=ExtResource("13_8apwg")]
-position = Vector2(-160, 0)
-scale = Vector2(0.5, 0.5)
+position = Vector2(-288, 0)

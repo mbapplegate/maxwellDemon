@@ -17,20 +17,20 @@
    id="svg5906"
    sodipodi:docname="IndicatorButton.svg"
    inkscape:version="0.92.0 r15299"
-   inkscape:export-filename="C:\Users\matth\Documents\Godot\maxwellDemon\scenes\DetectorMeterAnalog\indicatorLight_ON.png"
-   inkscape:export-xdpi="95.93"
-   inkscape:export-ydpi="95.93">
+   inkscape:export-filename="C:\Users\matth\Documents\Godot\maxwellDemon\scenes\DetectorMeterAnalog\indicatorLight_256px_OFF.png"
+   inkscape:export-xdpi="192"
+   inkscape:export-ydpi="192">
   <defs
      id="defs5900">
     <linearGradient
        inkscape:collect="always"
        id="linearGradient6457">
       <stop
-         style="stop-color:#ffffd1;stop-opacity:1"
+         style="stop-color:#c8c896;stop-opacity:1"
          offset="0"
          id="stop6453" />
       <stop
-         style="stop-color:#ffff16;stop-opacity:1"
+         style="stop-color:#78640a;stop-opacity:1"
          offset="1"
          id="stop6455" />
     </linearGradient>
