@@ -1,0 +1,80 @@
+[gd_scene load_steps=5 format=3 uid="uid://dns1nq8hlfau"]
+
+[ext_resource type="Script" path="res://Doorway.gd" id="1_i0r02"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bv4bs"]
+size = Vector2(32, 128)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_375sy"]
+size = Vector2(32, 128)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mb014"]
+size = Vector2(32, 128)
+
+[node name="Doorway" type="Node2D"]
+position = Vector2(256, 256)
+script = ExtResource("1_i0r02")
+
+[node name="doorBodyClosed" type="StaticBody2D" parent="."]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="doorBodyClosed"]
+position = Vector2(16, 0)
+shape = SubResource("RectangleShape2D_bv4bs")
+
+[node name="down1" type="Line2D" parent="."]
+points = PackedVector2Array(2, -64, 2, 64)
+width = 4.0
+default_color = Color(0.784314, 0.784314, 0.784314, 1)
+
+[node name="up1" type="Line2D" parent="."]
+points = PackedVector2Array(6, 64, 6, -64)
+width = 4.0
+default_color = Color(0.784314, 0.784314, 0.784314, 1)
+
+[node name="down2" type="Line2D" parent="."]
+points = PackedVector2Array(10, -64, 10, 64)
+width = 4.0
+default_color = Color(0.784314, 0.784314, 0.784314, 1)
+
+[node name="up2" type="Line2D" parent="."]
+points = PackedVector2Array(14, 64, 14, -64)
+width = 4.0
+default_color = Color(0.784314, 0.784314, 0.784314, 1)
+
+[node name="up3" type="Line2D" parent="."]
+points = PackedVector2Array(22, 64, 22, -64)
+width = 4.0
+default_color = Color(0.784314, 0.784314, 0.784314, 1)
+
+[node name="down3" type="Line2D" parent="."]
+points = PackedVector2Array(18, -64, 18, 64)
+width = 4.0
+default_color = Color(0.784314, 0.784314, 0.784314, 1)
+
+[node name="up4" type="Line2D" parent="."]
+points = PackedVector2Array(30, 64, 30, -64)
+width = 4.0
+default_color = Color(0.784314, 0.784314, 0.784314, 1)
+
+[node name="down4" type="Line2D" parent="."]
+points = PackedVector2Array(26, -64, 26, 64)
+width = 4.0
+default_color = Color(0.784314, 0.784314, 0.784314, 1)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.25
+one_shot = true
+
+[node name="doorBodyOpen" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="doorBodyOpen"]
+position = Vector2(16, -96)
+shape = SubResource("RectangleShape2D_375sy")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="doorBodyOpen"]
+position = Vector2(16, 96)
+shape = SubResource("RectangleShape2D_mb014")
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

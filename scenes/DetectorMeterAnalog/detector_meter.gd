@@ -11,7 +11,7 @@ const NUM_POINTS_TO_AVG = 10
 
 @export var minPower = 0.0
 @export var maxPower = 10.0
-@export var goalPower = 5
+@export var goalPower:float = 5
 @export var integrationTime = 0.5
 @export var IDColor = Color(1,0,0)
 
@@ -26,6 +26,7 @@ var powerArray = []
 var arrayIndex = 0
 var currentEnergy = 0.0
 var goalMet = false
+signal goalMetChanged(val:bool)
 
 func _ready():
 	idBall.modulate = IDColor
@@ -68,8 +69,12 @@ func _on_timer_timeout():
 	currentEnergy = 0.0
 	if currentAvg >= goalPower:
 		light.texture = load("res://scenes/DetectorMeterAnalog/indicatorLight_256px_ON.png")
-		goalMet = true
+		if not goalMet:
+			goalMet = true
+			goalMetChanged.emit(goalMet)
 	else:
 		light.texture = load("res://scenes/DetectorMeterAnalog/indicatorLight_256px_OFF.png")
-		goalMet = false
+		if goalMet:
+			goalMet = false
+			goalMetChanged.emit(goalMet)
 	

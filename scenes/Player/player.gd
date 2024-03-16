@@ -36,6 +36,7 @@ var inputs = {
 	
 func _ready():
 	self.position = self.position.snapped(Vector2.ONE * TILE_SIZE)
+	#self.position += Vector2.ONE*(TILE_SIZE/2)
 	screen_size = get_viewport_rect().size
 	idleCount = SEC_TO_IDLE+1
 	idle = true
