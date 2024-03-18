@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://beic3gevjusuj" path="res://scenes/PushableObject/pushable_object.tscn" id="1_tnojq"]
 [ext_resource type="Script" path="res://scenes/Iris/Iris.gd" id="2_rb1hw"]
-[ext_resource type="Texture2D" uid="uid://dd2o1bvfafs6f" path="res://scenes/Iris/IrisTile_16x16.png" id="3_ws33i"]
+[ext_resource type="Texture2D" uid="uid://cfrwrssugeth" path="res://scenes/Iris/IrisTile_16x16_grad.png" id="3_t5t7w"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1cfuo"]
 size = Vector2(16, 48)
@@ -26,7 +26,7 @@ shape = SubResource("RectangleShape2D_1cfuo")
 [node name="TopPartSprite" type="Sprite2D" parent="Stage/TopPart" index="1"]
 texture_repeat = 2
 position = Vector2(0, -36)
-texture = ExtResource("3_ws33i")
+texture = ExtResource("3_t5t7w")
 region_enabled = true
 region_rect = Rect2(0, 0, 16, 48)
 
@@ -39,6 +39,6 @@ shape = SubResource("RectangleShape2D_2vg45")
 [node name="BotPartSprite" type="Sprite2D" parent="Stage/BotPart" index="1"]
 texture_repeat = 2
 position = Vector2(0, 36)
-texture = ExtResource("3_ws33i")
+texture = ExtResource("3_t5t7w")
 region_enabled = true
 region_rect = Rect2(0, 0, 16, 48)
