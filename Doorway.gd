@@ -138,7 +138,6 @@ func _on_timer_timeout():
 			unseatLeaves()
 		else:
 			for i in range(upLeaves.size()-1,-1,-1):
-				print(i)
 				if leafOpenVec[i]:
 					_toggleLeaf(i,false)
 					break

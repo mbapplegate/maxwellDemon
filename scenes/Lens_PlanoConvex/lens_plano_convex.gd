@@ -82,3 +82,25 @@ func _ray_hit(photonObj:Object, collPoint:Vector2, collNormal:Vector2, _collider
 	photonObj.propDir = newDir
 	photonObj.ray_add_point(photonObj.to_local(collPoint))
 	
+func update_texture():
+	super.update_texture()
+	
+	if isActive:
+		var tween = get_tree().create_tween()
+		tween.set_ease(Tween.EASE_IN)
+		tween.set_trans(Tween.TRANS_LINEAR)
+		tween.tween_property(frontFocusSprite,"scale",Vector2(3,3),0.5)
+		var tween2 = get_tree().create_tween()
+		tween2.set_ease(Tween.EASE_IN)
+		tween2.set_trans(Tween.TRANS_LINEAR)
+		tween2.tween_property(rearFocusSprite,"scale",Vector2(3,3),0.5)
+	else:
+		var tween = get_tree().create_tween()
+		tween.set_ease(Tween.EASE_IN)
+		tween.set_trans(Tween.TRANS_LINEAR)
+		tween.tween_property(frontFocusSprite,"scale",Vector2(1,1),1)
+		var tween2 = get_tree().create_tween()
+		tween2.set_ease(Tween.EASE_IN)
+		tween2.set_trans(Tween.TRANS_LINEAR)
+		tween2.tween_property(rearFocusSprite,"scale",Vector2(1,1),0.5)
+	

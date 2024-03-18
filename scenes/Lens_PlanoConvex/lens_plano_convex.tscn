@@ -29,9 +29,11 @@ polygon = PackedVector2Array(7, -57, 8, 61, 19, 58, 25, 46, 31, 29, 34, 10, 31, 
 color = Color(0.0705882, 0.619608, 1, 0.501961)
 
 [node name="frontFocus" type="Sprite2D" parent="Stage" index="3"]
+z_index = 1
 position = Vector2(128, 0)
 texture = ExtResource("3_n4x3j")
 
 [node name="rearFocus" type="Sprite2D" parent="Stage" index="4"]
+z_index = 1
 position = Vector2(-128, 0)
 texture = ExtResource("3_n4x3j")
