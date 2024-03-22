@@ -47,9 +47,32 @@ func push(motion:Vector2):
 		return true
 	else:
 		return false
-
+		
+func pull(direction:Vector2,player:Object):
+	if isSliding or not isPushable:
+		return false
+	self.add_collision_exception_with(player)	
+	
+	var globalTargetLoc = global_position + direction.normalized()*TILE_SIZE
+	print("Pulling: ",direction, ", ", to_local(globalTargetLoc),", ",can_move(to_local(globalTargetLoc)))
+	if can_move(to_local(globalTargetLoc)):
+		var tween = get_tree().create_tween()
+		
+		tween.set_ease(Tween.EASE_IN)
+		tween.set_trans(Tween.TRANS_CUBIC)
+		tween.tween_property(self,"global_position",globalTargetLoc,sliding_time)
+		isSliding = true
+		await tween.finished
+		isSliding = false
+		self.remove_collision_exception_with(player)
+		return true
+	else:
+		self.remove_collision_exception_with(player)
+		return false
+	
 func can_move(localDestination:Vector2):
-	if move_and_collide(localDestination, true):
+	var collInfo =  move_and_collide(localDestination, true)
+	if collInfo:
 		return false
 	else:
 		return true

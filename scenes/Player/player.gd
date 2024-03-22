@@ -2,7 +2,7 @@ extends Node2D
 
 @onready var _animation_player = $MaxwellBody/AnimatedSprite2D
 @onready var _activate_region = $MaxwellBody/ActivationRegion/CollisionShape2D
-#@onready var _player_body = $MaxwellBody
+@onready var _player_body = $MaxwellBody
 @onready var _cast = $MaxwellBody/checkCollision
 @onready var _cast2 = $MaxwellBody/checkCollision2
 
@@ -72,6 +72,8 @@ func move_grid(direction:String):
 		var tween = get_tree().create_tween()
 		tween.set_ease(Tween.EASE_IN)
 		tween.set_trans(Tween.TRANS_CUBIC)
+		if itemActive and Input.is_action_pressed("pull"):
+			itemActive.pull(inputs[direction],_player_body)
 		tween.tween_property(self,"global_position",newPos,0.2)
 		update_animation(inputs[direction])
 		isMoving = true
@@ -207,19 +209,19 @@ func update_animation(motion:Vector2):
 	#if _animation_player.animation != animation:
 	_animation_player.play(animation)
 		
-func check_pushable_collision(motion:Vector2, collider:Object):
-	if abs(motion.x) + abs(motion.y) > 1.0:
-		return
-	var pushable = collider as pushableObject
-	if pushable:
-		pushable.push(motion.normalized())
-		
-func check_pullable_collision(motion:Vector2, collider:Object):
-	if abs(motion.x) + abs(motion.y) > 1.0:
-		return
-	var pushable = collider as pushableObject
-	if pushable:
-		pushable.pull(motion.normalized())
+#func check_pushable_collision(motion:Vector2, collider:Object):
+	#if abs(motion.x) + abs(motion.y) > 1.0:
+		#return
+	#var pushable = collider as pushableObject
+	#if pushable:
+		#pushable.push(motion.normalized())
+		#
+#func check_pullable_collision(motion:Vector2, collider:Object):
+	#if abs(motion.x) + abs(motion.y) > 1.0:
+		#return
+	#var pushable = collider as pushableObject
+	#if pushable:
+		#pushable.pull(motion.normalized())
 	
 func _on_activation_region_body_entered(body):
 	var obj = body as pushableObject

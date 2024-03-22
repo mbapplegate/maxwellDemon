@@ -65,7 +65,7 @@ isEnergizeable = false
 position = Vector2(672, 192)
 
 [node name="LaserSource" parent="." instance=ExtResource("8_a3hu6")]
-position = Vector2(288, 448)
+position = Vector2(256, 448)
 rayColor = Vector3(1, 0, 0.1)
 isEnergized = true
 
@@ -82,7 +82,7 @@ goalPower = 1.5
 integrationTime = 0.25
 
 [node name="PointDetector" parent="DetectorMeter" instance=ExtResource("13_8apwg")]
-position = Vector2(-1024, 320)
+position = Vector2(-960, 320)
 
 [node name="Iris" parent="." instance=ExtResource("13_nvoua")]
 position = Vector2(576, 640)
