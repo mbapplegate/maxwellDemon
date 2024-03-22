@@ -4,11 +4,12 @@ extends Node2D
 @onready var _activate_region = $MaxwellBody/ActivationRegion/CollisionShape2D
 #@onready var _player_body = $MaxwellBody
 @onready var _cast = $MaxwellBody/checkCollision
+@onready var _cast2 = $MaxwellBody/checkCollision2
 
 @export var SPEED = 400.0
 @export var PUSH_SPEED = 200.0
-const SPRITE_SIZE = Vector2(32,32)
-const ACTIVATION_SIZE = 24
+const SPRITE_SIZE = Vector2(64,64)
+const ACTIVATION_SIZE = 30
 const SEC_TO_IDLE = 2
 const TILE_SIZE = 32
 
@@ -79,18 +80,43 @@ func move_grid(direction:String):
 		
 	
 func validate_movement(testLoc:Vector2, direction:Vector2):
-	_cast.position = Vector2(16,16) + direction*8
+	var dirCast1 = Vector2.ZERO
+	var dirCast2 = Vector2.ZERO
+	if direction == Vector2.RIGHT:
+		dirCast1 = (Vector2.RIGHT + Vector2.UP).normalized()
+		dirCast2 = (Vector2.RIGHT + Vector2.DOWN).normalized()
+	elif direction == Vector2.UP:
+		dirCast1 = (Vector2.RIGHT + Vector2.UP).normalized()
+		dirCast2 = (Vector2.LEFT + Vector2.UP).normalized()
+	elif direction == Vector2.DOWN:
+		dirCast1 = (Vector2.RIGHT + Vector2.DOWN).normalized()
+		dirCast2 = (Vector2.LEFT + Vector2.DOWN).normalized()
+	elif direction == Vector2.LEFT:
+		dirCast1 = (Vector2.LEFT + Vector2.UP).normalized()
+		dirCast2 = (Vector2.LEFT + Vector2.DOWN).normalized()
+		
+	_cast.position = SPRITE_SIZE/2.0 + dirCast1*TILE_SIZE
 	_cast.target_position =to_local(testLoc)
+	_cast2.position = SPRITE_SIZE/2.0 + dirCast2*TILE_SIZE
+	_cast2.target_position = to_local(testLoc)
 	#_cast.position = self.position
 	_cast.force_raycast_update()
-	if not _cast.is_colliding():
+	_cast2.force_raycast_update()
+	if (not _cast.is_colliding()) and (not _cast2.is_colliding()):
 		return true
 	else:
-		if _cast.get_collider() is pushableObject and _cast.get_collider().isPushable:
-			_cast.get_collider().push(_cast.target_position)
-			return _cast.get_collider().isSliding
-		else:
-			return false
+		if _cast.is_colliding():
+			if _cast.get_collider() is pushableObject and _cast.get_collider().isPushable:
+				_cast.get_collider().push(_cast.target_position)
+				return _cast.get_collider().isSliding
+			else:
+				return false
+		elif _cast2.is_colliding():
+			if _cast2.get_collider() is pushableObject and _cast2.get_collider().isPushable:
+				_cast2.get_collider().push(_cast2.target_position)
+				return _cast2.get_collider().isSliding
+			else:
+				return false
 			
 			
 func _process(_delta):
@@ -154,7 +180,7 @@ func update_animation(motion:Vector2):
 			animation = "WalkUp"
 		elif motion == Vector2.ZERO and idle:
 			animation = "Idle"
-			_set_activation_region("down")
+			#_set_activation_region("down")
 #		else:
 #			_animation_player.stop()
 	else:
@@ -174,7 +200,7 @@ func update_animation(motion:Vector2):
 			animation = "WalkDown"
 		elif motion == Vector2.ZERO and idle:
 			animation = "Idle"
-			_set_activation_region("down")
+			#_set_activation_region("down")
 #		else:
 #			_animation_player.stop()
 				

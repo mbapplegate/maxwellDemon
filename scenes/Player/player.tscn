@@ -142,14 +142,12 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hn8h0"]
-size = Vector2(32, 32)
+size = Vector2(64, 64)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bhfnq"]
-size = Vector2(10, 10)
+size = Vector2(30, 30)
 
 [node name="Player" type="Node2D"]
-position = Vector2(127, 109)
-scale = Vector2(3, 3)
 script = ExtResource("1_ne1mb")
 
 [node name="MaxwellBody" type="CharacterBody2D" parent="."]
@@ -158,12 +156,13 @@ collision_mask = 3
 motion_mode = 1
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="MaxwellBody"]
+scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_sindr")
 animation = &"WalkUp"
 centered = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MaxwellBody"]
-position = Vector2(16, 16)
+position = Vector2(32, 32)
 shape = SubResource("RectangleShape2D_hn8h0")
 
 [node name="ActivationRegion" type="Area2D" parent="MaxwellBody"]
@@ -171,10 +170,15 @@ collision_layer = 2
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MaxwellBody/ActivationRegion"]
-position = Vector2(16, -5)
+position = Vector2(32, -15)
 shape = SubResource("RectangleShape2D_bhfnq")
 
 [node name="checkCollision" type="RayCast2D" parent="MaxwellBody"]
+position = Vector2(16, 16)
+target_position = Vector2(0, 32)
+collision_mask = 2
+
+[node name="checkCollision2" type="RayCast2D" parent="MaxwellBody"]
 position = Vector2(16, 16)
 target_position = Vector2(0, 32)
 collision_mask = 2

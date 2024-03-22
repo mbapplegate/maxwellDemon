@@ -16,7 +16,10 @@
    version="1.1"
    id="svg4974"
    inkscape:version="0.92.5 (2060ec1f9f, 2020-04-08)"
-   sodipodi:docname="screenOsc.svg">
+   sodipodi:docname="screenOsc.svg"
+   inkscape:export-filename="C:\Users\Matthew\Documents\Godot\maxwellGithub\maxwellDemon\scenes\DetectorScreen\screenOsc.png"
+   inkscape:export-xdpi="96.18"
+   inkscape:export-ydpi="96.18">
   <defs
      id="defs4968">
     <linearGradient
@@ -52,7 +55,7 @@
      inkscape:pageshadow="2"
      inkscape:zoom="5.6"
      inkscape:cx="0.29488409"
-     inkscape:cy="61.035995"
+     inkscape:cy="75.321709"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
