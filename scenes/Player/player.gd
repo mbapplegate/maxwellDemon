@@ -77,6 +77,12 @@ func move_grid(direction:String):
 		isMoving = true
 		await tween.finished
 		isMoving = false
+		if global_position.x >= screen_size.x or \
+			global_position.x <= -SPRITE_SIZE.x or \
+			global_position.y >= screen_size.y or    \
+			global_position.y <= -SPRITE_SIZE.y:
+					levelComplete.emit()
+					print("Winner winner chicken dinner")
 		
 	
 func validate_movement(testLoc:Vector2, direction:Vector2):

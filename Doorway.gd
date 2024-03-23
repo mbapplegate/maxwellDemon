@@ -41,7 +41,7 @@ func _ready():
 	startClosedGlobalPosDown = down1.global_position
 	leafOpenVec.resize(downLeaves.size())
 	leafOpenVec.fill(false)
-	#openDoor()
+	openDoor()
 	
 func openDoor():
 	isOpening = true
@@ -68,7 +68,7 @@ func seatLeaves():
 		t = get_tree().create_tween()
 		t.set_ease(Tween.EASE_IN)
 		t.set_trans(Tween.TRANS_SPRING)
-		t.tween_property(upLeaves[i],"global_position",startClosedGlobalPosUp+Vector2((4-i)*LINE_WIDTH,-DOOR_WIDTH),SEATING_TIME)
+		t.tween_property(upLeaves[i],"global_position",startClosedGlobalPosUp+Vector2((3-i)*LINE_WIDTH,-DOOR_WIDTH),SEATING_TIME)
 	for i in range(upLeaves.size()):
 		t = get_tree().create_tween()
 		t.set_ease(Tween.EASE_IN)
