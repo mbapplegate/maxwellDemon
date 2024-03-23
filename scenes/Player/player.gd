@@ -24,6 +24,7 @@ var isMoving = false
 signal rotateCWSignal
 signal rotateCCWSignal
 signal energizeSignal
+signal levelComplete
 
 var drawSize = Vector2.ZERO
 var velocity = Vector2.ZERO
@@ -66,8 +67,9 @@ func _unhandled_input(event):
 func move_grid(direction:String):
 	
 	var newPos = inputs[direction].normalized()*(TILE_SIZE) + self.global_position
-	if not isMoving:
+	if not isMoving and not Input.is_action_pressed("pull"):
 		_set_activation_region(direction)
+		
 	if validate_movement(newPos, inputs[direction]) and not isMoving:
 		var tween = get_tree().create_tween()
 		tween.set_ease(Tween.EASE_IN)
@@ -185,23 +187,23 @@ func update_animation(motion:Vector2):
 			#_set_activation_region("down")
 #		else:
 #			_animation_player.stop()
-	else:
-		if motion.x > 0:
-			_set_activation_region("left")
-			animation = "WalkRight"
-			_animation_player.flip_h = true
-		elif motion.x < 0:
-			_set_activation_region("right")
-			animation = "WalkRight"
-			_animation_player.flip_h = false
-		elif motion.y > 0:
-			_set_activation_region("up")
-			animation = "WalkUp"
-		elif motion.y < 0:
-			_set_activation_region("down")
-			animation = "WalkDown"
-		elif motion == Vector2.ZERO and idle:
-			animation = "Idle"
+	#else:
+		#if motion.x > 0:
+			#_set_activation_region("left")
+			#animation = "WalkRight"
+			#_animation_player.flip_h = true
+		#elif motion.x < 0:
+			#_set_activation_region("right")
+			#animation = "WalkRight"
+			#_animation_player.flip_h = false
+		#elif motion.y > 0:
+			#_set_activation_region("up")
+			#animation = "WalkUp"
+		#elif motion.y < 0:
+			#_set_activation_region("down")
+			#animation = "WalkDown"
+		#elif motion == Vector2.ZERO and idle:
+			#animation = "Idle"
 			#_set_activation_region("down")
 #		else:
 #			_animation_player.stop()
