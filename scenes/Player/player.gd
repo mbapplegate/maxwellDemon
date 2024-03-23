@@ -58,11 +58,7 @@ func _unhandled_input(event):
 		energizeSignal.emit()
 		actionTaken= true
 	else:
-		for dir in inputs.keys():
-			if event.is_action_pressed(dir) and not isMoving:
-				actionTaken= true
-				update_animation(inputs[dir])
-				move_grid(dir)
+		pass
 				
 func move_grid(direction:String):
 	
@@ -140,9 +136,12 @@ func _ray_hit(_photonObj:Object, _collPoint:Vector2, _collNormal:Vector2):
 	pass
 	
 func _physics_process(delta):
-	#var motion = Vector2.ZERO
-	#velocity.x = Input.get_action_strength("right") - Input.get_action_strength("left")
-	#velocity.y = Input.get_action_strength("down") - Input.get_action_strength("up")
+	for dir in inputs.keys():
+		if Input.is_action_pressed(dir) and not isMoving:
+			actionTaken= true
+			update_animation(inputs[dir])
+			move_grid(dir)
+			
 	if not actionTaken:
 		idleCount += delta
 	else:
