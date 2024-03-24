@@ -37,8 +37,8 @@ func _ready():
 	downLeaves.append(down2)
 	downLeaves.append(down3)
 	downLeaves.append(down4)
-	startClosedGlobalPosUp = up1.global_position
-	startClosedGlobalPosDown = down1.global_position
+	startClosedGlobalPosUp = up1.position
+	startClosedGlobalPosDown = down1.position
 	leafOpenVec.resize(downLeaves.size())
 	leafOpenVec.fill(false)
 	openDoor()
@@ -68,12 +68,12 @@ func seatLeaves():
 		t = get_tree().create_tween()
 		t.set_ease(Tween.EASE_IN)
 		t.set_trans(Tween.TRANS_SPRING)
-		t.tween_property(upLeaves[i],"global_position",startClosedGlobalPosUp+Vector2((3-i)*LINE_WIDTH,-DOOR_WIDTH),SEATING_TIME)
+		t.tween_property(upLeaves[i],"position",startClosedGlobalPosUp+Vector2((3-i)*LINE_WIDTH,-DOOR_WIDTH),SEATING_TIME)
 	for i in range(upLeaves.size()):
 		t = get_tree().create_tween()
 		t.set_ease(Tween.EASE_IN)
 		t.set_trans(Tween.TRANS_SPRING)
-		t.tween_property(downLeaves[i],"global_position",startClosedGlobalPosUp+Vector2((4-i)*LINE_WIDTH,DOOR_WIDTH),SEATING_TIME)	
+		t.tween_property(downLeaves[i],"position",startClosedGlobalPosUp+Vector2((4-i)*LINE_WIDTH,DOOR_WIDTH),SEATING_TIME)	
 	await t.finished
 	isSeated = true
 	leafTimer.start()
@@ -85,13 +85,13 @@ func unseatLeaves():
 		t = get_tree().create_tween()
 		t.set_ease(Tween.EASE_OUT)
 		t.set_trans(Tween.TRANS_CUBIC)
-		t.tween_property(upLeaves[i],"global_position",startClosedGlobalPosUp+Vector2(0,-DOOR_WIDTH),1)
+		t.tween_property(upLeaves[i],"position",startClosedGlobalPosUp+Vector2(0,-DOOR_WIDTH),1)
 			
 	for i in range(downLeaves.size()):
 		t = get_tree().create_tween()
 		t.set_ease(Tween.EASE_OUT)
 		t.set_trans(Tween.TRANS_CUBIC)
-		t.tween_property(downLeaves[i],"global_position",startClosedGlobalPosUp+Vector2(0,DOOR_WIDTH),1)
+		t.tween_property(downLeaves[i],"position",startClosedGlobalPosUp+Vector2(0,DOOR_WIDTH),1)
 	await t.finished
 	isSeated = false
 	leafTimer.start()
@@ -109,13 +109,13 @@ func _toggleLeaf(leafIndex:int, opening:bool):
 	tween2.set_trans(Tween.TRANS_CIRC)
 	
 	if opening:
-		tween1.tween_property(leafUp,"global_position",startClosedGlobalPosUp+Vector2(0,-DOOR_WIDTH),OPENING_TIME)
-		tween2.tween_property(leafDown,"global_position",startClosedGlobalPosDown+Vector2(0,DOOR_WIDTH),OPENING_TIME)
+		tween1.tween_property(leafUp,"position",startClosedGlobalPosUp+Vector2(0,-DOOR_WIDTH),OPENING_TIME)
+		tween2.tween_property(leafDown,"position",startClosedGlobalPosDown+Vector2(0,DOOR_WIDTH),OPENING_TIME)
 		if leafOpenVec.count(true) == leafOpenVec.size():
 			tween1.connect("finished",seatLeaves)
 	else:
-		tween1.tween_property(leafUp,"global_position",startClosedGlobalPosUp,OPENING_TIME)
-		tween2.tween_property(leafDown,"global_position",startClosedGlobalPosDown,OPENING_TIME)
+		tween1.tween_property(leafUp,"position",startClosedGlobalPosUp,OPENING_TIME)
+		tween2.tween_property(leafDown,"position",startClosedGlobalPosDown,OPENING_TIME)
 		#tween1.connect("finished",_setLeafOpenState(leafIndex,false))
 	
 func _on_timer_timeout():
