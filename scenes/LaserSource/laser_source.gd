@@ -1,5 +1,6 @@
 extends pushableObject
 
+@export var HALF_HEIGHT = 0.0
 @export var halfAngle = 0.0
 @export var numRaysPerTimeout : int = 1
 @export var rayColor : Vector3 = Vector3(1.0, 0, 1.0)
@@ -29,8 +30,11 @@ func _on_timer_timeout():
 		for i in numRaysPerTimeout:
 			if halfAngle > 0:
 				angle = rng.randf_range(-halfAngle,halfAngle)
-		
-			yLoc = max(min(halfHeight,rng.randfn(0,halfHeight/2.0)),-halfHeight)
+			
+			if HALF_HEIGHT > 0:
+				yLoc = max(min(halfHeight,rng.randfn(0,halfHeight/2.0)),-halfHeight)
+			else:
+				yLoc = 0
 			#print("Timeout. Angle: ",angle)
 			instance = ray.instantiate()
 			instance.propDir = Vector2(cos(angle+sprite.rotation),sin(angle+sprite.rotation))

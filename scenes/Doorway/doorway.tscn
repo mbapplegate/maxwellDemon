@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://dns1nq8hlfau"]
 
-[ext_resource type="Script" path="res://scenes/Doorway/Doorway.gd" id="1_faeo7"]
+[ext_resource type="Script" path="res://scenes/Doorway/doorway.gd" id="1_etbt3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bv4bs"]
 size = Vector2(32, 128)
@@ -13,7 +13,7 @@ size = Vector2(32, 128)
 
 [node name="Doorway" type="Node2D"]
 position = Vector2(256, 256)
-script = ExtResource("1_faeo7")
+script = ExtResource("1_etbt3")
 
 [node name="doorBodyClosed" type="StaticBody2D" parent="."]
 collision_layer = 3

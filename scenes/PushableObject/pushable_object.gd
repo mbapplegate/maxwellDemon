@@ -24,6 +24,7 @@ func initialize():
 	#print(position.snapped(Vector2(TILE_SIZE,TILE_SIZE)))
 	self.position = position.snapped(Vector2(TILE_SIZE,TILE_SIZE))
 	sprite.rotation = deg_to_rad(initialAngle)
+	#print("Initializing: ",self,", energ?: ", isEnergizeable)
 	update_texture()
 	
 func calculate_destination(dir:Vector2):

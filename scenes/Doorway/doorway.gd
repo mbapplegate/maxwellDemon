@@ -41,7 +41,7 @@ func _ready():
 	startClosedGlobalPosDown = down1.position
 	leafOpenVec.resize(downLeaves.size())
 	leafOpenVec.fill(false)
-	openDoor()
+	#openDoor()
 	
 func openDoor():
 	isOpening = true

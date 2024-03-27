@@ -32,6 +32,7 @@ func _ready():
 	idBall.modulate = IDColor
 	for child in get_children():
 		if child.name == "PointDetector":
+			child.initialize()
 			child.photonDetected.connect(_packetDetected)	
 			child.idIndicator.modulate = IDColor
 			
