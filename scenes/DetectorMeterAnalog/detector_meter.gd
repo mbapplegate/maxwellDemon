@@ -1,4 +1,5 @@
 extends StaticBody2D
+class_name detectorMeter
 
 const NUM_STEPS = 256
 const MIN_THETA =-PI+.1 

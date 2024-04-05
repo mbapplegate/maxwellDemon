@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=3 uid="uid://cksywskoh65iu"]
+
+[ext_resource type="PackedScene" uid="uid://chc6j322etsui" path="res://worlds/world_template.tscn" id="1_hc1is"]
+[ext_resource type="Script" path="res://worlds/test_level.gd" id="2_r7nx1"]
+[ext_resource type="PackedScene" uid="uid://dn3852bgxqccu" path="res://scenes/DetectorMeterAnalog/detector_meter.tscn" id="3_uhqtu"]
+[ext_resource type="PackedScene" uid="uid://bq36hxil0t1vi" path="res://scenes/DetectorPoint/point_detector.tscn" id="4_8y41k"]
+[ext_resource type="PackedScene" uid="uid://cy88a0n33mko2" path="res://scenes/BeamSplitter/beam_splitter.tscn" id="5_nwjbc"]
+
+[node name="TestLevel" instance=ExtResource("1_hc1is")]
+script = ExtResource("2_r7nx1")
+
+[node name="Player" parent="." index="3"]
+position = Vector2(679, 612)
+
+[node name="DetectorMeter" parent="." index="4"]
+maxPower = 5.0
+goalPower = 2.0
+
+[node name="BeamSplitter" parent="." index="7" instance=ExtResource("5_nwjbc")]
+position = Vector2(840, 518)
+
+[node name="DetectorMeter2" parent="." index="8" instance=ExtResource("3_uhqtu")]
+position = Vector2(984.664, 110.752)
+maxPower = 5.0
+goalPower = 2.0
+IDColor = Color(0.611765, 0.356863, 1, 1)
+
+[node name="PointDetector" parent="DetectorMeter2" index="8" instance=ExtResource("4_8y41k")]
+position = Vector2(-146.664, 657.248)
+initialAngle = 90.0
+isPushable = false
