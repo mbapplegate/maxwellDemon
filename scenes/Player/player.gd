@@ -82,7 +82,7 @@ func move_grid(direction:String):
 			global_position.y >= screen_size.y or    \
 			global_position.y <= -SPRITE_SIZE.y:
 					levelComplete.emit()
-					print("Winner winner chicken dinner")
+					#print("Winner winner chicken dinner")
 		
 	
 func validate_movement(testLoc:Vector2, direction:Vector2):

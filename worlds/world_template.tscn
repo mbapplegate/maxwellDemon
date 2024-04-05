@@ -60,3 +60,9 @@ position = Vector2(-608, 384)
 
 [node name="LaserSource" parent="." instance=ExtResource("8_4hlqj")]
 position = Vector2(614.925, 503.77)
+
+[node name="screenFader" type="ColorRect" parent="."]
+z_index = 1
+offset_right = 1920.0
+offset_bottom = 1088.0
+color = Color(0, 0, 0, 1)
