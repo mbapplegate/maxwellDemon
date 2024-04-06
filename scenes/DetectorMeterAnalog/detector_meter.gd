@@ -22,15 +22,21 @@ const NUM_POINTS_TO_AVG = 10
 @onready var timer = $Timer
 @onready var light = $LightSprite
 @onready var idBall = $IDSprite
+@onready var goalWire = $goalWire
 
 var powerArray = []
 var arrayIndex = 0
 var currentEnergy = 0.0
 var goalMet = false
+
+const WIRE_OFF_COLOR = Color(10/255.0,10/255.0,10/255.0)
+const WIRE_ON_COLOR = Color(240/255.0,240/255.0,60/255.0)
+
 signal goalMetChanged(val:bool)
 
 func _ready():
 	idBall.modulate = IDColor
+	goalWire.modulate = WIRE_OFF_COLOR
 	for child in get_children():
 		if child.name == "PointDetector":
 			child.initialize()
@@ -59,7 +65,11 @@ func _getArrayAvg():
 	
 func _packetDetected(energy:float):
 	currentEnergy += energy
-
+	
+func setGoalWirePoints(pointArray:PackedVector2Array):
+	goalWire.clear_points()
+	goalWire.points = pointArray
+	
 func _on_timer_timeout():
 	powerArray[arrayIndex] = currentEnergy
 	arrayIndex += 1
@@ -70,13 +80,15 @@ func _on_timer_timeout():
 	avgLine.set_point_position(1,LINE_ORIGIN+AVG_LINE_LENGTH*_getPointDirection(currentAvg))
 	currentEnergy = 0.0
 	if currentAvg >= goalPower:
-		light.texture = load("res://scenes/DetectorMeterAnalog/indicatorLight_256px_ON.png")
 		if not goalMet:
+			light.texture = load("res://scenes/DetectorMeterAnalog/indicatorLight_256px_ON.png")
+			goalWire.modulate = WIRE_ON_COLOR
 			goalMet = true
 			goalMetChanged.emit(goalMet)
 	else:
-		light.texture = load("res://scenes/DetectorMeterAnalog/indicatorLight_256px_OFF.png")
 		if goalMet:
+			light.texture = load("res://scenes/DetectorMeterAnalog/indicatorLight_256px_OFF.png")
+			goalWire.modulate = WIRE_OFF_COLOR
 			goalMet = false
 			goalMetChanged.emit(goalMet)
 	

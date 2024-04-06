@@ -11,8 +11,13 @@ config_version=5
 [application]
 
 config/name="Maxwell_Grid"
+run/main_scene="res://utilities/mainMenu/main_menu.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
+
+[autoload]
+
+SceneSwitcher="*res://utilities/sceneSwitcher/scene_switcher.tscn"
 
 [display]
 

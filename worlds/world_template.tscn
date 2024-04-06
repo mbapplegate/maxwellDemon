@@ -43,7 +43,7 @@ layer_0/tile_data = PackedInt32Array(2162688, 1, 0, 2097152, 1, 0, 2031616, 1, 0
 
 [node name="goalWire" type="Line2D" parent="."]
 position = Vector2(17, 0)
-points = PackedVector2Array(1775, 128, 1860, 128, 1860, 480)
+points = PackedVector2Array(1839, 224, 1860, 224, 1860, 480)
 width = 6.0
 
 [node name="Doorway" parent="." instance=ExtResource("4_tcvdg")]
@@ -58,11 +58,9 @@ position = Vector2(1664, 128)
 [node name="PointDetector" parent="DetectorMeter" instance=ExtResource("7_00355")]
 position = Vector2(-608, 384)
 
+[node name="detLine1" type="Line2D" parent="DetectorMeter"]
+points = PackedVector2Array(0, 0, 192, 0, 192, 98)
+width = 6.0
+
 [node name="LaserSource" parent="." instance=ExtResource("8_4hlqj")]
 position = Vector2(614.925, 503.77)
-
-[node name="screenFader" type="ColorRect" parent="."]
-z_index = 1
-offset_right = 1920.0
-offset_bottom = 1088.0
-color = Color(0, 0, 0, 1)

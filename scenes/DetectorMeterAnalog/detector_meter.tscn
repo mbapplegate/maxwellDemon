@@ -18,6 +18,10 @@ integrationTime = 1.0
 [node name="meterShape" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_k0pt1")
 
+[node name="goalWire" type="Line2D" parent="."]
+points = PackedVector2Array(0, 0, 150, 0)
+width = 6.0
+
 [node name="meterSprite" type="Sprite2D" parent="."]
 texture = ExtResource("2_nbrkn")
 

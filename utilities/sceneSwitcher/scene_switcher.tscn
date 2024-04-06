@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://vyl86o748qf4"]
+
+[ext_resource type="Script" path="res://utilities/sceneSwitcher/scene_switcher.gd" id="1_sww8q"]
+
+[node name="SceneSwitcher" type="Node2D"]
+script = ExtResource("1_sww8q")
+Scenes = {
+"MainMenu": &"res://utilities/mainMenu/main_menu.tscn",
+"TestLevel": &"res://worlds/test_level.tscn",
+"TestWorld": &"res://worlds/test_world.tscn"
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = 5
+offset_right = 1920.0
+offset_bottom = 1080.0
+color = Color(0.0784314, 0.0784314, 0.0784314, 1)
