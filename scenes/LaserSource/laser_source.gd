@@ -32,7 +32,7 @@ func _on_timer_timeout():
 				angle = rng.randf_range(-halfAngle,halfAngle)
 			
 			if HALF_HEIGHT > 0:
-				yLoc = max(min(halfHeight,rng.randfn(0,halfHeight/2.0)),-halfHeight)
+				yLoc = max(min(halfHeight,rng.randfn(0,HALF_HEIGHT/2.0)),-halfHeight)
 			else:
 				yLoc = 0
 			#print("Timeout. Angle: ",angle)

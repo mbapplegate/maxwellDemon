@@ -19,10 +19,14 @@ position = Vector2(679, 612)
 maxPower = 5.0
 goalPower = 2.0
 
-[node name="BeamSplitter" parent="." index="7" instance=ExtResource("5_nwjbc")]
+[node name="LaserSource" parent="." index="5"]
+position = Vector2(512, 522)
+HALF_HEIGHT = 12.0
+
+[node name="BeamSplitter" parent="." index="6" instance=ExtResource("5_nwjbc")]
 position = Vector2(840, 518)
 
-[node name="DetectorMeter2" parent="." index="8" instance=ExtResource("3_uhqtu")]
+[node name="DetectorMeter2" parent="." index="7" instance=ExtResource("3_uhqtu")]
 position = Vector2(1344, 128)
 maxPower = 5.0
 goalPower = 2.0

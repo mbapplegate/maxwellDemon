@@ -8,7 +8,7 @@ class_name WorldTemplate
 @onready var player = $Player
 @onready var wire = $goalWire
 
-@export var nextSceneAlias : StringName = "MainMenu"
+var nextSceneAlias : StringName = "MainMenu"
 var newScene = null
 const WIRE_OFF_COLOR = Color(10/255.0,10/255.0,10/255.0)
 const WIRE_ON_COLOR = Color(240/255.0,240/255.0,60/255.0)
