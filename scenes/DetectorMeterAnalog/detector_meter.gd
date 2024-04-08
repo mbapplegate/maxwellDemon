@@ -35,6 +35,7 @@ const WIRE_ON_COLOR = Color(240/255.0,240/255.0,60/255.0)
 signal goalMetChanged(val:bool)
 
 func _ready():
+	var wireSet = false
 	idBall.modulate = IDColor
 	goalWire.modulate = WIRE_OFF_COLOR
 	for child in get_children():
@@ -42,6 +43,10 @@ func _ready():
 			child.initialize()
 			child.photonDetected.connect(_packetDetected)	
 			child.idIndicator.modulate = IDColor
+		if not wireSet and child is Line2D and child.name == "WirePath":
+			setGoalWirePoints(child.points)
+			child.visible = false
+			wireSet = true
 			
 	powerArray.resize(NUM_POINTS_TO_AVG)
 	powerArray.fill(0.0)

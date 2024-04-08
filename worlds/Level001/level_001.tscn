@@ -21,6 +21,11 @@ HALF_HEIGHT = 10.0
 [node name="DetectorMeter" parent="." instance=ExtResource("3_ieyoj")]
 position = Vector2(1568, 160)
 
+[node name="WirePath" type="Line2D" parent="DetectorMeter"]
+points = PackedVector2Array(0, 0, 310, 0, 310, 270)
+width = 6.0
+default_color = Color(0, 1, 0, 1)
+
 [node name="PointDetector" parent="DetectorMeter" instance=ExtResource("4_2aqcr")]
 position = Vector2(-256, 224)
 
