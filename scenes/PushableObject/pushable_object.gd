@@ -55,7 +55,7 @@ func pull(direction:Vector2,player:Object):
 	self.add_collision_exception_with(player)	
 	
 	var globalTargetLoc = global_position + direction.normalized()*TILE_SIZE
-	print("Pulling: ",direction, ", ", to_local(globalTargetLoc),", ",can_move(to_local(globalTargetLoc)))
+	#print("Pulling: ",direction, ", ", to_local(globalTargetLoc),", ",can_move(to_local(globalTargetLoc)))
 	if can_move(to_local(globalTargetLoc)):
 		var tween = get_tree().create_tween()
 		

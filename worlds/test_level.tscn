@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://cksywskoh65iu"]
 
-[ext_resource type="PackedScene" uid="uid://chc6j322etsui" path="res://worlds/world_template.tscn" id="1_hc1is"]
+[ext_resource type="PackedScene" path="res://worlds/world_template.tscn" id="1_hc1is"]
 [ext_resource type="Script" path="res://worlds/test_level.gd" id="2_r7nx1"]
 [ext_resource type="PackedScene" uid="uid://dn3852bgxqccu" path="res://scenes/DetectorMeterAnalog/detector_meter.tscn" id="3_uhqtu"]
 [ext_resource type="PackedScene" uid="uid://bq36hxil0t1vi" path="res://scenes/DetectorPoint/point_detector.tscn" id="4_8y41k"]
@@ -10,7 +10,7 @@
 script = ExtResource("2_r7nx1")
 
 [node name="goalWire" parent="." index="1"]
-points = PackedVector2Array(1455, 128, 1860, 128, 1860, 480)
+points = PackedVector2Array(1487, 128, 1860, 128, 1860, 480)
 
 [node name="Player" parent="." index="3"]
 position = Vector2(679, 612)
@@ -18,6 +18,9 @@ position = Vector2(679, 612)
 [node name="DetectorMeter" parent="." index="4"]
 maxPower = 5.0
 goalPower = 2.0
+
+[node name="detLine1" parent="DetectorMeter" index="10"]
+points = PackedVector2Array(0, 0, 212, 0, 212, 96)
 
 [node name="LaserSource" parent="." index="5"]
 position = Vector2(512, 522)

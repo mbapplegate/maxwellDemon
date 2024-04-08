@@ -1,4 +1,0 @@
-extends WorldTemplate
-
-
-#nextSceneAlias = "TestWorld"

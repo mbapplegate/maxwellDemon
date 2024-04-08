@@ -37,7 +37,7 @@ var inputs = {
 }
 	
 func _ready():
-	self.position = self.position.snapped(Vector2.ONE * TILE_SIZE)
+	snap_position()
 	#self.position += Vector2.ONE*(TILE_SIZE/2)
 	screen_size = get_viewport_rect().size
 	idleCount = SEC_TO_IDLE+1
@@ -46,6 +46,9 @@ func _ready():
 	drawSize.x = SPRITE_SIZE.x * self.scale.x
 	drawSize.y = SPRITE_SIZE.y * self.scale.y
 	_activate_region.shape.size =Vector2(ACTIVATION_SIZE,ACTIVATION_SIZE)
+	
+func snap_position():
+	self.position = self.position.snapped(Vector2.ONE * TILE_SIZE)
 
 func _unhandled_input(event):
 	if event.is_action_pressed("rotateCW"):
