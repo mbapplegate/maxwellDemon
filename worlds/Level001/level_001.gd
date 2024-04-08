@@ -12,14 +12,15 @@ func _ready():
 			child.goalMetChanged.connect(_toggleDoor)
 			
 func _toggleDoor(val):
-	var allGoalsMet = true
-	for child in get_children():
-		if child is detectorMeter:
-			if not child.goalMet:
-				allGoalsMet = false
-	
-	if allGoalsMet:
-		door.openDoor()
+	if val:
+		var allGoalsMet = true
+		for child in get_children():
+			if child is detectorMeter:
+				if not child.goalMet:
+					allGoalsMet = false
+		
+		if allGoalsMet:
+			door.openDoor()
 	else:
 		door.closeDoor()
 		

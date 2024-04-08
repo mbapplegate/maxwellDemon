@@ -5,8 +5,8 @@
 [node name="SceneSwitcher" type="Node2D"]
 script = ExtResource("1_sww8q")
 Scenes = {
+"Level001": &"res://worlds/Level001/level_001.tscn",
 "MainMenu": &"res://utilities/mainMenu/main_menu.tscn",
-"TestLevel": &"res://worlds/test_level.tscn",
 "TestWorld": &"res://worlds/test_world.tscn"
 }
 

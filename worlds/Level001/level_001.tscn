@@ -22,7 +22,7 @@ HALF_HEIGHT = 10.0
 position = Vector2(1568, 160)
 
 [node name="WirePath" type="Line2D" parent="DetectorMeter"]
-points = PackedVector2Array(0, 0, 310, 0, 310, 270)
+points = PackedVector2Array(0, 0, 310, 0, 310, 275)
 width = 6.0
 default_color = Color(0, 1, 0, 1)
 
