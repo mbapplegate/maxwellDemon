@@ -7,7 +7,7 @@ extends Node2D
 @export var nextSceneAlias = "MainMenu"
 
 func _ready():
-	tutText.modulate = Color(1.0,1.0,1.0,0.0)
+	tutText.modulate=Color(1.0,1.0,1.0,0.0)
 	player.levelComplete.connect(nextLevel)
 	player.objectActiveChanged.connect(isLaserActive)
 	for child in get_children():

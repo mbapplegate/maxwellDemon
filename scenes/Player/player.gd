@@ -25,6 +25,7 @@ signal rotateCWSignal
 signal rotateCCWSignal
 signal energizeSignal
 signal levelComplete
+signal objectActiveChanged(object, isActive)
 
 var drawSize = Vector2.ZERO
 var velocity = Vector2.ZERO
@@ -242,6 +243,7 @@ func _on_activation_region_body_entered(body):
 			connect("rotateCCWSignal",obj.rotateCCW)
 			connect("rotateCWSignal",obj.rotateCW)
 			connect("energizeSignal",obj.togEnergize)
+			objectActiveChanged.emit(obj,true)
 			obj.update_texture()
 
 
@@ -251,6 +253,7 @@ func _on_activation_region_body_exited(body):
 		if obj.isActive:
 			itemActive = null
 			obj.isActive = false
+			objectActiveChanged.emit(obj,false)
 			if rotateCCWSignal.is_connected(obj.rotateCCW):
 				rotateCCWSignal.disconnect(obj.rotateCCW)
 			if rotateCWSignal.is_connected(obj.rotateCW):
