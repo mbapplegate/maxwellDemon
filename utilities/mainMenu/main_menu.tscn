@@ -20,14 +20,20 @@ grow_vertical = 2
 
 [node name="startGame" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-focus_next = NodePath("../selectLevel")
+focus_next = NodePath("../loadGame")
 focus_previous = NodePath("../quitGame")
 text = "Start Game"
+
+[node name="loadGame" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+focus_next = NodePath("../selectLevel")
+focus_previous = NodePath("../startGame")
+text = "Load Game	"
 
 [node name="selectLevel" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 focus_next = NodePath("../quitGame")
-focus_previous = NodePath("../startGame")
+focus_previous = NodePath("../loadGame")
 text = "Select Level"
 
 [node name="quitGame" type="Button" parent="VBoxContainer"]
@@ -46,5 +52,6 @@ text = "[b]Demon Maxwell[/b]	"
 scroll_active = false
 
 [connection signal="pressed" from="VBoxContainer/startGame" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/loadGame" to="." method="_on_load_game_pressed"]
 [connection signal="pressed" from="VBoxContainer/selectLevel" to="." method="_on_select_level_pressed"]
 [connection signal="pressed" from="VBoxContainer/quitGame" to="." method="_on_quit_game_pressed"]

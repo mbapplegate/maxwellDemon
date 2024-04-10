@@ -11,3 +11,6 @@ func _on_select_level_pressed():
 	
 func _on_quit_game_pressed():
 	SceneSwitcher.QuitGame() # Replace with function body.
+
+func _on_load_game_pressed():
+	SceneSwitcher.ChangeScene("MainMenu")
