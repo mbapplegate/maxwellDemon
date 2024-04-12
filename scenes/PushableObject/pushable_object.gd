@@ -83,7 +83,7 @@ func can_move(localDestination:Vector2):
 func update_texture():
 	if isActive:
 		bg.texture = load("res://tiles/pushable/pushableBase_BACKGROUND_ACTIVE.png")
-	elif isRotatable or isPushable:
+	elif isPushable:
 		bg.texture = load("res://tiles/pushable/pushableBase_BACKGROUND_NORMAL.png")
 	else:
 		bg.texture = load("res://tiles/pushable/pushableBase_BACKGROUND_STATIC.png")

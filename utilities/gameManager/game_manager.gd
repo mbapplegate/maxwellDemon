@@ -18,6 +18,8 @@ func _input(event):
 			pauseMenu.gamePaused()
 		else:
 			pauseMenu.gameUnPaused()
+			if currentSceneAlias == "MainMenu":
+				currentScene.get_node("VBoxContainer/startGame").grab_focus()
 			
 func switchScene(sceneAlias):
 	if sceneAlias == "QuitGame":
