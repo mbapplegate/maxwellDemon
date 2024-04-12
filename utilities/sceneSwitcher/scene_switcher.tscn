@@ -8,6 +8,8 @@ Scenes = {
 "Level001": &"res://worlds/Level001/level_001.tscn",
 "Level002": &"res://worlds/Level002/level_002.tscn",
 "Level003": &"res://worlds/Level003/level_003.tscn",
+"Level004": &"res://worlds/Level004/level_004.tscn",
+"Level005": &"res://worlds/Level005/level_005.tscn",
 "MainMenu": &"res://utilities/mainMenu/main_menu.tscn",
 "Manager": &"res://utilities/gameManager/game_manager.tscn",
 "TestWorld": &"res://worlds/test_world.tscn"

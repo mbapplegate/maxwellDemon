@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="128"
+   height="128"
+   viewBox="0 0 33.866666 33.866666"
+   version="1.1"
+   id="svg4530"
+   inkscape:version="0.92.0 r15299"
+   sodipodi:docname="combinerBase.svg"
+   inkscape:export-filename="C:\Users\matth\Documents\Godot\maxwellDemon\scenes\WireCombiner\combinerBase_64px.png"
+   inkscape:export-xdpi="87.148827"
+   inkscape:export-ydpi="87.148827">
+  <defs
+     id="defs4524" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="10.31468"
+     inkscape:cx="41.146102"
+     inkscape:cy="63.145698"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     units="px"
+     showguides="true"
+     inkscape:guide-bbox="true"
+     inkscape:snap-bbox="true"
+     inkscape:snap-bbox-midpoints="true"
+     inkscape:window-width="1920"
+     inkscape:window-height="1000"
+     inkscape:window-x="-11"
+     inkscape:window-y="-11"
+     inkscape:window-maximized="1">
+    <sodipodi:guide
+       position="0,63.999999"
+       orientation="0,1"
+       id="guide5077"
+       inkscape:locked="false"
+       inkscape:label=""
+       inkscape:color="rgb(0,0,255)" />
+    <sodipodi:guide
+       position="16.933333,16.933333"
+       orientation="0,1"
+       id="guide5081"
+       inkscape:locked="false"
+       inkscape:label=""
+       inkscape:color="rgb(0,0,255)" />
+    <sodipodi:guide
+       position="0,0"
+       orientation="0,128"
+       id="guide5083"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="33.866666,0"
+       orientation="-128,0"
+       id="guide5085"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="33.866666,33.866666"
+       orientation="0,-128"
+       id="guide5087"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="0,33.866666"
+       orientation="128,0"
+       id="guide5089"
+       inkscape:locked="false" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata4527">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-263.13331)">
+    <circle
+       style="fill:#000000;fill-opacity:0;stroke:none;stroke-width:0.26458332;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="path5075-1"
+       cx="18.520834"
+       cy="281.65417"
+       r="8.4666662" />
+    <circle
+       style="fill:#e1e1e1;fill-opacity:1;stroke:#000000;stroke-width:0.26458333;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="path5075"
+       cx="16.933332"
+       cy="280.06665"
+       r="8.4666662"
+       inkscape:export-xdpi="94.523087"
+       inkscape:export-ydpi="94.523087" />
+  </g>
+</svg>
