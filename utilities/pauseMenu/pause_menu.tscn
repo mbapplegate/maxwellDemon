@@ -1,0 +1,46 @@
+[gd_scene load_steps=2 format=3 uid="uid://b047on3svtnae"]
+
+[ext_resource type="Script" path="res://utilities/pauseMenu/pause_menu.gd" id="1_amycw"]
+
+[node name="PauseMenu" type="Node2D"]
+process_mode = 2
+z_index = 5
+script = ExtResource("1_amycw")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 1920.0
+offset_bottom = 1080.0
+color = Color(0, 0, 0, 0.196078)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+offset_left = 846.0
+offset_top = 430.0
+offset_right = 1102.0
+offset_bottom = 698.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Resume" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+text = "Resume"
+
+[node name="Restart" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+text = "Restart Level"
+
+[node name="quitToMenu" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+text = "Quit to Menu"
+
+[node name="quitGame" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+text = "Quit Game"
+
+[connection signal="pressed" from="VBoxContainer/Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="VBoxContainer/Restart" to="." method="_on_restart_pressed"]
+[connection signal="pressed" from="VBoxContainer/quitToMenu" to="." method="_on_quit_to_menu_pressed"]
+[connection signal="pressed" from="VBoxContainer/quitGame" to="." method="_on_quit_game_pressed"]

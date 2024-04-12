@@ -6,6 +6,9 @@ extends Node2D
 
 @export var nextSceneAlias = "MainMenu"
 
+signal nextScene(sceneAlias)
+var signalEmitted : bool = false
+		
 func _ready():
 	tutText.modulate = Color(1.0,1.0,1.0,0.0)
 	player.levelComplete.connect(nextLevel)
@@ -43,4 +46,6 @@ func isLaserActive(obj, isActive:bool):
 		
 			
 func nextLevel():
-	SceneSwitcher.ChangeScene(nextSceneAlias)
+	if not signalEmitted:
+		nextScene.emit(nextSceneAlias)
+		signalEmitted = true

@@ -1,16 +1,18 @@
 extends Node2D
 
+signal nextScene(sceneAlias)
+
 func _ready():
 	$VBoxContainer/startGame.grab_focus()
 	
 func _on_button_pressed():
-	SceneSwitcher.ChangeScene("Level001")
+	nextScene.emit("Level001")
 
 func _on_select_level_pressed():
-	SceneSwitcher.ChangeScene("MainMenu")
+	nextScene.emit("MainMenu")
 	
 func _on_quit_game_pressed():
-	SceneSwitcher.QuitGame() # Replace with function body.
+	nextScene.emit("QuitGame")
 
 func _on_load_game_pressed():
-	SceneSwitcher.ChangeScene("MainMenu")
+	nextScene.emit("MainMenu")

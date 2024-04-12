@@ -1,0 +1,17 @@
+[gd_scene load_steps=5 format=3 uid="uid://bjmn30ankgxh3"]
+
+[ext_resource type="Script" path="res://utilities/gameManager/game_manager.gd" id="1_udi1u"]
+[ext_resource type="PackedScene" uid="uid://bfbvy82r12g1w" path="res://utilities/mainMenu/main_menu.tscn" id="2_5h6i1"]
+[ext_resource type="PackedScene" uid="uid://b047on3svtnae" path="res://utilities/pauseMenu/pause_menu.tscn" id="3_agk0w"]
+[ext_resource type="PackedScene" uid="uid://vyl86o748qf4" path="res://utilities/sceneSwitcher/scene_switcher.tscn" id="4_hp3ei"]
+
+[node name="GameManager" type="Node"]
+process_mode = 3
+script = ExtResource("1_udi1u")
+
+[node name="SceneSwitcher" parent="." instance=ExtResource("4_hp3ei")]
+
+[node name="PauseMenu" parent="." instance=ExtResource("3_agk0w")]
+
+[node name="MainMenu" parent="." instance=ExtResource("2_5h6i1")]
+process_mode = 1
