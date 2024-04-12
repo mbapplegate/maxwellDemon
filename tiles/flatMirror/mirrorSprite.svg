@@ -15,13 +15,37 @@
    viewBox="0 0 33.866666 33.866668"
    version="1.1"
    id="svg4974"
-   inkscape:version="0.92.5 (2060ec1f9f, 2020-04-08)"
+   inkscape:version="0.92.0 r15299"
    sodipodi:docname="mirrorSprite.svg"
    inkscape:export-filename="C:\Users\Matthew\Documents\Godot\maxwellGithub\maxwellDemon\tiles\mirror\flatMirror_96px.png"
    inkscape:export-xdpi="96.18"
    inkscape:export-ydpi="96.18">
   <defs
      id="defs4968">
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient4514">
+      <stop
+         style="stop-color:#1e1e1e;stop-opacity:1"
+         offset="0"
+         id="stop4510" />
+      <stop
+         id="stop4522"
+         offset="0.56997603"
+         style="stop-color:#1e1e1e;stop-opacity:1" />
+      <stop
+         id="stop4518"
+         offset="0.6351549"
+         style="stop-color:#505050;stop-opacity:1" />
+      <stop
+         style="stop-color:#1e1e1e;stop-opacity:1"
+         offset="0.70424449"
+         id="stop4520" />
+      <stop
+         style="stop-color:#1e1e1e;stop-opacity:1"
+         offset="1"
+         id="stop4512" />
+    </linearGradient>
     <linearGradient
        inkscape:collect="always"
        id="linearGradient2122">
@@ -56,6 +80,15 @@
        x2="29.546778"
        y2="280.06665"
        gradientTransform="matrix(1.1690725,0,0,0.99859198,-2.7923249,0.3943386)" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient4514"
+       id="linearGradient4516"
+       x1="2.1828122"
+       y1="281.51954"
+       x2="31.683854"
+       y2="281.51954"
+       gradientUnits="userSpaceOnUse" />
   </defs>
   <sodipodi:namedview
      id="base"
@@ -64,9 +97,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="11.2"
-     inkscape:cx="45.623794"
-     inkscape:cy="80.474234"
+     inkscape:zoom="6.88"
+     inkscape:cx="71.037207"
+     inkscape:cy="81.917384"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -76,11 +109,11 @@
      inkscape:snap-bbox-midpoints="true"
      inkscape:bbox-paths="true"
      inkscape:bbox-nodes="true"
-     inkscape:window-width="2226"
-     inkscape:window-height="1340"
-     inkscape:window-x="266"
-     inkscape:window-y="266"
-     inkscape:window-maximized="0"
+     inkscape:window-width="1920"
+     inkscape:window-height="1000"
+     inkscape:window-x="-11"
+     inkscape:window-y="35"
+     inkscape:window-maximized="1"
      showguides="true"
      inkscape:guide-bbox="true">
     <sodipodi:guide
@@ -172,5 +205,12 @@
        y="277.95001"
        inkscape:export-xdpi="102.61"
        inkscape:export-ydpi="102.61" />
+    <rect
+       style="fill:url(#linearGradient4516);fill-opacity:1;stroke:none;stroke-width:0.26517859;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect4508"
+       width="29.501041"
+       height="1.20015"
+       x="2.1828122"
+       y="280.91946" />
   </g>
 </svg>

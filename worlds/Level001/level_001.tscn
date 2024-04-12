@@ -45,7 +45,7 @@ isRotatable = false
 isEnergizeable = false
 
 [node name="Player" parent="." instance=ExtResource("5_ar0j5")]
-position = Vector2(1676, 412)
+position = Vector2(1216, 192)
 
 [node name="Doorway" parent="." instance=ExtResource("7_h1u2k")]
 position = Vector2(1856, 480)
