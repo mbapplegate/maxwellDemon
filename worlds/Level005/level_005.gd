@@ -38,6 +38,12 @@ func _toggleDoor(val):
 			goalWire.modulate = WIRE_ON_COLOR
 			door.openDoor()
 	else:
+		for child in get_children():
+			if child is detectorMeter:
+				if child.name == "DetectorMeter":
+					combiner.updateTerm1(child.goalMet)
+				else:
+					combiner.updateTerm2(child.goalMet)
 		goalWire.modulate = WIRE_OFF_COLOR
 		door.closeDoor()
 		
