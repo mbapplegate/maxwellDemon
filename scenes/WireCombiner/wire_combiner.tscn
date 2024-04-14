@@ -1,14 +1,24 @@
-[gd_scene load_steps=4 format=3 uid="uid://dyfkdaujhyr5u"]
+[gd_scene load_steps=6 format=3 uid="uid://dyfkdaujhyr5u"]
 
 [ext_resource type="Texture2D" uid="uid://ufme3h54og6" path="res://scenes/WireCombiner/combinerBase_64px.png" id="1_f0dwg"]
 [ext_resource type="Script" path="res://scenes/WireCombiner/wire_combiner.gd" id="1_pq7lo"]
 [ext_resource type="Texture2D" uid="uid://bqjgtn8gfcvkb" path="res://scenes/WireCombiner/combinerTerminal.png" id="2_vj16o"]
+[ext_resource type="Texture2D" uid="uid://beedaqe78epa4" path="res://scenes/WireCombiner/combinerIcon_32px.png" id="4_1in0h"]
 
-[node name="WireCombiner" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qeciy"]
+size = Vector2(64, 64)
+
+[node name="WireCombiner" type="StaticBody2D"]
 position = Vector2(160, 96)
+collision_layer = 2
+collision_mask = 2
 script = ExtResource("1_pq7lo")
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_qeciy")
+
 [node name="combinerBase" type="Sprite2D" parent="."]
+z_index = 1
 texture = ExtResource("1_f0dwg")
 
 [node name="terminalIn1" type="Sprite2D" parent="combinerBase"]
@@ -21,11 +31,12 @@ texture = ExtResource("2_vj16o")
 z_index = -1
 position = Vector2(-23, -23)
 rotation = -0.785398
-scale = Vector2(1, 1)
 texture = ExtResource("2_vj16o")
 
 [node name="terminalOut" type="Sprite2D" parent="combinerBase"]
 z_index = -1
 position = Vector2(3.8147e-06, 32)
-scale = Vector2(1, 1)
 texture = ExtResource("2_vj16o")
+
+[node name="Icon" type="Sprite2D" parent="combinerBase"]
+texture = ExtResource("4_1in0h")

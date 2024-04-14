@@ -1,0 +1,43 @@
+[gd_scene load_steps=2 format=3 uid="uid://dvig7r74ecgqk"]
+
+[ext_resource type="Script" path="res://utilities/levelSelector/level_selector.gd" id="1_ohu8e"]
+
+[node name="LevelSelector" type="Node2D"]
+script = ExtResource("1_ohu8e")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+offset_left = 128.0
+offset_top = 128.0
+offset_right = 768.0
+offset_bottom = 256.0
+
+[node name="Level01" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "01	"
+
+[node name="Level02" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "02"
+
+[node name="Level03" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "03"
+
+[node name="Level04" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "04"
+
+[node name="Level05" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "05"
+
+[connection signal="pressed" from="HBoxContainer/Level01" to="." method="_on_level_01_pressed"]
+[connection signal="pressed" from="HBoxContainer/Level02" to="." method="_on_level_02_pressed"]
+[connection signal="pressed" from="HBoxContainer/Level03" to="." method="_on_level_03_pressed"]
+[connection signal="pressed" from="HBoxContainer/Level04" to="." method="_on_level_04_pressed"]
+[connection signal="pressed" from="HBoxContainer/Level05" to="." method="_on_level_05_pressed"]

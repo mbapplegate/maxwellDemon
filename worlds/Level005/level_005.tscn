@@ -23,6 +23,11 @@ initialAngle = 90.0
 isPushable = false
 isEnergized = true
 
+[node name="goalWire" type="Line2D" parent="."]
+position = Vector2(5, -12)
+points = PackedVector2Array(1601, 430, 1601, 460, 1659, 460, 1659, 435, 1880, 435)
+width = 6.0
+
 [node name="DetectorMeter" parent="." instance=ExtResource("4_yyiux")]
 position = Vector2(1740, 198)
 maxPower = 8.0
@@ -31,7 +36,7 @@ IDColor = Color(0, 0.529412, 0, 1)
 
 [node name="WirePath" type="Line2D" parent="DetectorMeter"]
 position = Vector2(-1, 0)
-points = PackedVector2Array(0, 0, 0, 64, -106, 170)
+points = PackedVector2Array(0, 0, 0, 90, -116, 180)
 width = 6.0
 default_color = Color(0, 1, 0, 1)
 
@@ -42,8 +47,29 @@ isPushable = false
 isRotatable = false
 isEnergizeable = false
 
+[node name="DetectorMeter2" parent="." instance=ExtResource("4_yyiux")]
+position = Vector2(1472, 198)
+maxPower = 8.0
+goalPower = 2.0
+IDColor = Color(0, 0, 1, 1)
+
+[node name="WirePath" type="Line2D" parent="DetectorMeter2"]
+points = PackedVector2Array(0, 0, 0, 90, 116, 180)
+width = 6.0
+default_color = Color(0, 1, 0, 1)
+
+[node name="PointDetector" parent="DetectorMeter2" instance=ExtResource("5_0joy3")]
+position = Vector2(-288, 256)
+isPushable = false
+isRotatable = false
+isEnergizeable = false
+
+[node name="WireCombiner" parent="." instance=ExtResource("9_agail")]
+position = Vector2(1606, 396)
+scale = Vector2(0.6, 0.6)
+
 [node name="Player" parent="." instance=ExtResource("6_g8ngg")]
-position = Vector2(1676, 412)
+position = Vector2(1480, 476)
 
 [node name="Doorway" parent="." instance=ExtResource("7_v08ql")]
 position = Vector2(1856, 480)
@@ -56,29 +82,3 @@ zoom = Vector2(1.75, 1.75)
 position = Vector2(992, 448)
 isPushable = false
 isEnergizeable = false
-
-[node name="DetectorMeter2" parent="." instance=ExtResource("4_yyiux")]
-position = Vector2(1472, 198)
-maxPower = 8.0
-goalPower = 2.0
-IDColor = Color(0, 0, 1, 1)
-
-[node name="WirePath" type="Line2D" parent="DetectorMeter2"]
-points = PackedVector2Array(0, 0, 0, 64, 106, 170)
-width = 6.0
-default_color = Color(0, 1, 0, 1)
-
-[node name="PointDetector" parent="DetectorMeter2" instance=ExtResource("5_0joy3")]
-position = Vector2(-288, 256)
-isPushable = false
-isRotatable = false
-isEnergizeable = false
-
-[node name="WireCombiner" parent="." instance=ExtResource("9_agail")]
-z_index = 1
-position = Vector2(1606, 394)
-
-[node name="goalWire" type="Line2D" parent="."]
-position = Vector2(5, -12)
-points = PackedVector2Array(1600, 448, 1600, 492, 1659, 492, 1659, 428, 1851, 428)
-width = 6.0
