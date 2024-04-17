@@ -1,7 +1,6 @@
 extends Node2D
 class_name SceneManager
 
-@export var Scenes : Dictionary = {}
 @onready var fader = $ColorRect
 
 var currentSceneAlias : StringName = "MainMenu"
@@ -13,12 +12,6 @@ func _ready():
 	fadeIn.set_ease(Tween.EASE_IN_OUT)
 	fadeIn.set_trans(Tween.TRANS_LINEAR)
 	fadeIn.tween_property(fader,"color",FaderTrans,0.5)
-
-func AddScene(sceneAlias : StringName, scenePath : StringName):
-	Scenes[sceneAlias] = scenePath
-	
-func RemoveScene(sceneAlias : String):
-	Scenes.erase(sceneAlias)
 	
 func ChangeScene(sceneFrom : Object, sceneAlias : StringName):
 	var fadeOut = get_tree().create_tween()
@@ -27,7 +20,7 @@ func ChangeScene(sceneFrom : Object, sceneAlias : StringName):
 	fadeOut.tween_property(fader,"color",FaderBlack,1.0)
 	await fadeOut.finished
 	sceneFrom.queue_free()
-	var newScene = load(String(Scenes[sceneAlias]))
+	var newScene = load(String(LevelInfo.LevelDictionary[sceneAlias].Path))
 	var sceneInstance = newScene.instantiate()
 	get_tree().root.add_child(sceneInstance)
 	#FadeIn(0.5, true)
@@ -45,7 +38,7 @@ func QuitGame():
 	get_tree().quit()
 	
 func GetSceneCount():
-	return Scenes.size()
+	return LevelInfo.LevelDictionary.size()
 	
 func GetCurrentSceneAlias():
 	return currentSceneAlias

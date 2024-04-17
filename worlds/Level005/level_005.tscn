@@ -25,11 +25,11 @@ isEnergized = true
 
 [node name="goalWire" type="Line2D" parent="."]
 position = Vector2(5, -12)
-points = PackedVector2Array(1601, 430, 1601, 460, 1659, 460, 1659, 435, 1880, 435)
+points = PackedVector2Array(1611, 428, 1611, 460, 1659, 460, 1659, 435, 1880, 435)
 width = 6.0
 
 [node name="DetectorMeter" parent="." instance=ExtResource("4_yyiux")]
-position = Vector2(1740, 198)
+position = Vector2(1750, 198)
 maxPower = 8.0
 goalPower = 2.0
 IDColor = Color(0, 0.529412, 0, 1)
@@ -41,14 +41,14 @@ width = 6.0
 default_color = Color(0, 1, 0, 1)
 
 [node name="PointDetector" parent="DetectorMeter" instance=ExtResource("5_0joy3")]
-position = Vector2(-745, 410)
+position = Vector2(-758, 404)
 initialAngle = 90.0
 isPushable = false
 isRotatable = false
 isEnergizeable = false
 
 [node name="DetectorMeter2" parent="." instance=ExtResource("4_yyiux")]
-position = Vector2(1472, 198)
+position = Vector2(1482, 198)
 maxPower = 8.0
 goalPower = 2.0
 IDColor = Color(0, 0, 1, 1)
@@ -59,13 +59,13 @@ width = 6.0
 default_color = Color(0, 1, 0, 1)
 
 [node name="PointDetector" parent="DetectorMeter2" instance=ExtResource("5_0joy3")]
-position = Vector2(-288, 256)
+position = Vector2(-234, 250)
 isPushable = false
 isRotatable = false
 isEnergizeable = false
 
 [node name="WireCombiner" parent="." instance=ExtResource("9_agail")]
-position = Vector2(1606, 396)
+position = Vector2(1616, 396)
 scale = Vector2(0.6, 0.6)
 
 [node name="Player" parent="." instance=ExtResource("6_g8ngg")]
@@ -82,3 +82,13 @@ zoom = Vector2(1.75, 1.75)
 position = Vector2(992, 448)
 isPushable = false
 isEnergizeable = false
+
+[node name="titleText" type="Label" parent="."]
+offset_left = 1632.0
+offset_top = 674.0
+offset_right = 1888.0
+offset_bottom = 706.0
+theme_override_font_sizes/font_size = 22
+text = "L1"
+horizontal_alignment = 2
+vertical_alignment = 1

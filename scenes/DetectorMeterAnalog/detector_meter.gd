@@ -29,15 +29,15 @@ var arrayIndex = 0
 var currentEnergy = 0.0
 var goalMet = false
 
-const WIRE_OFF_COLOR = Color(10/255.0,10/255.0,10/255.0)
-const WIRE_ON_COLOR = Color(240/255.0,240/255.0,60/255.0)
+#const WIRE_OFF_COLOR = Color(10/255.0,10/255.0,10/255.0)
+#const WIRE_ON_COLOR = Color(240/255.0,240/255.0,60/255.0)
 
 signal goalMetChanged(val:bool)
 
 func _ready():
 	var wireSet = false
 	idBall.modulate = IDColor
-	goalWire.modulate = WIRE_OFF_COLOR
+	goalWire.modulate = LevelInfo.WIRE_OFF_COLOR
 	for child in get_children():
 		if child.name == "PointDetector":
 			child.initialize()
@@ -87,13 +87,13 @@ func _on_timer_timeout():
 	if currentAvg >= goalPower:
 		if not goalMet:
 			light.texture = load("res://scenes/DetectorMeterAnalog/indicatorLight_256px_ON.png")
-			goalWire.modulate = WIRE_ON_COLOR
+			goalWire.modulate = LevelInfo.WIRE_ON_COLOR
 			goalMet = true
 			goalMetChanged.emit(goalMet)
 	else:
 		if goalMet:
 			light.texture = load("res://scenes/DetectorMeterAnalog/indicatorLight_256px_OFF.png")
-			goalWire.modulate = WIRE_OFF_COLOR
+			goalWire.modulate = LevelInfo.WIRE_OFF_COLOR
 			goalMet = false
 			goalMetChanged.emit(goalMet)
 	

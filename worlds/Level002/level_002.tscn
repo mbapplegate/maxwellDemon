@@ -96,3 +96,13 @@ offset_top = -15.0
 offset_right = 327.0
 offset_bottom = 85.0
 texture = SubResource("Texture2D_3p5ad")
+
+[node name="titleText" type="Label" parent="."]
+offset_left = 1632.0
+offset_top = 674.0
+offset_right = 1888.0
+offset_bottom = 706.0
+theme_override_font_sizes/font_size = 22
+text = "L1"
+horizontal_alignment = 2
+vertical_alignment = 1

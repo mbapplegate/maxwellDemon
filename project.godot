@@ -18,13 +18,14 @@ config/icon="res://icon.svg"
 [autoload]
 
 ControllerIcons="*res://addons/controller_icons/ControllerIcons.gd"
+LevelInfo="*res://utilities/levelInfo/level_info.tscn"
 
 [display]
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
-window/size/resizable=false
-window/stretch/mode="viewport"
+window/size/mode=3
+window/stretch/mode="canvas_items"
 window/stretch/scale_mode="integer"
 
 [editor_plugins]

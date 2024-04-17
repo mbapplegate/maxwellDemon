@@ -3,11 +3,14 @@ extends Node2D
 @onready var door = $Doorway
 @onready var player = $Player
 @onready var tutText= $RichTextLabel
+@onready var titleText = $titleText
+const THIS_SCENE_ALIAS = "Level002"
 
 @export var nextSceneAlias = "MainMenu"
 signal nextScene(sceneAlias)
 var signalEmitted : bool = false
 func _ready():
+	titleText.text = LevelInfo.LevelDictionary[THIS_SCENE_ALIAS].Title
 	tutText.modulate=Color(1.0,1.0,1.0,0.0)
 	player.levelComplete.connect(nextLevel)
 	player.objectActiveChanged.connect(isLaserActive)

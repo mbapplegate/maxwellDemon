@@ -5,16 +5,17 @@ extends Node2D
 @onready var player = $Player
 @onready var combiner = $WireCombiner
 @onready var goalWire = $goalWire
+@onready var titleText = $titleText
 
 @export var nextSceneAlias = "MainMenu"
 signal nextScene(sceneAlias)
 var signalEmitted : bool = false
 
-const WIRE_OFF_COLOR = Color(10/255.0,10/255.0,10/255.0)
-const WIRE_ON_COLOR = Color(240/255.0,240/255.0,60/255.0)
+const THIS_SCENE_ALIAS = "Level005"
 
 func _ready():
-	goalWire.modulate = WIRE_OFF_COLOR
+	titleText.text = LevelInfo.LevelDictionary[THIS_SCENE_ALIAS].Title
+	goalWire.modulate = LevelInfo.WIRE_OFF_COLOR
 	player.levelComplete.connect(nextLevel)
 	for child in get_children():
 		if child is pushableObject:
@@ -35,7 +36,7 @@ func _toggleDoor(val):
 					allGoalsMet = false
 		
 		if allGoalsMet:
-			goalWire.modulate = WIRE_ON_COLOR
+			goalWire.modulate = LevelInfo.WIRE_ON_COLOR
 			door.openDoor()
 	else:
 		for child in get_children():
@@ -44,7 +45,7 @@ func _toggleDoor(val):
 					combiner.updateTerm1(child.goalMet)
 				else:
 					combiner.updateTerm2(child.goalMet)
-		goalWire.modulate = WIRE_OFF_COLOR
+		goalWire.modulate = LevelInfo.WIRE_OFF_COLOR
 		door.closeDoor()
 		
 			
