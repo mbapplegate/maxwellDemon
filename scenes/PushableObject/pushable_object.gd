@@ -23,7 +23,8 @@ var isSliding : bool = false
 func initialize():
 	#print(position.snapped(Vector2(TILE_SIZE,TILE_SIZE)))
 	self.global_position = global_position.snapped(Vector2(TILE_SIZE,TILE_SIZE))
-	sprite.rotation = deg_to_rad(initialAngle)
+	if isRotatable:
+		sprite.rotation = deg_to_rad(initialAngle)
 	#print("Initializing: ",self,", energ?: ", isEnergizeable)
 	update_texture()
 	

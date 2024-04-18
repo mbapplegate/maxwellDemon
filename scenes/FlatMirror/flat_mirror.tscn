@@ -13,10 +13,12 @@ reflectivity = 1.0
 
 [node name="Sprite2D" type="Sprite2D" parent="Stage" index="0"]
 z_index = 1
-position = Vector2(0, 8)
+position = Vector2(0, -1)
 texture = ExtResource("3_sei5a")
+offset = Vector2(0, 9)
 
 [node name="Area2D" type="Area2D" parent="Stage/Sprite2D" index="0"]
+position = Vector2(0, 9)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Stage/Sprite2D/Area2D" index="0"]
 shape = SubResource("RectangleShape2D_6aj0s")
