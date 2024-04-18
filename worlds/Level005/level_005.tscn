@@ -60,8 +60,8 @@ default_color = Color(0, 1, 0, 1)
 
 [node name="PointDetector" parent="DetectorMeter2" instance=ExtResource("5_0joy3")]
 position = Vector2(-234, 250)
+initialAngle = 180.0
 isPushable = false
-isRotatable = false
 isEnergizeable = false
 
 [node name="WireCombiner" parent="." instance=ExtResource("9_agail")]
@@ -80,7 +80,9 @@ zoom = Vector2(1.75, 1.75)
 
 [node name="BeamSplitter" parent="." instance=ExtResource("8_2cdh5")]
 position = Vector2(992, 448)
+initialAngle = 90.0
 isPushable = false
+isRotatable = false
 isEnergizeable = false
 
 [node name="titleText" type="Label" parent="."]
