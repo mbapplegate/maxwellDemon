@@ -46,6 +46,11 @@ layout_mode = 2
 text = "07"
 levelAlias = "Level007"
 
+[node name="Level08" parent="HBoxContainer" instance=ExtResource("2_hu0pa")]
+layout_mode = 2
+text = "08"
+levelAlias = "Level008"
+
 [node name="Label" type="Label" parent="."]
 offset_left = 288.0
 offset_top = 416.0
@@ -53,3 +58,7 @@ offset_right = 592.0
 offset_bottom = 483.0
 theme_override_font_sizes/font_size = 48
 text = "Lorem Ipsem"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0

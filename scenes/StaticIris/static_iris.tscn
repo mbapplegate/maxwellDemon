@@ -10,12 +10,15 @@ size = Vector2(16, 48)
 size = Vector2(16, 48)
 
 [node name="StaticIris" type="Node2D"]
+position = Vector2(128, 128)
 script = ExtResource("1_hmi85")
+total_height = 128
+aperture_width = 16
 
 [node name="TopPart" type="StaticBody2D" parent="."]
 
 [node name="TopPartShape" type="CollisionShape2D" parent="TopPart"]
-position = Vector2(0, 36)
+position = Vector2(0, -36)
 shape = SubResource("RectangleShape2D_x1si8")
 
 [node name="TopPartSprite" type="Sprite2D" parent="TopPart"]
@@ -28,7 +31,7 @@ region_rect = Rect2(0, 0, 16, 48)
 [node name="BotPart" type="StaticBody2D" parent="."]
 
 [node name="BotPartShape" type="CollisionShape2D" parent="BotPart"]
-position = Vector2(0, -36)
+position = Vector2(0, 36)
 shape = SubResource("RectangleShape2D_6ec8s")
 
 [node name="BotPartSprite" type="Sprite2D" parent="BotPart"]

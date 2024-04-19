@@ -5,6 +5,7 @@ extends Node2D
 @export var aperture_width = 24
 @export var thickness = 8
 const collThickness = 2
+const TILE_SIZE = 32
 
 @onready var topShape = $TopPart/TopPartShape
 @onready var topTex = $TopPart/TopPartSprite
@@ -12,9 +13,11 @@ const collThickness = 2
 @onready var botTex = $BotPart/BotPartSprite
 
 func _ready():
-	var shapeHt = (total_height - aperture_width) / 2.0
+	var snappedPos = global_position.snapped(Vector2(TILE_SIZE,TILE_SIZE))
+	global_position.y = snappedPos.y
+	var shapeHt = (total_height - aperture_width) / 2.0 #Height of each leaf
 	var shapeOffset = (shapeHt + aperture_width) / 2.0
-	
+	#print("Ht: ", shapeHt, ", y-Offset: ", shapeOffset)
 	topShape.position = Vector2(0,shapeOffset)
 	topShape.shape.size = Vector2(collThickness,shapeHt)
 	

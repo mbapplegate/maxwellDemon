@@ -3,8 +3,8 @@ extends Node2D
 @onready var door = $Doorway
 @onready var player = $Player
 @onready var titleText = $titleText
-const THIS_SCENE_ALIAS = "Level007"
-@export var nextSceneAlias = "Level008"
+const THIS_SCENE_ALIAS = "Level008"
+@export var nextSceneAlias = "MainMenu"
 signal nextScene(sceneAlias)
 var signalEmitted : bool = false
 

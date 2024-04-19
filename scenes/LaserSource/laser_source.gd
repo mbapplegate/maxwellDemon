@@ -15,6 +15,7 @@ func _ready():
 	#halfHeight = BARREL_WIDTH * self.scale.x
 	#print(halfHeight)
 	#isEnergized = true
+	halfAngle = deg_to_rad(halfAngle)
 	laserParent = get_parent()
 	pass
 	

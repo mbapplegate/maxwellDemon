@@ -71,7 +71,6 @@ isEnergizeable = false
 
 [node name="LensPlanoConvex" parent="." instance=ExtResource("10_lqocq")]
 position = Vector2(1246, 351)
-LENS_HEIGHT = 128
 focalLength = 160
 
 [node name="FlatMirror3" parent="." instance=ExtResource("8_fytua")]

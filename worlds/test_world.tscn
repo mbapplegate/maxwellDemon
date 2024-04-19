@@ -51,7 +51,6 @@ position = Vector2(1728, 416)
 
 [node name="PointSource" parent="." instance=ExtResource("8_1t5aj")]
 position = Vector2(992, 448)
-angleRange = Vector2(-0.25, 0.25)
 rayColor = Vector3(1, 0, 0)
 isRotatable = false
 isEnergized = false
@@ -85,7 +84,7 @@ integrationTime = 0.25
 position = Vector2(-896, 320)
 
 [node name="Iris" parent="." instance=ExtResource("13_nvoua")]
-position = Vector2(576, 640)
+position = Vector2(928, 320)
 
 [node name="Doorway" parent="." instance=ExtResource("13_c74tw")]
 position = Vector2(992, 64)

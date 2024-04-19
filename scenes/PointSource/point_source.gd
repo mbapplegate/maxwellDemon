@@ -1,6 +1,6 @@
 extends pushableObject
 
-@export var angleRange : Vector2 = Vector2(0,TAU)
+@export var angleRangeDeg : Vector2 = Vector2(-90,90)
 @export var numRaysPerTimeout : int = 1
 @export var rayColor : Vector3 = Vector3(1.0, 0, 1.0)
 @onready var ray = preload("res://scenes/LightPacket/light_packet.tscn")
@@ -8,11 +8,12 @@ extends pushableObject
 
 var sourceParent = null
 var rng = RandomNumberGenerator.new()
-
+var angleRange = Vector2.ZERO
 const POINT_RADIUS = 8
 
 func _ready():
 	sourceParent = get_parent()
+	angleRange = Vector2(deg_to_rad(angleRangeDeg.x),deg_to_rad(angleRangeDeg.y))
 	isRotatable=false
 	sourceBall.modulate = Color(rayColor[0], rayColor[1],rayColor[2])
 
