@@ -1,0 +1,39 @@
+[gd_scene load_steps=5 format=3 uid="uid://3lsffc1281c7"]
+
+[ext_resource type="Script" path="res://scenes/StaticIris/static_iris.gd" id="1_hmi85"]
+[ext_resource type="Texture2D" uid="uid://cfrwrssugeth" path="res://scenes/Iris/IrisTile_16x16_grad.png" id="2_j8e65"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x1si8"]
+size = Vector2(16, 48)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6ec8s"]
+size = Vector2(16, 48)
+
+[node name="StaticIris" type="Node2D"]
+script = ExtResource("1_hmi85")
+
+[node name="TopPart" type="StaticBody2D" parent="."]
+
+[node name="TopPartShape" type="CollisionShape2D" parent="TopPart"]
+position = Vector2(0, 36)
+shape = SubResource("RectangleShape2D_x1si8")
+
+[node name="TopPartSprite" type="Sprite2D" parent="TopPart"]
+texture_repeat = 2
+position = Vector2(0, -36)
+texture = ExtResource("2_j8e65")
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 48)
+
+[node name="BotPart" type="StaticBody2D" parent="."]
+
+[node name="BotPartShape" type="CollisionShape2D" parent="BotPart"]
+position = Vector2(0, -36)
+shape = SubResource("RectangleShape2D_6ec8s")
+
+[node name="BotPartSprite" type="Sprite2D" parent="BotPart"]
+texture_repeat = 2
+position = Vector2(0, 36)
+texture = ExtResource("2_j8e65")
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 48)
