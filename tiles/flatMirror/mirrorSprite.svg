@@ -17,7 +17,7 @@
    id="svg4974"
    inkscape:version="0.92.0 r15299"
    sodipodi:docname="mirrorSprite.svg"
-   inkscape:export-filename="C:\Users\matth\Documents\Godot\maxwellDemon\tiles\flatMirror\flatMirror_120px_back.png"
+   inkscape:export-filename="C:\Users\matth\Documents\Godot\maxwellDemon\tiles\flatMirror\flatMirror_120px_back_full.png"
    inkscape:export-xdpi="102.4"
    inkscape:export-ydpi="102.4">
   <defs
@@ -89,7 +89,7 @@
        x2="31.683854"
        y2="281.51954"
        gradientUnits="userSpaceOnUse"
-       gradientTransform="translate(0,-0.41379603)" />
+       gradientTransform="matrix(1,0,0,1.4530101,0,-127.67315)" />
   </defs>
   <sodipodi:namedview
      id="base"
@@ -207,10 +207,10 @@
        inkscape:export-xdpi="102.61"
        inkscape:export-ydpi="102.61" />
     <rect
-       style="fill:url(#linearGradient4516);fill-opacity:1;stroke:none;stroke-width:0.26517859;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       style="fill:url(#linearGradient4516);fill-opacity:1;stroke:none;stroke-width:0.31964859;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        id="rect4508"
        width="29.501041"
-       height="1.20015"
+       height="1.7438301"
        x="2.1828122"
        y="280.50565" />
   </g>
