@@ -82,7 +82,7 @@ func can_move(localDestination:Vector2):
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 	
 func update_texture():
-	if isActive:
+	if isActive and (isPushable or isRotatable):
 		bg.texture = load("res://tiles/pushable/pushableBase_BACKGROUND_ACTIVE.png")
 	elif isPushable:
 		bg.texture = load("res://tiles/pushable/pushableBase_BACKGROUND_NORMAL.png")
