@@ -5,6 +5,7 @@ extends pushableObject
 @export var numRaysPerTimeout : int = 1
 @export var rayColor : Vector3 = Vector3(1.0, 0, 1.0)
 @onready var barrelShape = $Stage/laserBarrel/barrelArea/barrelShape
+@onready var barrel = $Stage/laserBarrel
 @onready var ray = preload("res://scenes/LightPacket/light_packet.tscn")
 
 var rng = RandomNumberGenerator.new()
@@ -15,6 +16,8 @@ func _ready():
 	#halfHeight = BARREL_WIDTH * self.scale.x
 	#print(halfHeight)
 	#isEnergized = true
+	if not isRotatable and initialAngle != 0:
+		barrel.rotation=deg_to_rad(initialAngle)
 	halfAngle = deg_to_rad(halfAngle)
 	laserParent = get_parent()
 	pass
@@ -27,7 +30,7 @@ func _on_timer_timeout():
 	var instance 
 	var yLoc
 	if (isEnergized):
-		var barrelPosition = Vector2(barrelShape.position.x+(barrelShape.shape.size[0]/2.0+1.0)*cos(sprite.rotation),barrelShape.position.y-(barrelShape.shape.size[0]/2.0+1.0)*sin(sprite.rotation))
+		var barrelPosition = Vector2(barrelShape.position.x+(barrelShape.shape.size[0]/2.0+1.0)*cos(barrel.rotation),barrelShape.position.y-(barrelShape.shape.size[0]/2.0+1.0)*sin(barrel.rotation))
 		for i in numRaysPerTimeout:
 			if halfAngle > 0:
 				angle = rng.randf_range(-halfAngle,halfAngle)
@@ -38,8 +41,8 @@ func _on_timer_timeout():
 				yLoc = 0
 			#print("Timeout. Angle: ",angle)
 			instance = ray.instantiate()
-			instance.propDir = Vector2(cos(angle+sprite.rotation),sin(angle+sprite.rotation))
-			instance.position = to_global(Vector2(barrelPosition.x+yLoc*sin(sprite.rotation), -barrelPosition.y-yLoc*cos(sprite.rotation)))
+			instance.propDir = Vector2(cos(angle+barrel.rotation),sin(angle+barrel.rotation))
+			instance.position = to_global(Vector2(barrelPosition.x+yLoc*sin(barrel.rotation), -barrelPosition.y-yLoc*cos(barrel.rotation)))
 			
 			instance.rayColor = rayColor
 			#instance.scale[0] = 1.0/self.scale[0]
