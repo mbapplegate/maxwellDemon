@@ -18,6 +18,7 @@ layer_0/tile_data = PackedInt32Array(2097152, 1, 0, 2031616, 1, 0, 1966080, 1, 0
 [node name="LaserSource" parent="." instance=ExtResource("3_0hbdy")]
 position = Vector2(1248, 397)
 HALF_HEIGHT = 7.0
+isRotatable = false
 isEnergized = true
 
 [node name="DetectorMeter" parent="." instance=ExtResource("4_ug6t2")]

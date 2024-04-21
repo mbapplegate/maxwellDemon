@@ -75,6 +75,8 @@ initialAngle = -135.0
 [node name="LEDSource" parent="." instance=ExtResource("6_8ue0y")]
 position = Vector2(98, 224)
 numRaysPerTimeout = 6
+isPushable = false
+isRotatable = false
 
 [node name="StaticIris" parent="LEDSource" instance=ExtResource("6_85xs3")]
 position = Vector2(70, 0)
