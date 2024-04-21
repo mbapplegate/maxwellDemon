@@ -4,13 +4,13 @@
 [ext_resource type="Script" path="res://scenes/BeamSplitter/beam_splitter.gd" id="2_ax1hy"]
 [ext_resource type="Texture2D" uid="uid://kqouxmosrdj7" path="res://scenes/BeamSplitter/splitterSprite_96px.png" id="3_6svek"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7ne0p"]
+size = Vector2(2, 96)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ti7ve"]
 size = Vector2(2, 135)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_iphu0"]
-size = Vector2(2, 96)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_7ne0p"]
 size = Vector2(2, 96)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lyhju"]
@@ -27,32 +27,32 @@ splitterIndex = 2.0
 [node name="Sprite2D" type="Sprite2D" parent="Stage" index="0"]
 texture = ExtResource("3_6svek")
 
-[node name="splitterArea" type="Area2D" parent="Stage" index="1"]
+[node name="WallArea4" type="Area2D" parent="Stage/Sprite2D" index="0"]
 
-[node name="splitterShape" type="CollisionShape2D" parent="Stage/splitterArea" index="0"]
-rotation = 0.785398
-shape = SubResource("RectangleShape2D_ti7ve")
-
-[node name="WallArea" type="Area2D" parent="Stage" index="2"]
-
-[node name="WallShape" type="CollisionShape2D" parent="Stage/WallArea" index="0"]
-position = Vector2(-48, 0)
-shape = SubResource("RectangleShape2D_iphu0")
-
-[node name="WallArea4" type="Area2D" parent="Stage" index="3"]
-
-[node name="WallShape" type="CollisionShape2D" parent="Stage/WallArea4" index="0"]
+[node name="WallShape" type="CollisionShape2D" parent="Stage/Sprite2D/WallArea4" index="0"]
 position = Vector2(48, 0)
 shape = SubResource("RectangleShape2D_7ne0p")
 
-[node name="WallArea3" type="Area2D" parent="Stage" index="4"]
+[node name="splitterArea" type="Area2D" parent="Stage/Sprite2D" index="1"]
 
-[node name="WallShape" type="CollisionShape2D" parent="Stage/WallArea3" index="0"]
+[node name="splitterShape" type="CollisionShape2D" parent="Stage/Sprite2D/splitterArea" index="0"]
+rotation = 0.785398
+shape = SubResource("RectangleShape2D_ti7ve")
+
+[node name="WallArea" type="Area2D" parent="Stage/Sprite2D" index="2"]
+
+[node name="WallShape" type="CollisionShape2D" parent="Stage/Sprite2D/WallArea" index="0"]
+position = Vector2(-48, 0)
+shape = SubResource("RectangleShape2D_iphu0")
+
+[node name="WallArea3" type="Area2D" parent="Stage/Sprite2D" index="3"]
+
+[node name="WallShape" type="CollisionShape2D" parent="Stage/Sprite2D/WallArea3" index="0"]
 position = Vector2(0, 48)
 shape = SubResource("RectangleShape2D_lyhju")
 
-[node name="WallArea2" type="Area2D" parent="Stage" index="5"]
+[node name="WallArea2" type="Area2D" parent="Stage/Sprite2D" index="4"]
 
-[node name="WallShape" type="CollisionShape2D" parent="Stage/WallArea2" index="0"]
+[node name="WallShape" type="CollisionShape2D" parent="Stage/Sprite2D/WallArea2" index="0"]
 position = Vector2(0, -48)
 shape = SubResource("RectangleShape2D_k8fr0")
