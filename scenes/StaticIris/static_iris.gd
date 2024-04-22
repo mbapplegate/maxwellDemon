@@ -12,6 +12,8 @@ const TILE_SIZE = 32
 @onready var botShape = $BotPart/BotPartShape
 @onready var botTex = $BotPart/BotPartSprite
 
+signal rayHit(energy)
+
 func _ready():
 	var snappedPos = global_position.snapped(Vector2(TILE_SIZE,TILE_SIZE))
 	global_position.y = snappedPos.y
@@ -30,5 +32,6 @@ func _ready():
 	botTex.region_rect = Rect2(botShape.position.x,botShape.position.y,thickness, shapeHt)
 	
 func _ray_hit(photonObj:Object, _collPoint:Vector2, _collNormal:Vector2, _collider:Object):
+	rayHit.emit(photonObj.energy)
 	photonObj.rayDying = true
 

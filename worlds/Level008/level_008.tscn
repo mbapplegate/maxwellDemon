@@ -19,7 +19,7 @@ layer_0/tile_data = PackedInt32Array(2097152, 1, 0, 2031616, 1, 0, 1966080, 1, 0
 
 [node name="DetectorMeter" parent="." instance=ExtResource("4_jngr6")]
 position = Vector2(1740, 128)
-goalPower = 4.75
+goalPower = 4.5
 integrationTime = 0.5
 IDColor = Color(0, 0, 1, 1)
 
@@ -65,6 +65,7 @@ isEnergizeable = false
 
 [node name="LensPlanoConvex2" parent="." instance=ExtResource("10_8har7")]
 position = Vector2(800, 480)
+LENS_HEIGHT = 116
 focalLength = 192
 isEnergizeable = false
 
@@ -81,8 +82,23 @@ isRotatable = false
 [node name="StaticIris" parent="LEDSource" instance=ExtResource("6_85xs3")]
 position = Vector2(70, 0)
 total_height = 196
+aperture_width = 12
 thickness = 6
 
 [node name="StaticIris" parent="." instance=ExtResource("6_85xs3")]
 position = Vector2(1600, 864)
 aperture_width = 8
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = 1569.0
+offset_top = 733.0
+offset_right = 1786.0
+offset_bottom = 807.0
+text = "Detected: 0
+Blocked: 0
+Percent:      0"
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
