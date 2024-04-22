@@ -24,8 +24,7 @@ integrationTime = 0.5
 IDColor = Color(0, 0, 1, 1)
 
 [node name="WirePath" type="Line2D" parent="DetectorMeter"]
-position = Vector2(12, 34)
-points = PackedVector2Array(0, 0, 124, 0, 124, 270)
+points = PackedVector2Array(0, 32, 140, 32, 140, 295)
 width = 6.0
 default_color = Color(0, 1, 0, 1)
 

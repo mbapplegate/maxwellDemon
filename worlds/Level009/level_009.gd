@@ -3,29 +3,19 @@ extends Node2D
 @onready var door = $Doorway
 @onready var player = $Player
 @onready var titleText = $titleText
-const THIS_SCENE_ALIAS = "Level008"
-@export var nextSceneAlias = "Level009"
+const THIS_SCENE_ALIAS = "Level009"
+@export var nextSceneAlias = "MainMenu"
 signal nextScene(sceneAlias)
 var signalEmitted : bool = false
-
-var energyDetected = 0.0
-var energyBlocked = 0.0
 
 func _ready():
 	titleText.text = LevelInfo.LevelDictionary[THIS_SCENE_ALIAS].Title
 	player.levelComplete.connect(nextLevel)
-	$StaticIris.rayHit.connect(incrementBlockedCtr)
-	$DetectorMeter/PointDetector.photonDetected.connect(incrementDetectedCtr)
 	for child in get_children():
 		if child is pushableObject:
 			child.initialize()
 		elif child is detectorMeter:
 			child.goalMetChanged.connect(_toggleDoor)
-func incrementBlockedCtr(energy):
-	energyBlocked += energy
-	
-func incrementDetectedCtr(energy):
-	energyDetected += energy
 			
 func _toggleDoor(val):
 	if val:
@@ -45,14 +35,3 @@ func nextLevel():
 	if not signalEmitted:
 		nextScene.emit(nextSceneAlias)
 		signalEmitted = true
-
-
-func _on_timer_timeout():
-	var pctDetected = 0.0
-	if energyBlocked > 0 or energyDetected > 0:
-		pctDetected = energyDetected / (energyBlocked + energyDetected)
-		
-	$RichTextLabel.text = "Detected: %2d\nBlocked: %4d\nPercent: %4.0f%%" % [energyDetected, energyBlocked, (100*pctDetected)]
-	energyBlocked = 0.0
-	energyDetected = 0.0
-	

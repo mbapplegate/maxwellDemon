@@ -9,7 +9,7 @@ script = ExtResource("1_ohu8e")
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 offset_left = 128.0
 offset_top = 128.0
-offset_right = 928.0
+offset_right = 1056.0
 offset_bottom = 256.0
 
 [node name="Level01" parent="HBoxContainer" instance=ExtResource("2_hu0pa")]
@@ -50,6 +50,11 @@ levelAlias = "Level007"
 layout_mode = 2
 text = "08"
 levelAlias = "Level008"
+
+[node name="LevelSelectButton" parent="HBoxContainer" instance=ExtResource("2_hu0pa")]
+layout_mode = 2
+text = "09	"
+levelAlias = "Level009"
 
 [node name="Label" type="Label" parent="."]
 offset_left = 288.0
