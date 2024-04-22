@@ -1,0 +1,65 @@
+[gd_scene load_steps=9 format=3 uid="uid://c2ksmmgyp4o6i"]
+
+[ext_resource type="PackedScene" uid="uid://beic3gevjusuj" path="res://scenes/PushableObject/pushable_object.tscn" id="1_0l4hb"]
+[ext_resource type="Script" path="res://scenes/MirrorHalfSilver/half_silver_mirror.gd" id="2_h8edx"]
+[ext_resource type="Texture2D" uid="uid://dd0gdrundiani" path="res://scenes/MirrorHalfSilver/halfSilverMirror_backFull_120px.png" id="3_u318p"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6aj0s"]
+size = Vector2(58, 9)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_osfrx"]
+custom_solver_bias = 1.0
+size = Vector2(58, 6)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_eni56"]
+resource_local_to_scene = true
+size = Vector2(60, 2)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w1ttf"]
+size = Vector2(60, 2)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r0g5e"]
+size = Vector2(2, 12)
+
+[node name="HalfSilverMirror" instance=ExtResource("1_0l4hb")]
+position = Vector2(157, 157)
+script = ExtResource("2_h8edx")
+reflectivity = 1.0
+MirrorLength = 120
+
+[node name="Sprite2D" type="Sprite2D" parent="Stage" index="0"]
+z_index = 1
+position = Vector2(0, -1)
+texture = ExtResource("3_u318p")
+offset = Vector2(0, 9)
+
+[node name="Front" type="Area2D" parent="Stage/Sprite2D" index="0"]
+position = Vector2(0, 9)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Stage/Sprite2D/Front" index="0"]
+position = Vector2(-29, -2.5)
+shape = SubResource("RectangleShape2D_6aj0s")
+
+[node name="Back" type="StaticBody2D" parent="Stage/Sprite2D" index="1"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Stage/Sprite2D/Back" index="0"]
+position = Vector2(-29, 14)
+shape = SubResource("RectangleShape2D_osfrx")
+
+[node name="ClearFront" type="StaticBody2D" parent="Stage/Sprite2D" index="2"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Stage/Sprite2D/ClearFront" index="0"]
+position = Vector2(30, 2)
+shape = SubResource("RectangleShape2D_eni56")
+
+[node name="ClearBack" type="StaticBody2D" parent="Stage/Sprite2D" index="3"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Stage/Sprite2D/ClearBack" index="0"]
+position = Vector2(30, 16)
+shape = SubResource("RectangleShape2D_w1ttf")
+
+[node name="ClearFront2" type="StaticBody2D" parent="Stage/Sprite2D" index="4"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Stage/Sprite2D/ClearFront2" index="0"]
+position = Vector2(59, 9)
+shape = SubResource("RectangleShape2D_r0g5e")

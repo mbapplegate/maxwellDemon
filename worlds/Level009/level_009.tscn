@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://csfijk5v5ts8e"]
+[gd_scene load_steps=12 format=3 uid="uid://csfijk5v5ts8e"]
 
 [ext_resource type="Script" path="res://worlds/Level009/level_009.gd" id="1_0drhk"]
 [ext_resource type="PackedScene" uid="uid://fkwew1tbysym" path="res://worlds/BaseTileMap.tscn" id="2_gx0og"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://dyfkdaujhyr5u" path="res://scenes/WireCombiner/wire_combiner.tscn" id="7_sy02t"]
 [ext_resource type="PackedScene" uid="uid://2ai0r6raovox" path="res://scenes/LaserSource/laser_source.tscn" id="8_fyujm"]
 [ext_resource type="PackedScene" uid="uid://ciufjrc1fmyfi" path="res://scenes/FlatMirror/flat_mirror.tscn" id="8_iurxw"]
+[ext_resource type="PackedScene" uid="uid://c2ksmmgyp4o6i" path="res://scenes/MirrorHalfSilver/half_silver_mirror.tscn" id="11_qvbuf"]
 
 [node name="Level009" type="Node2D"]
 script = ExtResource("1_0drhk")
@@ -83,3 +84,6 @@ isEnergizeable = false
 position = Vector2(1110, 355)
 MirrorLength = 120
 initialAngle = -45.0
+
+[node name="HalfSilverMirror" parent="." instance=ExtResource("11_qvbuf")]
+position = Vector2(1111, 593)
