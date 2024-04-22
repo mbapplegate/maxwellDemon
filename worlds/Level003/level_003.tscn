@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dwc0n83o0nmoc"]
+[gd_scene load_steps=10 format=3 uid="uid://dwc0n83o0nmoc"]
 
 [ext_resource type="Script" path="res://worlds/Level003/level_003.gd" id="1_0rxl5"]
 [ext_resource type="PackedScene" uid="uid://fkwew1tbysym" path="res://worlds/BaseTileMap.tscn" id="2_ockkl"]
@@ -7,6 +7,15 @@
 [ext_resource type="PackedScene" uid="uid://bq36hxil0t1vi" path="res://scenes/DetectorPoint/point_detector.tscn" id="5_5mtrj"]
 [ext_resource type="PackedScene" uid="uid://ojfv06ceqv2a" path="res://scenes/Player/player.tscn" id="6_xdtn4"]
 [ext_resource type="PackedScene" uid="uid://dns1nq8hlfau" path="res://scenes/Doorway/doorway.tscn" id="7_u27ai"]
+[ext_resource type="Script" path="res://addons/controller_icons/objects/ControllerIconTexture.gd" id="8_q7krq"]
+
+[sub_resource type="Texture2D" id="Texture2D_ej44y"]
+resource_local_to_scene = false
+resource_name = ""
+script = ExtResource("8_q7krq")
+path = "pull"
+show_mode = 0
+force_type = 0
 
 [node name="Level003" type="Node2D"]
 script = ExtResource("1_0rxl5")
@@ -55,3 +64,30 @@ theme_override_font_sizes/font_size = 22
 text = "L1"
 horizontal_alignment = 2
 vertical_alignment = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = 864.0
+offset_top = 128.0
+offset_right = 1196.0
+offset_bottom = 264.0
+theme_override_font_sizes/normal_font_size = 40
+text = "Hold           to push"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+shortcut_keys_enabled = false
+
+[node name="TextureRect" type="TextureRect" parent="RichTextLabel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -78.0
+offset_top = -88.0
+offset_right = 22.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("Texture2D_ej44y")

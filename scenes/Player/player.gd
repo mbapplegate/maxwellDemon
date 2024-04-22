@@ -116,13 +116,13 @@ func validate_movement(testLoc:Vector2, direction:Vector2):
 		return true
 	else:
 		if _cast.is_colliding():
-			if _cast.get_collider() is pushableObject and _cast.get_collider().isPushable:
+			if _cast.get_collider() is pushableObject and _cast.get_collider().isPushable and Input.is_action_pressed("pull"):
 				_cast.get_collider().push(_cast.target_position)
 				return _cast.get_collider().isSliding
 			else:
 				return false
 		elif _cast2.is_colliding():
-			if _cast2.get_collider() is pushableObject and _cast2.get_collider().isPushable:
+			if _cast2.get_collider() is pushableObject and _cast2.get_collider().isPushable and Input.is_action_pressed("pull"):
 				_cast2.get_collider().push(_cast2.target_position)
 				return _cast2.get_collider().isSliding
 			else:
