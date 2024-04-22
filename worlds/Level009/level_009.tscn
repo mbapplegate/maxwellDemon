@@ -81,4 +81,5 @@ isEnergizeable = false
 
 [node name="FlatMirror" parent="." instance=ExtResource("8_iurxw")]
 position = Vector2(1110, 355)
+MirrorLength = 120
 initialAngle = -45.0

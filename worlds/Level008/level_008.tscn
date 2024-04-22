@@ -59,6 +59,7 @@ isEnergizeable = false
 
 [node name="FlatMirror3" parent="." instance=ExtResource("9_uy0jb")]
 position = Vector2(1056, 484)
+MirrorLength = 130
 initialAngle = 45.0
 isEnergizeable = false
 
@@ -70,6 +71,7 @@ isEnergizeable = false
 
 [node name="FlatMirror" parent="." instance=ExtResource("9_uy0jb")]
 position = Vector2(576, 476)
+MirrorLength = 130
 initialAngle = -135.0
 
 [node name="LEDSource" parent="." instance=ExtResource("6_8ue0y")]

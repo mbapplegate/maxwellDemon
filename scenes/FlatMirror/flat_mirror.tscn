@@ -12,8 +12,10 @@ custom_solver_bias = 1.0
 size = Vector2(116, 6)
 
 [node name="FlatMirror" instance=ExtResource("1_najvj")]
+position = Vector2(157, 157)
 script = ExtResource("2_th8rt")
 reflectivity = 1.0
+MirrorLength = 240
 
 [node name="Sprite2D" type="Sprite2D" parent="Stage" index="0"]
 z_index = 1
