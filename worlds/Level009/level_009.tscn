@@ -70,7 +70,7 @@ isRotatable = false
 isEnergized = true
 
 [node name="LensPlanoConvex" parent="." instance=ExtResource("7_7xemi")]
-position = Vector2(759, 409)
+position = Vector2(767, 407)
 LENS_HEIGHT = 256
 focalLength = 512
 initialAngle = 90.0

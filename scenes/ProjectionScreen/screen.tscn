@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=3 uid="uid://dq8te0dn5rvle"]
+
+[ext_resource type="Script" path="res://scenes/ProjectionScreen/screen.gd" id="1_p32n1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yq1fv"]
+size = Vector2(2, 256)
+
+[node name="Screen" type="Node2D"]
+position = Vector2(256, 192)
+script = ExtResource("1_p32n1")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("RectangleShape2D_yq1fv")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="StaticBody2D/CollisionShape2D"]
+offset_left = -32.0
+offset_top = -128.0
+offset_bottom = -96.0
+theme_override_constants/separation = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=3 uid="uid://opcv033f8gxt"]
+
+[ext_resource type="Script" path="res://scenes/Scratch/test_imaging_setup.gd" id="1_led3s"]
+[ext_resource type="PackedScene" uid="uid://b6navnb20xork" path="res://scenes/Lens_PlanoConvex/lens_plano_convex.tscn" id="1_t0kf5"]
+[ext_resource type="PackedScene" uid="uid://cou28duaoksf1" path="res://scenes/objectToImage/object_for_imaging.tscn" id="2_21ssc"]
+[ext_resource type="PackedScene" uid="uid://ojfv06ceqv2a" path="res://scenes/Player/player.tscn" id="4_2xy1q"]
+[ext_resource type="PackedScene" uid="uid://dq8te0dn5rvle" path="res://scenes/ProjectionScreen/screen.tscn" id="5_go8c6"]
+
+[node name="TestImagingSetup" type="Node2D"]
+script = ExtResource("1_led3s")
+
+[node name="LensPlanoConvex" parent="." instance=ExtResource("1_t0kf5")]
+position = Vector2(384, 224)
+LENS_HEIGHT = 180
+focalLength = 225
+
+[node name="ObjectForImaging" parent="." instance=ExtResource("2_21ssc")]
+position = Vector2(928, 224)
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[node name="Player" parent="." instance=ExtResource("4_2xy1q")]
+position = Vector2(645.418, 83.3945)
+
+[node name="Screen" parent="." instance=ExtResource("5_go8c6")]
+position = Vector2(96, 256)
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

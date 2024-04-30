@@ -30,6 +30,7 @@ func _on_timer_timeout():
 			instance.propDir = Vector2(POINT_RADIUS*cos(angle),POINT_RADIUS*sin(angle))
 			instance.position = to_global(Vector2.ZERO)
 			instance.rayColor = rayColor
+			instance.lightSource = "point"
 			#instance.scale[0] = 1.0/self.scale[0]
 			#instance.scale[1] = 1.0 / self.scale[1]
 			if sourceParent:

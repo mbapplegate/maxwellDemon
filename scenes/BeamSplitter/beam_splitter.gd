@@ -38,6 +38,7 @@ func _ray_hit(photonObj:Object, collPoint:Vector2, collNormal:Vector2, collider:
 			instance.global_position = collPoint
 			#If the splitter isn't root then add the child to the parent
 			if splitterParent:
+				instance.lightSource = "splitter"
 				splitterParent.add_child(instance)
 			#Otherwise make it a child of itself (mostly for debugging)
 			else:

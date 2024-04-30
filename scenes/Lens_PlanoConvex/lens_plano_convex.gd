@@ -80,6 +80,12 @@ func _ray_hit(photonObj:Object, collPoint:Vector2, collNormal:Vector2, _collider
 	photonObj.propDir = newDir
 	photonObj.ray_add_point(photonObj.to_local(collPoint))
 	
+func getFocusPositions():
+	var lensAngle = getRotation()
+	var frontPos = Vector2(focalLength * cos(lensAngle),focalLength * sin(lensAngle))
+	var rearPos = Vector2(-focalLength * cos(lensAngle), -focalLength * sin(lensAngle))
+	return [frontPos,rearPos]
+	
 func update_texture():
 	super.update_texture()
 	

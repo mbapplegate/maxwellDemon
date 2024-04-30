@@ -1,5 +1,5 @@
 extends Node2D
-
+class_name lightPacket
 @onready var line = $Line2D
 @onready var ray = $RayCast2D
 #@onready var circ = $DEBUG
@@ -22,6 +22,8 @@ var winSize
 var lastCollider = null
 var numPoints = 0
 var lineLength = 0.0
+var isPaused = false
+var lightSource = ""
 
 signal hitSomething(rayObject, collisionPoint, collisionNormal, collider)
 #
@@ -61,62 +63,70 @@ func _ready():
 	line.material.set_shader_parameter("propVisibleFront",0.0)
 	line.material.set_shader_parameter("propVisibleEnd",1.0)
 
+func setPaused(val):
+	if val:
+		isPaused = true
+	else:
+		isPaused = false
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	#Move the second point by one increment                                  #Number of points in the line
-	var currentPointFront = line.get_point_position(numPoints-1)           #Front of ray
-	var nextPointFront = currentPointFront + propDir.normalized()*SPEED*delta   #New position of front of ray
-	var currentPointBack = line.get_point_position(0)
-	var startDirToNextPointBack = line.get_point_position(0).direction_to(line.get_point_position(1))
-	var nextPointBack = currentPointBack+startDirToNextPointBack*SPEED*delta
-	var endDirToNextPointBack = nextPointBack.direction_to(line.get_point_position(1))
-	
-	if not endDirToNextPointBack.is_equal_approx(startDirToNextPointBack):
-		nextPointBack = line.get_point_position(1)
-	#Adjust the raycast
-	ray.position = currentPointFront
-	ray.set_target_position(propDir.normalized()*SPEED*delta)
-	ray.force_raycast_update()
-	
-	#Detect interfaces
-	#Ray hasn't hit anything, so move the ray forward
-	if not ray.is_colliding():
-		_update_line_position(currentPointFront,nextPointFront,nextPointBack)
-	#OK, the ray has hit something -- this is a big deal and we'll figure it out together
+	if isPaused:
+		pass
 	else:
-		#If the ray is alive (hasn't left the scene or hit an absorber)
-		if not rayDying:
-			#AAAND it's hitting something new
-			if (ray.get_collider() != lastCollider):
-				#print(_get_packet_length(line.points))
-				#Update the last collider
-				lastCollider = ray.get_collider()
-				var collHandler = _get_functional_collider(lastCollider)
-				#Send a signal to that collider to handle the collision depending on what it is
-				if not is_connected("hitSomething",collHandler._ray_hit):
-					connect("hitSomething",collHandler._ray_hit)
-				hitSomething.emit(self, ray.get_collision_point(), ray.get_collision_normal(),  ray.get_collider())
-				#Disconnect the signal to keep things clean
-				disconnect("hitSomething",collHandler._ray_hit)
-				var distFrontTraveled = currentPointFront.distance_to(to_local(ray.get_collision_point()))
-				nextPointBack = currentPointBack+startDirToNextPointBack*distFrontTraveled
-				nextPointFront = to_local(ray.get_collision_point())
-				endDirToNextPointBack = nextPointBack.direction_to(line.get_point_position(1))
-				if not endDirToNextPointBack.is_equal_approx(startDirToNextPointBack):
-					nextPointBack = line.get_point_position(1)
-				#Advance the first point to the collision point and the back point to the next point
-				_update_line_position(currentPointFront,nextPointFront,nextPointBack)
-			#We've collided with the same thing as before, so ignore the collision
-			else:
-				_update_line_position(currentPointFront,nextPointFront,nextPointBack)	
-		else:
-			_update_line_position(currentPointFront,nextPointFront,nextPointBack)
-	
-	#If the ray is dying and has fully been absorbed, kill the ray
-	if ((rayDying and proportionVisibleBack == 0.0) or numPoints == 1):
-		queue_free()
+		#Move the second point by one increment                                  #Number of points in the line
+		var currentPointFront = line.get_point_position(numPoints-1)           #Front of ray
+		var nextPointFront = currentPointFront + propDir.normalized()*SPEED*delta   #New position of front of ray
+		var currentPointBack = line.get_point_position(0)
+		var startDirToNextPointBack = line.get_point_position(0).direction_to(line.get_point_position(1))
+		var nextPointBack = currentPointBack+startDirToNextPointBack*SPEED*delta
+		var endDirToNextPointBack = nextPointBack.direction_to(line.get_point_position(1))
 		
-	_has_ray_left_screen()
+		if not endDirToNextPointBack.is_equal_approx(startDirToNextPointBack):
+			nextPointBack = line.get_point_position(1)
+		#Adjust the raycast
+		ray.position = currentPointFront
+		ray.set_target_position(propDir.normalized()*SPEED*delta)
+		ray.force_raycast_update()
+		
+		#Detect interfaces
+		#Ray hasn't hit anything, so move the ray forward
+		if not ray.is_colliding():
+			_update_line_position(currentPointFront,nextPointFront,nextPointBack)
+		#OK, the ray has hit something -- this is a big deal and we'll figure it out together
+		else:
+			#If the ray is alive (hasn't left the scene or hit an absorber)
+			if not rayDying:
+				#AAAND it's hitting something new
+				if (ray.get_collider() != lastCollider):
+					#print(_get_packet_length(line.points))
+					#Update the last collider
+					lastCollider = ray.get_collider()
+					var collHandler = _get_functional_collider(lastCollider)
+					#Send a signal to that collider to handle the collision depending on what it is
+					if not is_connected("hitSomething",collHandler._ray_hit):
+						connect("hitSomething",collHandler._ray_hit)
+					hitSomething.emit(self, ray.get_collision_point(), ray.get_collision_normal(),  ray.get_collider())
+					#Disconnect the signal to keep things clean
+					disconnect("hitSomething",collHandler._ray_hit)
+					var distFrontTraveled = currentPointFront.distance_to(to_local(ray.get_collision_point()))
+					nextPointBack = currentPointBack+startDirToNextPointBack*distFrontTraveled
+					nextPointFront = to_local(ray.get_collision_point())
+					endDirToNextPointBack = nextPointBack.direction_to(line.get_point_position(1))
+					if not endDirToNextPointBack.is_equal_approx(startDirToNextPointBack):
+						nextPointBack = line.get_point_position(1)
+					#Advance the first point to the collision point and the back point to the next point
+					_update_line_position(currentPointFront,nextPointFront,nextPointBack)
+				#We've collided with the same thing as before, so ignore the collision
+				else:
+					_update_line_position(currentPointFront,nextPointFront,nextPointBack)	
+			else:
+				_update_line_position(currentPointFront,nextPointFront,nextPointBack)
+		
+		#If the ray is dying and has fully been absorbed, kill the ray
+		if ((rayDying and proportionVisibleBack == 0.0) or numPoints == 1):
+			queue_free()
+			
+		_has_ray_left_screen()
 
 #Walks up the tree until something with a _ray_hit method is found
 #If no method is found -- return null which I think means the object is ignored
@@ -186,4 +196,11 @@ func update_energy(newEnergy:float):
 	else:
 		energy = newEnergy
 		line.material.set_shader_parameter("energy",sqrt(energy))
+		
+func set_ray_color(newColor: Vector3):
+	rayColor = newColor
+	line.material.set_shader_parameter("red",rayColor[0])
+	line.material.set_shader_parameter("green",rayColor[1])
+	line.material.set_shader_parameter("blue",rayColor[2])
+	
 	

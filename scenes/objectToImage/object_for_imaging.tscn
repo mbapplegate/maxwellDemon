@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://cou28duaoksf1"]
+
+[ext_resource type="Script" path="res://scenes/objectToImage/object_for_imaging.gd" id="1_kvvep"]
+[ext_resource type="Texture2D" uid="uid://3l3q1hn80qap" path="res://scenes/objectToImage/whiteSquare.png" id="2_kdpk4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o7qel"]
+size = Vector2(32, 32)
+
+[node name="ObjectForImaging" type="Node2D"]
+position = Vector2(250, 142)
+script = ExtResource("1_kvvep")
+pieceSize = Vector2(32, 128)
+objectColor = Vector3(1, 0, 0)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 3
+collision_mask = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
+texture = ExtResource("2_kdpk4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+visible = false
+shape = SubResource("RectangleShape2D_o7qel")
+
+[node name="Timer" type="Timer" parent="."]

@@ -3,6 +3,8 @@ extends Node
 const WIRE_OFF_COLOR = Color(10/255.0,10/255.0,10/255.0)
 const WIRE_ON_COLOR = Color(240/255.0,240/255.0,60/255.0)
 
+signal imagingModeChanged(val)
+
 var LevelDictionary = {
 	"MainMenu"    : {"Path" : "res://utilities/mainMenu/main_menu.tscn",           "Title" : "Main Menu",      "Section" : "Menu"} ,
 	"LevelSelect" : {"Path" : "res://utilities/levelSelector/level_selector.tscn", "Title" : "Select Level",   "Section" : "Menu"},
@@ -16,5 +18,13 @@ var LevelDictionary = {
 	"Level006"    : {"Path" : "res://worlds/Level006/level_006.tscn",              "Title" : "Mirrors",        "Section" : "Tutorial"},
 	"Level007"    : {"Path" : "res://worlds/Level007/level_007.tscn",              "Title" : "Focus",          "Section" : "Tutorial"},
 	"Level008"    : {"Path" : "res://worlds/Level008/level_008.tscn",              "Title" : "Collimation",    "Section" : "LensesAndMirrors"},
-	"Level009"    : {"Path" : "res://worlds/Level009/level_009.tscn",              "Title" : "Expand",         "Section" : "LensesAndMirrors"}
+	"Level009"    : {"Path" : "res://worlds/Level009/level_009.tscn",              "Title" : "Expand",         "Section" : "LensesAndMirrors"},
+	"Level010"    : {"Path" : "res://worlds/Level010/level_010.tscn",              "Title" : "Image",          "Section" : "LensesAndMirrors"}
 }
+
+var inImagingMode: bool = false
+
+func _input(event):
+	if event.is_action_pressed("imageMode"):
+		inImagingMode = !inImagingMode
+		imagingModeChanged.emit(inImagingMode)
