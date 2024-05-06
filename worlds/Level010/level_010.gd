@@ -4,6 +4,7 @@ extends Node2D
 @onready var player = $Player
 @onready var titleText = $titleText
 @onready var laser = $LaserSource
+@onready var imagingLens = $LensPlanoConvex
 
 const THIS_SCENE_ALIAS = "Level010"
 @export var nextSceneAlias = "MainMenu"
@@ -19,6 +20,8 @@ func _ready():
 			child.initialize()
 		elif child is detectorMeter:
 			child.goalMetChanged.connect(_toggleDoor)
+		elif child is ImagerObject:
+			child.setImagingLens(imagingLens)
 			
 func _toggleDoor(val):
 	if val:
@@ -36,6 +39,8 @@ func _toggleDoor(val):
 			
 func nextLevel():
 	if not signalEmitted:
+		LevelInfo.imagingModeChanged.disconnect(receiveImagingMode)
+		receiveImagingMode(true)
 		nextScene.emit(nextSceneAlias)
 		signalEmitted = true
 		
@@ -48,6 +53,4 @@ func receiveImagingMode(val):
 			if child.lightSource == "laser":
 				child.setPaused(val)
 	laser.setPaused(val)
-	
-		
 	

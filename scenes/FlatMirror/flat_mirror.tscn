@@ -15,7 +15,7 @@ size = Vector2(116, 6)
 position = Vector2(157, 157)
 script = ExtResource("2_th8rt")
 reflectivity = 1.0
-MirrorLength = 240
+MirrorLength = 120
 
 [node name="Sprite2D" type="Sprite2D" parent="Stage" index="0"]
 z_index = 1
