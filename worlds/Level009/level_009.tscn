@@ -96,6 +96,7 @@ aperture_width = 6
 
 [node name="FlatMirror" parent="." instance=ExtResource("8_iurxw")]
 position = Vector2(1293, 306)
+MirrorLength = 240
 initialAngle = -135.0
 isPushable = false
 isRotatable = false
@@ -103,6 +104,7 @@ isEnergizeable = false
 
 [node name="FlatMirror2" parent="." instance=ExtResource("8_iurxw")]
 position = Vector2(1293, 794)
+MirrorLength = 240
 initialAngle = -45.0
 isPushable = false
 isRotatable = false
