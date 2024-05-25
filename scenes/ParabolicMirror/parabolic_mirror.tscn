@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://bve80wrxbeco5" path="res://scenes/Lens_PlanoConvex/focalSpot.png" id="3_8ww8a"]
 
 [node name="parabolicMirror" instance=ExtResource("1_wi1ai")]
+position = Vector2(160, 128)
 script = ExtResource("2_84iss")
 focalLength = 128.0
 mirrorHeight = 120.0

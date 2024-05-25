@@ -4,6 +4,8 @@ extends Node2D
 @export var total_height = 120
 @export var aperture_width = 24
 @export var thickness = 8
+@export var snapX : bool = false
+@export var snapY : bool = true
 const collThickness = 2
 const TILE_SIZE = 32
 
@@ -16,7 +18,10 @@ signal rayHit(energy)
 
 func _ready():
 	var snappedPos = global_position.snapped(Vector2(TILE_SIZE,TILE_SIZE))
-	global_position.y = snappedPos.y
+	if snapY:
+		global_position.y = snappedPos.y
+	if snapX:
+		global_position.x = snappedPos.x
 	var shapeHt = (total_height - aperture_width) / 2.0 #Height of each leaf
 	var shapeOffset = (shapeHt + aperture_width) / 2.0
 	#print("Ht: ", shapeHt, ", y-Offset: ", shapeOffset)

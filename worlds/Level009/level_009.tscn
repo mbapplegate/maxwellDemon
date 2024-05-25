@@ -70,14 +70,14 @@ isRotatable = false
 isEnergized = true
 
 [node name="LensPlanoConvex" parent="." instance=ExtResource("7_7xemi")]
-position = Vector2(767, 407)
+position = Vector2(881, 405)
 LENS_HEIGHT = 256
 focalLength = 512
 initialAngle = 90.0
 isEnergizeable = false
 
 [node name="LensPlanoConvex2" parent="." instance=ExtResource("7_7xemi")]
-position = Vector2(763, 156)
+position = Vector2(570, 150)
 initialAngle = 90.0
 isEnergizeable = false
 
@@ -96,7 +96,7 @@ aperture_width = 6
 
 [node name="FlatMirror" parent="." instance=ExtResource("8_iurxw")]
 position = Vector2(1293, 306)
-MirrorLength = 240
+MirrorLength = 256
 initialAngle = -135.0
 isPushable = false
 isRotatable = false

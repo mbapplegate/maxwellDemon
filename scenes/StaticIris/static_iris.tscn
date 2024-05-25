@@ -12,8 +12,7 @@ size = Vector2(16, 48)
 [node name="StaticIris" type="Node2D"]
 position = Vector2(128, 128)
 script = ExtResource("1_hmi85")
-total_height = 128
-aperture_width = 16
+aperture_width = 32
 
 [node name="TopPart" type="StaticBody2D" parent="."]
 

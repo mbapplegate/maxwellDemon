@@ -21,7 +21,7 @@ isEnergized = true
 texture = ExtResource("2_6jece")
 
 [node name="Timer" type="Timer" parent="." index="5"]
-wait_time = 0.125
+wait_time = 0.05
 autostart = true
 
 [node name="sourceBall" type="Sprite2D" parent="." index="6"]

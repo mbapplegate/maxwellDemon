@@ -51,10 +51,15 @@ layout_mode = 2
 text = "08"
 levelAlias = "Level008"
 
-[node name="LevelSelectButton" parent="HBoxContainer" instance=ExtResource("2_hu0pa")]
+[node name="Level09" parent="HBoxContainer" instance=ExtResource("2_hu0pa")]
 layout_mode = 2
 text = "09	"
 levelAlias = "Level009"
+
+[node name="Level10" parent="HBoxContainer" instance=ExtResource("2_hu0pa")]
+layout_mode = 2
+text = "10"
+levelAlias = "Level011"
 
 [node name="Label" type="Label" parent="."]
 offset_left = 288.0
