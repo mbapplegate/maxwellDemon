@@ -20,7 +20,7 @@ var LevelDictionary = {
 	"Level008"    : {"Path" : "res://worlds/Level008/level_008.tscn",              "Title" : "Collimation",    "Section" : "LensesAndMirrors"},
 	"Level009"    : {"Path" : "res://worlds/Level009/level_009.tscn",              "Title" : "Expand",         "Section" : "LensesAndMirrors"},
 	"Level010"    : {"Path" : "res://worlds/Level010/level_010.tscn",              "Title" : "Image",          "Section" : "Debug"},
-	"Level011"    : {"Path" : "res://worlds/Level011/level_011.tscn",              "Title" : "Whispering Gallery", "Section" : "LensesAndMirrors"}
+	"Level011"    : {"Path" : "res://worlds/Level011/level_011.tscn",              "Title" : "Parabolic Mirror","Section" : "LensesAndMirrors"}
 }
 
 var inImagingMode: bool = false

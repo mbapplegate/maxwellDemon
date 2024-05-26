@@ -90,10 +90,14 @@ func update_texture():
 		bg.texture = load("res://tiles/pushable/pushableBase_BACKGROUND_STATIC.png")
 	
 	if isRotatable:
-		sprite.texture = load("res://tiles/pushable/circularRotationBase.png")
+		sprite.texture = load("res://tiles/pushable/circularRotationBase_whiteOutline.png")
 	else:
-		sprite.texture = load("res://tiles/pushable/squareBase.png")
+		sprite.texture = load("res://tiles/pushable/squareBase_whiteOutline.png")
 	
+	if not isPushable:
+		$fixation.texture = load("res://tiles/pushable/fixation_HEX.png")
+	else:
+		$fixation.texture = null
 	if isEnergizeable:
 		if isEnergized:
 			indicator.texture = load("res://tiles/pushable/onButton.png")

@@ -15,11 +15,11 @@
    viewBox="0 0 33.866667 33.866667"
    version="1.1"
    id="svg2032"
-   inkscape:version="0.92.5 (2060ec1f9f, 2020-04-08)"
+   inkscape:version="0.92.0 r15299"
    sodipodi:docname="circularRotationBase.svg"
-   inkscape:export-filename="C:\Users\Matthew\Documents\Godot\maxwellGithub\maxwellDemon\tiles\pushable\circularRotationBase.png"
-   inkscape:export-xdpi="96"
-   inkscape:export-ydpi="96">
+   inkscape:export-filename="C:\Users\matth\Documents\Godot\maxwellDemon\tiles\pushable\circularRotationBase_whiteOutline.png"
+   inkscape:export-xdpi="95.273689"
+   inkscape:export-ydpi="95.273689">
   <defs
      id="defs2026">
     <linearGradient
@@ -278,11 +278,11 @@
      inkscape:guide-bbox="true"
      inkscape:snap-bbox="true"
      inkscape:snap-bbox-midpoints="true"
-     inkscape:window-width="2468"
-     inkscape:window-height="1192"
-     inkscape:window-x="480"
-     inkscape:window-y="532"
-     inkscape:window-maximized="0"
+     inkscape:window-width="1827"
+     inkscape:window-height="1046"
+     inkscape:window-x="82"
+     inkscape:window-y="-11"
+     inkscape:window-maximized="1"
      units="px"
      inkscape:bbox-paths="true"
      inkscape:bbox-nodes="true"
@@ -343,7 +343,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -353,7 +353,7 @@
      id="layer1"
      transform="translate(-32.50379,-179.98071)">
     <ellipse
-       style="fill:url(#linearGradient3749);fill-opacity:1;stroke:#282828;stroke-width:0.27098498;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       style="fill:url(#linearGradient3749);fill-opacity:1;stroke:#dcdcdc;stroke-width:0.52916667;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        id="path2577"
        cx="49.437122"
        cy="196.91405"
