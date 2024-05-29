@@ -22,6 +22,7 @@ func _input(event):
 				currentScene.get_node("VBoxContainer/startGame").grab_focus()
 			
 func switchScene(sceneAlias):
+	#print(currentSceneAlias, sceneAlias)
 	if sceneAlias == "QuitGame":
 		switcher.QuitGame()
 	elif sceneAlias == "Reload":
