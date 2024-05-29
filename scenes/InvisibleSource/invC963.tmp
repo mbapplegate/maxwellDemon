@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://bt1eicy7gakub"]
+
+[ext_resource type="Script" path="res://scenes/InvisibleSource/invisible_source.gd" id="1_oxv8m"]
+
+[node name="InvisibleSource" type="Node2D"]
+position = Vector2(192, 96)
+script = ExtResource("1_oxv8m")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.1
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
