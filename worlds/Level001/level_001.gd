@@ -51,3 +51,10 @@ func nextLevel():
 	if not signalEmitted:
 		nextScene.emit(nextSceneAlias)
 		signalEmitted = true
+
+
+func _on_timer_timeout():
+	var tween = get_tree().create_tween()
+	tween.set_ease(Tween.EASE_IN_OUT)
+	tween.set_trans(Tween.TRANS_CUBIC)
+	tween.tween_property($movementHint,"modulate",Color(1.0,1.0,1.0,0.0),1.5)
