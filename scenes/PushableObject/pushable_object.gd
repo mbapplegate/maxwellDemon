@@ -53,7 +53,8 @@ func push(motion:Vector2):
 func pull(direction:Vector2,player:Object):
 	if isSliding or not isPushable:
 		return false
-	self.add_collision_exception_with(player)	
+	if player:
+		self.add_collision_exception_with(player)	
 	
 	var globalTargetLoc = global_position + direction.normalized()*TILE_SIZE
 	#print("Pulling: ",direction, ", ", to_local(globalTargetLoc),", ",can_move(to_local(globalTargetLoc)))
@@ -66,10 +67,12 @@ func pull(direction:Vector2,player:Object):
 		isSliding = true
 		await tween.finished
 		isSliding = false
-		self.remove_collision_exception_with(player)
+		if player:
+			self.remove_collision_exception_with(player)
 		return true
 	else:
-		self.remove_collision_exception_with(player)
+		if player:
+			self.remove_collision_exception_with(player)
 		return false
 	
 func can_move(localDestination:Vector2):
@@ -82,7 +85,7 @@ func can_move(localDestination:Vector2):
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 	
 func update_texture():
-	if isActive and (isPushable or isRotatable):
+	if isActive and (isPushable or isRotatable or isEnergizeable):
 		bg.texture = load("res://tiles/pushable/pushableBase_BACKGROUND_ACTIVE.png")
 	elif isPushable:
 		bg.texture = load("res://tiles/pushable/pushableBase_BACKGROUND_NORMAL.png")
@@ -109,11 +112,11 @@ func update_texture():
 
 func rotateCW():
 	if isRotatable:
-		sprite.rotation -= ROTATION_INCREMENT
+		sprite.rotation += ROTATION_INCREMENT
 	
 func rotateCCW():
 	if isRotatable:
-		sprite.rotation += ROTATION_INCREMENT
+		sprite.rotation -= ROTATION_INCREMENT
 
 func getRotation():
 	if isRotatable:

@@ -243,8 +243,9 @@ func _on_activation_region_body_entered(body):
 			connect("rotateCCWSignal",obj.rotateCCW)
 			connect("rotateCWSignal",obj.rotateCW)
 			connect("energizeSignal",obj.togEnergize)
-			objectActiveChanged.emit(obj,true)
 			obj.update_texture()
+			objectActiveChanged.emit(obj,true)
+			
 
 
 func _on_activation_region_body_exited(body):
