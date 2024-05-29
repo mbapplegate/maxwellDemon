@@ -1,0 +1,155 @@
+[gd_scene load_steps=9 format=3 uid="uid://c446defvfbyrh"]
+
+[ext_resource type="Script" path="res://lessons/push/push_lesson.gd" id="1_bx1vq"]
+[ext_resource type="PackedScene" uid="uid://2ai0r6raovox" path="res://scenes/LaserSource/laser_source.tscn" id="2_4nntb"]
+[ext_resource type="Script" path="res://addons/controller_icons/objects/ControllerIconTexture.gd" id="3_tqc4f"]
+
+[sub_resource type="Texture2D" id="Texture2D_885em"]
+resource_local_to_scene = false
+resource_name = ""
+script = ExtResource("3_tqc4f")
+path = "pull"
+show_mode = 0
+force_type = 0
+
+[sub_resource type="Texture2D" id="Texture2D_ih0bi"]
+resource_local_to_scene = false
+resource_name = ""
+script = ExtResource("3_tqc4f")
+path = "left"
+show_mode = 0
+force_type = 0
+
+[sub_resource type="Texture2D" id="Texture2D_oly0n"]
+resource_local_to_scene = false
+resource_name = ""
+script = ExtResource("3_tqc4f")
+path = "up"
+show_mode = 0
+force_type = 0
+
+[sub_resource type="Texture2D" id="Texture2D_1d6be"]
+resource_local_to_scene = false
+resource_name = ""
+script = ExtResource("3_tqc4f")
+path = "right"
+show_mode = 0
+force_type = 0
+
+[sub_resource type="Texture2D" id="Texture2D_mebc2"]
+resource_local_to_scene = false
+resource_name = ""
+script = ExtResource("3_tqc4f")
+path = "down"
+show_mode = 0
+force_type = 0
+
+[node name="PushLesson" type="Node2D"]
+script = ExtResource("1_bx1vq")
+
+[node name="LaserSource" parent="." instance=ExtResource("2_4nntb")]
+position = Vector2(160, 256)
+scale = Vector2(2, 2)
+initialAngle = 90.0
+isPushable = false
+isRotatable = false
+
+[node name="LaserSource2" parent="." instance=ExtResource("2_4nntb")]
+position = Vector2(736, 256)
+scale = Vector2(2, 2)
+HALF_HEIGHT = 5.0
+initialAngle = 90.0
+isRotatable = false
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(480, 288)
+zoom = Vector2(2, 2)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = 25.0
+offset_top = 18.0
+offset_right = 345.0
+offset_bottom = 146.0
+theme_override_font_sizes/normal_font_size = 40
+text = "     Screws =
+        Fixed"
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="."]
+offset_left = 647.0
+offset_top = 18.0
+offset_right = 903.0
+offset_bottom = 140.0
+theme_override_font_sizes/normal_font_size = 40
+text = "No screws =
+  Moveable"
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="."]
+offset_left = 32.0
+offset_top = 416.0
+offset_right = 622.0
+offset_bottom = 552.0
+theme_override_font_sizes/normal_font_size = 44
+text = "        hold          to grab
+then                             to move"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+shortcut_keys_enabled = false
+
+[node name="TextureRect" type="TextureRect" parent="RichTextLabel3"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -109.0
+offset_top = -87.0
+offset_right = -9.0
+offset_bottom = 13.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("Texture2D_885em")
+
+[node name="TextureRect2" type="TextureRect" parent="RichTextLabel3"]
+layout_mode = 0
+offset_left = 92.0
+offset_top = 48.0
+offset_right = 192.0
+offset_bottom = 148.0
+texture = SubResource("Texture2D_ih0bi")
+
+[node name="TextureRect3" type="TextureRect" parent="RichTextLabel3"]
+offset_left = 168.0
+offset_top = 48.0
+offset_right = 268.0
+offset_bottom = 148.0
+texture = SubResource("Texture2D_oly0n")
+
+[node name="TextureRect4" type="TextureRect" parent="RichTextLabel3"]
+offset_left = 244.0
+offset_top = 48.0
+offset_right = 344.0
+offset_bottom = 148.0
+texture = SubResource("Texture2D_1d6be")
+
+[node name="TextureRect5" type="TextureRect" parent="RichTextLabel3"]
+offset_left = 320.0
+offset_top = 48.0
+offset_right = 420.0
+offset_bottom = 148.0
+texture = SubResource("Texture2D_mebc2")
+
+[node name="RichTextLabel4" type="RichTextLabel" parent="."]
+offset_left = 672.0
+offset_top = 512.0
+offset_right = 1024.0
+offset_bottom = 552.0
+theme_override_font_sizes/normal_font_size = 24
+text = "Any key to continue . . ."
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -1,0 +1,110 @@
+[gd_scene load_steps=6 format=3 uid="uid://c6s5or3c6pek1"]
+
+[ext_resource type="Script" path="res://lessons/rotate/rotate_lesson.gd" id="1_5xhga"]
+[ext_resource type="PackedScene" uid="uid://2ai0r6raovox" path="res://scenes/LaserSource/laser_source.tscn" id="2_6k4nd"]
+[ext_resource type="Script" path="res://addons/controller_icons/objects/ControllerIconTexture.gd" id="3_xxc4q"]
+
+[sub_resource type="Texture2D" id="Texture2D_885em"]
+resource_local_to_scene = false
+resource_name = ""
+script = ExtResource("3_xxc4q")
+path = "rotateCCW"
+show_mode = 0
+force_type = 0
+
+[sub_resource type="Texture2D" id="Texture2D_sty1x"]
+resource_local_to_scene = false
+resource_name = ""
+script = ExtResource("3_xxc4q")
+path = "rotateCW"
+show_mode = 0
+force_type = 0
+
+[node name="RotateLesson" type="Node2D"]
+script = ExtResource("1_5xhga")
+
+[node name="LaserSource" parent="." instance=ExtResource("2_6k4nd")]
+position = Vector2(160, 256)
+scale = Vector2(2, 2)
+initialAngle = 90.0
+isPushable = false
+isRotatable = false
+
+[node name="LaserSource2" parent="." instance=ExtResource("2_6k4nd")]
+position = Vector2(800, 256)
+scale = Vector2(2, 2)
+HALF_HEIGHT = 5.0
+initialAngle = 90.0
+isPushable = false
+isEnergized = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(480, 288)
+zoom = Vector2(2, 2)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = 32.0
+offset_top = 23.0
+offset_right = 352.0
+offset_bottom = 151.0
+theme_override_font_sizes/normal_font_size = 40
+text = "     Square =
+Not rotatable"
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="."]
+offset_left = 672.0
+offset_top = 21.0
+offset_right = 928.0
+offset_bottom = 143.0
+theme_override_font_sizes/normal_font_size = 40
+text = "    Round =
+   Rotatable"
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="."]
+offset_left = 216.0
+offset_top = 408.0
+offset_right = 742.0
+offset_bottom = 544.0
+theme_override_font_sizes/normal_font_size = 44
+text = "         or        to rotate"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+shortcut_keys_enabled = false
+
+[node name="TextureRect" type="TextureRect" parent="RichTextLabel3"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -121.0
+offset_top = -81.0
+offset_right = -21.0
+offset_bottom = 19.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("Texture2D_885em")
+
+[node name="TextureRect2" type="TextureRect" parent="RichTextLabel3"]
+layout_mode = 0
+offset_left = 4.0
+offset_top = -13.0
+offset_right = 104.0
+offset_bottom = 87.0
+texture = SubResource("Texture2D_sty1x")
+
+[node name="RichTextLabel4" type="RichTextLabel" parent="."]
+offset_left = 672.0
+offset_top = 512.0
+offset_right = 1024.0
+offset_bottom = 552.0
+theme_override_font_sizes/normal_font_size = 24
+text = "Any key to continue . . ."
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.3
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

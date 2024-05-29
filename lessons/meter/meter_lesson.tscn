@@ -1,0 +1,128 @@
+[gd_scene load_steps=5 format=3 uid="uid://6cgsj3nqgjs4"]
+
+[ext_resource type="Script" path="res://lessons/meter/meter_lesson.gd" id="1_e1gsn"]
+[ext_resource type="PackedScene" uid="uid://dn3852bgxqccu" path="res://scenes/DetectorMeterAnalog/detector_meter.tscn" id="2_xx52t"]
+[ext_resource type="Texture2D" uid="uid://dtxyg0dsi5bmm" path="res://scenes/DetectorMeterAnalog/indicatorLight_256px_OFF.png" id="4_el8f0"]
+[ext_resource type="Texture2D" uid="uid://0dgf3cefecwr" path="res://scenes/PointSource/sourceCircle.png" id="5_eylqh"]
+
+[node name="MeterLesson" type="Node2D"]
+script = ExtResource("1_e1gsn")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(480, 288)
+zoom = Vector2(2, 2)
+
+[node name="RichTextLabel4" type="RichTextLabel" parent="."]
+offset_left = 672.0
+offset_top = 512.0
+offset_right = 1024.0
+offset_bottom = 552.0
+theme_override_font_sizes/normal_font_size = 24
+text = "Any key to continue . . ."
+
+[node name="DetectorMeter" parent="." instance=ExtResource("2_xx52t")]
+position = Vector2(192, 160)
+goalPower = 6.0
+integrationTime = 0.5
+
+[node name="WirePath" type="Line2D" parent="DetectorMeter"]
+points = PackedVector2Array(96, 0, 160, 0, 160, 80, -80, 80, -80, 112, 32, 112)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
+[node name="InstantLegend" type="Line2D" parent="."]
+points = PackedVector2Array(512, 160, 576, 96)
+default_color = Color(0, 0, 0, 1)
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="InstantLegend"]
+offset_left = 608.0
+offset_top = 109.0
+offset_right = 960.0
+offset_bottom = 149.0
+theme_override_font_sizes/normal_font_size = 23
+text = "Instantaneous Power"
+
+[node name="AverageLegend" type="Line2D" parent="."]
+points = PackedVector2Array(512, 224, 576, 160)
+default_color = Color(1, 0, 0, 1)
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="AverageLegend"]
+offset_left = 608.0
+offset_top = 173.0
+offset_right = 960.0
+offset_bottom = 213.0
+theme_override_font_sizes/normal_font_size = 23
+text = "Average Power"
+
+[node name="GoalLegend" type="Line2D" parent="."]
+points = PackedVector2Array(512, 288, 576, 224)
+default_color = Color(0, 0, 1, 1)
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="GoalLegend"]
+offset_left = 608.0
+offset_top = 237.0
+offset_right = 832.0
+offset_bottom = 277.0
+theme_override_font_sizes/normal_font_size = 23
+text = "Goal Power"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+self_modulate = Color(1, 0, 0, 1)
+position = Vector2(544, 320)
+scale = Vector2(2, 2)
+texture = ExtResource("5_eylqh")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Sprite2D"]
+offset_left = 32.0
+offset_top = -8.5
+offset_right = 160.0
+offset_bottom = 31.5
+scale = Vector2(0.5, 0.5)
+theme_override_font_sizes/normal_font_size = 23
+text = "ID Color"
+
+[node name="GoalMetLegend" type="Sprite2D" parent="."]
+position = Vector2(544, 384)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("4_el8f0")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="GoalMetLegend"]
+offset_left = 42.6667
+offset_top = -12.0
+offset_right = 295.667
+offset_bottom = 28.0
+scale = Vector2(0.67, 0.67)
+theme_override_font_sizes/normal_font_size = 23
+text = "Goal Met Indicator"
+
+[node name="WireLegend" type="Line2D" parent="."]
+position = Vector2(1, 18)
+points = PackedVector2Array(512, 416, 576, 416, 576, 448, 544, 448)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="WireLegend"]
+offset_left = 607.0
+offset_top = 412.0
+offset_right = 734.0
+offset_bottom = 452.0
+theme_override_font_sizes/normal_font_size = 23
+text = "Wire"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = 32.0
+offset_top = 320.0
+offset_right = 352.0
+offset_bottom = 512.0
+theme_override_font_sizes/normal_font_size = 22
+bbcode_enabled = true
+text = "[fill]When the average power exceeds the goal, the device connected to the wire will activate[/fill]"
+autowrap_mode = 2
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
