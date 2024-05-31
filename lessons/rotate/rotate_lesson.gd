@@ -14,8 +14,8 @@ func _ready():
 		if child is pushableObject:
 			child.initialize()
 
-func _input(_event):
-	if not signalEmitted:
+func _input(event):
+	if not signalEmitted and event.is_pressed():
 		nextScene.emit(nextSceneAlias)
 		signalEmitted = true
 

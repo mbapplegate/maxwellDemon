@@ -22,14 +22,14 @@ theme_override_font_sizes/normal_font_size = 24
 text = "Any key to continue . . ."
 
 [node name="PointDetector" parent="." instance=ExtResource("1_s76hq")]
-position = Vector2(224, 192)
+position = Vector2(224, 288)
 scale = Vector2(2, 2)
 isPushable = false
 isRotatable = false
 isEnergizeable = false
 
 [node name="active" type="Sprite2D" parent="."]
-position = Vector2(512, 162)
+position = Vector2(512, 248)
 scale = Vector2(3, 3)
 texture = ExtResource("3_l4aoh")
 
@@ -40,10 +40,11 @@ offset_right = 165.333
 offset_bottom = 29.3333
 scale = Vector2(0.67, 0.67)
 theme_override_font_sizes/normal_font_size = 23
-text = "Active Area"
+text = "Detector"
+metadata/_edit_use_anchors_ = true
 
 [node name="housing" type="Sprite2D" parent="."]
-position = Vector2(512, 290)
+position = Vector2(512, 376)
 scale = Vector2(2, 2)
 texture = ExtResource("4_2s8c7")
 
@@ -54,8 +55,10 @@ offset_right = 160.0
 offset_bottom = 24.0
 theme_override_font_sizes/normal_font_size = 23
 text = "Housing"
+metadata/_edit_use_anchors_ = true
 
 [node name="ID_dot" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(512, 418)
 scale = Vector2(2, 2)
 texture = ExtResource("5_p0xhk")
@@ -69,6 +72,7 @@ theme_override_font_sizes/normal_font_size = 23
 text = "Detector ID"
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
+visible = false
 offset_left = 96.0
 offset_top = 352.0
 offset_right = 352.0

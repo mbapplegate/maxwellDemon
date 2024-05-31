@@ -16,8 +16,8 @@ func _ready():
 	las.isActive = true
 	las.update_texture()
 
-func _input(_event):
-	if not signalEmitted:
+func _input(event):
+	if not signalEmitted and event.is_pressed():
 		nextScene.emit(nextSceneAlias)
 		signalEmitted = true
 

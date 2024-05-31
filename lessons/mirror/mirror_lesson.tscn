@@ -45,30 +45,34 @@ sourceColor = Vector3(0, 0, 1)
 sourceWidth = 3
 
 [node name="InvisibleSource3" parent="." instance=ExtResource("3_skcde")]
-position = Vector2(608, 544)
-propagationDirection = Vector2(0, -1)
+position = Vector2(0, 224)
+rotation = 1.5708
+propagationDirection = Vector2(1, 0)
 sourceColor = Vector3(0, 1, 0)
-sourceWidth = 3
+sourceWidth = 18
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
-offset_left = 111.0
+visible = false
+offset_left = 95.0
 offset_top = 57.0
-offset_right = 175.0
+offset_right = 159.0
 offset_bottom = 121.0
 theme_override_font_sizes/normal_font_size = 32
 bbcode_enabled = true
 text = "θ1"
 
 [node name="RichTextLabel2" type="RichTextLabel" parent="."]
-offset_left = 168.0
+visible = false
+offset_left = 220.0
 offset_top = 352.0
-offset_right = 232.0
+offset_right = 284.0
 offset_bottom = 416.0
 theme_override_font_sizes/normal_font_size = 32
 bbcode_enabled = true
 text = "θ2"
 
 [node name="RichTextLabel3" type="RichTextLabel" parent="."]
+visible = false
 offset_left = 527.0
 offset_top = 154.0
 offset_right = 591.0
@@ -78,6 +82,7 @@ bbcode_enabled = true
 text = "θ1"
 
 [node name="RichTextLabel5" type="RichTextLabel" parent="."]
+visible = false
 offset_left = 662.0
 offset_top = 194.0
 offset_right = 726.0
@@ -87,9 +92,57 @@ bbcode_enabled = true
 text = "θ2"
 
 [node name="RichTextLabel6" type="RichTextLabel" parent="."]
-offset_left = 146.0
-offset_top = 416.0
-offset_right = 626.0
-offset_bottom = 456.0
+offset_left = 480.0
+offset_top = 384.0
+offset_right = 960.0
+offset_bottom = 424.0
 theme_override_font_sizes/normal_font_size = 23
-text = "Incident Angle (θ1) = Reflected Angle (θ2)"
+text = "Incident Angle = Reflected Angle"
+
+[node name="LeftIncident" type="Line2D" parent="."]
+z_index = 3
+position = Vector2(160, 234)
+points = PackedVector2Array(0, -120, 0, 0, -21, -118)
+width = 4.0
+joint_mode = 1
+
+[node name="LeftReflected" type="Line2D" parent="."]
+z_index = 3
+position = Vector2(160, 234)
+points = PackedVector2Array(0, -120, 0, 0, -21, -118)
+width = 4.0
+joint_mode = 1
+
+[node name="RightIncident" type="Line2D" parent="."]
+z_index = 3
+position = Vector2(608, 226)
+points = PackedVector2Array(0, -120, 0, 0, -116, -31)
+width = 4.0
+joint_mode = 1
+
+[node name="RightReflected" type="Line2D" parent="."]
+z_index = 3
+position = Vector2(608, 226)
+points = PackedVector2Array(0, -120, 0, 0, -116, -31)
+width = 4.0
+joint_mode = 1
+
+[node name="RichTextLabel7" type="RichTextLabel" parent="."]
+offset_left = 480.0
+offset_top = 429.0
+offset_right = 960.0
+offset_bottom = 469.0
+theme_override_font_sizes/normal_font_size = 23
+text = "Only 1 side is reflective"
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+autostart = true
+
+[node name="Timer2" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="Timer2" to="." method="_on_timer_2_timeout"]
