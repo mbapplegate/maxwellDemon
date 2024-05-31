@@ -8,6 +8,7 @@ const mediumIndex = 1.0
 @export var LENS_HEIGHT = 128
 @export var focalLength = 128
 @export var lensIndex = 2.0
+@export var focalSpriteColor : Color = Color.BLUE
 
 var halfAngle = 1.0
 var lens_shape = PackedVector2Array()
@@ -24,6 +25,8 @@ func _ready():
 	set_geometry(radius,LENS_HEIGHT,Vector2.ZERO)
 	frontFocusSprite.position = Vector2(focalLength,0.0)
 	rearFocusSprite.position = Vector2(-focalLength,0.0)
+	frontFocusSprite.self_modulate = focalSpriteColor
+	rearFocusSprite.self_modulate = focalSpriteColor
 	
 func set_geometry(newRadius:float, lens_height:float, center:Vector2):
 	var radius = newRadius
@@ -93,11 +96,11 @@ func update_texture():
 		var tween = get_tree().create_tween()
 		tween.set_ease(Tween.EASE_IN)
 		tween.set_trans(Tween.TRANS_LINEAR)
-		tween.tween_property(frontFocusSprite,"scale",Vector2(3,3),0.5)
+		tween.tween_property(frontFocusSprite,"scale",Vector2(2,2),0.5)
 		var tween2 = get_tree().create_tween()
 		tween2.set_ease(Tween.EASE_IN)
 		tween2.set_trans(Tween.TRANS_LINEAR)
-		tween2.tween_property(rearFocusSprite,"scale",Vector2(3,3),0.5)
+		tween2.tween_property(rearFocusSprite,"scale",Vector2(2,2),0.5)
 	else:
 		var tween = get_tree().create_tween()
 		tween.set_ease(Tween.EASE_IN)

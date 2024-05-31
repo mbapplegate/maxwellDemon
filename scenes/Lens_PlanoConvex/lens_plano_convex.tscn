@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://beic3gevjusuj" path="res://scenes/PushableObject/pushable_object.tscn" id="1_5pv0u"]
 [ext_resource type="Script" path="res://scenes/Lens_PlanoConvex/lens_plano_convex.gd" id="2_ljto7"]
-[ext_resource type="Texture2D" uid="uid://bve80wrxbeco5" path="res://scenes/Lens_PlanoConvex/focalSpot.png" id="3_n4x3j"]
+[ext_resource type="Texture2D" uid="uid://ciqfgqswil4p2" path="res://scenes/Lens_PlanoConvex/focalSpot_white_16x16.png" id="3_fwnnj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b5uwf"]
 size = Vector2(4, 120)
@@ -13,6 +13,7 @@ script = ExtResource("2_ljto7")
 LENS_HEIGHT = 128
 focalLength = 128
 lensIndex = 2.0
+focalSpriteColor = Color(0, 0, 1, 1)
 
 [node name="flatFaceArea" type="Area2D" parent="Stage" index="0"]
 
@@ -31,11 +32,9 @@ color = Color(0.0705882, 0.619608, 1, 0.501961)
 [node name="frontFocus" type="Sprite2D" parent="Stage" index="3"]
 z_index = 1
 position = Vector2(128, 0)
-texture = ExtResource("3_n4x3j")
+texture = ExtResource("3_fwnnj")
 
 [node name="rearFocus" type="Sprite2D" parent="Stage" index="4"]
-modulate = Color(1, 0, 1, 1)
-self_modulate = Color(1, 0.313726, 1, 1)
 z_index = 1
 position = Vector2(-128, 0)
-texture = ExtResource("3_n4x3j")
+texture = ExtResource("3_fwnnj")
