@@ -6,7 +6,7 @@ extends Node2D
 @onready var titleText = $titleText
 const THIS_SCENE_ALIAS = "Level002"
 
-@export var nextSceneAlias = "MainMenu"
+@export var nextSceneAlias = "Level003"
 signal nextScene(sceneAlias)
 var signalEmitted : bool = false
 func _ready():

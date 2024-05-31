@@ -23,7 +23,7 @@ func _on_timer_timeout():
 				rayPos = 0
 			#print("Timeout. Angle: ",angle)
 			instance = ray.instantiate()
-			instance.propDir = propagationDirection
+			instance.propDir = propagationDirection.normalized()
 			instance.position = to_global(Vector2(rayPos,0.0))
 			
 			instance.rayColor = sourceColor

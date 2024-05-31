@@ -7,7 +7,7 @@ extends Node2D
 @onready var goalWire = $goalWire
 @onready var titleText = $titleText
 
-@export var nextSceneAlias = "MirrorLesson"
+@export var nextSceneAlias = "MeterLesson"
 signal nextScene(sceneAlias)
 var signalEmitted : bool = false
 

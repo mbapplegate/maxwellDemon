@@ -5,7 +5,7 @@ extends Node2D
 @onready var tutText= $RichTextLabel
 @onready var titleText = $titleText
 
-@export var nextSceneAlias = "MainMenu"
+@export var nextSceneAlias = "Level002"
 const THIS_SCENE_ALIAS = "Level001"
 signal nextScene(sceneAlias)
 var signalEmitted : bool = false
