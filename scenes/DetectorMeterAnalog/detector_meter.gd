@@ -9,6 +9,7 @@ const AVG_LINE_LENGTH = 90
 const GOAL_LINE_LENGTH = 64
 const LINE_ORIGIN = Vector2(0,56)
 const NUM_POINTS_TO_AVG = 10
+const GOAL_SPRITE_RADIUS = 110
 
 @export var minPower = 0.0
 @export var maxPower = 10.0
@@ -19,6 +20,7 @@ const NUM_POINTS_TO_AVG = 10
 @onready var currLine = $currentPowerLine
 @onready var avgLine = $averagePowerLine
 @onready var goalLine = $goalLine
+@onready var goalSprite = $goalSprite
 @onready var timer = $Timer
 @onready var light = $LightSprite
 @onready var idBall = $IDSprite
@@ -53,6 +55,8 @@ func _ready():
 	currLine.set_point_position(1,LINE_ORIGIN+CURR_LINE_LENGTH*_getPointDirection(minPower))
 	avgLine.set_point_position(1,LINE_ORIGIN+AVG_LINE_LENGTH*_getPointDirection(minPower))
 	goalLine.set_point_position(1,LINE_ORIGIN+GOAL_LINE_LENGTH*_getPointDirection(goalPower))
+	goalSprite.position = _getGoalSpriteLocation()
+	goalSprite.rotation = _getGoalSpriteAngle()
 	timer.wait_time = integrationTime
 	
 
@@ -61,6 +65,16 @@ func _getPointDirection(currPower) -> Vector2:
 	var angle = proportion * (MAX_THETA-MIN_THETA) + MIN_THETA
 	angle = min(MAX_THETA,max(MIN_THETA,angle))
 	return Vector2(cos(angle),sin(angle)).normalized()
+	
+func _getGoalSpriteLocation() -> Vector2:
+	var goalDir = _getPointDirection(goalPower)
+	return LINE_ORIGIN + GOAL_SPRITE_RADIUS*goalDir
+	
+func _getGoalSpriteAngle() -> float:
+	var proportion = (goalPower-minPower)/(maxPower-minPower)
+	var angle = proportion * (MAX_THETA-MIN_THETA) + MIN_THETA
+	return angle + PI/2.0
+	
 
 func _getArrayAvg():
 	var sum = 0.0
