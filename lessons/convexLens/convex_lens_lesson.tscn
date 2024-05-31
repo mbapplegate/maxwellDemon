@@ -1,0 +1,121 @@
+[gd_scene load_steps=4 format=3 uid="uid://ceeicvunoq27t"]
+
+[ext_resource type="Script" path="res://lessons/convexLens/convex_lens_lesson.gd" id="1_78lu6"]
+[ext_resource type="PackedScene" uid="uid://b6navnb20xork" path="res://scenes/Lens_PlanoConvex/lens_plano_convex.tscn" id="2_hhjx2"]
+[ext_resource type="PackedScene" uid="uid://bt1eicy7gakub" path="res://scenes/InvisibleSource/invisible_source.tscn" id="3_8lqxb"]
+
+[node name="ConvexLensLesson" type="Node2D"]
+script = ExtResource("1_78lu6")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(480, 288)
+zoom = Vector2(2, 2)
+
+[node name="RichTextLabel4" type="RichTextLabel" parent="."]
+offset_left = 672.0
+offset_top = 512.0
+offset_right = 1024.0
+offset_bottom = 552.0
+theme_override_font_sizes/normal_font_size = 24
+text = "Any key to continue . . ."
+
+[node name="LensPlanoConvex" parent="." instance=ExtResource("2_hhjx2")]
+position = Vector2(256, 288)
+focalLength = 256
+isPushable = false
+isRotatable = false
+isEnergizeable = false
+
+[node name="InvisibleSource" parent="." instance=ExtResource("3_8lqxb")]
+position = Vector2(32, 256)
+rotation = 1.5708
+scale = Vector2(2, 2)
+propagationDirection = Vector2(1, 0)
+sourceColor = Vector3(1, 1, 0)
+
+[node name="InvisibleSource2" parent="." instance=ExtResource("3_8lqxb")]
+position = Vector2(32, 320)
+rotation = 1.5708
+propagationDirection = Vector2(1, 0)
+sourceColor = Vector3(1, 1, 0)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
+[node name="LensPlanoConvex2" parent="." instance=ExtResource("2_hhjx2")]
+position = Vector2(256, 128)
+focalLength = 256
+focalSpriteColor = Color(0, 1, 1, 1)
+isPushable = false
+isRotatable = false
+isEnergizeable = false
+
+[node name="InvisibleSource3" parent="." instance=ExtResource("3_8lqxb")]
+position = Vector2(32, 104)
+rotation = 1.5708
+scale = Vector2(2, 2)
+propagationDirection = Vector2(1, 0)
+
+[node name="InvisibleSource4" parent="." instance=ExtResource("3_8lqxb")]
+position = Vector2(32, 152)
+rotation = 1.5708
+propagationDirection = Vector2(1, 0)
+
+[node name="LensPlanoConvex3" parent="." instance=ExtResource("2_hhjx2")]
+position = Vector2(256, 448)
+focalLength = 256
+focalSpriteColor = Color(1, 0, 0, 1)
+isPushable = false
+isRotatable = false
+isEnergizeable = false
+
+[node name="InvisibleSource5" parent="." instance=ExtResource("3_8lqxb")]
+position = Vector2(32, 464)
+rotation = 1.5708
+scale = Vector2(2, 2)
+propagationDirection = Vector2(1, 0)
+sourceColor = Vector3(0, 1, 1)
+
+[node name="InvisibleSource6" parent="." instance=ExtResource("3_8lqxb")]
+position = Vector2(32, 432)
+rotation = 1.5708
+propagationDirection = Vector2(1, 0)
+sourceColor = Vector3(0, 1, 1)
+
+[node name="explan1" type="RichTextLabel" parent="."]
+offset_left = 512.0
+offset_top = 27.0
+offset_right = 928.0
+offset_bottom = 91.0
+theme_override_font_sizes/normal_font_size = 18
+text = "Light entering squarely converges at the focal point"
+
+[node name="explan2" type="RichTextLabel" parent="."]
+offset_left = 512.0
+offset_top = 177.0
+offset_right = 928.0
+offset_bottom = 241.0
+theme_override_font_sizes/normal_font_size = 18
+text = "Light entering \"off-square\" shifts focal point forward or backward"
+
+[node name="explan3" type="RichTextLabel" parent="."]
+offset_left = 512.0
+offset_top = 352.0
+offset_right = 896.0
+offset_bottom = 416.0
+theme_override_font_sizes/normal_font_size = 18
+text = "Rays entering near the edge of lens have a different focal point (spherical aberration)"
+
+[node name="Timer2" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+autostart = true
+
+[node name="Timer3" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="Timer2" to="." method="_on_timer_2_timeout"]
+[connection signal="timeout" from="Timer3" to="." method="_on_timer_3_timeout"]
