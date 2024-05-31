@@ -6,6 +6,7 @@ const MIRROR_THICKNESS = 8
 @export var focalLength = 128.0
 @export var mirrorHeight = 120.0
 @export var reflectivity = 1.0
+@export var focalSpriteColor : Color = Color.BLUE
 
 var parabolicConstant:float = 1.0
 var surfacePolygonPoints = PackedVector2Array()
@@ -18,6 +19,7 @@ func _ready():
 	isEnergizeable = false
 	parabolicConstant = 1 / (4.0 * focalLength)
 	set_geometry(parabolicConstant,mirrorHeight)
+	focalSprite.self_modulate = focalSpriteColor
 	
 	
 	
@@ -53,7 +55,7 @@ func update_texture():
 		var tween = get_tree().create_tween()
 		tween.set_ease(Tween.EASE_IN)
 		tween.set_trans(Tween.TRANS_LINEAR)
-		tween.tween_property(focalSprite,"scale",Vector2(3,3),0.5)
+		tween.tween_property(focalSprite,"scale",Vector2(2,2),0.5)
 	
 	else:
 		var tween = get_tree().create_tween()
