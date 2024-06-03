@@ -25,7 +25,9 @@ var LevelDictionary = {
 	"Level007"    : {"Path" : "res://worlds/Level007/level_007.tscn",              "Title" : "Focus",          "Section" : "Tutorial"},
 	"ConvexLensLesson"  : {"Path" : "res://lessons/convexLens/convex_lens_lesson.tscn", "Title" : "Convex Lens Lesson", "Section" : "Lessons"},
 	"Level008"    : {"Path" : "res://worlds/Level008/level_008.tscn",              "Title" : "Collimation",    "Section" : "LensesAndMirrors"},
+	"CollimationLesson" : {"Path" : "res://lessons/collimation/collimation_lesson.tscn", "Title" : "Collimation Lesson", "Section" : "Lessons"},
 	"Level009"    : {"Path" : "res://worlds/Level009/level_009.tscn",              "Title" : "Expand",         "Section" : "LensesAndMirrors"},
+	"BeamExpanderLesson" : {},
 	"Level010"    : {"Path" : "res://worlds/Level010/level_010.tscn",              "Title" : "Image",          "Section" : "Debug"},
 	"Level011"    : {"Path" : "res://worlds/Level011/level_011.tscn",              "Title" : "Parabolic Mirror","Section" : "LensesAndMirrors"}
 }
