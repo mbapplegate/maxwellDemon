@@ -63,6 +63,7 @@ isRotatable = false
 
 [node name="DetectorMeter" parent="." instance=ExtResource("3_ieyoj")]
 position = Vector2(1568, 192)
+integrationTime = 0.5
 
 [node name="WirePath" type="Line2D" parent="DetectorMeter"]
 points = PackedVector2Array(0, 0, 315, 0, 315, 240)

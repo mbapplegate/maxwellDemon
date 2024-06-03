@@ -15,7 +15,7 @@ numRaysPerTimeout = 1
 rayColor = Vector3(1, 0, 1)
 
 [node name="Timer" type="Timer" parent="." index="0"]
-wait_time = 0.125
+wait_time = 0.063
 autostart = true
 
 [node name="laserBarrel" type="Sprite2D" parent="Stage" index="0"]

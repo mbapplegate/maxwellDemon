@@ -31,6 +31,8 @@ isEnergized = true
 
 [node name="DetectorMeter" parent="." instance=ExtResource("4_ug6t2")]
 position = Vector2(1568, 192)
+goalPower = 7.0
+integrationTime = 0.5
 IDColor = Color(0, 0, 1, 1)
 
 [node name="WirePath" type="Line2D" parent="DetectorMeter"]
@@ -70,7 +72,7 @@ offset_top = 128.0
 offset_right = 1196.0
 offset_bottom = 264.0
 theme_override_font_sizes/normal_font_size = 40
-text = "Hold           to push"
+text = "Hold           to drag"
 fit_content = true
 scroll_active = false
 autowrap_mode = 0

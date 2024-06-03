@@ -25,6 +25,7 @@ isEnergized = true
 
 [node name="DetectorMeter" parent="." instance=ExtResource("4_rtrxn")]
 position = Vector2(1568, 192)
+integrationTime = 0.5
 IDColor = Color(0, 0, 1, 1)
 
 [node name="WirePath" type="Line2D" parent="DetectorMeter"]

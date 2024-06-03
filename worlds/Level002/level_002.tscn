@@ -34,10 +34,13 @@ layer_0/tile_data = PackedInt32Array(2097152, 1, 0, 2031616, 1, 0, 1966080, 1, 0
 [node name="LaserSource" parent="." instance=ExtResource("3_m24m5")]
 position = Vector2(1248, 256)
 HALF_HEIGHT = 7.0
+rayColor = Vector3(1, 0, 0)
 isPushable = false
 
 [node name="DetectorMeter" parent="." instance=ExtResource("4_fibex")]
 position = Vector2(1568, 192)
+goalPower = 6.0
+integrationTime = 0.5
 
 [node name="WirePath" type="Line2D" parent="DetectorMeter"]
 points = PackedVector2Array(0, 0, 315, 0, 315, 240)

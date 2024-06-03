@@ -31,6 +31,8 @@ width = 6.0
 [node name="DetectorMeter" parent="." instance=ExtResource("4_yyiux")]
 position = Vector2(1750, 198)
 maxPower = 8.0
+goalPower = 3.5
+integrationTime = 0.5
 IDColor = Color(0, 0.529412, 0, 1)
 
 [node name="WirePath" type="Line2D" parent="DetectorMeter"]
@@ -49,6 +51,8 @@ isEnergizeable = false
 [node name="DetectorMeter2" parent="." instance=ExtResource("4_yyiux")]
 position = Vector2(1482, 198)
 maxPower = 8.0
+goalPower = 3.5
+integrationTime = 0.5
 IDColor = Color(0, 0, 1, 1)
 
 [node name="WirePath" type="Line2D" parent="DetectorMeter2"]
