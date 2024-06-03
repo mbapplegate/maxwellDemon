@@ -19,102 +19,61 @@ offset_bottom = 552.0
 theme_override_font_sizes/normal_font_size = 24
 text = "Any key to continue . . ."
 
-[node name="LensPlanoConvex" parent="." instance=ExtResource("2_hhjx2")]
-position = Vector2(256, 288)
-focalLength = 256
-isPushable = false
-isRotatable = false
-isEnergizeable = false
-
 [node name="InvisibleSource" parent="." instance=ExtResource("3_8lqxb")]
-position = Vector2(32, 256)
+position = Vector2(32, 266)
 rotation = 1.5708
 scale = Vector2(2, 2)
 propagationDirection = Vector2(1, 0)
-sourceColor = Vector3(1, 1, 0)
 
 [node name="InvisibleSource2" parent="." instance=ExtResource("3_8lqxb")]
-position = Vector2(32, 320)
+position = Vector2(32, 310)
 rotation = 1.5708
 propagationDirection = Vector2(1, 0)
-sourceColor = Vector3(1, 1, 0)
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 0.5
-autostart = true
+wait_time = 0.25
 
 [node name="LensPlanoConvex2" parent="." instance=ExtResource("2_hhjx2")]
-position = Vector2(256, 128)
+position = Vector2(256, 288)
+LENS_HEIGHT = 200
 focalLength = 256
-focalSpriteColor = Color(0, 1, 1, 1)
+lensIndex = 3.0
 isPushable = false
 isRotatable = false
 isEnergizeable = false
-
-[node name="InvisibleSource3" parent="." instance=ExtResource("3_8lqxb")]
-position = Vector2(32, 104)
-rotation = 1.5708
-scale = Vector2(2, 2)
-propagationDirection = Vector2(1, 0)
-
-[node name="InvisibleSource4" parent="." instance=ExtResource("3_8lqxb")]
-position = Vector2(32, 152)
-rotation = 1.5708
-propagationDirection = Vector2(1, 0)
-
-[node name="LensPlanoConvex3" parent="." instance=ExtResource("2_hhjx2")]
-position = Vector2(256, 448)
-focalLength = 256
-focalSpriteColor = Color(1, 0, 0, 1)
-isPushable = false
-isRotatable = false
-isEnergizeable = false
-
-[node name="InvisibleSource5" parent="." instance=ExtResource("3_8lqxb")]
-position = Vector2(32, 464)
-rotation = 1.5708
-scale = Vector2(2, 2)
-propagationDirection = Vector2(1, 0)
-sourceColor = Vector3(0, 1, 1)
-
-[node name="InvisibleSource6" parent="." instance=ExtResource("3_8lqxb")]
-position = Vector2(32, 432)
-rotation = 1.5708
-propagationDirection = Vector2(1, 0)
-sourceColor = Vector3(0, 1, 1)
 
 [node name="explan1" type="RichTextLabel" parent="."]
-offset_left = 512.0
-offset_top = 27.0
-offset_right = 928.0
-offset_bottom = 91.0
+offset_left = 416.0
+offset_top = 64.0
+offset_right = 832.0
+offset_bottom = 128.0
 theme_override_font_sizes/normal_font_size = 18
 text = "Light entering squarely converges at the focal point"
 
 [node name="explan2" type="RichTextLabel" parent="."]
-offset_left = 512.0
-offset_top = 177.0
-offset_right = 928.0
-offset_bottom = 241.0
+offset_left = 416.0
+offset_top = 128.0
+offset_right = 832.0
+offset_bottom = 192.0
 theme_override_font_sizes/normal_font_size = 18
 text = "Light entering \"off-square\" shifts focal point forward or backward"
 
-[node name="explan3" type="RichTextLabel" parent="."]
-offset_left = 512.0
-offset_top = 352.0
-offset_right = 896.0
-offset_bottom = 416.0
-theme_override_font_sizes/normal_font_size = 18
-text = "Rays entering near the edge of lens have a different focal point (spherical aberration)"
-
 [node name="Timer2" type="Timer" parent="."]
-wait_time = 2.0
+wait_time = 5.0
 one_shot = true
 autostart = true
 
 [node name="Timer3" type="Timer" parent="."]
 wait_time = 2.0
 one_shot = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = 16.0
+offset_top = 29.0
+offset_right = 230.0
+offset_bottom = 98.0
+theme_override_font_sizes/normal_font_size = 40
+text = "Lenses"
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="Timer2" to="." method="_on_timer_2_timeout"]
