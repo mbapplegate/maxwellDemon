@@ -38,13 +38,6 @@ isPushable = false
 isRotatable = false
 isEnergizeable = false
 
-[node name="InvisibleSource3" parent="." instance=ExtResource("3_skcde")]
-position = Vector2(6, 256)
-rotation = 1.5708
-propagationDirection = Vector2(1, 0)
-sourceColor = Vector3(0, 1, 0)
-sourceWidth = 18
-
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
 offset_left = 15.0
 offset_top = 30.0
@@ -90,9 +83,10 @@ offset_top = 384.0
 offset_right = 960.0
 offset_bottom = 448.0
 theme_override_font_sizes/normal_font_size = 23
-text = "When light hits a mirror it bounces at the same angle as it hits."
+text = "Light reflects at the same angle as it hits"
 
 [node name="Normal" type="Line2D" parent="."]
+visible = false
 position = Vector2(288, 223)
 points = PackedVector2Array(0, 0, 0, -85)
 width = 2.0
@@ -101,17 +95,25 @@ width = 2.0
 z_index = 3
 position = Vector2(288, 225)
 points = PackedVector2Array(0, -75, 0, 0, -21, -118)
-closed = true
 width = 4.0
 joint_mode = 1
+
+[node name="IncidentArc" type="Line2D" parent="LeftIncident"]
+z_index = -1
+width = 3.0
+default_color = Color(1, 0.784314, 0, 1)
 
 [node name="LeftReflected" type="Line2D" parent="."]
 z_index = 3
 position = Vector2(288, 225)
 points = PackedVector2Array(0, -75, 0, 0, -21, -118)
-closed = true
 width = 4.0
 joint_mode = 1
+
+[node name="ReflectedArc" type="Line2D" parent="LeftReflected"]
+z_index = -1
+width = 3.0
+default_color = Color(1, 0.784314, 0, 1)
 
 [node name="RightIncident" type="Line2D" parent="."]
 visible = false
@@ -130,6 +132,7 @@ width = 4.0
 joint_mode = 1
 
 [node name="RichTextLabel7" type="RichTextLabel" parent="."]
+visible = false
 offset_left = 480.0
 offset_top = 464.0
 offset_right = 960.0

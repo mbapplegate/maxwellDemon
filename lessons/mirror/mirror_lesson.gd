@@ -3,6 +3,7 @@ extends Node2D
 @export var nextSceneAlias = "Level007"
 const THIS_SCENE_ALIAS = "MirrorLesson"
 const ANGLE_DEMO_LEN = 75
+const NUM_ARC_POINTS = 32
 var signalEmitted : bool = false
 var rotatingCCW = true
 @onready var lref = $LeftReflected
@@ -20,6 +21,10 @@ func _ready():
 	$LeftIncident.set_point_position(2,newLoc)
 	$LeftReflected.set_point_position(2,newLoc)
 	$Normal.set_point_position(1,Vector2(85*sin(rot),-85*cos(rot)))
+	$LeftIncident/IncidentArc.clear_points()
+	$LeftIncident/IncidentArc.points = getArcPoints()
+	$LeftReflected/ReflectedArc.clear_points()
+	$LeftReflected/ReflectedArc.points = getArcPoints()
 
 func _input(event):
 	if not signalEmitted and event.is_pressed():
@@ -31,7 +36,15 @@ func animateLeftForward():
 	tween.set_ease(Tween.EASE_IN_OUT)
 	tween.set_trans(Tween.TRANS_CUBIC)
 	tween.tween_property(lref,"rotation",$FlatMirror.getRotation()+PI/2.0,0.75)
-	
+
+func getArcPoints() -> PackedVector2Array:
+	var points = PackedVector2Array()
+	var endingAngle = PI/2.0
+	var startingAngle = $FlatMirror.getRotation()
+	for i in range(NUM_ARC_POINTS):
+		var thisAngle = i * (endingAngle-startingAngle)/NUM_ARC_POINTS
+		points.append(Vector2(-(ANGLE_DEMO_LEN-25)*sin(thisAngle),-(ANGLE_DEMO_LEN-25)*cos(thisAngle)))
+	return points
 #func animateRightForward():
 	#var tween = get_tree().create_tween()
 	#tween.set_ease(Tween.EASE_IN_OUT)
@@ -74,7 +87,7 @@ func _on_timer_2_timeout():
 		$FlatMirror.rotateCCW()
 	else:
 		$FlatMirror.rotateCW()
-	print("Angle: ",rad_to_deg($FlatMirror.getRotation()))
+	#print("Angle: ",rad_to_deg($FlatMirror.getRotation()))
 	if rad_to_deg($FlatMirror.getRotation()) <= 10:
 		rotatingCCW = false
 	if $FlatMirror.getRotation() >= deg_to_rad($FlatMirror.initialAngle-2):
@@ -90,6 +103,10 @@ func _on_timer_2_timeout():
 	$Normal.set_point_position(1,Vector2(85*sin(rot),-85*cos(rot)))
 	$LeftIncident.set_point_position(2,newLoc)
 	$LeftReflected.set_point_position(2,newLoc)
+	$LeftIncident/IncidentArc.clear_points()
+	$LeftIncident/IncidentArc.points = getArcPoints()
+	$LeftReflected/ReflectedArc.clear_points()
+	$LeftReflected/ReflectedArc.points = getArcPoints()
 	#$LeftIncident.position.y-=2
 	#$LeftReflected.position.y-=2
 	$Timer.start()
