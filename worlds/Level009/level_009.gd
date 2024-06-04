@@ -4,7 +4,7 @@ extends Node2D
 @onready var player = $Player
 @onready var titleText = $titleText
 const THIS_SCENE_ALIAS = "Level009"
-@export var nextSceneAlias = "Level011"
+@export var nextSceneAlias = "BeamExpanderLesson"
 signal nextScene(sceneAlias)
 var signalEmitted : bool = false
 var energyBlocked : float = 0.0
