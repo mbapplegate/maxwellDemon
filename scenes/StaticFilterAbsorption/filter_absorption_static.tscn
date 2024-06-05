@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://bjmhbrm2asl7e"]
+
+[ext_resource type="Script" path="res://scenes/StaticFilterAbsorption/filter_absorption_static.gd" id="1_0t575"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wg10y"]
+size = Vector2(5, 118)
+
+[node name="FilterAbsorptionStatic" type="Node2D"]
+position = Vector2(209, 80)
+script = ExtResource("1_0t575")
+filterAbsorption = Color(0, 0, 1, 0.501961)
+
+[node name="filterBody" type="StaticBody2D" parent="."]
+
+[node name="filterShape" type="CollisionShape2D" parent="filterBody"]
+shape = SubResource("RectangleShape2D_wg10y")
+
+[node name="ColorRect" type="ColorRect" parent="filterBody"]
+offset_left = -4.0
+offset_top = -60.0
+offset_right = 4.0
+offset_bottom = 60.0
+metadata/_edit_use_anchors_ = true

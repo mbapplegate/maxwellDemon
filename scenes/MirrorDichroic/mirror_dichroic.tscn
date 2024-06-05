@@ -1,7 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://vx0v73uughwh"]
+[gd_scene load_steps=6 format=3 uid="uid://kpejk6yshspv"]
 
-[ext_resource type="PackedScene" uid="uid://beic3gevjusuj" path="res://scenes/PushableObject/pushable_object.tscn" id="1_fcvi1"]
-[ext_resource type="Script" path="res://scenes/FilterAbsorption/filter_absorption.gd" id="2_6pd1d"]
+[ext_resource type="PackedScene" uid="uid://beic3gevjusuj" path="res://scenes/PushableObject/pushable_object.tscn" id="1_l8v1q"]
+[ext_resource type="Script" path="res://scenes/MirrorDichroic/mirror_dichroic.gd" id="2_76no6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uol1q"]
 size = Vector2(2, 197)
@@ -12,12 +12,12 @@ size = Vector2(2, 200)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q41vn"]
 size = Vector2(2, 200)
 
-[node name="FilterAbsorption" instance=ExtResource("1_fcvi1")]
+[node name="MirrorDichroic" instance=ExtResource("1_l8v1q")]
 position = Vector2(379, 408)
-script = ExtResource("2_6pd1d")
-filterWidth = 16
+script = ExtResource("2_76no6")
+filterWidth = 8
 filterHeight = 120
-filterAbsorbance = Color(0, 0, 1, 1)
+mirrorReflectance = Color(1, 0, 0, 1)
 
 [node name="Center" type="StaticBody2D" parent="Stage" index="0"]
 
@@ -25,18 +25,24 @@ filterAbsorbance = Color(0, 0, 1, 1)
 shape = SubResource("RectangleShape2D_uol1q")
 
 [node name="Left" type="StaticBody2D" parent="Stage" index="1"]
+visible = false
+collision_layer = 0
+collision_mask = 0
 
 [node name="WallLeftColl" type="CollisionShape2D" parent="Stage/Left" index="0"]
 position = Vector2(-10, 0)
 shape = SubResource("RectangleShape2D_a0i2m")
 
 [node name="Right" type="StaticBody2D" parent="Stage" index="2"]
+visible = false
+collision_layer = 0
+collision_mask = 0
 
 [node name="WallRightColl" type="CollisionShape2D" parent="Stage/Right" index="0"]
 position = Vector2(11, 0)
 shape = SubResource("RectangleShape2D_q41vn")
 
-[node name="ColorRect" type="ColorRect" parent="." index="4"]
+[node name="ColorRect" type="ColorRect" parent="Stage" index="3"]
 offset_left = -12.0
 offset_top = -60.0
 offset_right = 12.0

@@ -7,7 +7,7 @@ extends Node2D
 @onready var imagingLens = $LensPlanoConvex
 
 const THIS_SCENE_ALIAS = "Level010"
-@export var nextSceneAlias = "MainMenu"
+@export var nextSceneAlias = "Level012Filters"
 signal nextScene(sceneAlias)
 var signalEmitted : bool = false
 

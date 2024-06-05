@@ -203,4 +203,12 @@ func set_ray_color(newColor: Vector3):
 	line.material.set_shader_parameter("green",rayColor[1])
 	line.material.set_shader_parameter("blue",rayColor[2])
 	
+func addCollisionException(noCollideObject : Object):
+	if noCollideObject:
+		ray.add_exception(noCollideObject)
+	
+func removeCollisionException(collideObject : Object):
+	if collideObject:
+		ray.remove_exception(collideObject)
+	
 	
