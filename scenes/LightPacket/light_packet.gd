@@ -75,7 +75,7 @@ func _process(delta):
 	else:
 		#Move the second point by one increment                                  #Number of points in the line
 		var currentPointFront = line.get_point_position(numPoints-1)           #Front of ray
-		var nextPointFront = currentPointFront + propDir.normalized()*SPEED*delta   #New position of front of ray
+		var nextPointFront = currentPointFront + propDir.normalized()*SPEED*delta*index_of_refraction   #New position of front of ray
 		var currentPointBack = line.get_point_position(0)
 		var startDirToNextPointBack = line.get_point_position(0).direction_to(line.get_point_position(1))
 		var nextPointBack = currentPointBack+startDirToNextPointBack*SPEED*delta
@@ -102,12 +102,8 @@ func _process(delta):
 					#Update the last collider
 					lastCollider = ray.get_collider()
 					var collHandler = _get_functional_collider(lastCollider)
-					#Send a signal to that collider to handle the collision depending on what it is
-					if not is_connected("hitSomething",collHandler._ray_hit):
-						connect("hitSomething",collHandler._ray_hit)
-					hitSomething.emit(self, ray.get_collision_point(), ray.get_collision_normal(),  ray.get_collider())
-					#Disconnect the signal to keep things clean
-					disconnect("hitSomething",collHandler._ray_hit)
+					collHandler._ray_hit(self, ray.get_collision_point(), ray.get_collision_normal(),  ray.get_collider())
+					
 					var distFrontTraveled = currentPointFront.distance_to(to_local(ray.get_collision_point()))
 					nextPointBack = currentPointBack+startDirToNextPointBack*distFrontTraveled
 					nextPointFront = to_local(ray.get_collision_point())
