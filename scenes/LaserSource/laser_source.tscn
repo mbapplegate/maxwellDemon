@@ -13,6 +13,7 @@ HALF_HEIGHT = 0.0
 halfAngle = 0.0
 numRaysPerTimeout = 1
 rayColor = Vector3(1, 0, 1)
+timerTimeout = 0.063
 
 [node name="Timer" type="Timer" parent="." index="0"]
 wait_time = 0.063
