@@ -26,10 +26,12 @@ func switchScene(sceneAlias):
 	if sceneAlias == "QuitGame":
 		switcher.QuitGame()
 	elif sceneAlias == "Reload":
+		currentScene.nextScene.disconnect(switchScene)
 		var nextScene = await switcher.ChangeScene(currentScene,currentSceneAlias)
 		currentScene = nextScene
 		currentScene.nextScene.connect(switchScene)
 	else:
+		currentScene.nextScene.disconnect(switchScene)
 		currentSceneAlias = sceneAlias
 		var nextScene = await switcher.ChangeScene(currentScene,sceneAlias)
 		currentScene = nextScene
