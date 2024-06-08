@@ -206,5 +206,12 @@ func addCollisionException(noCollideObject : Object):
 func removeCollisionException(collideObject : Object):
 	if collideObject:
 		ray.remove_exception(collideObject)
+		
+func reflectRay(normalAngle, collisionPoint):
+	if normalAngle:
+		var newDir = propDir.bounce(normalAngle.normalized()).normalized()
+		propDir = newDir
+		ray_add_point(to_local(collisionPoint))
+		
 	
 	

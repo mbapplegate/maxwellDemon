@@ -11,6 +11,7 @@ func _ready():
 		detector.rotation = deg_to_rad(initialAngle)
 	
 func _ray_hit(photonObj:Object, _collPoint:Vector2, _collNormal:Vector2, collider:Object):
+	#print(to_local(_collPoint))
 	photonObj.rayDying = true
 	if collider.name == "activeArea":
 		photonDetected.emit(photonObj.energy)

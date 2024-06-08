@@ -26,13 +26,13 @@ layer_0/tile_data = PackedInt32Array(2097152, 1, 0, 2031616, 1, 0, 1966080, 1, 0
 [node name="LaserSource" parent="." instance=ExtResource("3_0hbdy")]
 position = Vector2(1248, 397)
 HALF_HEIGHT = 7.0
+timerTimeout = 0.125
 isRotatable = false
 isEnergized = true
 
 [node name="DetectorMeter" parent="." instance=ExtResource("4_ug6t2")]
 position = Vector2(1568, 192)
 goalPower = 7.0
-integrationTime = 0.5
 IDColor = Color(0, 0, 1, 1)
 
 [node name="WirePath" type="Line2D" parent="DetectorMeter"]
