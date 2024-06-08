@@ -49,21 +49,5 @@ func _ray_hit(photonObj:Object, collPoint:Vector2, collNormal:Vector2, collider:
 		photonObj.update_energy(photonObj.energy*(1-reflectivity))
 	#Otherwise we've collided with the wall of the cube so need to refract
 	else:
-		var normalIn = -collNormal;
-		var theta1 = normalIn.angle_to(photonObj.propDir);
-		var theta2
-		#Going from high index to low index
-		if photonObj.index_of_refraction > mediumIndex:
-			theta2 = asin(splitterIndex/mediumIndex * sin(theta1))
-			photonObj.index_of_refraction = mediumIndex
-		#Going from low index to high index
-		else:
-			theta2 = asin(mediumIndex/splitterIndex*sin(theta1))
-			photonObj.index_of_refraction = splitterIndex
-		#Add the point to the photon packet
-		
-		var newDir = normalIn.rotated(theta2)
-		photonObj.propDir = newDir
-		
-		photonObj.ray_add_point(photonObj.to_local(collPoint))
+		photonObj.refractRay(collNormal,splitterIndex,collPoint)
 	

@@ -19,6 +19,7 @@ layer_0/tile_data = PackedInt32Array(2097152, 1, 0, 2031616, 1, 0, 1966080, 1, 0
 [node name="LaserSource" parent="." instance=ExtResource("3_ytnoy")]
 position = Vector2(992, 256)
 HALF_HEIGHT = 7.0
+timerTimeout = 0.125
 initialAngle = 90.0
 isPushable = false
 isEnergized = true
@@ -30,8 +31,8 @@ width = 6.0
 
 [node name="DetectorMeter" parent="." instance=ExtResource("4_yyiux")]
 position = Vector2(1750, 198)
-maxPower = 8.0
-goalPower = 3.5
+maxPower = 5.0
+goalPower = 1.75
 integrationTime = 0.5
 IDColor = Color(0, 0.529412, 0, 1)
 
@@ -50,8 +51,8 @@ isEnergizeable = false
 
 [node name="DetectorMeter2" parent="." instance=ExtResource("4_yyiux")]
 position = Vector2(1482, 198)
-maxPower = 8.0
-goalPower = 3.5
+maxPower = 5.0
+goalPower = 1.75
 integrationTime = 0.5
 IDColor = Color(0, 0, 1, 1)
 
@@ -84,7 +85,6 @@ zoom = Vector2(1.75, 1.75)
 position = Vector2(992, 448)
 initialAngle = 90.0
 isPushable = false
-isRotatable = false
 isEnergizeable = false
 
 [node name="titleText" type="Label" parent="."]

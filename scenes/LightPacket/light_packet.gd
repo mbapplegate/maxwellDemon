@@ -8,6 +8,7 @@ class_name lightPacket
 const SPEED = 400
 const LEN = 250
 const RAY_ENERGY_CUTOFF = .1
+const MEDIUM_INDEX = 1.0
 
 @export var propDir:Vector2 = Vector2(1,0)
 @export var rayColor:Vector3 = Vector3(1.0,0.0,1.0)
@@ -73,19 +74,20 @@ func _process(delta):
 	if isPaused:
 		pass
 	else:
+		var speedInMedium = (SPEED/index_of_refraction)
 		#Move the second point by one increment                                  #Number of points in the line
 		var currentPointFront = line.get_point_position(numPoints-1)           #Front of ray
-		var nextPointFront = currentPointFront + propDir.normalized()*SPEED*delta*index_of_refraction   #New position of front of ray
+		var nextPointFront = currentPointFront + propDir.normalized()*speedInMedium*delta   #New position of front of ray
 		var currentPointBack = line.get_point_position(0)
 		var startDirToNextPointBack = line.get_point_position(0).direction_to(line.get_point_position(1))
-		var nextPointBack = currentPointBack+startDirToNextPointBack*SPEED*delta
+		var nextPointBack = currentPointBack+startDirToNextPointBack*speedInMedium*delta
 		var endDirToNextPointBack = nextPointBack.direction_to(line.get_point_position(1))
 		
 		if not endDirToNextPointBack.is_equal_approx(startDirToNextPointBack):
 			nextPointBack = line.get_point_position(1)
 		#Adjust the raycast
 		ray.position = currentPointFront
-		ray.set_target_position(propDir.normalized()*SPEED*delta)
+		ray.set_target_position(propDir.normalized()*speedInMedium*delta)
 		ray.force_raycast_update()
 		
 		#Detect interfaces
@@ -212,6 +214,27 @@ func reflectRay(normalAngle, collisionPoint):
 		var newDir = propDir.bounce(normalAngle.normalized()).normalized()
 		propDir = newDir
 		ray_add_point(to_local(collisionPoint))
+	else:
+		pass
+		
+func refractRay(normalAngle, objectIOR,collisionPoint):
+	var normalIn = -normalAngle;
+	var theta1 = normalIn.angle_to(propDir);
+	var theta2
+	#Going from high index to low index
+	if index_of_refraction > MEDIUM_INDEX:
+		theta2 = asin(objectIOR/MEDIUM_INDEX * sin(theta1))
+		index_of_refraction = MEDIUM_INDEX
+	#Going from low index to high index
+	else:
+		theta2 = asin(MEDIUM_INDEX/objectIOR*sin(theta1))
+		index_of_refraction = objectIOR
+	#Add the point to the photon packet
+	
+	var newDir = normalIn.rotated(theta2)
+	propDir = newDir
+	
+	ray_add_point(to_local(collisionPoint))
 		
 	
 	
