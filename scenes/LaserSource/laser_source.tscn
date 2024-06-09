@@ -9,7 +9,7 @@ size = Vector2(126, 64)
 
 [node name="LaserSource" instance=ExtResource("1_moxnu")]
 script = ExtResource("2_3djyt")
-HALF_HEIGHT = 0.0
+HALF_HEIGHT = 5.0
 halfAngle = 0.0
 numRaysPerTimeout = 1
 rayColor = Vector3(1, 0, 1)

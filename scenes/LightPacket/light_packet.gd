@@ -1,5 +1,6 @@
 extends Node2D
 class_name lightPacket
+var thisScene = preload("res://scenes/LightPacket/light_packet.tscn")
 @onready var line = $Line2D
 @onready var ray = $RayCast2D
 #@onready var circ = $DEBUG
@@ -26,7 +27,7 @@ var lineLength = 0.0
 var isPaused = false
 var lightSource = ""
 
-signal hitSomething(rayObject, collisionPoint, collisionNormal, collider)
+#signal hitSomething(rayObject, collisionPoint, collisionNormal, collider)
 #
 #func clonePacket():
 	#var newPacket = self.duplicate()
@@ -208,14 +209,31 @@ func addCollisionException(noCollideObject : Object):
 func removeCollisionException(collideObject : Object):
 	if collideObject:
 		ray.remove_exception(collideObject)
+
+func cloneRay(propDirection : Vector2, newColor : Vector3) -> lightPacket:
+	var newRay = thisScene.instantiate()
+	newRay.propDir = propDirection
+	newRay.rayColor = newColor
+	newRay.index_of_refraction = index_of_refraction
+	newRay.position = self.position
+	newRay.energy = energy
+	self.get_parent().add_child(newRay)
+	return newRay
 		
-func reflectRay(normalAngle, collisionPoint):
+func reflectRay(normalAngle, collisionPoint) ->Vector2:
 	if normalAngle:
-		var newDir = propDir.bounce(normalAngle.normalized()).normalized()
+		var newDir = getReflectionDirection(normalAngle)
 		propDir = newDir
 		ray_add_point(to_local(collisionPoint))
+		return newDir
 	else:
-		pass
+		return propDir
+
+func getReflectionDirection(normalAngle : Vector2)->Vector2:
+	if normalAngle:
+		return propDir.bounce(normalAngle.normalized()).normalized()
+	else:
+		return propDir
 		
 func refractRay(normalAngle, objectIOR,collisionPoint):
 	var normalIn = -normalAngle;

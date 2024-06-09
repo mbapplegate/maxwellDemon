@@ -13,5 +13,6 @@ func _ready():
 func _ray_hit(photonObj:Object, _collPoint:Vector2, _collNormal:Vector2, collider:Object):
 	#print(to_local(_collPoint))
 	photonObj.rayDying = true
+	#print(collider.name)
 	if collider.name == "activeArea":
 		photonDetected.emit(photonObj.energy)

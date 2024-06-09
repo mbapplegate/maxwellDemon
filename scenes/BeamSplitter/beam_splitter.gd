@@ -22,28 +22,14 @@ func _ray_hit(photonObj:Object, collPoint:Vector2, collNormal:Vector2, collider:
 	#If it's the center line
 	if collider == splitter:
 		if reflectivity > 0.1:
-			#Create new ray
-			var instance = ray.instantiate()
-			#Color, energy, IOR, and direction are the same as the incoming ray
-			instance.rayColor = photonObj.rayColor
-			instance.energy = photonObj.energy
-			instance.index_of_refraction = photonObj.index_of_refraction
+			
+			
 			#Reflect off the splitter
-			var newDir = photonObj.propDir
-			#Sometimes the collision normal will be NULL, so check that
-			if collNormal:
-				newDir = photonObj.propDir.bounce(collNormal.normalized()).normalized()
-			#Update the direction
-			instance.propDir =newDir
-			instance.global_position = collPoint
-			#If the splitter isn't root then add the child to the parent
-			if splitterParent:
-				instance.lightSource = "splitter"
-				splitterParent.add_child(instance)
-			#Otherwise make it a child of itself (mostly for debugging)
-			else:
-				instance.position = to_local(collPoint)
-				add_child(instance)
+			var newDir = photonObj.getReflectionDirection(collNormal)
+			#create new ray
+			var instance = photonObj.cloneRay(newDir,photonObj.rayColor)
+			#instance.propDir =newDir
+			instance.position = collPoint
 			instance.update_energy(instance.energy*reflectivity)
 		#Update photon packet energies depending on reflectivity
 		photonObj.update_energy(photonObj.energy*(1-reflectivity))
