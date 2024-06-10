@@ -1,13 +1,26 @@
-[gd_scene load_steps=5 format=3 uid="uid://3lsffc1281c7"]
+[gd_scene load_steps=8 format=3 uid="uid://3lsffc1281c7"]
 
 [ext_resource type="Script" path="res://scenes/StaticIris/static_iris.gd" id="1_hmi85"]
-[ext_resource type="Texture2D" uid="uid://cfrwrssugeth" path="res://scenes/Iris/IrisTile_16x16_grad.png" id="2_j8e65"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_x1si8"]
 size = Vector2(16, 48)
 
+[sub_resource type="Gradient" id="Gradient_p6tcr"]
+offsets = PackedFloat32Array(0.530201)
+colors = PackedColorArray(0.862745, 0.862745, 0.862745, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_4g2na"]
+gradient = SubResource("Gradient_p6tcr")
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6ec8s"]
 size = Vector2(16, 48)
+
+[sub_resource type="Gradient" id="Gradient_ejowl"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0.862745, 0.862745, 0.862745, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_7sc5g"]
+gradient = SubResource("Gradient_ejowl")
 
 [node name="StaticIris" type="Node2D"]
 position = Vector2(128, 128)
@@ -23,7 +36,7 @@ shape = SubResource("RectangleShape2D_x1si8")
 [node name="TopPartSprite" type="Sprite2D" parent="TopPart"]
 texture_repeat = 2
 position = Vector2(0, -36)
-texture = ExtResource("2_j8e65")
+texture = SubResource("GradientTexture1D_4g2na")
 region_enabled = true
 region_rect = Rect2(0, 0, 16, 48)
 
@@ -36,6 +49,6 @@ shape = SubResource("RectangleShape2D_6ec8s")
 [node name="BotPartSprite" type="Sprite2D" parent="BotPart"]
 texture_repeat = 2
 position = Vector2(0, 36)
-texture = ExtResource("2_j8e65")
+texture = SubResource("GradientTexture1D_7sc5g")
 region_enabled = true
 region_rect = Rect2(0, 0, 16, 48)
