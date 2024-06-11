@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://b6navnb20xork"]
+[gd_scene load_steps=6 format=3 uid="uid://b6navnb20xork"]
 
 [ext_resource type="PackedScene" uid="uid://beic3gevjusuj" path="res://scenes/PushableObject/pushable_object.tscn" id="1_5pv0u"]
 [ext_resource type="Script" path="res://scenes/Lens_PlanoConvex/lens_plano_convex.gd" id="2_ljto7"]
 [ext_resource type="Texture2D" uid="uid://ciqfgqswil4p2" path="res://scenes/Lens_PlanoConvex/focalSpot_white_16x16.png" id="3_fwnnj"]
+[ext_resource type="Texture2D" uid="uid://cvb38ctmeqcy8" path="res://icon.svg" id="4_iqnky"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b5uwf"]
 size = Vector2(4, 120)
@@ -38,3 +39,18 @@ texture = ExtResource("3_fwnnj")
 z_index = 1
 position = Vector2(-128, 0)
 texture = ExtResource("3_fwnnj")
+
+[node name="Sprite2D" type="Sprite2D" parent="." index="5"]
+visible = false
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("4_iqnky")
+
+[node name="Sprite2D2" type="Sprite2D" parent="." index="6"]
+visible = false
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("4_iqnky")
+
+[node name="Sprite2D3" type="Sprite2D" parent="." index="7"]
+visible = false
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("4_iqnky")

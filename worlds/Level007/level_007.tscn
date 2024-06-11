@@ -19,31 +19,10 @@ layer_0/tile_data = PackedInt32Array(2097152, 1, 0, 2031616, 1, 0, 1966080, 1, 0
 
 [node name="LaserSource" parent="." instance=ExtResource("3_1b8hj")]
 position = Vector2(928, 198)
-HALF_HEIGHT = 35.0
+HALF_HEIGHT = 25.0
+sliding_time = -0.8
 isPushable = false
 isRotatable = false
-isEnergized = true
-
-[node name="DetectorMeter" parent="." instance=ExtResource("4_ipodj")]
-position = Vector2(1568, 192)
-goalPower = 6.5
-integrationTime = 0.5
-IDColor = Color(0, 0, 1, 1)
-
-[node name="WirePath" type="Line2D" parent="DetectorMeter"]
-points = PackedVector2Array(0, 0, 315, 0, 315, 240)
-width = 6.0
-default_color = Color(0, 1, 0, 1)
-
-[node name="PointDetector" parent="DetectorMeter" instance=ExtResource("5_x5sgd")]
-position = Vector2(192, 160)
-isPushable = false
-isRotatable = false
-isEnergizeable = false
-
-[node name="StaticIris" parent="DetectorMeter/PointDetector" instance=ExtResource("6_j8uol")]
-position = Vector2(-31, -1)
-aperture_width = 8
 
 [node name="Player" parent="." instance=ExtResource("6_7dvji")]
 position = Vector2(1336, 256)
@@ -72,13 +51,34 @@ isPushable = false
 isRotatable = false
 isEnergizeable = false
 
-[node name="LensPlanoConvex" parent="." instance=ExtResource("10_lqocq")]
-position = Vector2(1246, 351)
-focalLength = 160
-
 [node name="FlatMirror3" parent="." instance=ExtResource("8_fytua")]
 position = Vector2(1056, 352)
 initialAngle = 45.0
 isPushable = false
 isRotatable = false
 isEnergizeable = false
+
+[node name="LensPlanoConvex" parent="." instance=ExtResource("10_lqocq")]
+position = Vector2(1246, 351)
+focalLength = 160
+
+[node name="DetectorMeter" parent="." instance=ExtResource("4_ipodj")]
+position = Vector2(1568, 192)
+goalPower = 6.5
+integrationTime = 0.5
+IDColor = Color(0, 0, 1, 1)
+
+[node name="WirePath" type="Line2D" parent="DetectorMeter"]
+points = PackedVector2Array(0, 0, 315, 0, 315, 240)
+width = 6.0
+default_color = Color(0, 1, 0, 1)
+
+[node name="PointDetector" parent="DetectorMeter" instance=ExtResource("5_x5sgd")]
+position = Vector2(192, 160)
+isPushable = false
+isRotatable = false
+isEnergizeable = false
+
+[node name="StaticIris" parent="DetectorMeter/PointDetector" instance=ExtResource("6_j8uol")]
+position = Vector2(-32, 0)
+aperture_width = 6
