@@ -1,6 +1,6 @@
 extends pushableObject
 
-const NUM_POINTS = 8
+const NUM_POINTS = 32
 const FRONT_THICKNESS = 2
 
 const mediumIndex = 1.0
