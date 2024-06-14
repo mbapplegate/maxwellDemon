@@ -61,7 +61,6 @@ HALF_HEIGHT = 4.0
 rayColor = Vector3(1, 1, 1)
 isPushable = false
 isRotatable = false
-isEnergized = true
 
 [node name="MirrorDichroic" parent="." instance=ExtResource("10_w5yl4")]
 position = Vector2(1120, 224)

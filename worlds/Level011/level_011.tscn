@@ -20,7 +20,8 @@ layer_0/tile_data = PackedInt32Array(2097152, 1, 0, 2031616, 1, 0, 1966080, 1, 0
 
 [node name="DetectorMeter" parent="." instance=ExtResource("4_g072h")]
 position = Vector2(1568, 192)
-goalPower = 7.0
+maxPower = 12.0
+goalPower = 8.5
 IDColor = Color(0, 0, 1, 1)
 
 [node name="WirePath" type="Line2D" parent="DetectorMeter"]
@@ -37,11 +38,11 @@ isEnergizeable = false
 
 [node name="StaticIris" parent="DetectorMeter/PointDetector" instance=ExtResource("6_1jegh")]
 position = Vector2(32, 0)
-aperture_width = 20
+aperture_width = 8
 snapY = false
 
 [node name="Player" parent="." instance=ExtResource("7_23bhi")]
-position = Vector2(1336, 256)
+position = Vector2(1152, 896)
 
 [node name="Doorway" parent="." instance=ExtResource("8_5bbyb")]
 position = Vector2(1856, 480)
@@ -81,7 +82,7 @@ isEnergizeable = false
 [node name="parabolicMirror" parent="." instance=ExtResource("9_yvego")]
 position = Vector2(96, 256)
 mirrorHeight = 128.0
-initialAngle = 180.0
+focalSpriteColor = Color(1, 1, 0, 1)
 isPushable = false
 isRotatable = false
 isEnergizeable = false
@@ -90,13 +91,15 @@ isEnergizeable = false
 position = Vector2(1056, 928)
 focalLength = 256.0
 mirrorHeight = 200.0
-initialAngle = -45.0
+focalSpriteColor = Color(1, 1, 0, 1)
+initialAngle = -15.0
 isEnergizeable = false
 
 [node name="LensPlanoConvex" parent="." instance=ExtResource("11_ksj72")]
 position = Vector2(800, 576)
-LENS_HEIGHT = 180
+LENS_HEIGHT = 200
 focalLength = 256
+focalSpriteColor = Color(1, 1, 1, 1)
 isPushable = false
 isRotatable = false
 
@@ -104,5 +107,7 @@ isRotatable = false
 position = Vector2(448, 576)
 LENS_HEIGHT = 200
 focalLength = 256
+focalSpriteColor = Color(1, 1, 1, 1)
+initialAngle = 180.0
 isPushable = false
 isRotatable = false

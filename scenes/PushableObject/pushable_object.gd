@@ -122,7 +122,7 @@ func getRotation():
 	if isRotatable:
 		return sprite.rotation	
 	else:
-		return initialAngle
+		return deg_to_rad(initialAngle)
 		
 func togEnergize():
 	if isEnergizeable:

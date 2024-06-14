@@ -23,13 +23,17 @@ var minX = 1.0
 
 func _ready():
 	isEnergizeable = false
-	lensRadius = focalLength * (lensIndex - mediumIndex)-15.0
+	lensRadius = focalLength * (lensIndex - mediumIndex)-5
 	
 	set_geometry(lensRadius,LENS_HEIGHT,Vector2.ZERO)
 	frontFocusSprite.position = Vector2(focalLength,0.0)
 	rearFocusSprite.position = Vector2(-focalLength,0.0)
 	frontFocusSprite.self_modulate = focalSpriteColor
 	rearFocusSprite.self_modulate = focalSpriteColor
+	if not isRotatable and initialAngle != 0:
+		$Stage/curveFaceArea.rotation=deg_to_rad(initialAngle)
+		$Stage/flatFaceArea.rotation = deg_to_rad(initialAngle)
+		$Stage/LensOutline.rotation= deg_to_rad(initialAngle)
 	
 func set_geometry(newRadius:float, lens_height:float, center:Vector2):
 	var rad = newRadius

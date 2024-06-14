@@ -4,12 +4,16 @@ extends Node2D
 @export var sourceColor : Vector3 = Vector3(1.0, 0.0, 0.0)
 @export var sourceWidth : int = 32
 @export var numRaysPerTimeout : int = 1
+@export var timerTimeout : float = 1.0
+
+@onready var timer = $Timer
 
 var ray = preload("res://scenes/LightPacket/light_packet.tscn")
 var rng = RandomNumberGenerator.new()
 var invisParent = null
 func _ready():
 	invisParent = get_parent()
+	timer.wait_time = timerTimeout
 
 
 
