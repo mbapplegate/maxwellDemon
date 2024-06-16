@@ -61,6 +61,7 @@ vertical_alignment = 1
 position = Vector2(216, 260)
 angleRangeDeg = Vector2(90, 270)
 numRaysPerTimeout = 3
+rayColor = Vector3(0, 0, 1)
 isPushable = false
 isRotatable = false
 isEnergizeable = false

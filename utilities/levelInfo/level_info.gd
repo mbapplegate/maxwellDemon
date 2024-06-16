@@ -30,6 +30,7 @@ var LevelDictionary = {
 	"BeamExpanderLesson" : {"Path" : "res://lessons/beamExpanderKep/beam_expander_lesson.tscn", "Title" : "Beam Expander Lesson", "Section" : "Lessons"},
 	"Level010"    : {"Path" : "res://worlds/Level010/level_010.tscn",              "Title" : "Image",          "Section" : "Debug"},
 	"Level011"    : {"Path" : "res://worlds/Level011/level_011.tscn",              "Title" : "Parabolic Mirror","Section" : "LensesAndMirrors"},
+	"ParabolicMirrorLesson" : {"Path" : "res://lessons/parabolicMirror/parabolic_mirror_lesson.tscn", "Title" : "Parabolic Mirror Lesson","Section" : "Lessons"},
 	"Level012Filters" : {"Path" : "res://worlds/Level012_Filters/level_012_filters.tscn", "Title" : "Filters", "Section" : "Colors"}
 }
 

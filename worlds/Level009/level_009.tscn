@@ -20,7 +20,7 @@ layer_0/tile_data = PackedInt32Array(2097152, 1, 0, 2031616, 1, 0, 1966080, 1, 0
 [node name="DetectorMeter" parent="." instance=ExtResource("3_0b1q1")]
 position = Vector2(1740, 128)
 maxPower = 16.0
-goalPower = 8.0
+goalPower = 6.5
 integrationTime = 0.5
 IDColor = Color(0, 0, 1, 1)
 
@@ -65,19 +65,21 @@ position = Vector2(92, 313)
 HALF_HEIGHT = 20.0
 numRaysPerTimeout = 3
 rayColor = Vector3(0, 0, 1)
+timerTimeout = 0.08
 isPushable = false
 isRotatable = false
-isEnergized = true
 
 [node name="LensPlanoConvex" parent="." instance=ExtResource("7_7xemi")]
 position = Vector2(881, 405)
 LENS_HEIGHT = 256
 focalLength = 512
+focalSpriteColor = Color(1, 1, 0, 1)
 initialAngle = 90.0
 isEnergizeable = false
 
 [node name="LensPlanoConvex2" parent="." instance=ExtResource("7_7xemi")]
 position = Vector2(570, 150)
+focalSpriteColor = Color(1, 1, 0, 1)
 initialAngle = 90.0
 isEnergizeable = false
 
@@ -85,6 +87,7 @@ isEnergizeable = false
 position = Vector2(473, 798)
 LENS_HEIGHT = 256
 focalLength = 368
+focalSpriteColor = Color(1, 1, 0, 1)
 initialAngle = 180.0
 isPushable = false
 isRotatable = false

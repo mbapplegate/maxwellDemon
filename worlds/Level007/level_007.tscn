@@ -27,9 +27,6 @@ isRotatable = false
 [node name="Player" parent="." instance=ExtResource("6_7dvji")]
 position = Vector2(1336, 256)
 
-[node name="Doorway" parent="." instance=ExtResource("7_vrycc")]
-position = Vector2(1856, 480)
-
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(1376, 406)
 zoom = Vector2(1.75, 1.75)
@@ -64,7 +61,7 @@ focalLength = 160
 
 [node name="DetectorMeter" parent="." instance=ExtResource("4_ipodj")]
 position = Vector2(1568, 192)
-goalPower = 6.5
+goalPower = 7.0
 integrationTime = 0.5
 IDColor = Color(0, 0, 1, 1)
 
@@ -82,3 +79,6 @@ isEnergizeable = false
 [node name="StaticIris" parent="DetectorMeter/PointDetector" instance=ExtResource("6_j8uol")]
 position = Vector2(-32, 0)
 aperture_width = 6
+
+[node name="Doorway" parent="." instance=ExtResource("7_vrycc")]
+position = Vector2(1856, 480)
