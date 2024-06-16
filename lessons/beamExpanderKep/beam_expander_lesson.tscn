@@ -32,10 +32,12 @@ text = "Keplerian Beam Expander"
 position = Vector2(96, 212)
 propagationDirection = Vector2(1, 0)
 sourceColor = Vector3(0, 0, 1)
+timerTimeout = 0.25
 
 [node name="InvisibleSource2" parent="." instance=ExtResource("3_qfu3i")]
 position = Vector2(96, 236)
 propagationDirection = Vector2(1, 0)
+timerTimeout = 0.25
 
 [node name="RichTextLabel2" type="RichTextLabel" parent="."]
 offset_left = 64.0
@@ -52,8 +54,15 @@ position = Vector2(192, 224)
 LENS_HEIGHT = 64
 focalLength = 64
 focalSpriteColor = Color(1, 0, 0, 1)
+isPushable = false
+isRotatable = false
+isEnergizeable = false
 
 [node name="LensPlanoConvex" parent="." instance=ExtResource("2_yvxg1")]
 position = Vector2(576, 224)
 LENS_HEIGHT = 256
 focalLength = 320
+initialAngle = 180.0
+isPushable = false
+isRotatable = false
+isEnergizeable = false

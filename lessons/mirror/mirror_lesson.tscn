@@ -28,15 +28,7 @@ isPushable = false
 [node name="InvisibleSource" parent="." instance=ExtResource("3_skcde")]
 position = Vector2(288, 32)
 scale = Vector2(2, 2)
-sourceWidth = 3
-
-[node name="FlatMirror2" parent="." instance=ExtResource("2_4lugw")]
-position = Vector2(-160, 224)
-scale = Vector2(2, 2)
-initialAngle = 60.0
-isPushable = false
-isRotatable = false
-isEnergizeable = false
+timerTimeout = 0.125
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
 offset_left = 15.0

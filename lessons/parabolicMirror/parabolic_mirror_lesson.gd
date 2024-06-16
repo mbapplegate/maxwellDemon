@@ -1,6 +1,6 @@
 extends Node2D
 
-@export var nextSceneAlias = "Level0012"
+@export var nextSceneAlias = "Level012Filters"
 const THIS_SCENE_ALIAS = "ParabolicMirrorLesson"
 
 var signalEmitted : bool = false
