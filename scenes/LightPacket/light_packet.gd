@@ -231,7 +231,7 @@ func reflectRay(normalAngle, collisionPoint) ->Vector2:
 
 func getReflectionDirection(normalAngle : Vector2)->Vector2:
 	if normalAngle:
-		return propDir.bounce(normalAngle.normalized()).normalized()
+		return propDir.reflect(normalAngle.rotated(PI/2).normalized()).normalized()
 	else:
 		return propDir
 		

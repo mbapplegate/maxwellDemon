@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://catkndynfd4s5"]
+[gd_scene load_steps=8 format=3 uid="uid://catkndynfd4s5"]
 
 [ext_resource type="PackedScene" uid="uid://beic3gevjusuj" path="res://scenes/PushableObject/pushable_object.tscn" id="1_wi1ai"]
 [ext_resource type="Script" path="res://scenes/ParabolicMirror/parabolic_mirror.gd" id="2_84iss"]
@@ -7,6 +7,12 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2dok2"]
 size = Vector2(4, 100)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b3bxq"]
+size = Vector2(32, 4)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vlwfp"]
+size = Vector2(32, 4)
 
 [node name="parabolicMirror" instance=ExtResource("1_wi1ai")]
 position = Vector2(480, 160)
@@ -19,23 +25,30 @@ focalSpriteColor = Color(0, 0, 1, 1)
 [node name="mirrorOutline" type="Polygon2D" parent="Stage" index="0"]
 color = Color(0.666667, 0.666667, 0.666667, 1)
 
-[node name="backBody" type="StaticBody2D" parent="Stage" index="1"]
+[node name="surfaceArea" type="Area2D" parent="Stage" index="1"]
+
+[node name="surfaceShape" type="CollisionPolygon2D" parent="Stage/surfaceArea" index="0"]
+polygon = PackedVector2Array(18, 0, 16, -36, 12, -49, 0, -61, 27, -60, 26, 55, -1, 55, 9, 36, 15, 21)
+
+[node name="backBody" type="StaticBody2D" parent="Stage" index="2"]
 
 [node name="backArea" type="CollisionShape2D" parent="Stage/backBody" index="0"]
 position = Vector2(30, 2)
 shape = SubResource("RectangleShape2D_2dok2")
 
-[node name="surfaceArea" type="Area2D" parent="Stage" index="2"]
+[node name="top" type="CollisionShape2D" parent="Stage/backBody" index="1"]
+position = Vector2(16, -64)
+shape = SubResource("RectangleShape2D_b3bxq")
 
-[node name="surfaceShape" type="CollisionPolygon2D" parent="Stage/surfaceArea" index="0"]
-polygon = PackedVector2Array(18, 0, 16, -36, 12, -49, 0, -61, 27, -60, 26, 55, -1, 55, 9, 36, 15, 21)
+[node name="bottom" type="CollisionShape2D" parent="Stage/backBody" index="2"]
+position = Vector2(16, 55)
+shape = SubResource("RectangleShape2D_vlwfp")
 
 [node name="focalPoint" type="Sprite2D" parent="Stage" index="3"]
 position = Vector2(-16, 0)
 texture = ExtResource("3_e2uk1")
 
 [node name="Sprite2D" type="Sprite2D" parent="." index="5"]
-visible = false
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("4_640ot")
 

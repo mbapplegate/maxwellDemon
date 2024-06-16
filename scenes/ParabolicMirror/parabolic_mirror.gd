@@ -15,6 +15,8 @@ var outlinePolygonPoints = PackedVector2Array()
 @onready var focalSprite = $Stage/focalPoint
 @onready var surfaceShape = $Stage/surfaceArea/surfaceShape
 @onready var backShape = $Stage/backBody/backArea
+@onready var topShape = $Stage/backBody/top
+@onready var botShape = $Stage/backBody/bottom
 @onready var mirrOutline = $Stage/mirrorOutline
 
 func _ready():
@@ -23,6 +25,12 @@ func _ready():
 	set_geometry(parabolicConstant,mirrorHeight)
 	backShape.shape.size = Vector2(MIRROR_THICKNESS/2.0,mirrorHeight)
 	backShape.position = Vector2((-0.75*MIRROR_THICKNESS),0.0)
+	
+	topShape.shape.size = Vector2(MIRROR_THICKNESS,2)
+	topShape.position = Vector2(1,mirrorHeight/2.0-1)
+	
+	botShape.shape.size = Vector2(MIRROR_THICKNESS,2)
+	botShape.position = Vector2(1,-mirrorHeight/2.0+1)
 	focalSprite.self_modulate = focalSpriteColor
 	if not isRotatable and initialAngle != 0:
 		$Stage/mirrorOutline.rotation=deg_to_rad(initialAngle)
