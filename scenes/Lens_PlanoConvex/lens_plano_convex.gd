@@ -5,8 +5,8 @@ const FRONT_THICKNESS = 2
 
 const mediumIndex = 1.0
 
-@export var LENS_HEIGHT = 128
-@export var focalLength = 128
+@export var LENS_HEIGHT : float = 128
+@export var focalLength : float = 128
 @export var lensIndex = 2.0
 @export var focalSpriteColor : Color = Color.BLUE
 
@@ -23,11 +23,11 @@ var minX = 1.0
 
 func _ready():
 	isEnergizeable = false
-	lensRadius = focalLength * (lensIndex - mediumIndex)-5
-	
+	lensRadius = focalLength * (lensIndex - mediumIndex)
 	set_geometry(lensRadius,LENS_HEIGHT,Vector2.ZERO)
-	frontFocusSprite.position = Vector2(focalLength,0.0)
-	rearFocusSprite.position = Vector2(-focalLength,0.0)
+	#$Line2D.set_point_position(0,Vector2(0,-LENS_HEIGHT/2.0))
+	#$Line2D.set_point_position(1,Vector2(0,LENS_HEIGHT/2.0))
+
 	frontFocusSprite.self_modulate = focalSpriteColor
 	rearFocusSprite.self_modulate = focalSpriteColor
 	if not isRotatable and initialAngle != 0:
@@ -36,29 +36,45 @@ func _ready():
 		$Stage/LensOutline.rotation= deg_to_rad(initialAngle)
 	
 func set_geometry(newRadius:float, lens_height:float, center:Vector2):
-	var rad = newRadius
-	halfAngle = asin(lens_height / (2.0 * rad))
-	curveShape.position.x = center[0]+FRONT_THICKNESS/2.0+1.0
+	halfAngle = asin(lens_height / (2.0 * newRadius))
+	curveShape.position.x = center[0]#+FRONT_THICKNESS/2.0+1.0
 	curveShape.position.y = center[1]
-	lensOrigin = Vector2(-lensRadius+curveShape.position.x+minX/2.0,-curveShape.position.y)
-	minX = rad - rad*cos(halfAngle)
-	flatShape.shape.size = Vector2(FRONT_THICKNESS,LENS_HEIGHT)
-	flatShape.position = Vector2(-(minX+FRONT_THICKNESS)/2.0,0.0)
-	set_curve_polygon(minX, rad)
+	minX = newRadius - newRadius*cos(halfAngle)
+	#print(minX,', ', newRadius*sin(halfAngle), ", ", lens_height)
+	#var maxY = newRadius*sin(halfAngle)
+	#if maxY < lens_height:
+		#lens_height = 2*maxY
+	var lensThickness = minX+4.0*FRONT_THICKNESS
+	#Distance from lens at theta=0 to principal plane
+	#I want this to be located at Zero
+	var apexToPlane = lensThickness/lensIndex
+	frontFocusSprite.position = Vector2(focalLength,0.0)
+	rearFocusSprite.position = Vector2(-focalLength,0.0)
+	#print(apexToPlane, ", ", minX)
+	#$Sprite2D.position = Vector2.ZERO
+	#$Sprite2D2.position = Vector2(apexToPlane,0)
+	#Center of the spherical portion of the lens
+	lensOrigin = Vector2(-lensRadius+apexToPlane,0)
+	
+	flatShape.shape.size = Vector2(FRONT_THICKNESS,lens_height)
+	flatShape.position = Vector2(-lensThickness+apexToPlane+FRONT_THICKNESS/2.0,0.0)
+	set_curve_polygon(apexToPlane, newRadius, lensThickness)
+	#print($Stage/flatFaceArea/flatFaceShape.shape.size)
 
-func set_curve_polygon(minXVal : float, rad : float):
+func set_curve_polygon(distToPrinPlane : float,  rad : float,lensThickness : float):
 	var poly = PackedVector2Array()
 
 	var spacing = 2*halfAngle / (NUM_POINTS-1)
 
 	for i in NUM_POINTS:
 		var theta = -halfAngle + spacing*i
-		poly.append(Vector2(rad*cos(theta)-rad+curveShape.position.x+minXVal/2.0,rad*sin(theta)+curveShape.position.y))
-		lens_shape.append(Vector2((rad)*cos(theta)-rad+2*curveShape.position.x+minXVal/2.0-FRONT_THICKNESS,(rad)*sin(theta)+2*curveShape.position.y))
+		poly.append(Vector2(rad*cos(theta)-rad+distToPrinPlane,rad*sin(theta)))
+		lens_shape.append(Vector2(rad*cos(theta)-rad+distToPrinPlane,rad*sin(theta)))
 	
-	lens_shape.append(Vector2(-minXVal/2.0 - FRONT_THICKNESS,(rad)*sin(-halfAngle + spacing*(NUM_POINTS-1))+curveShape.position.y))
-	lens_shape.append(Vector2(-minXVal/2.0 - FRONT_THICKNESS,-rad*sin(-halfAngle + spacing*(NUM_POINTS-1))+curveShape.position.y))
-		
+	lens_shape.append(Vector2(-lensThickness+distToPrinPlane,rad*sin(halfAngle)))
+	lens_shape.append(Vector2(-lensThickness+distToPrinPlane,rad*sin(-halfAngle)))
+	#$Sprite2D.position = Vector2(-4*FRONT_THICKNESS+distToPrinPlane-minX,rad*sin(halfAngle))	
+	#$Sprite2D2.position = Vector2(-4*FRONT_THICKNESS+distToPrinPlane-minX,rad*sin(-halfAngle))
 	for i in NUM_POINTS:
 		var theta = halfAngle - spacing*i
 		var insideRad
@@ -66,7 +82,7 @@ func set_curve_polygon(minXVal : float, rad : float):
 			insideRad = rad-FRONT_THICKNESS
 		else:
 			insideRad = rad+FRONT_THICKNESS
-		poly.append(Vector2((insideRad)*cos(theta)-rad+curveShape.position.x+minX/2.0,(insideRad)*sin(theta)+curveShape.position.y))
+		poly.append(Vector2(insideRad*cos(theta)-rad+distToPrinPlane,(insideRad)*sin(theta)))
 	
 	curveShape.polygon = poly
 	lensOutline.polygon = lens_shape
@@ -93,9 +109,10 @@ func _ray_hit(photonObj:Object, collPoint:Vector2, collNormal:Vector2, _collider
 			perpDir = -perpDir#-Vector2(cos(-2*correctedTheta),sin(-2*correctedTheta))
 		photonObj.refractRay(perpDir, lensIndex, collPoint)
 		#### DEBUG STUFF ###########
+		#$Sprite2D.position = Vector2(-4*FRONT_THICKNESS+distToPrinPlane,-rad*sin(halfAngle))
 		#$Sprite2D.position = locPt#Vector2(25*cos(correctedTheta),25*sin(correctedTheta)) + locPt
 		#$Sprite2D2.position = 25*collNormal+locPt#Vector2(25*cos(correctedTheta),25*sin(correctedTheta)) + locPt
-		#$Sprite2D3.position = 25*perpDir + locPt
+		#$Sprite2D.position = 25*perpDir + locPt
 		#print(photonObj.propDir.dot(perpDir),", ",photonObj.propDir.dot(collNormal))
 		#print(rad_to_deg(correctedTheta), ", ",rotatedOrigin,", ", perpDir,", ",collNormal)
 		#################################

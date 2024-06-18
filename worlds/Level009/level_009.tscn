@@ -20,7 +20,7 @@ layer_0/tile_data = PackedInt32Array(2097152, 1, 0, 2031616, 1, 0, 1966080, 1, 0
 [node name="DetectorMeter" parent="." instance=ExtResource("3_0b1q1")]
 position = Vector2(1740, 128)
 maxPower = 16.0
-goalPower = 6.5
+goalPower = 6.0
 integrationTime = 0.5
 IDColor = Color(0, 0, 1, 1)
 
@@ -45,7 +45,7 @@ Blocked: 0
 Percent:      0"
 
 [node name="Player" parent="." instance=ExtResource("5_jd18u")]
-position = Vector2(622, 771)
+position = Vector2(721, 347)
 
 [node name="Doorway" parent="." instance=ExtResource("6_mp8nl")]
 position = Vector2(1856, 480)
@@ -69,37 +69,34 @@ timerTimeout = 0.08
 isPushable = false
 isRotatable = false
 
-[node name="LensPlanoConvex" parent="." instance=ExtResource("7_7xemi")]
-position = Vector2(881, 405)
-LENS_HEIGHT = 256
-focalLength = 512
-focalSpriteColor = Color(1, 1, 0, 1)
-initialAngle = 90.0
-isEnergizeable = false
-
 [node name="LensPlanoConvex2" parent="." instance=ExtResource("7_7xemi")]
-position = Vector2(570, 150)
-focalSpriteColor = Color(1, 1, 0, 1)
-initialAngle = 90.0
-isEnergizeable = false
-
-[node name="LensPlanoConvex3" parent="." instance=ExtResource("7_7xemi")]
-position = Vector2(473, 798)
-LENS_HEIGHT = 256
-focalLength = 368
+position = Vector2(930, 171)
+LENS_HEIGHT = 256.0
+focalLength = 512.0
 focalSpriteColor = Color(1, 1, 0, 1)
 initialAngle = 180.0
+
+[node name="LensPlanoConvex" parent="." instance=ExtResource("7_7xemi")]
+position = Vector2(387, 144)
+focalLength = 96.0
+focalSpriteColor = Color(1, 1, 0, 1)
+
+[node name="LensPlanoConvex3" parent="." instance=ExtResource("7_7xemi")]
+position = Vector2(515, 801)
+LENS_HEIGHT = 360.0
+focalLength = 392.0
+focalSpriteColor = Color(1, 1, 0, 1)
 isPushable = false
 isRotatable = false
-isEnergizeable = false
 
 [node name="StaticIris" parent="." instance=ExtResource("9_amjd8")]
-position = Vector2(117, 795)
-aperture_width = 6
+position = Vector2(120, 795)
+aperture_width = 3
+thickness = 4
 
 [node name="FlatMirror" parent="." instance=ExtResource("8_iurxw")]
 position = Vector2(1293, 306)
-MirrorLength = 256
+MirrorLength = 312
 initialAngle = -135.0
 isPushable = false
 isRotatable = false
@@ -107,7 +104,7 @@ isEnergizeable = false
 
 [node name="FlatMirror2" parent="." instance=ExtResource("8_iurxw")]
 position = Vector2(1293, 794)
-MirrorLength = 240
+MirrorLength = 312
 initialAngle = -45.0
 isPushable = false
 isRotatable = false

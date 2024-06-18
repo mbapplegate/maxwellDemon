@@ -20,6 +20,7 @@ func _ray_hit(photonObj:Object, collPoint:Vector2, collNormal:Vector2, collider:
 		var ref = randf()
 		if (ref < reflectivity):
 			photonObj.reflectRay(collNormal,collPoint)
+			#print(photonObj.propDir)
 			#print(to_local(photonObj.line.get_point_position(photonObj.numPoints-1)))
 		else:
 			photonObj.rayDying = true

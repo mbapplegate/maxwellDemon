@@ -57,7 +57,8 @@ isEnergizeable = false
 
 [node name="LensPlanoConvex" parent="." instance=ExtResource("10_lqocq")]
 position = Vector2(1246, 351)
-focalLength = 160
+focalLength = 176
+initialAngle = 180.0
 
 [node name="DetectorMeter" parent="." instance=ExtResource("4_ipodj")]
 position = Vector2(1568, 192)
@@ -77,7 +78,7 @@ isRotatable = false
 isEnergizeable = false
 
 [node name="StaticIris" parent="DetectorMeter/PointDetector" instance=ExtResource("6_j8uol")]
-position = Vector2(-32, 0)
+position = Vector2(-16, -1)
 aperture_width = 6
 
 [node name="Doorway" parent="." instance=ExtResource("7_vrycc")]

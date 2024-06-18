@@ -13,6 +13,7 @@ position = Vector2(91, 89)
 script = ExtResource("2_w07lc")
 numRaysPerTimeout = 10
 rayColor = Vector3(0, 1, 0)
+timerTimeout = 0.125
 isEnergized = true
 
 [node name="backingSprite" type="Sprite2D" parent="Stage" index="0"]

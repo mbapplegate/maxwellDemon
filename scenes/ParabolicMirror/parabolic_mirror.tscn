@@ -6,12 +6,15 @@
 [ext_resource type="Texture2D" uid="uid://cvb38ctmeqcy8" path="res://icon.svg" id="4_640ot"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2dok2"]
+resource_local_to_scene = true
 size = Vector2(4, 100)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b3bxq"]
+resource_local_to_scene = true
 size = Vector2(32, 4)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vlwfp"]
+resource_local_to_scene = true
 size = Vector2(32, 4)
 
 [node name="parabolicMirror" instance=ExtResource("1_wi1ai")]
@@ -49,6 +52,7 @@ position = Vector2(-16, 0)
 texture = ExtResource("3_e2uk1")
 
 [node name="Sprite2D" type="Sprite2D" parent="." index="5"]
+visible = false
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("4_640ot")
 

@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=3 uid="uid://hnokmrtkfq3t"]
+
+[ext_resource type="Script" path="res://worlds/scratch/scratchMirror.gd" id="1_e8tnm"]
+[ext_resource type="PackedScene" uid="uid://ciufjrc1fmyfi" path="res://scenes/FlatMirror/flat_mirror.tscn" id="1_x3gk3"]
+[ext_resource type="PackedScene" uid="uid://bt1eicy7gakub" path="res://scenes/InvisibleSource/invisible_source.tscn" id="2_rq44c"]
+[ext_resource type="PackedScene" uid="uid://ojfv06ceqv2a" path="res://scenes/Player/player.tscn" id="3_d1sn8"]
+
+[node name="ScratchMirror" type="Node2D"]
+script = ExtResource("1_e8tnm")
+
+[node name="FlatMirror" parent="." instance=ExtResource("1_x3gk3")]
+position = Vector2(128, 384)
+initialAngle = 45.0
+
+[node name="InvisibleSource2" parent="." instance=ExtResource("2_rq44c")]
+position = Vector2(160, 128)
+
+[node name="InvisibleSource3" parent="." instance=ExtResource("2_rq44c")]
+position = Vector2(106, 128)
+
+[node name="Line2D" type="Line2D" parent="."]
+points = PackedVector2Array(256, 384, 1024, 384)
+width = 1.0
+
+[node name="Line2D2" type="Line2D" parent="."]
+position = Vector2(0, -22)
+points = PackedVector2Array(256, 384, 1024, 384)
+width = 1.0
+
+[node name="Line2D3" type="Line2D" parent="."]
+position = Vector2(0, 32)
+points = PackedVector2Array(256, 384, 1024, 384)
+width = 1.0
+
+[node name="Player" parent="." instance=ExtResource("3_d1sn8")]
+position = Vector2(1088, 512)
+
+[node name="FlatMirror2" parent="." instance=ExtResource("1_x3gk3")]
+position = Vector2(1120, 384)
+initialAngle = 30.0

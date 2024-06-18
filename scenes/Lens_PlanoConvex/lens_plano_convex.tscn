@@ -6,21 +6,24 @@
 [ext_resource type="Texture2D" uid="uid://cvb38ctmeqcy8" path="res://icon.svg" id="4_iqnky"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b5uwf"]
+resource_local_to_scene = true
 size = Vector2(4, 120)
 
 [node name="LensPlanoConvex" instance=ExtResource("1_5pv0u")]
 position = Vector2(88, 77)
 script = ExtResource("2_ljto7")
-LENS_HEIGHT = 128
-focalLength = 128
+LENS_HEIGHT = 128.0
+focalLength = 128.0
 lensIndex = 2.0
 focalSpriteColor = Color(0, 0, 1, 1)
+isEnergizeable = false
 
 [node name="flatFaceArea" type="Area2D" parent="Stage" index="0"]
 
 [node name="flatFaceShape" type="CollisionShape2D" parent="Stage/flatFaceArea" index="0"]
 position = Vector2(-16, 0)
 shape = SubResource("RectangleShape2D_b5uwf")
+debug_color = Color(1, 0, 0, 0.419608)
 
 [node name="curveFaceArea" type="Area2D" parent="Stage" index="1"]
 
@@ -47,10 +50,15 @@ texture = ExtResource("4_iqnky")
 
 [node name="Sprite2D2" type="Sprite2D" parent="." index="6"]
 visible = false
-scale = Vector2(0.1, 0.1)
+scale = Vector2(0.05, 0.05)
 texture = ExtResource("4_iqnky")
 
 [node name="Sprite2D3" type="Sprite2D" parent="." index="7"]
 visible = false
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("4_iqnky")
+
+[node name="Line2D" type="Line2D" parent="." index="8"]
+visible = false
+points = PackedVector2Array(0, -64, 0, 64)
+width = 2.0

@@ -30,14 +30,14 @@ width = 6.0
 default_color = Color(0, 1, 0, 1)
 
 [node name="PointDetector" parent="DetectorMeter" instance=ExtResource("5_khgv2")]
-position = Vector2(-1420, 378)
+position = Vector2(-1409, 378)
 initialAngle = 180.0
 isPushable = false
 isRotatable = false
 isEnergizeable = false
 
 [node name="StaticIris" parent="DetectorMeter/PointDetector" instance=ExtResource("6_1jegh")]
-position = Vector2(32, 0)
+position = Vector2(16, 0)
 aperture_width = 8
 snapY = false
 
@@ -98,17 +98,15 @@ isEnergizeable = false
 
 [node name="LensPlanoConvex" parent="." instance=ExtResource("11_ksj72")]
 position = Vector2(800, 576)
-LENS_HEIGHT = 200
-focalLength = 256
+focalLength = 256.0
 focalSpriteColor = Color(1, 1, 1, 1)
+initialAngle = 180.0
 isPushable = false
 isRotatable = false
 
 [node name="LensPlanoConvex2" parent="." instance=ExtResource("11_ksj72")]
 position = Vector2(448, 576)
-LENS_HEIGHT = 200
-focalLength = 256
+focalLength = 272.0
 focalSpriteColor = Color(1, 1, 1, 1)
-initialAngle = 180.0
 isPushable = false
 isRotatable = false

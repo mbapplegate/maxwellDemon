@@ -21,31 +21,34 @@ size = Vector2(4.5, 64)
 position = Vector2(365, 101)
 script = ExtResource("1_i8r5l")
 
-[node name="detSprite" type="Sprite2D" parent="Stage" index="0"]
+[node name="Pivot" type="Node2D" parent="Stage" index="0"]
+
+[node name="detSprite" type="Sprite2D" parent="Stage/Pivot" index="0"]
 z_index = 1
+position = Vector2(14, 0)
 texture = ExtResource("1_3scko")
 
-[node name="activeArea" type="Area2D" parent="Stage/detSprite" index="0"]
+[node name="activeArea" type="Area2D" parent="Stage/Pivot/detSprite" index="0"]
 
-[node name="activeShape" type="CollisionShape2D" parent="Stage/detSprite/activeArea" index="0"]
+[node name="activeShape" type="CollisionShape2D" parent="Stage/Pivot/detSprite/activeArea" index="0"]
 position = Vector2(-10, 0)
 shape = SubResource("RectangleShape2D_yaxwx")
 
-[node name="inactiveArea" type="Area2D" parent="Stage/detSprite" index="1"]
+[node name="inactiveArea" type="Area2D" parent="Stage/Pivot/detSprite" index="1"]
 
-[node name="inactiveShape1" type="CollisionShape2D" parent="Stage/detSprite/inactiveArea" index="0"]
+[node name="inactiveShape1" type="CollisionShape2D" parent="Stage/Pivot/detSprite/inactiveArea" index="0"]
 position = Vector2(0, -28)
 shape = SubResource("RectangleShape2D_y73ug")
 
-[node name="inactiveShape2" type="CollisionShape2D" parent="Stage/detSprite/inactiveArea" index="1"]
+[node name="inactiveShape2" type="CollisionShape2D" parent="Stage/Pivot/detSprite/inactiveArea" index="1"]
 position = Vector2(0, 28)
 shape = SubResource("RectangleShape2D_plt18")
 
-[node name="inactiveShape3" type="CollisionShape2D" parent="Stage/detSprite/inactiveArea" index="2"]
+[node name="inactiveShape3" type="CollisionShape2D" parent="Stage/Pivot/detSprite/inactiveArea" index="2"]
 position = Vector2(0.75, 0)
 shape = SubResource("RectangleShape2D_djivk")
 
-[node name="IDSprite" type="Sprite2D" parent="Stage/detSprite" index="2"]
+[node name="IDSprite" type="Sprite2D" parent="Stage/Pivot/detSprite" index="2"]
 z_index = 1
 position = Vector2(7, 0)
 scale = Vector2(0.75, 0.75)

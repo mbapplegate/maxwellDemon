@@ -2,6 +2,7 @@ extends pushableObject
 
 @export var numRaysPerTimeout : int = 1
 @export var rayColor : Vector3 = Vector3(0.0, 1.0, 0.0)
+@export var timerTimeout : float = 0.125
 @onready var ray = preload("res://scenes/LightPacket/light_packet.tscn")
 @onready var emitterSprite = $Stage/EmitterSprite
 
@@ -11,6 +12,7 @@ var rng = RandomNumberGenerator.new()
 func _ready():
 	ledParent = get_parent()
 	emitterSprite.modulate = Color(rayColor[0], rayColor[1],rayColor[2])
+	$Timer.wait_time = timerTimeout
 
 func _ray_hit(photonObj:Object, _collPoint:Vector2, _collNormal:Vector2, _collider:Object):
 	photonObj.rayDying = true

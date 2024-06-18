@@ -20,14 +20,14 @@ theme_override_font_sizes/normal_font_size = 24
 text = "Any key to continue . . ."
 
 [node name="InvisibleSource" parent="." instance=ExtResource("3_8lqxb")]
-position = Vector2(32, 266)
+position = Vector2(32, 256)
 rotation = 1.5708
 scale = Vector2(2, 2)
 propagationDirection = Vector2(1, 0)
 timerTimeout = 0.25
 
 [node name="InvisibleSource2" parent="." instance=ExtResource("3_8lqxb")]
-position = Vector2(32, 310)
+position = Vector2(32, 320)
 rotation = 1.5708
 propagationDirection = Vector2(1, 0)
 timerTimeout = 0.25
@@ -37,12 +37,9 @@ wait_time = 0.5
 
 [node name="LensPlanoConvex2" parent="." instance=ExtResource("2_hhjx2")]
 position = Vector2(256, 288)
-LENS_HEIGHT = 200
-focalLength = 256
-lensIndex = 3.0
+initialAngle = 180.0
 isPushable = false
 isRotatable = false
-isEnergizeable = false
 
 [node name="explan1" type="RichTextLabel" parent="."]
 offset_left = 416.0
