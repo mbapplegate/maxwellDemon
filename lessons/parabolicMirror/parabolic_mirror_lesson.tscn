@@ -69,12 +69,15 @@ timerTimeout = 0.75
 position = Vector2(864, 288)
 propagationDirection = Vector2(-3, 1)
 sourceColor = Vector3(0, 0, 1)
+timerTimeout = 1.5
 
 [node name="InvisibleSource4" parent="." instance=ExtResource("2_j1u1l")]
 position = Vector2(864, 320)
 propagationDirection = Vector2(-1, 0)
 sourceColor = Vector3(0, 1, 0)
+timerTimeout = 1.5
 
 [node name="InvisibleSource5" parent="." instance=ExtResource("2_j1u1l")]
 position = Vector2(864, 352)
 propagationDirection = Vector2(-3, -1)
+timerTimeout = 1.5

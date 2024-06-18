@@ -42,7 +42,7 @@ aperture_width = 8
 snapY = false
 
 [node name="Player" parent="." instance=ExtResource("7_23bhi")]
-position = Vector2(1152, 896)
+position = Vector2(1312, 192)
 
 [node name="Doorway" parent="." instance=ExtResource("8_5bbyb")]
 position = Vector2(1856, 480)
@@ -98,6 +98,7 @@ isEnergizeable = false
 
 [node name="LensPlanoConvex" parent="." instance=ExtResource("11_ksj72")]
 position = Vector2(800, 576)
+LENS_HEIGHT = 256.0
 focalLength = 256.0
 focalSpriteColor = Color(1, 1, 1, 1)
 initialAngle = 180.0
@@ -106,6 +107,7 @@ isRotatable = false
 
 [node name="LensPlanoConvex2" parent="." instance=ExtResource("11_ksj72")]
 position = Vector2(448, 576)
+LENS_HEIGHT = 256.0
 focalLength = 272.0
 focalSpriteColor = Color(1, 1, 1, 1)
 isPushable = false

@@ -37,6 +37,8 @@ wait_time = 0.5
 
 [node name="LensPlanoConvex2" parent="." instance=ExtResource("2_hhjx2")]
 position = Vector2(256, 288)
+LENS_HEIGHT = 200.0
+focalLength = 256.0
 initialAngle = 180.0
 isPushable = false
 isRotatable = false
