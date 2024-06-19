@@ -36,7 +36,7 @@ isRotatable = false
 isEnergizeable = false
 
 [node name="Player" parent="." instance=ExtResource("7_fu8xw")]
-position = Vector2(512, 288)
+position = Vector2(704, 608)
 
 [node name="Doorway" parent="." instance=ExtResource("8_4312g")]
 position = Vector2(1856, 480)
@@ -92,9 +92,6 @@ isRotatable = false
 position = Vector2(1616, 864)
 aperture_width = 6
 thickness = 6
-
-[node name="StaticIris" parent="StaticIris" instance=ExtResource("6_85xs3")]
-position = Vector2(-1680, -576)
 
 [node name="Timer" type="Timer" parent="."]
 autostart = true
