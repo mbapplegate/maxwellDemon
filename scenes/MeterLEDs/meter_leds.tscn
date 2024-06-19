@@ -1,0 +1,57 @@
+[gd_scene load_steps=4 format=3 uid="uid://chlytrwdjaffi"]
+
+[ext_resource type="Script" path="res://scenes/MeterLEDs/meter_leds.gd" id="1_b7sq0"]
+[ext_resource type="Texture2D" uid="uid://ibl8wahpqb2l" path="res://scenes/MeterLEDs/meterPanel.png" id="1_jf3a2"]
+[ext_resource type="Texture2D" uid="uid://bv0ynywgkkwgr" path="res://scenes/MeterLEDs/offLED.png" id="2_shm76"]
+
+[node name="MeterLEDs" type="Node2D"]
+scale = Vector2(0.1, 0.1)
+script = ExtResource("1_b7sq0")
+
+[node name="Panel" type="Sprite2D" parent="."]
+texture = ExtResource("1_jf3a2")
+
+[node name="LED01" type="Sprite2D" parent="Panel"]
+position = Vector2(-621, 0)
+texture = ExtResource("2_shm76")
+
+[node name="LED02" type="Sprite2D" parent="Panel"]
+position = Vector2(-483, 0)
+texture = ExtResource("2_shm76")
+
+[node name="LED03" type="Sprite2D" parent="Panel"]
+position = Vector2(-345, 0)
+texture = ExtResource("2_shm76")
+
+[node name="LED04" type="Sprite2D" parent="Panel"]
+position = Vector2(-207, 0)
+texture = ExtResource("2_shm76")
+
+[node name="LED05" type="Sprite2D" parent="Panel"]
+position = Vector2(-69, 0)
+texture = ExtResource("2_shm76")
+
+[node name="LED06" type="Sprite2D" parent="Panel"]
+position = Vector2(69, 0)
+texture = ExtResource("2_shm76")
+
+[node name="LED07" type="Sprite2D" parent="Panel"]
+position = Vector2(207, 0)
+texture = ExtResource("2_shm76")
+
+[node name="LED08" type="Sprite2D" parent="Panel"]
+position = Vector2(345, 0)
+texture = ExtResource("2_shm76")
+
+[node name="LED09" type="Sprite2D" parent="Panel"]
+position = Vector2(483, 0)
+texture = ExtResource("2_shm76")
+
+[node name="LED10" type="Sprite2D" parent="Panel"]
+position = Vector2(621, 0)
+texture = ExtResource("2_shm76")
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
