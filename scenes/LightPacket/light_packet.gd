@@ -75,7 +75,7 @@ func _process(delta):
 	if isPaused:
 		pass
 	else:
-		var speedInMedium = (SPEED/index_of_refraction)
+		var speedInMedium = SPEED#(SPEED/index_of_refraction)
 		#Move the second point by one increment                                  #Number of points in the line
 		var currentPointFront = line.get_point_position(numPoints-1)           #Front of ray
 		var nextPointFront = currentPointFront + propDir.normalized()*speedInMedium*delta   #New position of front of ray
