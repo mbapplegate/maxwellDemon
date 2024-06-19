@@ -19,8 +19,8 @@ layer_0/tile_data = PackedInt32Array(2097152, 1, 0, 2031616, 1, 0, 1966080, 1, 0
 
 [node name="DetectorMeter" parent="." instance=ExtResource("4_jngr6")]
 position = Vector2(1740, 128)
-maxPower = 8.0
-goalPower = 6.5
+maxPower = 20.0
+goalPower = 12.0
 integrationTime = 0.5
 IDColor = Color(0, 0, 1, 1)
 
@@ -36,7 +36,7 @@ isRotatable = false
 isEnergizeable = false
 
 [node name="Player" parent="." instance=ExtResource("7_fu8xw")]
-position = Vector2(668, 672)
+position = Vector2(512, 288)
 
 [node name="Doorway" parent="." instance=ExtResource("8_4312g")]
 position = Vector2(1856, 480)
@@ -52,16 +52,16 @@ horizontal_alignment = 2
 vertical_alignment = 1
 
 [node name="LensPlanoConvex" parent="." instance=ExtResource("10_8har7")]
-position = Vector2(1408, 864)
-LENS_HEIGHT = 96.0
-focalLength = 192.0
+position = Vector2(1280, 864)
+LENS_HEIGHT = 256.0
+focalLength = 336.0
 initialAngle = 180.0
 isPushable = false
 isRotatable = false
 
 [node name="FlatMirror3" parent="." instance=ExtResource("9_uy0jb")]
 position = Vector2(96, 864)
-MirrorLength = 130
+MirrorLength = 150
 initialAngle = 75.0
 isPushable = false
 isRotatable = false
@@ -69,8 +69,9 @@ isEnergizeable = false
 
 [node name="LensPlanoConvex2" parent="." instance=ExtResource("10_8har7")]
 position = Vector2(416, 224)
-LENS_HEIGHT = 200.0
-focalLength = 160.0
+LENS_HEIGHT = 220.0
+focalLength = 192.0
+lensIndex = 3.0
 
 [node name="FlatMirror" parent="." instance=ExtResource("9_uy0jb")]
 position = Vector2(1202, 219)
@@ -88,12 +89,12 @@ isPushable = false
 isRotatable = false
 
 [node name="StaticIris" parent="." instance=ExtResource("6_85xs3")]
-position = Vector2(1600, 864)
-aperture_width = 8
+position = Vector2(1616, 864)
+aperture_width = 6
+thickness = 6
 
 [node name="StaticIris" parent="StaticIris" instance=ExtResource("6_85xs3")]
-position = Vector2(-1455, -642)
-aperture_width = 26
+position = Vector2(-1680, -576)
 
 [node name="Timer" type="Timer" parent="."]
 autostart = true

@@ -45,7 +45,7 @@ Blocked: 0
 Percent:      0"
 
 [node name="Player" parent="." instance=ExtResource("5_jd18u")]
-position = Vector2(721, 347)
+position = Vector2(679, 402)
 
 [node name="Doorway" parent="." instance=ExtResource("6_mp8nl")]
 position = Vector2(1856, 480)
