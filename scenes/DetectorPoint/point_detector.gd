@@ -1,6 +1,8 @@
 extends pushableObject
+class_name PointDetector
 
 signal photonDetected(energy)
+signal photonMissed(energy)
 
 @onready var idIndicator = $Stage/Pivot/detSprite/IDSprite
 #@onready var detector = $Stage/Pivot/detSprite
@@ -16,3 +18,5 @@ func _ray_hit(photonObj:Object, _collPoint:Vector2, _collNormal:Vector2, collide
 	#print(collider.name)
 	if collider.name == "activeArea":
 		photonDetected.emit(photonObj.energy)
+	else:
+		photonMissed.emit(photonObj.energy)

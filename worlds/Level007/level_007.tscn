@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bji2h1oagrx5i"]
+[gd_scene load_steps=12 format=3 uid="uid://bji2h1oagrx5i"]
 
 [ext_resource type="Script" path="res://worlds/Level007/level_007.gd" id="1_dxbp8"]
 [ext_resource type="PackedScene" uid="uid://fkwew1tbysym" path="res://worlds/BaseTileMap.tscn" id="2_0ri1u"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://3lsffc1281c7" path="res://scenes/StaticIris/static_iris.tscn" id="6_j8uol"]
 [ext_resource type="PackedScene" uid="uid://dns1nq8hlfau" path="res://scenes/Doorway/doorway.tscn" id="7_vrycc"]
 [ext_resource type="PackedScene" uid="uid://ciufjrc1fmyfi" path="res://scenes/FlatMirror/flat_mirror.tscn" id="8_fytua"]
+[ext_resource type="PackedScene" uid="uid://chlytrwdjaffi" path="res://scenes/MeterLEDs/meter_leds.tscn" id="10_cl2lh"]
 [ext_resource type="PackedScene" uid="uid://b6navnb20xork" path="res://scenes/Lens_PlanoConvex/lens_plano_convex.tscn" id="10_lqocq"]
 
 [node name="Level007" type="Node2D"]
@@ -80,6 +81,11 @@ isEnergizeable = false
 [node name="StaticIris" parent="DetectorMeter/PointDetector" instance=ExtResource("6_j8uol")]
 position = Vector2(-16, -1)
 aperture_width = 6
+
+[node name="MeterLEDs" parent="DetectorMeter/PointDetector" instance=ExtResource("10_cl2lh")]
+position = Vector2(0, 86)
+maxEnergy = 9.0
+updateTime = 0.5
 
 [node name="Doorway" parent="." instance=ExtResource("7_vrycc")]
 position = Vector2(1856, 480)

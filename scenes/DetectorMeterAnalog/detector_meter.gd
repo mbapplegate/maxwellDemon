@@ -41,7 +41,7 @@ func _ready():
 	idBall.modulate = IDColor
 	goalWire.modulate = LevelInfo.WIRE_OFF_COLOR
 	for child in get_children():
-		if child.name == "PointDetector":
+		if child is PointDetector:
 			child.initialize()
 			child.photonDetected.connect(_packetDetected)	
 			child.idIndicator.modulate = IDColor

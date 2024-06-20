@@ -1,5 +1,5 @@
 extends Node2D
-
+class_name FreeAperture
 
 @export var total_height = 120
 @export var aperture_width = 24
