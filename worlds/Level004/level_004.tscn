@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://b8aafup7ob747"]
+[gd_scene load_steps=10 format=3 uid="uid://b8aafup7ob747"]
 
 [ext_resource type="Script" path="res://worlds/Level004/level_004.gd" id="1_kb7vs"]
 [ext_resource type="PackedScene" uid="uid://fkwew1tbysym" path="res://worlds/BaseTileMap.tscn" id="2_dqte5"]
@@ -6,7 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://dn3852bgxqccu" path="res://scenes/DetectorMeterAnalog/detector_meter.tscn" id="4_8oj73"]
 [ext_resource type="PackedScene" uid="uid://bq36hxil0t1vi" path="res://scenes/DetectorPoint/point_detector.tscn" id="5_lkleo"]
 [ext_resource type="PackedScene" uid="uid://ojfv06ceqv2a" path="res://scenes/Player/player.tscn" id="6_3bpnm"]
-[ext_resource type="PackedScene" uid="uid://chlytrwdjaffi" path="res://scenes/MeterLEDs/meter_leds.tscn" id="6_gidpx"]
 [ext_resource type="PackedScene" uid="uid://dns1nq8hlfau" path="res://scenes/Doorway/doorway.tscn" id="7_kutwy"]
 [ext_resource type="Script" path="res://addons/controller_icons/objects/ControllerIconTexture.gd" id="8_wjvvc"]
 
@@ -46,9 +45,6 @@ default_color = Color(0, 1, 0, 1)
 position = Vector2(-32, 412)
 initialAngle = 45.0
 isEnergizeable = false
-
-[node name="MeterLEDs" parent="DetectorMeter/PointDetector" instance=ExtResource("6_gidpx")]
-position = Vector2(4, -92)
 
 [node name="Player" parent="." instance=ExtResource("6_3bpnm")]
 position = Vector2(1216, 192)

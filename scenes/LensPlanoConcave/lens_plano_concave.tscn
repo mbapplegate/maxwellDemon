@@ -1,0 +1,39 @@
+[gd_scene load_steps=5 format=3 uid="uid://to3hq200c5kj"]
+
+[ext_resource type="PackedScene" uid="uid://beic3gevjusuj" path="res://scenes/PushableObject/pushable_object.tscn" id="1_mtbxf"]
+[ext_resource type="Script" path="res://scenes/LensPlanoConcave/lens_plano_concave.gd" id="2_pvqx7"]
+[ext_resource type="Texture2D" uid="uid://ciqfgqswil4p2" path="res://scenes/Lens_PlanoConvex/focalSpot_white_16x16.png" id="3_2jfuu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r1cfq"]
+resource_local_to_scene = true
+size = Vector2(7, 98)
+
+[node name="LensPlanoConcave" instance=ExtResource("1_mtbxf")]
+script = ExtResource("2_pvqx7")
+LENS_HEIGHT = null
+focalLength = null
+lensIndex = null
+focalSpriteColor = null
+sliding_time = null
+initialAngle = null
+isPushable = null
+isRotatable = null
+isEnergizeable = null
+isEnergized = null
+
+[node name="FrontFaceArea" type="StaticBody2D" parent="Stage" index="0"]
+
+[node name="curveFaceShape" type="CollisionPolygon2D" parent="Stage/FrontFaceArea" index="0"]
+polygon = PackedVector2Array(24, -51, 7, -42, 1, -19, 1, 0, 5, 31, 27, 57, 35, 47, 15, 26, 9, -4, 9, -19, 17, -39, 25, -42, 25, -42)
+
+[node name="BackFaceArea" type="StaticBody2D" parent="Stage" index="1"]
+
+[node name="flatFaceShape" type="CollisionShape2D" parent="Stage/BackFaceArea" index="0"]
+position = Vector2(-13, 0)
+shape = SubResource("RectangleShape2D_r1cfq")
+
+[node name="LensOutline" type="Polygon2D" parent="Stage" index="2"]
+
+[node name="focusSprite" type="Sprite2D" parent="Stage" index="3"]
+position = Vector2(-123, 0)
+texture = ExtResource("3_2jfuu")
