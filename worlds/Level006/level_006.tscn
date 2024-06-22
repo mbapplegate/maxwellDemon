@@ -22,7 +22,6 @@ timerTimeout = 0.125
 initialAngle = 90.0
 isPushable = false
 isRotatable = false
-isEnergized = true
 
 [node name="DetectorMeter" parent="." instance=ExtResource("4_rtrxn")]
 position = Vector2(1568, 192)
