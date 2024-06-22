@@ -10,11 +10,12 @@
 script = ExtResource("1_8ha15")
 
 [node name="LensPlanoConcave" parent="." instance=ExtResource("1_feq6s")]
-position = Vector2(339, 246)
+position = Vector2(333, 223)
+initialAngle = 180.0
 
 [node name="LaserSource" parent="." instance=ExtResource("2_2j8hj")]
-position = Vector2(105, 254)
-HALF_HEIGHT = 64.0
+position = Vector2(105, 218)
+HALF_HEIGHT = 30.0
 rayColor = Vector3(1, 0, 0)
 timerTimeout = 0.5
 
@@ -22,9 +23,8 @@ timerTimeout = 0.5
 position = Vector2(648, 373)
 
 [node name="LensPlanoConvex" parent="." instance=ExtResource("5_xcgw3")]
-position = Vector2(572, 225)
-focalLength = 258.0
+position = Vector2(651, 217)
+focalLength = 512.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(459, 217)
-zoom = Vector2(2, 2)

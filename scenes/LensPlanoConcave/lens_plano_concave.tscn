@@ -53,10 +53,16 @@ color = Color(0.0705882, 0.619608, 1, 0.501961)
 position = Vector2(-123, 0)
 texture = ExtResource("3_2jfuu")
 
+[node name="focusSprite2" type="Sprite2D" parent="Stage" index="6"]
+position = Vector2(127, -3)
+texture = ExtResource("3_2jfuu")
+
 [node name="Sprite2D" type="Sprite2D" parent="." index="5"]
+visible = false
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("4_ar8fy")
 
 [node name="Sprite2D2" type="Sprite2D" parent="." index="6"]
+visible = false
 scale = Vector2(0.05, 0.05)
 texture = ExtResource("4_ar8fy")
