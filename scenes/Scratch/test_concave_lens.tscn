@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=3 uid="uid://culdxocxr33i7"]
+
+[ext_resource type="Script" path="res://scenes/Scratch/test_concave_lens.gd" id="1_8ha15"]
+[ext_resource type="PackedScene" uid="uid://to3hq200c5kj" path="res://scenes/LensPlanoConcave/lens_plano_concave.tscn" id="1_feq6s"]
+[ext_resource type="PackedScene" uid="uid://2ai0r6raovox" path="res://scenes/LaserSource/laser_source.tscn" id="2_2j8hj"]
+[ext_resource type="PackedScene" uid="uid://ojfv06ceqv2a" path="res://scenes/Player/player.tscn" id="3_w8nse"]
+[ext_resource type="PackedScene" uid="uid://b6navnb20xork" path="res://scenes/Lens_PlanoConvex/lens_plano_convex.tscn" id="5_xcgw3"]
+
+[node name="TestConcaveLens" type="Node2D"]
+script = ExtResource("1_8ha15")
+
+[node name="LensPlanoConcave" parent="." instance=ExtResource("1_feq6s")]
+position = Vector2(333, 223)
+initialAngle = 180.0
+
+[node name="LaserSource" parent="." instance=ExtResource("2_2j8hj")]
+position = Vector2(105, 218)
+HALF_HEIGHT = 30.0
+rayColor = Vector3(1, 0, 0)
+timerTimeout = 0.5
+
+[node name="Player" parent="." instance=ExtResource("3_w8nse")]
+position = Vector2(648, 373)
+
+[node name="LensPlanoConvex" parent="." instance=ExtResource("5_xcgw3")]
+position = Vector2(651, 217)
+focalLength = 512.0
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(459, 217)

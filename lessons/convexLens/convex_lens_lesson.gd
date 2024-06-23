@@ -1,6 +1,6 @@
 extends Node2D
 
-@export var nextSceneAlias = "Level008"
+@export var nextSceneAlias = "Level007b"
 const THIS_SCENE_ALIAS = "ConvexLensLesson"
 
 var signalEmitted : bool = false
