@@ -26,7 +26,7 @@ isPushable = false
 isRotatable = false
 
 [node name="Player" parent="." instance=ExtResource("4_qgjph")]
-position = Vector2(1368, 544)
+position = Vector2(1312, 560)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(1376, 406)
@@ -89,4 +89,4 @@ position = Vector2(1856, 480)
 
 [node name="LensPlanoConcave" parent="." instance=ExtResource("11_c2a61")]
 position = Vector2(1472, 480)
-focalLength = -160.0
+focalLength = -155.2

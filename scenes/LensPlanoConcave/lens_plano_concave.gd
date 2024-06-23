@@ -53,7 +53,7 @@ func set_geometry(newRadius:float, lens_height:float, center:Vector2):
 		#lens_height = 2*maxY
 
 	var lensThickness =8*FRONT_THICKNESS + maxX
-	
+	#print("concave Thickness: ", lensThickness, "Radius: ", newRadius)
 	#Distance from lens at theta=0 to principal plane
 	#I want this to be located at Zero
 	var apexToPlane = (lensThickness-maxX)/lensIndex
@@ -69,7 +69,7 @@ func set_geometry(newRadius:float, lens_height:float, center:Vector2):
 	#$Sprite2D.position = Vector2(-apexToPlane,0)
 	#print(apexToPlane, ", ", minX)
 	#$Sprite2D.position = Vector2.ZERO
-	#$Sprite2D2.position = Vector2(apexToPlane,0)
+	#$Sprite2D2.position = Vector2(-apexToPlane,0)
 	#Center of the spherical portion of the lens
 	lensOrigin = Vector2(-lensRadius-apexToPlane,0)
 	#print(lensRadius, lensOrigin)
@@ -134,8 +134,10 @@ func _ray_hit(photonObj:Object, collPoint:Vector2, collNormal:Vector2, _collider
 		#### DEBUG STUFF ###########
 		#$Sprite2D.position = Vector2(-4*FRONT_THICKNESS+distToPrinPlane,-rad*sin(halfAngle))
 		#$Sprite2D.position = locPt#Vector2(25*cos(correctedTheta),25*sin(correctedTheta)) + locPt
-		$Sprite2D2.position =25*collNormal + locPt#Vector2(25*cos(correctedTheta),25*sin(correctedTheta)) + locPt
-		$Sprite2D.position = 25*perpDir + locPt
+		#$Sprite2D2.position =25*collNormal + locPt#Vector2(25*cos(correctedTheta),25*sin(correctedTheta)) + locPt
+		#$Sprite2D.position = 25*perpDir + locPt
+		#$Sprite2D.position = Vector2.ZERO
+		
 		#print(photonObj.propDir.dot(perpDir),", ",photonObj.propDir.dot(collNormal))
 		#print(rad_to_deg(correctedTheta), ", ",rotatedOrigin,", ", perpDir,", ",collNormal)
 		#################################

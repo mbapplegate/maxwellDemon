@@ -45,6 +45,7 @@ func set_geometry(newRadius:float, lens_height:float, center:Vector2):
 	#if maxY < lens_height:
 		#lens_height = 2*maxY
 	var lensThickness = minX+4.0*FRONT_THICKNESS
+	#print("Thickness: ", lensThickness, ", Radius: ", newRadius, ", minX: ", minX)
 	#Distance from lens at theta=0 to principal plane
 	#I want this to be located at Zero
 	var apexToPlane = lensThickness/lensIndex

@@ -23,12 +23,14 @@ text = "Any key to continue . . ."
 wait_time = 0.5
 
 [node name="explan1" type="RichTextLabel" parent="."]
-offset_left = 416.0
-offset_top = 96.0
-offset_right = 832.0
-offset_bottom = 224.0
+offset_left = 512.0
+offset_top = 32.0
+offset_right = 928.0
+offset_bottom = 256.0
 theme_override_font_sizes/normal_font_size = 18
-text = "Diverging lenses spread light out. They have a \"virtual focal point\" found by tracing output rays originating from a collimated input beam backwards"
+text = "Diverging lenses spread light out. They have a \"virtual focal point\" found by tracing output rays originating from a collimated input beam backwards.
+
+They are used in eyeglasses to correct nearsightedness by shifting the focal length of the eye."
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
 offset_left = 16.0

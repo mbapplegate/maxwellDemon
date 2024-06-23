@@ -74,6 +74,7 @@ func move_grid(direction:String):
 		var tween = get_tree().create_tween()
 		tween.set_ease(Tween.EASE_IN)
 		tween.set_trans(Tween.TRANS_CUBIC)
+		#print(itemActive)
 		if itemActive and Input.is_action_pressed("pull"):
 			itemActive.pull(inputs[direction],_player_body)
 		tween.tween_property(self,"global_position",newPos,0.2)
@@ -116,14 +117,14 @@ func validate_movement(testLoc:Vector2, direction:Vector2):
 		return true
 	else:
 		if _cast.is_colliding():
-			if _cast.get_collider() is pushableObject and _cast.get_collider().isPushable and Input.is_action_pressed("pull"):
+			if _cast.get_collider() is pushableObject and itemActive and _cast.get_collider().isPushable and Input.is_action_pressed("pull"):
 				_cast.get_collider().push(_cast.target_position)
 				return _cast.get_collider().isSliding
 			else:
 				return false
 		elif _cast2.is_colliding():
-			if _cast2.get_collider() is pushableObject and _cast2.get_collider().isPushable and Input.is_action_pressed("pull"):
-				_cast2.get_collider().push(_cast2.target_position)
+			if _cast2.get_collider() is pushableObject and itemActive and _cast2.get_collider().isPushable and Input.is_action_pressed("pull"):
+				#_cast2.get_collider().push(_cast2.target_position)
 				return _cast2.get_collider().isSliding
 			else:
 				return false
@@ -151,6 +152,9 @@ func _physics_process(delta):
 			actionTaken= true
 			update_animation(inputs[dir])
 			move_grid(dir)
+			
+		if Input.is_action_pressed("pull") and not isMoving:
+			actionTaken = true
 			
 	if not actionTaken:
 		idleCount += delta
