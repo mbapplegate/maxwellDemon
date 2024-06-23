@@ -30,7 +30,6 @@ text = "Collimation"
 
 [node name="LensPlanoConvex" parent="." instance=ExtResource("1_br23g")]
 position = Vector2(480, 288)
-focalLength = 256
 isPushable = false
 isRotatable = false
 

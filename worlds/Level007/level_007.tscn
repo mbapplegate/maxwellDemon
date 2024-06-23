@@ -57,7 +57,6 @@ isEnergizeable = false
 
 [node name="LensPlanoConvex" parent="." instance=ExtResource("10_lqocq")]
 position = Vector2(1246, 351)
-focalLength = 176
 initialAngle = 180.0
 
 [node name="DetectorMeter" parent="." instance=ExtResource("4_ipodj")]
