@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://c1aiovf0kwfef"]
+[gd_scene load_steps=5 format=3 uid="uid://c1aiovf0kwfef"]
 
 [ext_resource type="Script" path="res://lessons/concaveLens/concave_lens_lesson.gd" id="1_67plr"]
 [ext_resource type="PackedScene" uid="uid://bt1eicy7gakub" path="res://scenes/InvisibleSource/invisible_source.tscn" id="2_mce03"]
 [ext_resource type="PackedScene" uid="uid://to3hq200c5kj" path="res://scenes/LensPlanoConcave/lens_plano_concave.tscn" id="3_31y64"]
+[ext_resource type="PackedScene" uid="uid://b6navnb20xork" path="res://scenes/Lens_PlanoConvex/lens_plano_convex.tscn" id="4_8wmby"]
 
 [node name="ConcaveLensLesson" type="Node2D"]
 script = ExtResource("1_67plr")
@@ -19,38 +20,41 @@ offset_bottom = 552.0
 theme_override_font_sizes/normal_font_size = 24
 text = "Any key to continue . . ."
 
-[node name="Timer" type="Timer" parent="."]
-wait_time = 0.5
-
 [node name="explan1" type="RichTextLabel" parent="."]
 offset_left = 512.0
-offset_top = 32.0
+offset_top = 96.0
 offset_right = 928.0
-offset_bottom = 256.0
+offset_bottom = 128.0
 theme_override_font_sizes/normal_font_size = 18
-text = "Diverging lenses spread light out. They have a \"virtual focal point\" found by tracing output rays originating from a collimated input beam backwards.
+text = "Concave (negative) lenses spread light out . . ."
 
-They are used in eyeglasses to correct nearsightedness by shifting the focal length of the eye."
+[node name="explan2" type="RichTextLabel" parent="."]
+offset_left = 512.0
+offset_top = 160.0
+offset_right = 928.0
+offset_bottom = 224.0
+theme_override_font_sizes/normal_font_size = 18
+text = "Rays traced backward converge on the focal point . . ."
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
 offset_left = 16.0
 offset_top = 29.0
-offset_right = 416.0
+offset_right = 480.0
 offset_bottom = 98.0
 theme_override_font_sizes/normal_font_size = 40
-text = "Diverging Lenses"
+text = "Plano-Concave Lenses"
 
 [node name="LensPlanoConcave" parent="." instance=ExtResource("3_31y64")]
 position = Vector2(416, 352)
 isRotatable = false
 
 [node name="Line2D" type="Line2D" parent="."]
-points = PackedVector2Array(288, 352, 544, 283)
-width = 1.0
+points = PackedVector2Array(288, 352, 768, 221)
+width = 2.0
 
 [node name="Line2D2" type="Line2D" parent="."]
-points = PackedVector2Array(288, 352, 544, 421)
-width = 1.0
+points = PackedVector2Array(288, 352, 768, 483)
+width = 2.0
 
 [node name="InvisibleSource" parent="." instance=ExtResource("2_mce03")]
 z_index = 2
@@ -58,13 +62,49 @@ position = Vector2(224, 320)
 rotation = 1.5708
 scale = Vector2(2, 2)
 propagationDirection = Vector2(1, 0)
-timerTimeout = 0.5
+timerTimeout = 0.25
 
 [node name="InvisibleSource2" parent="." instance=ExtResource("2_mce03")]
 z_index = 1
 position = Vector2(224, 384)
 rotation = 1.5708
 propagationDirection = Vector2(1, 0)
-timerTimeout = 0.5
+timerTimeout = 0.25
 
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[node name="Timer2" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+autostart = true
+
+[node name="Timer3" type="Timer" parent="."]
+wait_time = 4.0
+one_shot = true
+
+[node name="LensPlanoConvex" parent="." instance=ExtResource("4_8wmby")]
+position = Vector2(256, 480)
+focalLength = 240.0
+focalSpriteColor = Color(0.921569, 0.909804, 0, 1)
+initialAngle = 180.0
+isPushable = false
+isRotatable = false
+
+[node name="explan3" type="RichTextLabel" parent="."]
+offset_left = 512.0
+offset_top = 224.0
+offset_right = 928.0
+offset_bottom = 288.0
+theme_override_font_sizes/normal_font_size = 18
+text = "Negative lenses close to positive lenses can  increase focal lengths"
+
+[node name="Line2D3" type="Line2D" parent="."]
+points = PackedVector2Array(288, 352, 768, 352)
+width = 2.0
+
+[node name="InvisibleSource3" parent="." instance=ExtResource("2_mce03")]
+position = Vector2(224, 352)
+rotation = 1.5708
+propagationDirection = Vector2(1, 0)
+timerTimeout = 0.25
+
+[connection signal="timeout" from="Timer2" to="." method="_on_timer_2_timeout"]
+[connection signal="timeout" from="Timer3" to="." method="_on_timer_3_timeout"]
