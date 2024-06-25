@@ -1,5 +1,6 @@
 extends Node2D
 
+@export var indicatorVisible : bool = true
 @onready var leafTimer = $Timer
 @onready var up1 = $up1
 @onready var up2 = $up2
@@ -29,6 +30,7 @@ var startClosedGlobalPosUp = Vector2.ZERO
 var startClosedGlobalPosDown = Vector2.ZERO
 
 func _ready():
+	$Indicator.visible = indicatorVisible
 	upLeaves.append(up1)
 	upLeaves.append(up2)
 	upLeaves.append(up3)
@@ -131,6 +133,7 @@ func _on_timer_timeout():
 			doorBodyClosed.set_collision_mask(0)
 			doorBodyOpen.set_collision_layer(3)
 			doorBodyOpen.set_collision_mask(3)
+			$Indicator.texture = load("res://tiles/pushable/onButton.png")
 			isOpening = false
 		
 	if  isClosing:
@@ -148,5 +151,6 @@ func _on_timer_timeout():
 				doorBodyClosed.set_collision_mask(3)
 				doorBodyOpen.set_collision_layer(0)
 				doorBodyOpen.set_collision_mask(0)
+				$Indicator.texture = load("res://tiles/pushable/offButton.png")
 				isClosing = false	
 
