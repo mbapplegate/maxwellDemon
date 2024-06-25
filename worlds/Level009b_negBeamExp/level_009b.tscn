@@ -71,7 +71,7 @@ isPushable = false
 isRotatable = false
 
 [node name="LensPlanoConvex2" parent="." instance=ExtResource("8_igsck")]
-position = Vector2(730, 316)
+position = Vector2(562, 160)
 LENS_HEIGHT = 256.0
 focalLength = 480.0
 focalSpriteColor = Color(0, 1, 1, 1)
@@ -110,7 +110,8 @@ isEnergizeable = false
 autostart = true
 
 [node name="LensPlanoConcave" parent="." instance=ExtResource("11_7s7uh")]
-position = Vector2(348, 319)
+position = Vector2(756, 164)
+LENS_HEIGHT = 96.0
 focalLength = -96.0
 focalSpriteColor = Color(0, 1, 1, 1)
 initialAngle = 180.0
