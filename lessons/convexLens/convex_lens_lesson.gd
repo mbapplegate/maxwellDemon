@@ -1,7 +1,8 @@
 extends Node2D
 
-@export var nextSceneAlias = "Level007b"
+
 const THIS_SCENE_ALIAS = "ConvexLensLesson"
+var nextSceneAlias = LevelInfo.GameFlow[THIS_SCENE_ALIAS]
 
 var signalEmitted : bool = false
 var yComponent = 0.0

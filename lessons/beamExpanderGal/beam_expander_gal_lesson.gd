@@ -1,7 +1,7 @@
 extends Node2D
 
-@export var nextSceneAlias = "Level011"
 const THIS_SCENE_ALIAS = "BeamExpanderLesson2"
+var nextSceneAlias = LevelInfo.GameFlow[THIS_SCENE_ALIAS]
 
 var signalEmitted : bool = false
 var dirIdx = 0

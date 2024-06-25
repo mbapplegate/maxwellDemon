@@ -38,6 +38,30 @@ var LevelDictionary = {
 	"Level012Filters" : {"Path" : "res://worlds/Level012_Filters/level_012_filters.tscn", "Title" : "Filters", "Section" : "Colors"}
 }
 
+var GameFlow = {
+	"Level001"            : "Level002",
+	"Level002"            : "Level003",
+	"Level003"            : "Level004",
+	"Level004"            : "DetectorLesson",
+	"DetectorLesson"      : "Level005",
+	"Level005"            : "MeterLesson",
+	"MeterLesson"         : "Level006",
+	"Level006"            : "MirrorLesson",
+	"MirrorLesson"        : "Level007",
+	"Level007"            : "ConvexLensLesson",
+	"ConvexLensLesson"    : "Level007b",
+	"Level007b"           : "ConcaveLensLesson",
+	"ConcaveLensLesson"   : "Level008",
+	"Level008"            : "CollimationLesson",
+	"CollimationLesson"   : "Level009",
+	"Level009"            : "BeamExpanderLesson",
+	"BeamExpanderLesson"  : "Level009b",
+	"Level009b"           : "BeamExpanderLesson2",
+	"BeamExpanderLesson2" : "Level011",
+	"Level011"            : "ParabolicMirrorLesson",
+	"ParabolicMirrorLesson" : "MainMenu"
+	
+}
 var inImagingMode: bool = false
 
 func _input(event):

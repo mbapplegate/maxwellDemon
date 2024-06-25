@@ -1,7 +1,7 @@
 extends Node2D
 
-@export var nextSceneAlias = "Level007"
 const THIS_SCENE_ALIAS = "MirrorLesson"
+var nextSceneAlias = LevelInfo.GameFlow[THIS_SCENE_ALIAS]
 const ANGLE_DEMO_LEN = 75
 const NUM_ARC_POINTS = 32
 var signalEmitted : bool = false

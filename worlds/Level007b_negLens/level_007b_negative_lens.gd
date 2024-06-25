@@ -4,7 +4,7 @@ extends Node2D
 @onready var player = $Player
 @onready var titleText = $titleText
 const THIS_SCENE_ALIAS = "Level007b"
-@export var nextSceneAlias = "ConcaveLensLesson"
+var nextSceneAlias = LevelInfo.GameFlow[THIS_SCENE_ALIAS]
 signal nextScene(sceneAlias)
 var signalEmitted : bool = false
 

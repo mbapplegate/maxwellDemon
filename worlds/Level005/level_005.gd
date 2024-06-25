@@ -7,11 +7,11 @@ extends Node2D
 @onready var goalWire = $goalWire
 @onready var titleText = $titleText
 
-@export var nextSceneAlias = "MeterLesson"
 signal nextScene(sceneAlias)
 var signalEmitted : bool = false
 
 const THIS_SCENE_ALIAS = "Level005"
+var nextSceneAlias = LevelInfo.GameFlow[THIS_SCENE_ALIAS]
 
 func _ready():
 	titleText.text = LevelInfo.LevelDictionary[THIS_SCENE_ALIAS].Title

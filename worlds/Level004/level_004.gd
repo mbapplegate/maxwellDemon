@@ -6,9 +6,9 @@ extends Node2D
 @onready var tutText= $RichTextLabel
 @onready var titleText = $titleText
 
-@export var nextSceneAlias = "DetectorLesson"
-
 const THIS_SCENE_ALIAS = "Level004"
+var nextSceneAlias = LevelInfo.GameFlow[THIS_SCENE_ALIAS]
+
 signal nextScene(sceneAlias)
 var signalEmitted : bool = false
 		
