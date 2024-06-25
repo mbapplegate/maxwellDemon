@@ -30,6 +30,8 @@ var LevelDictionary = {
 	"CollimationLesson" : {"Path" : "res://lessons/collimation/collimation_lesson.tscn", "Title" : "Collimation Lesson", "Section" : "Lessons"},
 	"Level009"    : {"Path" : "res://worlds/Level009/level_009.tscn",              "Title" : "Expand",         "Section" : "LensesAndMirrors"},
 	"BeamExpanderLesson" : {"Path" : "res://lessons/beamExpanderKep/beam_expander_lesson.tscn", "Title" : "Beam Expander Lesson", "Section" : "Lessons"},
+	"Level009b"   : {"Path" : "res://worlds/Level009b_negBeamExp/level_009b.tscn", "Title" : "Expand2",         "Section" : "LensesAndMirrors"},
+	"BeamExpanderLesson2" : {"Path" : "res://lessons/beamExpanderGal/beam_expander_gal_lesson.tscn", "Title" : "Galilan Beam Expander", "Section" : "Lessons"},
 	"Level010"    : {"Path" : "res://worlds/Level010/level_010.tscn",              "Title" : "Image",          "Section" : "Debug"},
 	"Level011"    : {"Path" : "res://worlds/Level011/level_011.tscn",              "Title" : "Parabolic Mirror","Section" : "LensesAndMirrors"},
 	"ParabolicMirrorLesson" : {"Path" : "res://lessons/parabolicMirror/parabolic_mirror_lesson.tscn", "Title" : "Parabolic Mirror Lesson","Section" : "Lessons"},

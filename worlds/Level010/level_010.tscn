@@ -39,7 +39,6 @@ rayColor = Vector3(1, 1, 1)
 initialAngle = 30.0
 isPushable = false
 isRotatable = false
-isEnergized = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 anchor_mode = 0
@@ -55,9 +54,6 @@ objectColor = Vector3(0, 0, 1)
 
 [node name="LensPlanoConvex" parent="." instance=ExtResource("8_v4y6q")]
 position = Vector2(608, 256)
-LENS_HEIGHT = 256
-focalLength = 300
-isEnergizeable = false
 
 [node name="Timer" type="Timer" parent="."]
 
