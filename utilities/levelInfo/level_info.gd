@@ -20,7 +20,7 @@ var LevelDictionary = {
 	"DetectorLesson" : {"Path" : "res://lessons/detector/detector_lesson.tscn",    "Title" : "Detector Lesson", "Section" : "Lessons"},
 	"Level005"    : {"Path" : "res://worlds/Level005/level_005.tscn",              "Title" : "Multiple Goals", "Section" : "Tutorial"},
 	"MeterLesson" : {"Path" : "res://lessons/meter/meter_lesson.tscn",             "Title" : "Meter Lesson",   "Section" : "Lessons"},
-	"DigitalMirrorLesson" : {"Path" : "res://lessons/digitalMeter/digital_meter_lesson.tscn", "Title" : "Digital Meter Lesson", "Section" : "Lessons"},
+	"DigitalMeterLesson" : {"Path" : "res://lessons/digitalMeter/digital_meter_lesson.tscn", "Title" : "Digital Meter Lesson", "Section" : "Lessons"},
 	"Level006"    : {"Path" : "res://worlds/Level006/level_006.tscn",              "Title" : "Mirrors",        "Section" : "Tutorial"},
 	"MirrorLesson": {"Path" : "res://lessons/mirror/mirror_lesson.tscn",           "Title" : "Mirror Lesson",  "Section" : "Lessons"},
 	"Level007"    : {"Path" : "res://worlds/Level007/level_007.tscn",              "Title" : "Focus",          "Section" : "Tutorial"},
