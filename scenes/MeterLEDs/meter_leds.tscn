@@ -7,8 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://dle8bqng3uccv" path="res://scenes/MeterLEDs/avgMarker.png" id="4_3cqhy"]
 
 [node name="MeterLEDs" type="Node2D"]
-position = Vector2(128, 64)
-scale = Vector2(0.1, 0.1)
+scale = Vector2(0.088, 0.088)
 script = ExtResource("1_b7sq0")
 goalOnTop = false
 

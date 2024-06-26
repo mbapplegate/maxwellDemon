@@ -25,7 +25,7 @@ func _toggleDoor(val):
 	if val:
 		var allGoalsMet = true
 		for child in get_children():
-			if child is detectorMeter:
+			if child is PointDetector:
 				if not child.goalMet:
 					allGoalsMet = false
 		

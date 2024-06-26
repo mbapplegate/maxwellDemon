@@ -7,6 +7,7 @@ signal photonMissed(energy)
 @onready var idIndicator = $Stage/Pivot/detSprite/IDSprite
 #@onready var detector = $Stage/Pivot/detSprite
 signal goalMetChanged(val)
+var goalMet = false
 
 func _ready():
 	isEnergizeable = false
@@ -26,4 +27,5 @@ func _ray_hit(photonObj:Object, _collPoint:Vector2, _collNormal:Vector2, collide
 		photonMissed.emit(photonObj.energy)
 		
 func goalChanged(val):
+	goalMet = val
 	goalMetChanged.emit(val)
