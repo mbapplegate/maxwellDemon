@@ -25,8 +25,9 @@ isEnergizeable = false
 
 [node name="StaticIris" parent="PointDetector" instance=ExtResource("6_85xs3")]
 position = Vector2(-16, 0)
-aperture_width = 8
+aperture_width = 6
 thickness = 6
+snapY = false
 
 [node name="MeterLEDs" parent="PointDetector" instance=ExtResource("5_8wj8b")]
 position = Vector2(0, 96)

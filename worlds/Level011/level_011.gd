@@ -14,8 +14,8 @@ func _ready():
 	for child in get_children():
 		if child is pushableObject:
 			child.initialize()
-		elif child is detectorMeter:
-			child.goalMetChanged.connect(_toggleDoor)
+			if child is PointDetector:
+				child.goalMetChanged.connect(_toggleDoor)
 			
 func _toggleDoor(val):
 	if val:
