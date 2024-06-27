@@ -6,57 +6,58 @@
 [node name="LevelSelector" type="Node2D"]
 script = ExtResource("1_ohu8e")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
-offset_left = 128.0
-offset_top = 128.0
-offset_right = 1056.0
-offset_bottom = 256.0
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
 
-[node name="Level01" parent="HBoxContainer" instance=ExtResource("2_hu0pa")]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Level01" parent="VBoxContainer/HBoxContainer" instance=ExtResource("2_hu0pa")]
 layout_mode = 2
 text = "01"
 
-[node name="Level02" parent="HBoxContainer" instance=ExtResource("2_hu0pa")]
+[node name="Level02" parent="VBoxContainer/HBoxContainer" instance=ExtResource("2_hu0pa")]
 layout_mode = 2
 text = "02			"
 levelAlias = "Level002"
 
-[node name="Level03" parent="HBoxContainer" instance=ExtResource("2_hu0pa")]
+[node name="Level03" parent="VBoxContainer/HBoxContainer" instance=ExtResource("2_hu0pa")]
 layout_mode = 2
 text = "03	"
 levelAlias = "Level003"
 
-[node name="Level04" parent="HBoxContainer" instance=ExtResource("2_hu0pa")]
+[node name="Level04" parent="VBoxContainer/HBoxContainer" instance=ExtResource("2_hu0pa")]
 layout_mode = 2
 text = "04	"
 levelAlias = "Level004"
 
-[node name="Level05" parent="HBoxContainer" instance=ExtResource("2_hu0pa")]
+[node name="Level05" parent="VBoxContainer/HBoxContainer" instance=ExtResource("2_hu0pa")]
 layout_mode = 2
 text = "05"
 levelAlias = "Level005"
 
-[node name="Level06" parent="HBoxContainer" instance=ExtResource("2_hu0pa")]
+[node name="Level06" parent="VBoxContainer/HBoxContainer" instance=ExtResource("2_hu0pa")]
 layout_mode = 2
 text = "06"
 levelAlias = "Level006"
 
-[node name="Level07" parent="HBoxContainer" instance=ExtResource("2_hu0pa")]
+[node name="Level07" parent="VBoxContainer/HBoxContainer" instance=ExtResource("2_hu0pa")]
 layout_mode = 2
 text = "07"
 levelAlias = "Level007"
 
-[node name="Level08" parent="HBoxContainer" instance=ExtResource("2_hu0pa")]
+[node name="Level08" parent="VBoxContainer/HBoxContainer" instance=ExtResource("2_hu0pa")]
 layout_mode = 2
 text = "08"
 levelAlias = "Level008"
 
-[node name="Level09" parent="HBoxContainer" instance=ExtResource("2_hu0pa")]
+[node name="Level09" parent="VBoxContainer/HBoxContainer" instance=ExtResource("2_hu0pa")]
 layout_mode = 2
 text = "09	"
 levelAlias = "Level009"
 
-[node name="Level10" parent="HBoxContainer" instance=ExtResource("2_hu0pa")]
+[node name="Level10" parent="VBoxContainer/HBoxContainer" instance=ExtResource("2_hu0pa")]
 layout_mode = 2
 text = "10"
 levelAlias = "Level011"
@@ -68,7 +69,3 @@ offset_right = 592.0
 offset_bottom = 483.0
 theme_override_font_sizes/font_size = 48
 text = "Lorem Ipsem"
-
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-offset_right = 40.0
-offset_bottom = 40.0
