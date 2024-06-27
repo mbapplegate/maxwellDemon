@@ -10,20 +10,20 @@ var LevelDictionary = {
 	"LevelSelect" : {"Path" : "res://utilities/levelSelector/level_selector.tscn", "Title" : "Select Level",   "Section" : "Menus"},
 	"Manager"     : {"Path" : "res://utilities/gameManager/game_manager.tscn",     "Title" : "Game Manager",   "Section" : "Menus"},
 	"TestWorld"   : {"Path" : "res://worlds/test_world.tscn",                      "Title" : "Debug",          "Section" : "Debug"},
-	"Level001"    : {"Path" : "res://worlds/Level001/level_001.tscn",              "Title" : "Energize!",      "Section" : "Tutorials"},
+	"Level001"    : {"Path" : "res://worlds/Level001/level_001.tscn",              "Title" : "Energize!",      "Section" : "Tutorial"},
 	"EnergizeLesson" : {"Path" : "res://lessons/energize/energize_lesson.tscn",    "Title" : "Energize Lesson", "Section" : "Lessons"},
-	"Level002"    : {"Path" : "res://worlds/Level002/level_002.tscn",              "Title" : "Rotate",         "Section" : "Tutorials"},
+	"Level002"    : {"Path" : "res://worlds/Level002/level_002.tscn",              "Title" : "Rotate",         "Section" : "Tutorial"},
 	"RotateLesson" : {"Path" : "res://lessons/rotate/rotate_lesson.tscn",          "Title" : "Rotate Lesson",  "Section" : "Lessons"},
-	"Level003"    : {"Path" : "res://worlds/Level003/level_003.tscn",              "Title" : "Push",           "Section" : "Tutorials"},
+	"Level003"    : {"Path" : "res://worlds/Level003/level_003.tscn",              "Title" : "Push",           "Section" : "Tutorial"},
 	"PushLesson"  : {"Path" : "res://lessons/push/push_lesson.tscn",               "Title" : "Push Lesson",    "Section" : "Lessons"},
-	"Level004"    : {"Path" : "res://worlds/Level004/level_004.tscn",              "Title" : "Pull",           "Section" : "Tutorials"},
+	"Level004"    : {"Path" : "res://worlds/Level004/level_004.tscn",              "Title" : "Pull",           "Section" : "Tutorial"},
 	"DetectorLesson" : {"Path" : "res://lessons/detector/detector_lesson.tscn",    "Title" : "Detector Lesson", "Section" : "Lessons"},
-	"Level005"    : {"Path" : "res://worlds/Level005/level_005.tscn",              "Title" : "Multiple Goals", "Section" : "Tutorials"},
+	"Level005"    : {"Path" : "res://worlds/Level005/level_005.tscn",              "Title" : "Multiple Goals", "Section" : "Tutorial"},
 	"MeterLesson" : {"Path" : "res://lessons/meter/meter_lesson.tscn",             "Title" : "Meter Lesson",   "Section" : "Lessons"},
 	"DigitalMeterLesson" : {"Path" : "res://lessons/digitalMeter/digital_meter_lesson.tscn", "Title" : "Digital Meter Lesson", "Section" : "Lessons"},
-	"Level006"    : {"Path" : "res://worlds/Level006/level_006.tscn",              "Title" : "Mirrors",        "Section" : "Tutorials"},
+	"Level006"    : {"Path" : "res://worlds/Level006/level_006.tscn",              "Title" : "Mirrors",        "Section" : "Lenses and Mirrors"},
 	"MirrorLesson": {"Path" : "res://lessons/mirror/mirror_lesson.tscn",           "Title" : "Mirror Lesson",  "Section" : "Lessons"},
-	"Level007"    : {"Path" : "res://worlds/Level007/level_007.tscn",              "Title" : "Focus",          "Section" : "Tutorials"},
+	"Level007"    : {"Path" : "res://worlds/Level007/level_007.tscn",              "Title" : "Focus",          "Section" : "Lenses and Mirrors"},
 	"ConvexLensLesson"  : {"Path" : "res://lessons/convexLens/convex_lens_lesson.tscn", "Title" : "Convex Lens Lesson", "Section" : "Lessons"},
 	"Level007b"   : {"Path" : "res://worlds/Level007b_negLens/level_007b_negative_lens.tscn", "Title" : "Diverging Lens", "Section" : "Lenses and Mirrors"},
 	"ConcaveLensLesson" : {"Path" : "res://lessons/concaveLens/concave_lens_lesson.tscn", "Title" : "Concave Lens Lesson", "Section" : "Lessons"},
@@ -39,7 +39,7 @@ var LevelDictionary = {
 	"Level012Filters" : {"Path" : "res://worlds/Level012_Filters/level_012_filters.tscn", "Title" : "Filters", "Section" : "Colors"}
 }
 
-var SectionOrdering = ["Menus", "Tutorials", "Lenses and Mirrors", "Colors", "Lessons", "Debug"]
+var SectionOrdering = ["Menus", "Tutorial", "Lenses and Mirrors", "Colors", "Lessons", "Debug"]
 
 var GameFlow = {
 	"Level001"              : "Level002",

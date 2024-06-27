@@ -39,6 +39,7 @@ func _ready():
 				var thisButton = LevelSelectButton.new()
 				thisButton.text = "%02d" % (levelNum+1)
 				thisButton.levelAlias = aliasChart[key][levelNum]
+				thisButton.custom_minimum_size = Vector2(96,96)
 				levelBox.add_child(thisButton)
 				if not somethingHasFocus:
 						thisButton.grab_focus()
@@ -52,7 +53,7 @@ func _ready():
 					currentButtonsInRow = 0
 					levelBox = HBoxContainer.new()
 					$VBoxContainer.add_child(levelBox)
-	
+	$Label.reparent($VBoxContainer)
 
 func buttonFocusEntered(levelAlias):
 	if label.self_modulate.a > 0:
