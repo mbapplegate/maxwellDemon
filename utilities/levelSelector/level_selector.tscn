@@ -1,71 +1,28 @@
-[gd_scene load_steps=3 format=3 uid="uid://dvig7r74ecgqk"]
+[gd_scene load_steps=2 format=3 uid="uid://dvig7r74ecgqk"]
 
 [ext_resource type="Script" path="res://utilities/levelSelector/level_selector.gd" id="1_ohu8e"]
-[ext_resource type="PackedScene" uid="uid://ctf3o0phovqby" path="res://utilities/levelSelectButton/level_select_button.tscn" id="2_hu0pa"]
 
 [node name="LevelSelector" type="Node2D"]
 script = ExtResource("1_ohu8e")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
-layout_mode = 2
-
-[node name="Level01" parent="VBoxContainer/HBoxContainer" instance=ExtResource("2_hu0pa")]
-layout_mode = 2
-text = "01"
-
-[node name="Level02" parent="VBoxContainer/HBoxContainer" instance=ExtResource("2_hu0pa")]
-layout_mode = 2
-text = "02			"
-levelAlias = "Level002"
-
-[node name="Level03" parent="VBoxContainer/HBoxContainer" instance=ExtResource("2_hu0pa")]
-layout_mode = 2
-text = "03	"
-levelAlias = "Level003"
-
-[node name="Level04" parent="VBoxContainer/HBoxContainer" instance=ExtResource("2_hu0pa")]
-layout_mode = 2
-text = "04	"
-levelAlias = "Level004"
-
-[node name="Level05" parent="VBoxContainer/HBoxContainer" instance=ExtResource("2_hu0pa")]
-layout_mode = 2
-text = "05"
-levelAlias = "Level005"
-
-[node name="Level06" parent="VBoxContainer/HBoxContainer" instance=ExtResource("2_hu0pa")]
-layout_mode = 2
-text = "06"
-levelAlias = "Level006"
-
-[node name="Level07" parent="VBoxContainer/HBoxContainer" instance=ExtResource("2_hu0pa")]
-layout_mode = 2
-text = "07"
-levelAlias = "Level007"
-
-[node name="Level08" parent="VBoxContainer/HBoxContainer" instance=ExtResource("2_hu0pa")]
-layout_mode = 2
-text = "08"
-levelAlias = "Level008"
-
-[node name="Level09" parent="VBoxContainer/HBoxContainer" instance=ExtResource("2_hu0pa")]
-layout_mode = 2
-text = "09	"
-levelAlias = "Level009"
-
-[node name="Level10" parent="VBoxContainer/HBoxContainer" instance=ExtResource("2_hu0pa")]
-layout_mode = 2
-text = "10"
-levelAlias = "Level011"
+offset_left = 256.0
+offset_top = 192.0
+offset_right = 1216.0
+offset_bottom = 352.0
 
 [node name="Label" type="Label" parent="."]
-offset_left = 288.0
-offset_top = 416.0
-offset_right = 592.0
-offset_bottom = 483.0
+offset_left = 96.0
+offset_top = 832.0
+offset_right = 400.0
+offset_bottom = 899.0
 theme_override_font_sizes/font_size = 48
 text = "Lorem Ipsem"
+
+[node name="Title" type="RichTextLabel" parent="."]
+offset_left = 32.0
+offset_top = 32.0
+offset_right = 591.0
+offset_bottom = 134.0
+theme_override_font_sizes/normal_font_size = 64
+text = "Level Select"
