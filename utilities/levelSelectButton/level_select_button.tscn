@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://utilities/levelSelectButton/level_select_button.gd" id="1_j0fh3"]
 
 [node name="LevelSelectButton" type="Button"]
+custom_minimum_size = Vector2(64, 64)
 offset_right = 128.0
 offset_bottom = 128.0
 size_flags_horizontal = 3
