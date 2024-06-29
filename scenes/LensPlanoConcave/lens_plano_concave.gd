@@ -7,7 +7,7 @@ const mediumIndex = 1.0
 
 @export var LENS_HEIGHT : float = 128
 @export_range (-16358,-10) var focalLength : float = -128
-@export var lensIndex = Vector3(2.05,2.0,1.95)
+@export var lensIndex : Vector3 = Vector3(2.05,2.0,1.95)
 @export var focalSpriteColor : Color = Color.BLUE
 
 var halfAngle = 1.0

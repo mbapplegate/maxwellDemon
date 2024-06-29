@@ -11,9 +11,11 @@ extends Node2D
 var ray = preload("res://scenes/LightPacket/light_packet.tscn")
 var rng = RandomNumberGenerator.new()
 var invisParent = null
+var srcEnergy = Vector3.ZERO
 func _ready():
 	invisParent = get_parent()
 	timer.wait_time = timerTimeout
+	srcEnergy = sourceColor/sourceColor.length_squared()
 
 
 
@@ -33,7 +35,7 @@ func _on_timer_timeout():
 				instanceRed.propDir =propagationDirection
 				instanceRed.position = to_global(Vector2(rayPos,0))
 				instanceRed.rayColor = Vector3(1,0,0)
-				instanceRed.energy = sourceColor[0]
+				instanceRed.energy = srcEnergy[0]
 				instanceRed.lightSource = "laser"
 			
 			if sourceColor[1] > 0.1:
@@ -41,7 +43,7 @@ func _on_timer_timeout():
 				instanceGreen.propDir = propagationDirection
 				instanceGreen.position = to_global(Vector2(rayPos,0))
 				instanceGreen.rayColor = Vector3(0,1,0)
-				instanceGreen.energy = sourceColor[1]
+				instanceGreen.energy = srcEnergy[1]
 				instanceGreen.lightSource = "laser"
 			
 			if sourceColor[2] > 0.1:
@@ -49,7 +51,7 @@ func _on_timer_timeout():
 				instanceBlue.propDir =propagationDirection
 				instanceBlue.position = to_global(Vector2(rayPos,0))
 				instanceBlue.rayColor = Vector3(0,0,1)
-				instanceBlue.energy = sourceColor[2]
+				instanceBlue.energy = srcEnergy[2]
 				instanceBlue.lightSource = "laser"
 			#instance.scale[0] = 1.0/self.scale[0]
 			#instance.scale[1] = 1.0 / self.scale[1]

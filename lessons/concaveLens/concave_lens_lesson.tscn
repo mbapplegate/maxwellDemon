@@ -46,6 +46,7 @@ text = "Plano-Concave Lenses"
 
 [node name="LensPlanoConcave" parent="." instance=ExtResource("3_31y64")]
 position = Vector2(416, 352)
+lensIndex = Vector3(2, 2, 1.95)
 isRotatable = false
 
 [node name="Line2D" type="Line2D" parent="."]
@@ -83,6 +84,7 @@ one_shot = true
 [node name="LensPlanoConvex" parent="." instance=ExtResource("4_8wmby")]
 position = Vector2(256, 480)
 focalLength = 240.0
+lensIndex = Vector3(2, 2, 1.95)
 focalSpriteColor = Color(0.921569, 0.909804, 0, 1)
 initialAngle = 180.0
 isPushable = false

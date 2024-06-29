@@ -14,6 +14,7 @@ var rng = RandomNumberGenerator.new()
 var isPaused = false
 var laserParent= null
 const halfHeight = 32.0
+var normEnergy = Vector3.ZERO
 
 func _ready():
 	#halfHeight = BARREL_WIDTH * self.scale.x
@@ -24,7 +25,7 @@ func _ready():
 	halfAngle = deg_to_rad(halfAngle)
 	laserParent = get_parent()
 	timer.wait_time=timerTimeout
-	pass
+	normEnergy = rayColor/rayColor.length_squared()
 	
 func _ray_hit(photonObj:Object, _collPoint:Vector2, _collNormal:Vector2, _collider:Object):
 	photonObj.rayDying = true
@@ -61,28 +62,28 @@ func _on_timer_timeout():
 			else:
 				yLoc = 0
 			#print("Timeout. Angle: ",angle)
-			if rayColor[0] > 0.1:
+			if normEnergy[0] > 0.1:
 				instanceRed = ray.instantiate()
 				instanceRed.propDir = Vector2(cos(angle+angleToUse),sin(angle+angleToUse))
 				instanceRed.position = to_global(Vector2(barrelPosition.x+yLoc*sin(angleToUse), -barrelPosition.y-yLoc*cos(angleToUse)))
 				instanceRed.rayColor = Vector3(1,0,0)
-				instanceRed.energy = rayColor[0]
+				instanceRed.energy = normEnergy[0]
 				instanceRed.lightSource = "laser"
 			
-			if rayColor[1] > 0.1:
+			if normEnergy[1] > 0.1:
 				instanceGreen = ray.instantiate()
 				instanceGreen.propDir = Vector2(cos(angle+angleToUse),sin(angle+angleToUse))
 				instanceGreen.position = to_global(Vector2(barrelPosition.x+yLoc*sin(angleToUse), -barrelPosition.y-yLoc*cos(angleToUse)))
 				instanceGreen.rayColor = Vector3(0,1,0)
-				instanceGreen.energy = rayColor[1]
+				instanceGreen.energy = normEnergy[1]
 				instanceGreen.lightSource = "laser"
 			
-			if rayColor[2] > 0.1:
+			if normEnergy[2] > 0.1:
 				instanceBlue = ray.instantiate()
 				instanceBlue.propDir = Vector2(cos(angle+angleToUse),sin(angle+angleToUse))
 				instanceBlue.position = to_global(Vector2(barrelPosition.x+yLoc*sin(angleToUse), -barrelPosition.y-yLoc*cos(angleToUse)))
 				instanceBlue.rayColor = Vector3(0,0,1)
-				instanceBlue.energy = rayColor[2]
+				instanceBlue.energy = normEnergy[2]
 				instanceBlue.lightSource = "laser"
 			#instance.scale[0] = 1.0/self.scale[0]
 			#instance.scale[1] = 1.0 / self.scale[1]

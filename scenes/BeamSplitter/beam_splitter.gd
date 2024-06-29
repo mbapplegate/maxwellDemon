@@ -1,7 +1,7 @@
 extends pushableObject
 
 @export var reflectivity = 0.5      #Proportion of light reflected from the splitter (0-1). The rest is transmitted
-@export var splitterIndex = Vector3(2.05,2.0,1.95)     #Index of refraction of the splitter
+@export var splitterIndex : Vector3 = Vector3(2.05,2.0,1.95)     #Index of refraction of the splitter
 
 @onready var ray = preload("res://scenes/LightPacket/light_packet.tscn")
 @onready var splitter = $Stage/Sprite2D/splitterArea

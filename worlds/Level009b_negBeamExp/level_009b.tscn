@@ -99,7 +99,6 @@ isEnergizeable = false
 position = Vector2(756, 164)
 LENS_HEIGHT = 96.0
 focalLength = -96.0
-lensIndex = Vector3(2.05, 2, 1.95)
 focalSpriteColor = Color(0, 1, 1, 1)
 initialAngle = 180.0
 isRotatable = false
