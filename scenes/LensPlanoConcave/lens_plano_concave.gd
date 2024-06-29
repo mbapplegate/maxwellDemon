@@ -7,7 +7,7 @@ const mediumIndex = 1.0
 
 @export var LENS_HEIGHT : float = 128
 @export_range (-16358,-10) var focalLength : float = -128
-@export var lensIndex = 2.0
+@export var lensIndex = Vector3(2.05,2.0,1.95)
 @export var focalSpriteColor : Color = Color.BLUE
 
 var halfAngle = 1.0
@@ -25,7 +25,7 @@ var lensOrigin:Vector2 = Vector2.RIGHT
 
 func _ready():
 	isEnergizeable = false
-	lensRadius = focalLength * (lensIndex - mediumIndex)
+	lensRadius = focalLength * (lensIndex[1] - mediumIndex)
 	set_geometry(lensRadius,LENS_HEIGHT,Vector2.ZERO)
 	#$Line2D.set_point_position(0,Vector2(0,-LENS_HEIGHT/2.0))
 	#$Line2D.set_point_position(1,Vector2(0,LENS_HEIGHT/2.0))
@@ -56,7 +56,7 @@ func set_geometry(newRadius:float, lens_height:float, center:Vector2):
 	#print("concave Thickness: ", lensThickness, "Radius: ", newRadius)
 	#Distance from lens at theta=0 to principal plane
 	#I want this to be located at Zero
-	var apexToPlane = (lensThickness-maxX)/lensIndex
+	var apexToPlane = (lensThickness-maxX)/lensIndex[1]
 	var backLoc = -(lensThickness-maxX)-apexToPlane
 	topShape.position = Vector2(backLoc+lensThickness/2.0,-lens_height/2.0+FRONT_THICKNESS/2.0)
 	topShape.shape.size = Vector2(lensThickness-2*FRONT_THICKNESS,FRONT_THICKNESS)
@@ -109,7 +109,13 @@ func get_face_polygon():
 	return curveShape.polygon
 	
 func _ray_hit(photonObj:Object, collPoint:Vector2, collNormal:Vector2, _collider:Object):
-
+	var thisIndex = 1.0
+	if photonObj.rayColor[0] > 0:
+		thisIndex = lensIndex[0]
+	elif photonObj.rayColor[1] > 0:
+		thisIndex = lensIndex[1]
+	else:
+		thisIndex = lensIndex[2]
 	if _collider.name == "FrontFaceArea":
 		#Local collision point
 	
@@ -127,7 +133,7 @@ func _ray_hit(photonObj:Object, collPoint:Vector2, collNormal:Vector2, _collider
 		if photonObj.propDir.dot(perpDir) > 0:
 		#	isChanged = true
 			perpDir = -perpDir#-Vector2(cos(-2*correctedTheta),sin(-2*correctedTheta))
-		photonObj.refractRay(perpDir, lensIndex, collPoint)
+		photonObj.refractRay(perpDir, thisIndex, collPoint)
 		#print("Curve: ", photonObj.index_of_refraction)
 		#print(photonObj.index_of_refraction)
 		#print(collNormal, perpDir)
@@ -142,7 +148,7 @@ func _ray_hit(photonObj:Object, collPoint:Vector2, collNormal:Vector2, _collider
 		#print(rad_to_deg(correctedTheta), ", ",rotatedOrigin,", ", perpDir,", ",collNormal)
 		#################################
 	else:
-		photonObj.refractRay(collNormal, lensIndex, collPoint)
+		photonObj.refractRay(collNormal, thisIndex, collPoint)
 		#print("Flat: ",photonObj.index_of_refraction)
 	
 func getFocusPositions():

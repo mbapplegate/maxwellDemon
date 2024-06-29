@@ -20,7 +20,7 @@ position = Vector2(388, 300)
 script = ExtResource("2_pvqx7")
 LENS_HEIGHT = 128.0
 focalLength = -128.0
-lensIndex = 2.0
+lensIndex = Vector3(2.05, 2, 1.95)
 focalSpriteColor = Color(0, 0, 1, 1)
 
 [node name="BackFaceArea" type="StaticBody2D" parent="Stage" index="0"]

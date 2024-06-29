@@ -87,3 +87,4 @@ position = Vector2(1856, 480)
 [node name="LensPlanoConcave" parent="." instance=ExtResource("11_c2a61")]
 position = Vector2(1472, 480)
 focalLength = -155.2
+lensIndex = Vector3(2.05, 2, 1.95)
