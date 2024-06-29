@@ -61,7 +61,7 @@ func _ready():
 	line.material.set_shader_parameter("red",rayColor[0])
 	line.material.set_shader_parameter("green",rayColor[1])
 	line.material.set_shader_parameter("blue",rayColor[2])
-	line.material.set_shader_parameter("energy",energy)
+	line.material.set_shader_parameter("energy",sqrt(energy))
 	line.material.set_shader_parameter("propVisibleFront",0.0)
 	line.material.set_shader_parameter("propVisibleEnd",1.0)
 
@@ -218,6 +218,7 @@ func cloneRay(propDirection : Vector2, newColor : Vector3) -> lightPacket:
 	newRay.position = self.position
 	newRay.energy = energy
 	self.get_parent().add_child(newRay)
+	newRay.update_energy(energy)
 	return newRay
 		
 func reflectRay(normalAngle, collisionPoint) ->Vector2:

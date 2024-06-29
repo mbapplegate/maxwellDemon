@@ -22,7 +22,7 @@ func _ray_hit(photonObj:Object, _collPoint:Vector2, _collNormal:Vector2, _collid
 func _on_timer_timeout():
 	var angle = 0.0
 	var uVal= 0.0
-	var instance 
+#	var instance 
 	var instanceRed = null
 	var instanceGreen = null
 	var instanceBlue = null
