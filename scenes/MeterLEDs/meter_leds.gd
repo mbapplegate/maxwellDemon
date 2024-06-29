@@ -112,7 +112,7 @@ func _on_timer_timeout():
 		
 	#Place average marker
 	var markerXVal = arrAvg/maxEnergy * (led10.position.x-led1.position.x) + led1.position.x
-	$avgPower.position.x = markerXVal
+	$avgPower.position.x = max(led1.position.x,min(led10.position.x,markerXVal))
 	#Reset vars
 	energyBlocked = 0
 	energyDetected = 0

@@ -1,7 +1,7 @@
 extends pushableObject
 
 @export var reflectivity = 0.5      #Proportion of light reflected from the splitter (0-1). The rest is transmitted
-@export var splitterIndex = 2.0     #Index of refraction of the splitter
+@export var splitterIndex : Vector3 = Vector3(2.05,2.0,1.95)     #Index of refraction of the splitter
 
 @onready var ray = preload("res://scenes/LightPacket/light_packet.tscn")
 @onready var splitter = $Stage/Sprite2D/splitterArea
@@ -19,6 +19,13 @@ func _ready():
 	
 #Function to handle if a ray collides with either the walls of the cube or the splitter
 func _ray_hit(photonObj:Object, collPoint:Vector2, collNormal:Vector2, collider:Object):
+	var thisIndex = 1.0
+	if photonObj.rayColor[0] > 0:
+		thisIndex = splitterIndex[0]
+	elif photonObj.rayColor[1] > 0:
+		thisIndex = splitterIndex[1]
+	else:
+		thisIndex = splitterIndex[2]
 	#If it's the center line
 	if collider == splitter:
 		if reflectivity > 0.1:
@@ -35,5 +42,5 @@ func _ray_hit(photonObj:Object, collPoint:Vector2, collNormal:Vector2, collider:
 		photonObj.update_energy(photonObj.energy*(1-reflectivity))
 	#Otherwise we've collided with the wall of the cube so need to refract
 	else:
-		photonObj.refractRay(collNormal,splitterIndex,collPoint)
+		photonObj.refractRay(collNormal,thisIndex,collPoint)
 	

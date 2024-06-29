@@ -11,28 +11,57 @@ extends Node2D
 var ray = preload("res://scenes/LightPacket/light_packet.tscn")
 var rng = RandomNumberGenerator.new()
 var invisParent = null
+var srcEnergy = Vector3.ZERO
 func _ready():
 	invisParent = get_parent()
 	timer.wait_time = timerTimeout
+	srcEnergy = sourceColor/sourceColor.length_squared()
 
 
-
+func changeSourceColor(newColor : Vector3):
+	sourceColor = newColor
+	srcEnergy = sourceColor/sourceColor.length_squared()
+	
 func _on_timer_timeout():
 	var rayPos = 0
-	var instance = null
+	var instanceRed = null
+	var instanceGreen = null
+	var instanceBlue = null
 	for i in numRaysPerTimeout:
 			if sourceWidth > 0:
 				rayPos =rng.randf_range(-sourceWidth/2.0,sourceWidth/2.0)
 			else:
 				rayPos = 0
 			#print("Timeout. Angle: ",angle)
-			instance = ray.instantiate()
-			instance.propDir = propagationDirection.normalized()
-			instance.position = to_global(Vector2(rayPos,0.0))
+			if sourceColor[0] > 0.1:
+				instanceRed = ray.instantiate()
+				instanceRed.propDir =propagationDirection
+				instanceRed.position = to_global(Vector2(rayPos,0))
+				instanceRed.rayColor = Vector3(1,0,0)
+				instanceRed.energy = srcEnergy[0]
+				instanceRed.lightSource = "laser"
 			
-			instance.rayColor = sourceColor
-			instance.lightSource = "invisible"
+			if sourceColor[1] > 0.1:
+				instanceGreen = ray.instantiate()
+				instanceGreen.propDir = propagationDirection
+				instanceGreen.position = to_global(Vector2(rayPos,0))
+				instanceGreen.rayColor = Vector3(0,1,0)
+				instanceGreen.energy = srcEnergy[1]
+				instanceGreen.lightSource = "laser"
+			
+			if sourceColor[2] > 0.1:
+				instanceBlue = ray.instantiate()
+				instanceBlue.propDir =propagationDirection
+				instanceBlue.position = to_global(Vector2(rayPos,0))
+				instanceBlue.rayColor = Vector3(0,0,1)
+				instanceBlue.energy = srcEnergy[2]
+				instanceBlue.lightSource = "laser"
 			#instance.scale[0] = 1.0/self.scale[0]
 			#instance.scale[1] = 1.0 / self.scale[1]
 			if invisParent:
-				invisParent.add_child(instance)
+				if instanceRed:
+					invisParent.add_child(instanceRed)
+				if instanceGreen:
+					invisParent.add_child(instanceGreen)
+				if instanceBlue:
+					invisParent.add_child(instanceBlue)

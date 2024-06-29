@@ -57,6 +57,7 @@ zoom = Vector2(1.75, 1.75)
 
 [node name="BeamSplitter" parent="." instance=ExtResource("8_2cdh5")]
 position = Vector2(1216, 406)
+splitterIndex = Vector3(2.05, 2, 1.95)
 initialAngle = 90.0
 isPushable = false
 isEnergizeable = false

@@ -39,6 +39,7 @@ wait_time = 0.5
 position = Vector2(256, 288)
 LENS_HEIGHT = 200.0
 focalLength = 256.0
+lensIndex = Vector3(2, 2, 2)
 initialAngle = 180.0
 isPushable = false
 isRotatable = false

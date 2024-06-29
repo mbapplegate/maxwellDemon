@@ -14,6 +14,7 @@ var rng = RandomNumberGenerator.new()
 var isPaused = false
 var laserParent= null
 const halfHeight = 32.0
+var normEnergy = Vector3.ZERO
 
 func _ready():
 	#halfHeight = BARREL_WIDTH * self.scale.x
@@ -24,7 +25,7 @@ func _ready():
 	halfAngle = deg_to_rad(halfAngle)
 	laserParent = get_parent()
 	timer.wait_time=timerTimeout
-	pass
+	normEnergy = rayColor/rayColor.length_squared()
 	
 func _ray_hit(photonObj:Object, _collPoint:Vector2, _collNormal:Vector2, _collider:Object):
 	photonObj.rayDying = true
@@ -39,7 +40,9 @@ func setPaused(val):
 		
 func _on_timer_timeout():
 	var angle = 0
-	var instance 
+	var instanceRed = null
+	var instanceGreen = null
+	var instanceBlue = null
 	var yLoc
 	var angleToUse = 0.0
 	if isRotatable:
@@ -59,13 +62,35 @@ func _on_timer_timeout():
 			else:
 				yLoc = 0
 			#print("Timeout. Angle: ",angle)
-			instance = ray.instantiate()
-			instance.propDir = Vector2(cos(angle+angleToUse),sin(angle+angleToUse))
-			instance.position = to_global(Vector2(barrelPosition.x+yLoc*sin(angleToUse), -barrelPosition.y-yLoc*cos(angleToUse)))
+			if normEnergy[0] > 0.1:
+				instanceRed = ray.instantiate()
+				instanceRed.propDir = Vector2(cos(angle+angleToUse),sin(angle+angleToUse))
+				instanceRed.position = to_global(Vector2(barrelPosition.x+yLoc*sin(angleToUse), -barrelPosition.y-yLoc*cos(angleToUse)))
+				instanceRed.rayColor = Vector3(1,0,0)
+				instanceRed.energy = normEnergy[0]
+				instanceRed.lightSource = "laser"
 			
-			instance.rayColor = rayColor
-			instance.lightSource = "laser"
+			if normEnergy[1] > 0.1:
+				instanceGreen = ray.instantiate()
+				instanceGreen.propDir = Vector2(cos(angle+angleToUse),sin(angle+angleToUse))
+				instanceGreen.position = to_global(Vector2(barrelPosition.x+yLoc*sin(angleToUse), -barrelPosition.y-yLoc*cos(angleToUse)))
+				instanceGreen.rayColor = Vector3(0,1,0)
+				instanceGreen.energy = normEnergy[1]
+				instanceGreen.lightSource = "laser"
+			
+			if normEnergy[2] > 0.1:
+				instanceBlue = ray.instantiate()
+				instanceBlue.propDir = Vector2(cos(angle+angleToUse),sin(angle+angleToUse))
+				instanceBlue.position = to_global(Vector2(barrelPosition.x+yLoc*sin(angleToUse), -barrelPosition.y-yLoc*cos(angleToUse)))
+				instanceBlue.rayColor = Vector3(0,0,1)
+				instanceBlue.energy = normEnergy[2]
+				instanceBlue.lightSource = "laser"
 			#instance.scale[0] = 1.0/self.scale[0]
 			#instance.scale[1] = 1.0 / self.scale[1]
 			if laserParent:
-				laserParent.add_child(instance)
+				if instanceRed:
+					laserParent.add_child(instanceRed)
+				if instanceGreen:
+					laserParent.add_child(instanceGreen)
+				if instanceBlue:
+					laserParent.add_child(instanceBlue)
