@@ -1,6 +1,7 @@
 extends Node2D
 
 @onready var label = $Label
+@onready var mainContainer = $VBoxContainer
 
 signal nextScene(sceneAlias)
 
@@ -31,9 +32,9 @@ func _ready():
 			var thisLabel = Label.new()
 			thisLabel.set("theme_override_font_sizes/font_size", 32)
 			thisLabel.text = key
-			$VBoxContainer.add_child(thisLabel)
+			mainContainer.add_child(thisLabel)
 			var levelBox = HBoxContainer.new()
-			$VBoxContainer.add_child(levelBox)
+			mainContainer.add_child(levelBox)
 			var currentButtonsInRow = 0
 			for levelNum in range(orgChart[key]):
 				var thisButton = LevelSelectButton.new()
@@ -52,8 +53,8 @@ func _ready():
 				if currentButtonsInRow > MAX_BUTTONS_PER_ROW:
 					currentButtonsInRow = 0
 					levelBox = HBoxContainer.new()
-					$VBoxContainer.add_child(levelBox)
-	$Label.reparent($VBoxContainer)
+					mainContainer.add_child(levelBox)
+	$Label.reparent(mainContainer)
 
 func buttonFocusEntered(levelAlias):
 	if label.self_modulate.a > 0:

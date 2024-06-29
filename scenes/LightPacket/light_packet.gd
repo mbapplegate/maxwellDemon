@@ -1,6 +1,6 @@
 extends Node2D
 class_name lightPacket
-var thisScene = "res://scenes/LightPacket/light_packet.tscn" 
+#var thisScene = "res://scenes/LightPacket/light_packet.tscn" 
 @onready var line = $Line2D
 @onready var ray = $RayCast2D
 #@onready var circ = $DEBUG
@@ -210,14 +210,12 @@ func removeCollisionException(collideObject : Object):
 	if collideObject:
 		ray.remove_exception(collideObject)
 
-func cloneRay(propDirection : Vector2, newColor : Vector3) -> lightPacket:
-	var newRay = load(thisScene).instantiate()
-	newRay.propDir = propDirection
-	newRay.rayColor = newColor
+func cloneRay(newRay : lightPacket) -> lightPacket:
+	newRay.propDir = propDir
+	newRay.rayColor = rayColor
 	newRay.index_of_refraction = index_of_refraction
 	newRay.position = self.position
 	newRay.energy = energy
-	self.get_parent().add_child(newRay)
 	return newRay
 		
 func reflectRay(normalAngle, collisionPoint) ->Vector2:

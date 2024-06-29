@@ -59,6 +59,7 @@ isEnergizeable = false
 [node name="LensPlanoConvex" parent="." instance=ExtResource("6_jnxea")]
 position = Vector2(1216, 351)
 focalLength = 256.0
+lensIndex = Vector3(2.05, 2, 1.95)
 initialAngle = 180.0
 isPushable = false
 isRotatable = false

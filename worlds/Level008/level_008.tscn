@@ -55,6 +55,7 @@ vertical_alignment = 1
 position = Vector2(1280, 864)
 LENS_HEIGHT = 256.0
 focalLength = 336.0
+lensIndex = Vector3(2.05, 2, 1.95)
 initialAngle = 180.0
 isPushable = false
 isRotatable = false
@@ -71,7 +72,7 @@ isEnergizeable = false
 position = Vector2(416, 224)
 LENS_HEIGHT = 220.0
 focalLength = 192.0
-lensIndex = 3.0
+lensIndex = Vector3(2.05, 2, 1.95)
 
 [node name="FlatMirror" parent="." instance=ExtResource("9_uy0jb")]
 position = Vector2(1202, 219)

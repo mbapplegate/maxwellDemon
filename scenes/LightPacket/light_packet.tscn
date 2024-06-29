@@ -20,6 +20,7 @@ script = ExtResource("1_k235j")
 texture_repeat = 2
 material = SubResource("ShaderMaterial_7y631")
 points = PackedVector2Array(0, 0, 50, 0)
+width = 6.0
 texture_mode = 2
 
 [node name="RayCast2D" type="RayCast2D" parent="."]

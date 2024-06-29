@@ -30,6 +30,7 @@ timerTimeout = 0.25
 position = Vector2(32, 320)
 rotation = 1.5708
 propagationDirection = Vector2(1, 0)
+sourceColor = Vector3(0, 0, 1)
 timerTimeout = 0.25
 
 [node name="Timer" type="Timer" parent="."]
@@ -39,6 +40,7 @@ wait_time = 0.5
 position = Vector2(256, 288)
 LENS_HEIGHT = 200.0
 focalLength = 256.0
+lensIndex = Vector3(2.05, 2, 1.95)
 initialAngle = 180.0
 isPushable = false
 isRotatable = false

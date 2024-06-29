@@ -66,6 +66,7 @@ isRotatable = false
 position = Vector2(562, 160)
 LENS_HEIGHT = 256.0
 focalLength = 480.0
+lensIndex = Vector3(2.05, 2, 1.95)
 focalSpriteColor = Color(0, 1, 1, 1)
 isRotatable = false
 
@@ -73,6 +74,7 @@ isRotatable = false
 position = Vector2(515, 801)
 LENS_HEIGHT = 360.0
 focalLength = 392.0
+lensIndex = Vector3(2.05, 2, 1.95)
 focalSpriteColor = Color(1, 1, 1, 1)
 isPushable = false
 isRotatable = false
