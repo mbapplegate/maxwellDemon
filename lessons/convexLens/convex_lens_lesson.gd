@@ -82,8 +82,8 @@ func _on_timer_2_timeout():
 	tween.set_trans(Tween.TRANS_CUBIC)
 	tween.tween_property($explan2,"self_modulate",Color(1.0,1.0,1.0,1.0),0.5)
 	
-	$InvisibleSource.sourceColor = Vector3(1.0,1.0,0.0)
-	$InvisibleSource2.sourceColor = Vector3(1.0,1.0,0.0) 
+	$InvisibleSource.changeSourceColor(Vector3(0.0,1.0,0.0))
+	$InvisibleSource2.changeSourceColor(Vector3(0.0,1.0,0.0))
 	$Timer.start()
 
 

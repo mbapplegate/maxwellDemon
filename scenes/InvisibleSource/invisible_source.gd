@@ -18,7 +18,10 @@ func _ready():
 	srcEnergy = sourceColor/sourceColor.length_squared()
 
 
-
+func changeSourceColor(newColor : Vector3):
+	sourceColor = newColor
+	srcEnergy = sourceColor/sourceColor.length_squared()
+	
 func _on_timer_timeout():
 	var rayPos = 0
 	var instanceRed = null

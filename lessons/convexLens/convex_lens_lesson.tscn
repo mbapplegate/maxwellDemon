@@ -24,14 +24,12 @@ position = Vector2(32, 256)
 rotation = 1.5708
 scale = Vector2(2, 2)
 propagationDirection = Vector2(1, 0)
-sourceColor = Vector3(1, 1, 0)
 timerTimeout = 0.25
 
 [node name="InvisibleSource2" parent="." instance=ExtResource("3_8lqxb")]
 position = Vector2(32, 320)
 rotation = 1.5708
 propagationDirection = Vector2(1, 0)
-sourceColor = Vector3(1, 1, 0)
 timerTimeout = 0.25
 
 [node name="Timer" type="Timer" parent="."]
@@ -41,7 +39,7 @@ wait_time = 0.5
 position = Vector2(256, 288)
 LENS_HEIGHT = 200.0
 focalLength = 256.0
-lensIndex = Vector3(2.05, 2, 1.95)
+lensIndex = Vector3(2, 2, 2)
 initialAngle = 180.0
 isPushable = false
 isRotatable = false
