@@ -116,15 +116,20 @@ func validate_movement(testLoc:Vector2, direction:Vector2):
 	if (not _cast.is_colliding()) and (not _cast2.is_colliding()):
 		return true
 	else:
-		if _cast.is_colliding():
+		var bothHittingSame = true
+		if _cast.is_colliding() and _cast2.is_colliding():
+			if _cast.get_collider() != _cast2.get_collider():
+				bothHittingSame = false
+		
+		if _cast.is_colliding() and bothHittingSame:
 			if _cast.get_collider() is pushableObject and itemActive and _cast.get_collider().isPushable and Input.is_action_pressed("pull"):
 				_cast.get_collider().push(_cast.target_position)
 				return _cast.get_collider().isSliding
 			else:
 				return false
-		elif _cast2.is_colliding():
+		elif _cast2.is_colliding() and bothHittingSame:
 			if _cast2.get_collider() is pushableObject and itemActive and _cast2.get_collider().isPushable and Input.is_action_pressed("pull"):
-				#_cast2.get_collider().push(_cast2.target_position)
+				_cast2.get_collider().push(_cast2.target_position)
 				return _cast2.get_collider().isSliding
 			else:
 				return false
