@@ -28,6 +28,7 @@ position = Vector2(1160, 384)
 HALF_HEIGHT = 7.0
 rayColor = Vector3(1, 0, 0)
 timerTimeout = 0.125
+packetEnergy = 1.0
 isPushable = false
 isRotatable = false
 

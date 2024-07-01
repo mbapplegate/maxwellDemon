@@ -58,6 +58,7 @@ HALF_HEIGHT = 20.0
 numRaysPerTimeout = 3
 rayColor = Vector3(0, 0, 1)
 timerTimeout = 0.08
+packetEnergy = 1.0
 isPushable = false
 isRotatable = false
 

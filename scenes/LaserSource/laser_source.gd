@@ -5,6 +5,7 @@ extends pushableObject
 @export var numRaysPerTimeout : int = 1
 @export var rayColor : Vector3 = Vector3(1.0, 0, 1.0)
 @export var timerTimeout : float = 0.063
+@export var packetEnergy : float = 1.0
 @onready var barrelShape = $Stage/laserBarrel/barrelArea/barrelShape
 @onready var barrel = $Stage/laserBarrel
 @onready var timer = $Timer
@@ -25,7 +26,7 @@ func _ready():
 	halfAngle = deg_to_rad(halfAngle)
 	laserParent = get_parent()
 	timer.wait_time=timerTimeout
-	normEnergy = rayColor/rayColor.length_squared()
+	normEnergy = rayColor/rayColor.length_squared() * packetEnergy
 	
 func _ray_hit(photonObj:Object, _collPoint:Vector2, _collNormal:Vector2, _collider:Object):
 	photonObj.rayDying = true

@@ -27,6 +27,7 @@ layer_0/tile_data = PackedInt32Array(2097152, 1, 0, 2031616, 1, 0, 1966080, 1, 0
 position = Vector2(1248, 320)
 HALF_HEIGHT = 7.0
 timerTimeout = 0.125
+packetEnergy = 1.0
 isRotatable = false
 
 [node name="PointDetector" parent="." instance=ExtResource("5_5mtrj")]
