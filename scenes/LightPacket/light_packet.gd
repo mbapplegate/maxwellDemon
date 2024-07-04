@@ -238,22 +238,28 @@ func getReflectionDirection(normalAngle : Vector2)->Vector2:
 		
 func refractRay(normalAngle, objectIOR,collisionPoint):
 	var normalIn = -normalAngle;
-	var theta1 = normalIn.angle_to(propDir);
+	var theta1 = normalIn.angle_to(propDir)
 	var theta2
+	var internalReflection = false
 	#Going from high index to low index
 	if index_of_refraction > MEDIUM_INDEX:
-		theta2 = asin(objectIOR/MEDIUM_INDEX * sin(theta1))
-		index_of_refraction = MEDIUM_INDEX
+		var arg =  objectIOR/MEDIUM_INDEX * sin(theta1)
+		if abs(arg) <= 1.0:
+			theta2 = asin(objectIOR/MEDIUM_INDEX * sin(theta1))
+			index_of_refraction = MEDIUM_INDEX
+		else:
+			reflectRay(normalAngle,collisionPoint)
+			internalReflection=true
 	#Going from low index to high index
 	else:
 		theta2 = asin(MEDIUM_INDEX/objectIOR*sin(theta1))
 		index_of_refraction = objectIOR
 	#Add the point to the photon packet
-	
-	var newDir = normalIn.rotated(theta2)
-	propDir = newDir
-	
-	ray_add_point(to_local(collisionPoint))
+	if not internalReflection:
+		var newDir = normalIn.rotated(theta2)
+		propDir = newDir
+		
+		ray_add_point(to_local(collisionPoint))
 		
 	
 	

@@ -134,7 +134,6 @@ func validate_movement(testLoc:Vector2, direction:Vector2):
 			else:
 				return false
 			
-			
 func _process(_delta):
 	pass
 		
