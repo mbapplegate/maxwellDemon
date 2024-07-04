@@ -21,7 +21,6 @@ layer_0/tile_data = PackedInt32Array(2097152, 1, 0, 2031616, 1, 0, 1966080, 1, 0
 position = Vector2(928, 198)
 HALF_HEIGHT = 25.0
 rayColor = Vector3(0, 1, 0)
-packetEnergy = 1.0
 sliding_time = -0.8
 isPushable = false
 isRotatable = false
@@ -60,7 +59,6 @@ isEnergizeable = false
 [node name="LensPlanoConvex" parent="." instance=ExtResource("10_lqocq")]
 position = Vector2(1246, 351)
 focalLength = 176.0
-lensIndex = Vector3(2.05, 2, 1.95)
 initialAngle = 180.0
 
 [node name="PointDetector" parent="." instance=ExtResource("5_x5sgd")]

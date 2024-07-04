@@ -29,8 +29,16 @@ func _ready():
 	
 	$Stage/Polygon2D.polygon = prismPoly
 	
-	var zeroAng = 2.0*asin(prismIOR[1]*sin(deg_to_rad(30)))-60
-	print(zeroAng)
+	var minDeviation = 2*(rad_to_deg(asin(prismIOR[1]*sin(deg_to_rad(30))))-30)
+	var incidentAngle = (60+minDeviation) / 2.0
+	print(minDeviation, ", ", incidentAngle)
+	if not isRotatable and initialAngle != 0:
+		var radAngle = deg_to_rad(initialAngle)
+		$Stage/Polygon2D.rotation=radAngle
+		$Stage/bodyA.rotation = radAngle
+		$Stage/bodyB.rotation = radAngle
+		$Stage/bodyC.rotation = radAngle
+		
 	
 func _ray_hit(photonObj:Object, collPoint:Vector2, collNormal:Vector2, _collider:Object):
 	var thisIndex = 1.0

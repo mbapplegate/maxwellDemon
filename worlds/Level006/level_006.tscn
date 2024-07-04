@@ -19,7 +19,6 @@ layer_0/tile_data = PackedInt32Array(2097152, 1, 0, 2031616, 1, 0, 1966080, 1, 0
 position = Vector2(928, 198)
 HALF_HEIGHT = 7.0
 timerTimeout = 0.125
-packetEnergy = 1.0
 initialAngle = 90.0
 isPushable = false
 isRotatable = false

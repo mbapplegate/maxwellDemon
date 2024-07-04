@@ -36,10 +36,12 @@ var LevelDictionary = {
 	"Level010"    : {"Path" : "res://worlds/Level010/level_010.tscn",              "Title" : "Image",          "Section" : "Debug"},
 	"Level011"    : {"Path" : "res://worlds/Level011/level_011.tscn",              "Title" : "Parabolic Mirror","Section" : "Lenses and Mirrors"},
 	"ParabolicMirrorLesson" : {"Path" : "res://lessons/parabolicMirror/parabolic_mirror_lesson.tscn", "Title" : "Parabolic Mirror Lesson","Section" : "Lessons"},
-	"Level012Filters" : {"Path" : "res://worlds/Level012_Filters/level_012_filters.tscn", "Title" : "Filters", "Section" : "Colors"}
+	"Level012Filters" : {"Path" : "res://worlds/Level012_Filters/level_012_filters.tscn", "Title" : "Filters", "Section" : "Colors"},
+	"LevelEquiPrism" : {"Path" : "res://worlds/equilateralPrism/level_equilateral_prism.tscn", "Title" : "Triangular Prism", "Section" : "Dispersion"},
+	"LevelPrismRecombine" :{"Path": "res://worlds/prismRecombine/level_prism_recombine.tscn", "Title" : "Newton's Prism Experiment", "Section" : "Dispersion"}
 }
 
-var SectionOrdering = ["Menus", "Tutorial", "Lenses and Mirrors", "Colors", "Lessons", "Debug"]
+var SectionOrdering = ["Menus", "Tutorial", "Lenses and Mirrors","Dispersion", "Colors", "Lessons", "Debug"]
 
 var GameFlow = {
 	"Level001"              : "Level002",
@@ -62,7 +64,9 @@ var GameFlow = {
 	"Level009b"             : "BeamExpanderLesson2",
 	"BeamExpanderLesson2"   : "Level011",
 	"Level011"              : "ParabolicMirrorLesson",
-	"ParabolicMirrorLesson" : "MainMenu"
+	"ParabolicMirrorLesson" : "LevelEquiPrism",
+	"LevelEquiPrism"        : "LevelPrismRecombine",
+	"LevelPrismRecombine"   : "MainMenu"
 	
 }
 var inImagingMode: bool = false

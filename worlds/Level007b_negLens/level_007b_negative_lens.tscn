@@ -22,7 +22,6 @@ layer_0/tile_data = PackedInt32Array(2097152, 1, 0, 2031616, 1, 0, 1966080, 1, 0
 position = Vector2(928, 198)
 HALF_HEIGHT = 25.0
 rayColor = Vector3(1, 0, 0)
-packetEnergy = 1.0
 sliding_time = -0.8
 isPushable = false
 isRotatable = false

@@ -24,7 +24,7 @@ func _ready():
 			orgChart[thisSection] += 1
 			aliasChart[thisSection].append(key)
 			#numLevelsPerSection[sections.bsearch(LevelInfo.LevelDictionary[key]["Section"])] += 1
-		
+	#print(orgChart)	
 	label.self_modulate = TEXT_COLOR
 	var somethingHasFocus = false
 	for key in LevelInfo.SectionOrdering:
