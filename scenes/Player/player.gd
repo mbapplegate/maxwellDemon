@@ -12,7 +12,7 @@ const SPRITE_SIZE = Vector2(64,64)
 const ACTIVATION_SIZE = 30
 const SEC_TO_IDLE = 2
 const TILE_SIZE = 32
-const NUDGE_DISTANCE = 16	
+const NUDGE_DISTANCE = 2	
 
 var idle = false
 var idleCount = 0
@@ -65,6 +65,10 @@ func _unhandled_input(event):
 	elif event.is_action_pressed("toggleEnergize"):
 		energizeSignal.emit()
 		actionTaken= true
+	elif event.is_action_pressed("snap") and itemActive is pushableObject:
+		var snapped = itemActive.snapToGrid()
+		if snapped:
+			snap_position()
 	else:
 		pass
 				
@@ -77,18 +81,18 @@ func move_grid(direction:String):
 	if not isMoving and not Input.is_action_pressed("pull") and not Input.is_action_pressed("nudge"):
 		_set_activation_region(direction)
 	#print(validate_movement(newPos, inputs[direction]))	
-	if validate_movement(newPos, inputs[direction]) and not isMoving:
+	if validate_movement(newPos, inputs[direction]):
 		var tween = get_tree().create_tween()
 		tween.set_ease(Tween.EASE_IN)
 		tween.set_trans(Tween.TRANS_CUBIC)
 		#print(itemActive)
-		if itemActive and Input.is_action_pressed("pull"):
-			itemActive.pull(inputs[direction],_player_body)
-		if itemActive and Input.is_action_pressed("nudge"):
-			itemActive.nudgePull(inputs[direction],_player_body)
+		#if itemActive and Input.is_action_pressed("pull"):
+			#itemActive.pull(inputs[direction],_player_body)
+		#if itemActive and Input.is_action_pressed("nudge"):
+			#itemActive.nudgePull(inputs[direction],_player_body)
 			
 		if Input.is_action_pressed("nudge"):
-			tween.tween_property(self,"global_position",newPos,0.1)
+			tween.tween_property(self,"global_position",newPos,0.2)
 		else:
 			tween.tween_property(self,"global_position",newPos,0.2)
 		update_animation(inputs[direction])
@@ -104,6 +108,8 @@ func move_grid(direction:String):
 		
 	
 func validate_movement(testLoc:Vector2, direction:Vector2):
+	if isMoving:
+		return false
 	var dirCast1 = Vector2.ZERO
 	var dirCast2 = Vector2.ZERO
 	if direction == Vector2.RIGHT:
@@ -121,16 +127,23 @@ func validate_movement(testLoc:Vector2, direction:Vector2):
 	
 	#if Input.is_action_pressed("nudge"):
 	#	distToLook = NUDGE_DISTANCE	
-	_cast.position = SPRITE_SIZE/2.0 + dirCast1*TILE_SIZE*.707
+	_cast.position = SPRITE_SIZE/2.0 + dirCast1*TILE_SIZE
 	_cast.target_position =to_local(testLoc)
-	_cast2.position = SPRITE_SIZE/2.0 + dirCast2*TILE_SIZE*.707
+	_cast2.position = SPRITE_SIZE/2.0 + dirCast2*TILE_SIZE
 	_cast2.target_position = to_local(testLoc)
-	$Sprite2D.position = _cast.target_position
+	$Sprite2D.position = to_global(_cast.target_position)
 	#_cast.position = self.position
 	_cast.force_raycast_update()
 	_cast2.force_raycast_update()
 	if (not _cast.is_colliding()) and (not _cast2.is_colliding()):
-		return true
+		if itemActive and Input.is_action_pressed("pull"):
+			itemActive.pull(direction,_player_body)
+		if itemActive and Input.is_action_pressed("nudge"):
+			itemActive.nudgePull(direction,_player_body)
+		if itemActive:
+			return itemActive.isSliding
+		else:
+			return true
 	else:
 		var bothHittingSame = true
 		if _cast.is_colliding() and _cast2.is_colliding():
