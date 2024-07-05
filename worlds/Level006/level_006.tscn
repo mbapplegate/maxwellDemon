@@ -37,7 +37,7 @@ goalOnTop = true
 updateTime = 0.5
 
 [node name="Player" parent="." instance=ExtResource("6_qdfd3")]
-position = Vector2(1336, 256)
+position = Vector2(1344, 224)
 
 [node name="Doorway" parent="." instance=ExtResource("7_3si8s")]
 position = Vector2(1856, 480)
