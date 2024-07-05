@@ -3,7 +3,7 @@ class_name pushableObject
 
 const OBJECT_SIZE : int = 128
 const TILE_SIZE : int = 32
-const NUDGE_DISTANCE : int = 2
+const NUDGE_DISTANCE : int = 16
 const ROTATION_INCREMENT = deg_to_rad(15)
 
 @export var sliding_time = 0.2
@@ -35,9 +35,10 @@ func calculate_destination(dir:Vector2):
 	#return tile_map.map_to_local(tile_map_position)
 
 func push(motion:Vector2):
+	print("Pushing")
 	if isSliding or not isPushable:
 		return false
-		
+	
 	if can_move(motion):
 		var tween = get_tree().create_tween()
 		
@@ -52,6 +53,7 @@ func push(motion:Vector2):
 		return false
 		
 func pull(direction:Vector2,player:Object):
+	print("pulling")
 	if isSliding or not isPushable:
 		return false
 	if player:
@@ -77,6 +79,7 @@ func pull(direction:Vector2,player:Object):
 		return false
 
 func nudgePull(direction:Vector2,player:Object):
+	print("nudge pulling")
 	if isSliding or not isPushable:
 		return false
 	if player:

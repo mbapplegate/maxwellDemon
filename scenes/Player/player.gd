@@ -12,7 +12,7 @@ const SPRITE_SIZE = Vector2(64,64)
 const ACTIVATION_SIZE = 30
 const SEC_TO_IDLE = 2
 const TILE_SIZE = 32
-const NUDGE_DISTANCE = 2
+const NUDGE_DISTANCE = 16	
 
 var idle = false
 var idleCount = 0
@@ -76,7 +76,7 @@ func move_grid(direction:String):
 	var newPos = inputs[direction].normalized()*(distToTravel) + self.global_position
 	if not isMoving and not Input.is_action_pressed("pull") and not Input.is_action_pressed("nudge"):
 		_set_activation_region(direction)
-	print(validate_movement(newPos, inputs[direction]))	
+	#print(validate_movement(newPos, inputs[direction]))	
 	if validate_movement(newPos, inputs[direction]) and not isMoving:
 		var tween = get_tree().create_tween()
 		tween.set_ease(Tween.EASE_IN)
@@ -125,7 +125,7 @@ func validate_movement(testLoc:Vector2, direction:Vector2):
 	_cast.target_position =to_local(testLoc)
 	_cast2.position = SPRITE_SIZE/2.0 + dirCast2*TILE_SIZE*.707
 	_cast2.target_position = to_local(testLoc)
-	$Sprite2D.position =  _cast.position
+	$Sprite2D.position = _cast.target_position
 	#_cast.position = self.position
 	_cast.force_raycast_update()
 	_cast2.force_raycast_update()
@@ -136,7 +136,7 @@ func validate_movement(testLoc:Vector2, direction:Vector2):
 		if _cast.is_colliding() and _cast2.is_colliding():
 			if _cast.get_collider() != _cast2.get_collider():
 				bothHittingSame = false
-		
+		#print("hitting same: ", bothHittingSame)
 		if _cast.is_colliding() and bothHittingSame:
 			if _cast.get_collider() is pushableObject and itemActive and _cast.get_collider().isPushable and (Input.is_action_pressed("nudge") or Input.is_action_pressed("pull")):
 				_cast.get_collider().push(_cast.target_position)
