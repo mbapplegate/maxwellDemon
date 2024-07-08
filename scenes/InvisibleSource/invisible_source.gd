@@ -2,6 +2,7 @@ extends Node2D
 
 @export var propagationDirection : Vector2 = Vector2.DOWN
 @export var sourceColor : Vector3 = Vector3(1.0, 0.0, 0.0)
+@export var packetEnergy : float = 1.0
 @export var sourceWidth : int = 32
 @export var numRaysPerTimeout : int = 1
 @export var timerTimeout : float = 1.0
@@ -15,7 +16,7 @@ var srcEnergy = Vector3.ZERO
 func _ready():
 	invisParent = get_parent()
 	timer.wait_time = timerTimeout
-	srcEnergy = sourceColor/sourceColor.length_squared()
+	srcEnergy = sourceColor/sourceColor.length_squared() * packetEnergy
 
 
 func changeSourceColor(newColor : Vector3):

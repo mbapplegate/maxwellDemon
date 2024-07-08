@@ -66,8 +66,8 @@ func _unhandled_input(event):
 		energizeSignal.emit()
 		actionTaken= true
 	elif event.is_action_pressed("snap") and itemActive is pushableObject:
-		var snapped = itemActive.snapToGrid()
-		if snapped:
+		var hasSnapped = itemActive.snapToGrid()
+		if hasSnapped:
 			snap_position()
 	else:
 		pass
