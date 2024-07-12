@@ -26,7 +26,7 @@ offset_right = 736.0
 offset_bottom = 192.0
 theme_override_font_sizes/normal_font_size = 18
 bbcode_enabled = true
-text = "Prisms separate light into its constituent parts. In reality there is a continuum of colors instead of just red, green, and blue."
+text = "Prisms separate light into its constituent parts (In reality there is a continuum of colors instead of just red, green, and blue.)"
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
 offset_left = 16.0
