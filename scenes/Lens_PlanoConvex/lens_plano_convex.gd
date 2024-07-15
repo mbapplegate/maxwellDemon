@@ -34,6 +34,10 @@ func _ready():
 		$Stage/curveFaceArea.rotation=deg_to_rad(initialAngle)
 		$Stage/flatFaceArea.rotation = deg_to_rad(initialAngle)
 		$Stage/LensOutline.rotation= deg_to_rad(initialAngle)
+		var focalLocs = getFocusPositions()
+		frontFocusSprite.position = focalLocs[0]
+		rearFocusSprite.position = focalLocs[1]
+		
 	
 func set_geometry(newRadius:float, lens_height:float, center:Vector2):
 	halfAngle = asin(lens_height / (2.0 * newRadius))
