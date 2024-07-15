@@ -3,13 +3,13 @@ extends Node2D
 @onready var door = $Doorway
 @onready var player = $Player
 @onready var titleText = $titleText
-const THIS_SCENE_ALIAS = "LevelEquiPrism"
-var nextSceneAlias = LevelInfo.GameFlow[THIS_SCENE_ALIAS]
+const THIS_SCENE_ALIAS = "LevelSourceSplit"
+var nextSceneAlias = "Main_Menu"#LevelInfo.GameFlow[THIS_SCENE_ALIAS]
 signal nextScene(sceneAlias)
 var signalEmitted : bool = false
 
 func _ready():
-	titleText.text = LevelInfo.LevelDictionary[THIS_SCENE_ALIAS].Title
+	titleText.text = "TITLE"#LevelInfo.LevelDictionary[THIS_SCENE_ALIAS].Title
 	player.levelComplete.connect(nextLevel)
 	for child in get_children():
 		if child is pushableObject:

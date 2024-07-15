@@ -3,7 +3,7 @@ extends Node2D
 @onready var door = $Doorway
 @onready var player = $Player
 @onready var titleText = $titleText
-const THIS_SCENE_ALIAS = "LevelEquiPrism"
+const THIS_SCENE_ALIAS = "LevelEquiPrism3"
 var nextSceneAlias = LevelInfo.GameFlow[THIS_SCENE_ALIAS]
 signal nextScene(sceneAlias)
 var signalEmitted : bool = false
@@ -11,11 +11,15 @@ var signalEmitted : bool = false
 func _ready():
 	titleText.text = LevelInfo.LevelDictionary[THIS_SCENE_ALIAS].Title
 	player.levelComplete.connect(nextLevel)
+	
 	for child in get_children():
 		if child is pushableObject:
 			child.initialize()
 			if child is PointDetector:
 				child.goalMetChanged.connect(_toggleDoor)
+				
+	$PointDetector.position += Vector2(0,-5)
+	$PointDetector3.position += Vector2(10,0)
 			
 func _toggleDoor(val):
 	if val:
