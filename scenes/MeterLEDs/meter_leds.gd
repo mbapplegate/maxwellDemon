@@ -70,15 +70,16 @@ func rayDetected(en : float):
 func rayBlocked(en : float):
 	energyBlocked += en
 
-func _getArrayAvg(arr, arrLen):
+func _getArrayAvg(arr, arrLen)->float:
 	var sum = 0.0
 	for i in arrLen:
 		sum += arr[i]
-	return sum/arrLen
+	return sum/float(arrLen)
 	
 func _on_timer_timeout():
 	#Calculate which LEDs should be lit
 	var totalEnergy = energyBlocked + energyDetected
+	
 	var pctOfMax = totalEnergy/maxEnergy
 	var numLEDsLit = int(round(pctOfMax * NUM_LEDS))
 	var pctDetected = energyDetected / totalEnergy
@@ -95,6 +96,7 @@ func _on_timer_timeout():
 	#Update average
 	detectedArray[avgIdx] = energyDetected
 	var arrAvg = _getArrayAvg(detectedArray,NUM_TO_AVG)
+	#print(energyBlocked, ", ", energyDetected, ", ", arrAvg)
 	#Update index
 	avgIdx += 1
 	if avgIdx >= NUM_TO_AVG:
