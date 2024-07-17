@@ -84,9 +84,9 @@ func _on_timer_2_timeout():
 	#else:
 		#await animateRightBack()
 	if rotatingCCW:
-		$FlatMirror.rotateCCW()
+		$FlatMirror.rotateCCW(deg_to_rad(15))
 	else:
-		$FlatMirror.rotateCW()
+		$FlatMirror.rotateCW(deg_to_rad(15))
 	#print("Angle: ",rad_to_deg($FlatMirror.getRotation()))
 	if rad_to_deg($FlatMirror.getRotation()) <= 10:
 		rotatingCCW = false

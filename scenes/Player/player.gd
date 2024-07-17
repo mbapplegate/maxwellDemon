@@ -69,6 +69,8 @@ func _unhandled_input(event):
 		var hasSnapped = itemActive.snapToGrid()
 		if hasSnapped:
 			snap_position()
+	elif event.is_action_pressed("skipLevel"):
+		levelComplete.emit()
 	else:
 		pass
 				
@@ -131,7 +133,7 @@ func validate_movement(testLoc:Vector2, direction:Vector2):
 	_cast.target_position =to_local(testLoc)
 	_cast2.position = SPRITE_SIZE/2.0 + dirCast2*TILE_SIZE
 	_cast2.target_position = to_local(testLoc)
-	$Sprite2D.position = to_global(_cast.target_position)
+	#$Sprite2D.position = to_global(_cast.target_position)
 	#_cast.position = self.position
 	_cast.force_raycast_update()
 	_cast2.force_raycast_update()

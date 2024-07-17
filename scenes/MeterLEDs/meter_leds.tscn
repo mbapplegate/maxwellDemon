@@ -63,6 +63,7 @@ scale = Vector2(3, 3)
 texture = ExtResource("4_3cqhy")
 
 [node name="Goal" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(210, -200)
 scale = Vector2(3, 3)
 texture = ExtResource("4_2qxgv")

@@ -54,6 +54,8 @@ func _ready():
 		for child in get_parent().get_children():
 			if child is FreeAperture:
 				child.rayHit.connect(rayBlocked)
+				
+	maxEnergy= goalEnergy
 	
 func _turnLEDOff(ledIndex : int):
 	ledArray[ledIndex].texture = offTexture

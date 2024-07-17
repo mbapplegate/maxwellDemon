@@ -26,6 +26,7 @@ var numPoints = 0
 var lineLength = 0.0
 var isPaused = false
 var lightSource = ""
+var pointPositions = []
 
 #signal hitSomething(rayObject, collisionPoint, collisionNormal, collider)
 #
@@ -51,8 +52,10 @@ var lightSource = ""
 func _ready():
 	line.clear_points();
 	line.add_point(-propDir.normalized() * LEN);
+	pointPositions.append(-propDir.normalized() * LEN)
 	line.add_point(Vector2.ZERO)
 	line.position = Vector2.ZERO
+	pointPositions.push_back(Vector2.ZERO)
 	#circ.position = Vector2.ZERO
 	#circ2.position = Vector2.ZERO
 	numPoints = 2
@@ -145,6 +148,7 @@ func _has_ray_left_screen():
 		
 func ray_add_point(newPt:Vector2):
 	line.add_point(newPt)
+	pointPositions.push_back(newPt)
 	numPoints += 1
 	
 func _get_packet_length(pointArray:PackedVector2Array):
@@ -156,11 +160,14 @@ func _get_packet_length(pointArray:PackedVector2Array):
 #
 func _update_line_position(currentPtFront:Vector2, nextPtFront:Vector2, nextPtBack:Vector2):
 	line.set_point_position(numPoints-1,nextPtFront)
+	pointPositions[numPoints-1] = nextPtFront
 	line.set_point_position(0,nextPtBack)
+	pointPositions[0] = nextPtBack
 	#circ.position = nextPtFront
 	#circ2.position = nextPtBack
 	if numPoints > 2:
-		if line.get_point_position(0).distance_squared_to(line.get_point_position(1)) <= 9.0:
+		if line.get_point_position(0).distance_squared_to(line.get_point_position(1)) <= 4.0:
+				
 				line.remove_point(0)
 				numPoints -= 1
 
