@@ -1,0 +1,96 @@
+[gd_scene load_steps=4 format=3 uid="uid://c88hoxq5fs60k"]
+
+[ext_resource type="Script" path="res://lessons/filtersAbs/filter_lesson.gd" id="1_mw32j"]
+[ext_resource type="PackedScene" uid="uid://bt1eicy7gakub" path="res://scenes/InvisibleSource/invisible_source.tscn" id="2_m5bw7"]
+[ext_resource type="PackedScene" uid="uid://vx0v73uughwh" path="res://scenes/FilterAbsorption/filter_absorption.tscn" id="3_mxntc"]
+
+[node name="FilterLesson" type="Node2D"]
+script = ExtResource("1_mw32j")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(480, 270)
+zoom = Vector2(2, 2)
+
+[node name="RichTextLabel4" type="RichTextLabel" parent="."]
+offset_left = 672.0
+offset_top = 500.0
+offset_right = 1024.0
+offset_bottom = 540.0
+theme_override_font_sizes/normal_font_size = 24
+text = "Any key to continue . . ."
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = 32.0
+offset_top = 12.0
+offset_right = 225.0
+offset_bottom = 76.0
+theme_override_font_sizes/normal_font_size = 40
+bbcode_enabled = true
+text = "Filters"
+
+[node name="RichTextLabel6" type="RichTextLabel" parent="."]
+offset_left = 147.0
+offset_top = 96.0
+offset_right = 819.0
+offset_bottom = 160.0
+theme_override_font_sizes/normal_font_size = 23
+text = "Filters block some colors of light and let others pass through"
+
+[node name="FilterAbsorption" parent="." instance=ExtResource("3_mxntc")]
+position = Vector2(256, 320)
+filterAbsorbance = Color(1, 0, 0, 1)
+isPushable = false
+isRotatable = false
+isEnergizeable = false
+
+[node name="FilterAbsorption2" parent="." instance=ExtResource("3_mxntc")]
+position = Vector2(480, 320)
+filterAbsorbance = Color(0, 1, 0, 1)
+isPushable = false
+isRotatable = false
+isEnergizeable = false
+
+[node name="FilterAbsorption3" parent="." instance=ExtResource("3_mxntc")]
+position = Vector2(704, 320)
+filterAbsorbance = Color(1, 1, 0, 1)
+isPushable = false
+isRotatable = false
+isEnergizeable = false
+
+[node name="InvisibleSource2" parent="." instance=ExtResource("2_m5bw7")]
+position = Vector2(16, 320)
+rotation = 1.5708
+propagationDirection = Vector2(1, 0)
+sourceColor = Vector3(1, 1, 1)
+packetEnergy = 3.0
+sourceWidth = 10
+timerTimeout = 0.25
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="."]
+offset_left = 192.0
+offset_top = 224.0
+offset_right = 320.0
+offset_bottom = 264.0
+bbcode_enabled = true
+text = "[center]Blocks Red"
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="."]
+offset_left = 416.0
+offset_top = 224.0
+offset_right = 544.0
+offset_bottom = 264.0
+bbcode_enabled = true
+text = "[center]Blocks Green"
+
+[node name="RichTextLabel5" type="RichTextLabel" parent="."]
+offset_left = 623.0
+offset_top = 224.0
+offset_right = 783.0
+offset_bottom = 264.0
+bbcode_enabled = true
+text = "[center]Blocks Red & Green"
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

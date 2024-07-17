@@ -41,7 +41,8 @@ var LevelDictionary = {
 	"LevelEquiPrism2" : {"Path" : "res://worlds/equilateralPrism2/level_equilateral_prism_2.tscn", "Title" : "Fine Control", "Section" : "Dispersion"},
 	"LevelEquiPrism3" : {"Path" : "res://worlds/equilateralPrism3/level_equilateral_prism_3.tscn", "Title" : "Source Spectra", "Section" : "Dispersion"},
 	"LevelPrismRecombine" :{"Path": "res://worlds/prismRecombine/level_prism_recombine.tscn", "Title" : "Newton's Prism Experiment", "Section" : "Dispersion"},
-	"TriangularPrismLesson" : {"Path": "res://lessons/prism/triangular_prism_lesson.tscn", "Title" : "Prism Lesson", "Section":"Lessons"}
+	"TriangularPrismLesson" : {"Path": "res://lessons/prism/triangular_prism_lesson.tscn", "Title" : "Prism Lesson", "Section":"Lessons"},
+	"FilterLesson" : {"Path" : "res://lessons/filtersAbs/filter_lesson.tscn", "Title" : "Filter Lesson", "Section":"Lessons"}
 }
 
 var SectionOrdering = ["Menus", "Tutorial", "Lenses and Mirrors","Dispersion", "Colors", "Lessons", "Debug"]
@@ -68,10 +69,11 @@ var GameFlow = {
 	"BeamExpanderLesson2"   : "Level011",
 	"Level011"              : "ParabolicMirrorLesson",
 	"ParabolicMirrorLesson" : "LevelEquiPrism",
-	"LevelEquiPrism"        : "LevelEquiPrism2",
-	"LevelEquiPrism2"       : "LevelEquiPrism3",
-	"LevelEquiPrism3"      : "TriangularPrismLesson",
-	"TriangularPrismLesson" : "LevelPrismRecombine",
+	"LevelEquiPrism"        : "TriangularPrismLesson",
+	"TriangularPrismLesson" : "LevelEquiPrism2",
+	"LevelEquiPrism2"       : "FilterLesson",
+	"FilterLesson"          : "LevelEquiPrism3",
+	"LevelEquiPrism3"       : "LevelPrismRecombine",
 	"LevelPrismRecombine"   : "MainMenu"
 	
 }

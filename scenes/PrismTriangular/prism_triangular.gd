@@ -29,8 +29,8 @@ func _ready():
 	
 	$Stage/Polygon2D.polygon = prismPoly
 	
-	var minDeviation = 2*(rad_to_deg(asin(prismIOR[1]*sin(deg_to_rad(30))))-30)
-	var incidentAngle = (60+minDeviation) / 2.0
+	#var minDeviation = 2*(rad_to_deg(asin(prismIOR[1]*sin(deg_to_rad(30))))-30)
+	#var incidentAngle = (60+minDeviation) / 2.0
 	#print(minDeviation, ", ", incidentAngle)
 	if not isRotatable and initialAngle != 0:
 		var radAngle = deg_to_rad(initialAngle)
