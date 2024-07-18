@@ -35,5 +35,7 @@ func _on_timer_timeout():
 		hasRed = 1.0
 
 	$InvisibleSource2.sourceColor = Vector3(hasRed,hasGreen,hasBlue)
+	$InvisibleSource3.sourceColor = Vector3(hasRed,hasGreen,hasBlue)
+	$InvisibleSource4.sourceColor = Vector3(hasRed,hasGreen,hasBlue)
 	
 	

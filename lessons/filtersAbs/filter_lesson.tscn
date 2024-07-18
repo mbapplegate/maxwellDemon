@@ -32,12 +32,14 @@ text = "Filters"
 offset_left = 147.0
 offset_top = 96.0
 offset_right = 819.0
-offset_bottom = 160.0
+offset_bottom = 192.0
 theme_override_font_sizes/normal_font_size = 23
-text = "Filters block some colors of light and let others pass through"
+bbcode_enabled = true
+text = "[fill]Filters block some colors of light and let others pass through. White light passing through the filter turns the same color as the filter."
 
 [node name="FilterAbsorption" parent="." instance=ExtResource("3_mxntc")]
 position = Vector2(256, 320)
+filterIndex = 1.0
 filterAbsorbance = Color(1, 0, 0, 1)
 isPushable = false
 isRotatable = false
@@ -45,6 +47,7 @@ isEnergizeable = false
 
 [node name="FilterAbsorption2" parent="." instance=ExtResource("3_mxntc")]
 position = Vector2(480, 320)
+filterIndex = 1.0
 filterAbsorbance = Color(0, 1, 0, 1)
 isPushable = false
 isRotatable = false
@@ -52,18 +55,18 @@ isEnergizeable = false
 
 [node name="FilterAbsorption3" parent="." instance=ExtResource("3_mxntc")]
 position = Vector2(704, 320)
-filterAbsorbance = Color(1, 1, 0, 1)
+filterIndex = 1.0
 isPushable = false
 isRotatable = false
 isEnergizeable = false
 
 [node name="InvisibleSource2" parent="." instance=ExtResource("2_m5bw7")]
-position = Vector2(16, 320)
+position = Vector2(160, 224)
 rotation = 1.5708
-propagationDirection = Vector2(1, 0)
+propagationDirection = Vector2(1, 1)
 sourceColor = Vector3(1, 1, 1)
 packetEnergy = 3.0
-sourceWidth = 10
+sourceWidth = 3
 timerTimeout = 0.25
 
 [node name="Timer" type="Timer" parent="."]
@@ -91,6 +94,24 @@ offset_top = 224.0
 offset_right = 783.0
 offset_bottom = 264.0
 bbcode_enabled = true
-text = "[center]Blocks Red & Green"
+text = "[center]Blocks Blue"
+
+[node name="InvisibleSource3" parent="." instance=ExtResource("2_m5bw7")]
+position = Vector2(384, 224)
+rotation = 1.5708
+propagationDirection = Vector2(1, 1)
+sourceColor = Vector3(1, 1, 1)
+packetEnergy = 3.0
+sourceWidth = 3
+timerTimeout = 0.25
+
+[node name="InvisibleSource4" parent="." instance=ExtResource("2_m5bw7")]
+position = Vector2(608, 224)
+rotation = 1.5708
+propagationDirection = Vector2(1, 1)
+sourceColor = Vector3(1, 1, 1)
+packetEnergy = 3.0
+sourceWidth = 3
+timerTimeout = 0.25
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

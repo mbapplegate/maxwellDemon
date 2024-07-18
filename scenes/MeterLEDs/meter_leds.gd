@@ -8,6 +8,7 @@ class_name DigitalMeter
 
 const NUM_LEDS : int = 10
 const NUM_TO_AVG : int = 5
+const PANEL_BOORDER_SIZE : int = 19
 
 @onready var led1 = $Panel/LED01
 @onready var led2 = $Panel/LED02
@@ -30,6 +31,7 @@ var energyBlocked : float = 0.0
 var detectedArray : Array = []
 var avgIdx : int = 0
 var goalMet = false
+var panelWidth = 10.0
 
 signal goalMetChanged(val:bool)
 
@@ -37,11 +39,14 @@ func _ready():
 	ledArray = [led1,led2,led3,led4,led5,led6,led7,led8,led9,led10]
 	detectedArray.resize(NUM_TO_AVG)
 	detectedArray.fill(0.0)
+	
 	$Timer.wait_time = updateTime
+	
 	var goalXPos = goalEnergy/maxEnergy * (led10.position.x-led1.position.x) + led1.position.x
 	$Goal.position.x = goalXPos
+	panelWidth = $Panel.texture.get_width() - 2*PANEL_BOORDER_SIZE
 	$avgPower.position.x = led1.position.x
-	$ColorRect.position.x = led1.position.x
+	$Panel/ColorRect.size.x =0
 	if not goalOnTop:
 		$avgPower.position.y = -$avgPower.position.y
 		$Goal.position.y = -$Goal.position.y
@@ -118,7 +123,7 @@ func _on_timer_timeout():
 	#Place average marker
 	var markerXVal = arrAvg/maxEnergy * (led10.position.x-led1.position.x) + led1.position.x
 	$avgPower.position.x = max(led1.position.x,min(led10.position.x,markerXVal))
-	$ColorRect.position.x =  max(led1.position.x,min(led10.position.x,markerXVal))
+	$Panel/ColorRect.size.x =  max(0,min(panelWidth,arrAvg/maxEnergy*panelWidth))
 	#Reset vars
 	energyBlocked = 0
 	energyDetected = 0
