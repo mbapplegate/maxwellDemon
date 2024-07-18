@@ -26,6 +26,7 @@ var numPoints = 0
 var lineLength = 0.0
 var isPaused = false
 var lightSource = ""
+var pointPositions = []
 
 #signal hitSomething(rayObject, collisionPoint, collisionNormal, collider)
 #
@@ -51,8 +52,10 @@ var lightSource = ""
 func _ready():
 	line.clear_points();
 	line.add_point(-propDir.normalized() * LEN);
+	pointPositions.append(-propDir.normalized() * LEN)
 	line.add_point(Vector2.ZERO)
 	line.position = Vector2.ZERO
+	pointPositions.push_back(Vector2.ZERO)
 	#circ.position = Vector2.ZERO
 	#circ2.position = Vector2.ZERO
 	numPoints = 2
@@ -61,7 +64,7 @@ func _ready():
 	line.material.set_shader_parameter("red",rayColor[0])
 	line.material.set_shader_parameter("green",rayColor[1])
 	line.material.set_shader_parameter("blue",rayColor[2])
-	line.material.set_shader_parameter("energy",energy)
+	line.material.set_shader_parameter("energy",sqrt(energy))
 	line.material.set_shader_parameter("propVisibleFront",0.0)
 	line.material.set_shader_parameter("propVisibleEnd",1.0)
 
@@ -87,9 +90,10 @@ func _process(delta):
 		if not endDirToNextPointBack.is_equal_approx(startDirToNextPointBack):
 			nextPointBack = line.get_point_position(1)
 		#Adjust the raycast
-		ray.position = currentPointFront
-		ray.set_target_position(propDir.normalized()*speedInMedium*delta)
-		ray.force_raycast_update()
+		if not rayDying:
+			ray.position = currentPointFront
+			ray.set_target_position(propDir.normalized()*speedInMedium*delta)
+			ray.force_raycast_update()
 		
 		#Detect interfaces
 		#Ray hasn't hit anything, so move the ray forward
@@ -144,6 +148,7 @@ func _has_ray_left_screen():
 		
 func ray_add_point(newPt:Vector2):
 	line.add_point(newPt)
+	pointPositions.push_back(newPt)
 	numPoints += 1
 	
 func _get_packet_length(pointArray:PackedVector2Array):
@@ -155,11 +160,14 @@ func _get_packet_length(pointArray:PackedVector2Array):
 #
 func _update_line_position(currentPtFront:Vector2, nextPtFront:Vector2, nextPtBack:Vector2):
 	line.set_point_position(numPoints-1,nextPtFront)
+	pointPositions[numPoints-1] = nextPtFront
 	line.set_point_position(0,nextPtBack)
+	pointPositions[0] = nextPtBack
 	#circ.position = nextPtFront
 	#circ2.position = nextPtBack
 	if numPoints > 2:
-		if line.get_point_position(0).distance_squared_to(line.get_point_position(1)) <= 9.0:
+		if line.get_point_position(0).distance_squared_to(line.get_point_position(1)) <= 4.0:
+				
 				line.remove_point(0)
 				numPoints -= 1
 
@@ -218,6 +226,7 @@ func cloneRay(propDirection : Vector2, newColor : Vector3) -> lightPacket:
 	newRay.position = self.position
 	newRay.energy = energy
 	self.get_parent().add_child(newRay)
+	newRay.update_energy(energy)
 	return newRay
 		
 func reflectRay(normalAngle, collisionPoint) ->Vector2:
@@ -236,23 +245,32 @@ func getReflectionDirection(normalAngle : Vector2)->Vector2:
 		return propDir
 		
 func refractRay(normalAngle, objectIOR,collisionPoint):
-	var normalIn = -normalAngle;
-	var theta1 = normalIn.angle_to(propDir);
-	var theta2
-	#Going from high index to low index
-	if index_of_refraction > MEDIUM_INDEX:
-		theta2 = asin(objectIOR/MEDIUM_INDEX * sin(theta1))
-		index_of_refraction = MEDIUM_INDEX
-	#Going from low index to high index
+	if objectIOR == MEDIUM_INDEX:
+		pass
 	else:
-		theta2 = asin(MEDIUM_INDEX/objectIOR*sin(theta1))
-		index_of_refraction = objectIOR
-	#Add the point to the photon packet
-	
-	var newDir = normalIn.rotated(theta2)
-	propDir = newDir
-	
-	ray_add_point(to_local(collisionPoint))
+		var normalIn = -normalAngle;
+		var theta1 = normalIn.angle_to(propDir)
+		var theta2
+		var internalReflection = false
+		#Going from high index to low index
+		if index_of_refraction > MEDIUM_INDEX:
+			var arg =  objectIOR/MEDIUM_INDEX * sin(theta1)
+			if abs(arg) <= 1.0:
+				theta2 = asin(objectIOR/MEDIUM_INDEX * sin(theta1))
+				index_of_refraction = MEDIUM_INDEX
+			else:
+				reflectRay(normalAngle,collisionPoint)
+				internalReflection=true
+		#Going from low index to high index
+		else:
+			theta2 = asin(MEDIUM_INDEX/objectIOR*sin(theta1))
+			index_of_refraction = objectIOR
+		#Add the point to the photon packet
+		if not internalReflection:
+			var newDir = normalIn.rotated(theta2)
+			propDir = newDir
+			
+			ray_add_point(to_local(collisionPoint))
 		
 	
 	

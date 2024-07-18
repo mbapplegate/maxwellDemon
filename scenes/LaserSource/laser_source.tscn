@@ -14,6 +14,7 @@ halfAngle = 0.0
 numRaysPerTimeout = 1
 rayColor = Vector3(1, 0, 1)
 timerTimeout = 0.063
+packetEnergy = 1.0
 isEnergized = true
 
 [node name="Timer" type="Timer" parent="." index="0"]

@@ -3,12 +3,12 @@
 [ext_resource type="Script" path="res://worlds/Level007/level_007.gd" id="1_dxbp8"]
 [ext_resource type="PackedScene" uid="uid://fkwew1tbysym" path="res://worlds/BaseTileMap.tscn" id="2_0ri1u"]
 [ext_resource type="PackedScene" uid="uid://2ai0r6raovox" path="res://scenes/LaserSource/laser_source.tscn" id="3_1b8hj"]
-[ext_resource type="PackedScene" uid="uid://dn3852bgxqccu" path="res://scenes/DetectorMeterAnalog/detector_meter.tscn" id="4_ipodj"]
 [ext_resource type="PackedScene" uid="uid://bq36hxil0t1vi" path="res://scenes/DetectorPoint/point_detector.tscn" id="5_x5sgd"]
 [ext_resource type="PackedScene" uid="uid://ojfv06ceqv2a" path="res://scenes/Player/player.tscn" id="6_7dvji"]
 [ext_resource type="PackedScene" uid="uid://3lsffc1281c7" path="res://scenes/StaticIris/static_iris.tscn" id="6_j8uol"]
 [ext_resource type="PackedScene" uid="uid://dns1nq8hlfau" path="res://scenes/Doorway/doorway.tscn" id="7_vrycc"]
 [ext_resource type="PackedScene" uid="uid://ciufjrc1fmyfi" path="res://scenes/FlatMirror/flat_mirror.tscn" id="8_fytua"]
+[ext_resource type="PackedScene" uid="uid://chlytrwdjaffi" path="res://scenes/MeterLEDs/meter_leds.tscn" id="9_lpii6"]
 [ext_resource type="PackedScene" uid="uid://b6navnb20xork" path="res://scenes/Lens_PlanoConvex/lens_plano_convex.tscn" id="10_lqocq"]
 
 [node name="Level007" type="Node2D"]
@@ -20,6 +20,7 @@ layer_0/tile_data = PackedInt32Array(2097152, 1, 0, 2031616, 1, 0, 1966080, 1, 0
 [node name="LaserSource" parent="." instance=ExtResource("3_1b8hj")]
 position = Vector2(928, 198)
 HALF_HEIGHT = 25.0
+rayColor = Vector3(0, 1, 0)
 sliding_time = -0.8
 isPushable = false
 isRotatable = false
@@ -60,26 +61,22 @@ position = Vector2(1246, 351)
 focalLength = 176.0
 initialAngle = 180.0
 
-[node name="DetectorMeter" parent="." instance=ExtResource("4_ipodj")]
-position = Vector2(1568, 192)
-goalPower = 7.0
-integrationTime = 0.5
-IDColor = Color(0, 0, 1, 1)
-
-[node name="WirePath" type="Line2D" parent="DetectorMeter"]
-points = PackedVector2Array(0, 0, 315, 0, 315, 240)
-width = 6.0
-default_color = Color(0, 1, 0, 1)
-
-[node name="PointDetector" parent="DetectorMeter" instance=ExtResource("5_x5sgd")]
-position = Vector2(192, 160)
+[node name="PointDetector" parent="." instance=ExtResource("5_x5sgd")]
+position = Vector2(1760, 352)
 isPushable = false
 isRotatable = false
 isEnergizeable = false
 
-[node name="StaticIris" parent="DetectorMeter/PointDetector" instance=ExtResource("6_j8uol")]
+[node name="StaticIris" parent="PointDetector" instance=ExtResource("6_j8uol")]
 position = Vector2(-16, -1)
 aperture_width = 6
+
+[node name="MeterLEDs" parent="PointDetector" instance=ExtResource("9_lpii6")]
+position = Vector2(0, -80)
+maxEnergy = 10.0
+goalEnergy = 7.0
+goalOnTop = true
+updateTime = 0.5
 
 [node name="Doorway" parent="." instance=ExtResource("7_vrycc")]
 position = Vector2(1856, 480)

@@ -3,8 +3,8 @@
 [ext_resource type="Script" path="res://worlds/Level006/level_006.gd" id="1_7tn6s"]
 [ext_resource type="PackedScene" uid="uid://fkwew1tbysym" path="res://worlds/BaseTileMap.tscn" id="2_6vngj"]
 [ext_resource type="PackedScene" uid="uid://2ai0r6raovox" path="res://scenes/LaserSource/laser_source.tscn" id="3_ixe0d"]
-[ext_resource type="PackedScene" uid="uid://dn3852bgxqccu" path="res://scenes/DetectorMeterAnalog/detector_meter.tscn" id="4_rtrxn"]
 [ext_resource type="PackedScene" uid="uid://bq36hxil0t1vi" path="res://scenes/DetectorPoint/point_detector.tscn" id="5_bnksd"]
+[ext_resource type="PackedScene" uid="uid://chlytrwdjaffi" path="res://scenes/MeterLEDs/meter_leds.tscn" id="5_hydsx"]
 [ext_resource type="PackedScene" uid="uid://ojfv06ceqv2a" path="res://scenes/Player/player.tscn" id="6_qdfd3"]
 [ext_resource type="PackedScene" uid="uid://dns1nq8hlfau" path="res://scenes/Doorway/doorway.tscn" id="7_3si8s"]
 [ext_resource type="PackedScene" uid="uid://ciufjrc1fmyfi" path="res://scenes/FlatMirror/flat_mirror.tscn" id="8_vofye"]
@@ -17,32 +17,28 @@ layer_0/tile_data = PackedInt32Array(2097152, 1, 0, 2031616, 1, 0, 1966080, 1, 0
 
 [node name="LaserSource" parent="." instance=ExtResource("3_ixe0d")]
 position = Vector2(928, 198)
-HALF_HEIGHT = 7.0
+HALF_HEIGHT = 8.0
+rayColor = Vector3(1, 0.5, 0)
 timerTimeout = 0.125
 initialAngle = 90.0
 isPushable = false
 isRotatable = false
 
-[node name="DetectorMeter" parent="." instance=ExtResource("4_rtrxn")]
-position = Vector2(1568, 192)
-maxPower = 5.0
-goalPower = 2.5
-integrationTime = 0.5
-IDColor = Color(0, 0, 1, 1)
-
-[node name="WirePath" type="Line2D" parent="DetectorMeter"]
-points = PackedVector2Array(0, 0, 315, 0, 315, 240)
-width = 6.0
-default_color = Color(0, 1, 0, 1)
-
-[node name="PointDetector" parent="DetectorMeter" instance=ExtResource("5_bnksd")]
-position = Vector2(64, 413)
+[node name="PointDetector" parent="." instance=ExtResource("5_bnksd")]
+position = Vector2(1632, 605)
 isPushable = false
 isRotatable = false
 isEnergizeable = false
 
+[node name="MeterLEDs" parent="PointDetector" instance=ExtResource("5_hydsx")]
+position = Vector2(0, -78)
+maxEnergy = 5.0
+goalEnergy = 2.5
+goalOnTop = true
+updateTime = 0.5
+
 [node name="Player" parent="." instance=ExtResource("6_qdfd3")]
-position = Vector2(1336, 256)
+position = Vector2(1344, 224)
 
 [node name="Doorway" parent="." instance=ExtResource("7_3si8s")]
 position = Vector2(1856, 480)
@@ -62,7 +58,7 @@ horizontal_alignment = 2
 vertical_alignment = 1
 
 [node name="FlatMirror" parent="." instance=ExtResource("8_vofye")]
-position = Vector2(1152, 416)
+position = Vector2(1120, 391)
 isEnergizeable = false
 
 [node name="FlatMirror2" parent="." instance=ExtResource("8_vofye")]
@@ -79,9 +75,9 @@ isPushable = false
 isRotatable = false
 
 [node name="FlatMirror4" parent="." instance=ExtResource("8_vofye")]
-position = Vector2(1614, 423)
+position = Vector2(1632, 384)
 isEnergizeable = false
 
 [node name="FlatMirror5" parent="." instance=ExtResource("8_vofye")]
-position = Vector2(1352, 400)
+position = Vector2(1352, 384)
 isEnergizeable = false

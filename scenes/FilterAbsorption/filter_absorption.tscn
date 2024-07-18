@@ -15,6 +15,7 @@ size = Vector2(2, 200)
 [node name="FilterAbsorption" instance=ExtResource("1_fcvi1")]
 position = Vector2(379, 408)
 script = ExtResource("2_6pd1d")
+filterIndex = 2.0
 filterWidth = 16
 filterHeight = 120
 filterAbsorbance = Color(0, 0, 1, 1)
@@ -36,9 +37,16 @@ shape = SubResource("RectangleShape2D_a0i2m")
 position = Vector2(11, 0)
 shape = SubResource("RectangleShape2D_q41vn")
 
-[node name="ColorRect" type="ColorRect" parent="." index="4"]
-offset_left = -12.0
-offset_top = -60.0
-offset_right = 12.0
-offset_bottom = 60.0
+[node name="ColorRect" type="ColorRect" parent="Stage" index="3"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -76.0
+offset_top = -124.0
+offset_right = -52.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
 metadata/_edit_use_anchors_ = true

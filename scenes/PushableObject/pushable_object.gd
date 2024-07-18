@@ -1,8 +1,9 @@
 extends CharacterBody2D
 class_name pushableObject
 
-const OBJECT_SIZE = 128
-const TILE_SIZE = 32
+const OBJECT_SIZE : int = 128
+const TILE_SIZE : int = 32
+const NUDGE_DISTANCE : int = 2
 const ROTATION_INCREMENT = deg_to_rad(15)
 
 @export var sliding_time = 0.2
@@ -36,7 +37,7 @@ func calculate_destination(dir:Vector2):
 func push(motion:Vector2):
 	if isSliding or not isPushable:
 		return false
-		
+	
 	if can_move(motion):
 		var tween = get_tree().create_tween()
 		
@@ -74,7 +75,32 @@ func pull(direction:Vector2,player:Object):
 		if player:
 			self.remove_collision_exception_with(player)
 		return false
+
+func nudgePull(direction:Vector2,player:Object):
+	if isSliding or not isPushable:
+		return false
+	if player:
+		self.add_collision_exception_with(player)	
 	
+	var globalTargetLoc = global_position + direction.normalized()*NUDGE_DISTANCE
+	#print("Pulling: ",direction, ", ", to_local(globalTargetLoc),", ",can_move(to_local(globalTargetLoc)))
+	if can_move(to_local(globalTargetLoc)):
+		var tween = get_tree().create_tween()
+		
+		tween.set_ease(Tween.EASE_IN)
+		tween.set_trans(Tween.TRANS_CUBIC)
+		tween.tween_property(self,"global_position",globalTargetLoc,sliding_time)
+		isSliding = true
+		await tween.finished
+		isSliding = false
+		if player:
+			self.remove_collision_exception_with(player)
+		return true
+	else:
+		if player:
+			self.remove_collision_exception_with(player)
+		return false
+		
 func can_move(localDestination:Vector2):
 	var collInfo =  move_and_collide(localDestination, true)
 	if collInfo:
@@ -109,14 +135,20 @@ func update_texture():
 	else:
 		indicator.texture = null
 
-
-func rotateCW():
-	if isRotatable:
-		sprite.rotation += ROTATION_INCREMENT
+func snapToGrid() -> bool:
+	if isPushable:
+		self.global_position = global_position.snapped(Vector2(TILE_SIZE,TILE_SIZE))
+		return true
+	else:
+		return false
 	
-func rotateCCW():
+func rotateCW(numDegrees : float):
 	if isRotatable:
-		sprite.rotation -= ROTATION_INCREMENT
+		sprite.rotation += numDegrees
+	
+func rotateCCW(numDegrees : float):
+	if isRotatable:
+		sprite.rotation -= numDegrees
 
 func getRotation():
 	if isRotatable:

@@ -6,6 +6,7 @@ var currentSceneAlias = ""
 @onready var switcher = $SceneSwitcher
 
 func _ready():
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	currentScene.nextScene.connect(switchScene)
 	pauseMenu.nextScene.connect(switchScene)
 	currentSceneAlias = "MainMenu"

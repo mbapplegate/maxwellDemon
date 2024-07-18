@@ -39,22 +39,23 @@ wait_time = 0.5
 position = Vector2(256, 288)
 LENS_HEIGHT = 200.0
 focalLength = 256.0
+lensIndex = Vector3(2, 2, 2)
 initialAngle = 180.0
 isPushable = false
 isRotatable = false
 
 [node name="explan1" type="RichTextLabel" parent="."]
-offset_left = 416.0
+offset_left = 512.0
 offset_top = 64.0
-offset_right = 832.0
+offset_right = 928.0
 offset_bottom = 128.0
 theme_override_font_sizes/normal_font_size = 18
 text = "Light entering squarely converges at the focal point . . ."
 
 [node name="explan2" type="RichTextLabel" parent="."]
-offset_left = 416.0
+offset_left = 512.0
 offset_top = 128.0
-offset_right = 832.0
+offset_right = 928.0
 offset_bottom = 192.0
 theme_override_font_sizes/normal_font_size = 18
 text = "Light entering \"off-square\" shifts focal point forward or backward"
@@ -71,10 +72,10 @@ one_shot = true
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
 offset_left = 16.0
 offset_top = 29.0
-offset_right = 230.0
+offset_right = 448.0
 offset_bottom = 98.0
 theme_override_font_sizes/normal_font_size = 40
-text = "Lenses"
+text = "Plano-convex Lenses"
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="Timer2" to="." method="_on_timer_2_timeout"]

@@ -1,7 +1,8 @@
 extends Node2D
 
-@export var nextSceneAlias = "Level006"
+
 const THIS_SCENE_ALIAS = "MeterLesson"
+var nextSceneAlias = LevelInfo.GameFlow[THIS_SCENE_ALIAS]
 
 @onready var meter = $DetectorMeter
 @onready var wireLegend = $WireLegend
