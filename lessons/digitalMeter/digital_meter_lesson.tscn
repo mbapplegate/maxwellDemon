@@ -88,6 +88,7 @@ theme_override_font_sizes/normal_font_size = 23
 text = "Wire"
 
 [node name="RichTextLabel2" type="RichTextLabel" parent="."]
+visible = false
 offset_left = 606.0
 offset_top = 364.0
 offset_right = 830.0
@@ -96,6 +97,7 @@ theme_override_font_sizes/normal_font_size = 23
 text = "Goal Power"
 
 [node name="goalLightLegend" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(542, 376)
 scale = Vector2(1.25, 1.25)
 texture = ExtResource("5_2esat")
@@ -130,6 +132,7 @@ theme_override_font_sizes/normal_font_size = 23
 text = "Average Power"
 
 [node name="InstantLegend3" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(542, 296)
 scale = Vector2(1.25, 1.25)
 texture = ExtResource("8_1pptw")
@@ -141,5 +144,19 @@ offset_right = 448.0
 offset_bottom = 98.0
 theme_override_font_sizes/normal_font_size = 40
 text = "Power Meter"
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 538.0
+offset_top = 268.0
+offset_right = 546.0
+offset_bottom = 328.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0.45098, 1, 1)
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

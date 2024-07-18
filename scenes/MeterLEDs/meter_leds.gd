@@ -41,6 +41,7 @@ func _ready():
 	var goalXPos = goalEnergy/maxEnergy * (led10.position.x-led1.position.x) + led1.position.x
 	$Goal.position.x = goalXPos
 	$avgPower.position.x = led1.position.x
+	$ColorRect.position.x = led1.position.x
 	if not goalOnTop:
 		$avgPower.position.y = -$avgPower.position.y
 		$Goal.position.y = -$Goal.position.y
@@ -117,6 +118,7 @@ func _on_timer_timeout():
 	#Place average marker
 	var markerXVal = arrAvg/maxEnergy * (led10.position.x-led1.position.x) + led1.position.x
 	$avgPower.position.x = max(led1.position.x,min(led10.position.x,markerXVal))
+	$ColorRect.position.x =  max(led1.position.x,min(led10.position.x,markerXVal))
 	#Reset vars
 	energyBlocked = 0
 	energyDetected = 0
