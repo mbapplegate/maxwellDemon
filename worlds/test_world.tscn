@@ -1,11 +1,13 @@
-[gd_scene load_steps=12 format=3 uid="uid://ciwb1o3jgik5o"]
+[gd_scene load_steps=14 format=3 uid="uid://ciwb1o3jgik5o"]
 
 [ext_resource type="Script" path="res://worlds/test_world.gd" id="1_0f5qq"]
 [ext_resource type="Texture2D" uid="uid://is28jambjmci" path="res://tiles/world/opticalTable_32x32.png" id="1_ggdl5"]
 [ext_resource type="Texture2D" uid="uid://cgnar1vxyuyml" path="res://tiles/world/wall_32x32.png" id="2_2ej38"]
 [ext_resource type="PackedScene" uid="uid://ojfv06ceqv2a" path="res://scenes/Player/player.tscn" id="3_y4irg"]
+[ext_resource type="PackedScene" uid="uid://ciufjrc1fmyfi" path="res://scenes/FlatMirror/flat_mirror.tscn" id="7_hl23f"]
 [ext_resource type="PackedScene" uid="uid://catkndynfd4s5" path="res://scenes/ParabolicMirror/parabolic_mirror.tscn" id="8_d4n6t"]
 [ext_resource type="PackedScene" uid="uid://b6navnb20xork" path="res://scenes/Lens_PlanoConvex/lens_plano_convex.tscn" id="8_t0pox"]
+[ext_resource type="PackedScene" uid="uid://dvstogaisj2wd" path="res://scenes/LightBeam/light_beam.tscn" id="9_0eadl"]
 [ext_resource type="PackedScene" uid="uid://cadtm4ftf8bxq" path="res://scenes/PointSource/point_source.tscn" id="9_olfr5"]
 [ext_resource type="PackedScene" uid="uid://dns1nq8hlfau" path="res://scenes/Doorway/doorway.tscn" id="13_c74tw"]
 
@@ -49,14 +51,29 @@ position = Vector2(992, 64)
 rotation = -1.5708
 
 [node name="LensPlanoConvex" parent="." instance=ExtResource("8_t0pox")]
-position = Vector2(1088, 256)
+position = Vector2(736, 160)
 LENS_HEIGHT = 256
 focalLength = 256
 
 [node name="PointSource" parent="." instance=ExtResource("9_olfr5")]
 position = Vector2(1280, 672)
 rayColor = Vector3(1, 1, 1)
+isEnergized = false
 
 [node name="parabolicMirror" parent="." instance=ExtResource("8_d4n6t")]
 position = Vector2(1408, 672)
 initialAngle = 180.0
+
+[node name="FlatMirror" parent="." instance=ExtResource("7_hl23f")]
+position = Vector2(1344, 128)
+initialAngle = -100.0
+
+[node name="LightBeam" parent="." instance=ExtResource("9_0eadl")]
+position = Vector2(192, 128)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
