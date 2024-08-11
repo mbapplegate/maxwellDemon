@@ -18,8 +18,11 @@ func _ready():
 	for child in get_children():
 		if child is pushableObject:
 			child.initialize()
+			#child.energizeChanged.emit(child.isEnergized)
 			if child is PointDetector:
 				child.goalMetChanged.connect(_toggleDoor)
+	print("Level ready")
+				
 			
 func _toggleDoor(val):
 	if val:

@@ -51,9 +51,7 @@ position = Vector2(992, 64)
 rotation = -1.5708
 
 [node name="LensPlanoConvex" parent="." instance=ExtResource("8_t0pox")]
-position = Vector2(736, 160)
-LENS_HEIGHT = 256
-focalLength = 256
+position = Vector2(512, 192)
 
 [node name="PointSource" parent="." instance=ExtResource("9_olfr5")]
 position = Vector2(1280, 672)
@@ -61,15 +59,15 @@ rayColor = Vector3(1, 1, 1)
 isEnergized = false
 
 [node name="parabolicMirror" parent="." instance=ExtResource("8_d4n6t")]
-position = Vector2(1408, 672)
-initialAngle = 180.0
+position = Vector2(896, 192)
+initialAngle = 150.0
 
 [node name="FlatMirror" parent="." instance=ExtResource("7_hl23f")]
-position = Vector2(1344, 128)
+position = Vector2(1344, 192)
 initialAngle = -100.0
 
 [node name="LightBeam" parent="." instance=ExtResource("9_0eadl")]
-position = Vector2(192, 128)
+position = Vector2(192, 160)
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 2.0

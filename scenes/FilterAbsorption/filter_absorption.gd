@@ -48,13 +48,13 @@ func _ray_hit(photonObj:Object, collPoint:Vector2, collNormal:Vector2, collider:
 		#print("Hit Center")
 		#Create new ray
 		if thisAbs == 1.0:
-			photonObj.rayDying = true
+			photonObj.stopBeam(collPoint)
 		elif thisAbs == 0.0:
 			pass
 		else:
 			var thisEnergy = photonObj.energy * (1-thisAbs)
 			if thisEnergy < 0.1:
-				photonObj.rayDying = true
+				photonObj.stopBeam(collPoint)
 			else:
 				var instance = ray.instantiate()
 				#Color, energy, IOR, and direction are the same as the incoming ray
@@ -76,6 +76,6 @@ func _ray_hit(photonObj:Object, collPoint:Vector2, collNormal:Vector2, collider:
 					add_child(instance)
 				#Update photon packet energies depending on reflectivity
 				instance.update_energy(instance.energy)
-				photonObj.rayDying = true
+				photonObj.stopBeam(collPoint)
 	else:
 		photonObj.refractRay(collNormal, filterIndex, collPoint)

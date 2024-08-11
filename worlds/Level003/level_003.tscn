@@ -25,8 +25,8 @@ layer_0/tile_data = PackedInt32Array(2097152, 1, 0, 2031616, 1, 0, 1966080, 1, 0
 
 [node name="LaserSource" parent="." instance=ExtResource("3_0hbdy")]
 position = Vector2(1248, 320)
-HALF_HEIGHT = 7.0
-timerTimeout = 0.125
+beamHalfHeight = 3
+numBeams = 2
 isRotatable = false
 
 [node name="PointDetector" parent="." instance=ExtResource("5_5mtrj")]

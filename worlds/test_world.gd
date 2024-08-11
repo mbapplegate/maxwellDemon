@@ -23,3 +23,5 @@ func _toggleDoor(val):
 
 func _on_timer_timeout():
 	$LightBeam.propagateBeam()
+	#$LightBeam2.propagateBeam()
+	#$LightBeam3.propagateBeam()

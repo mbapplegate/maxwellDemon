@@ -17,9 +17,9 @@ func _ready():
 		if child is DigitalMeter:
 			child.goalMetChanged.connect(goalChanged)
 	
-func _ray_hit(photonObj:Object, _collPoint:Vector2, _collNormal:Vector2, collider:Object):
+func _ray_hit(photonObj:Object, collPoint:Vector2, _collNormal:Vector2, collider:Object):
 	#print(to_local(_collPoint))
-	photonObj.rayDying = true
+	photonObj.stopBeam(collPoint)
 	#print(collider.name)
 	if collider.name == "activeArea":
 		photonDetected.emit(photonObj.energy)

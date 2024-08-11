@@ -17,6 +17,10 @@ const ROTATION_INCREMENT = deg_to_rad(15)
 @onready var bg = $Background
 @onready var indicator = $Indicator
 
+signal energizeChanged(val)
+signal rotationChanged()
+signal stageMoved()
+
 var isActive = false
 
 var isSliding : bool = false
@@ -46,6 +50,7 @@ func push(motion:Vector2):
 		tween.tween_property(self,"global_position",self.global_position+motion,sliding_time)
 		isSliding = true
 		await tween.finished
+		stageMoved.emit()
 		isSliding = false
 		return true
 	else:
@@ -67,6 +72,7 @@ func pull(direction:Vector2,player:Object):
 		tween.tween_property(self,"global_position",globalTargetLoc,sliding_time)
 		isSliding = true
 		await tween.finished
+		stageMoved.emit()
 		isSliding = false
 		if player:
 			self.remove_collision_exception_with(player)
@@ -92,6 +98,7 @@ func nudgePull(direction:Vector2,player:Object):
 		tween.tween_property(self,"global_position",globalTargetLoc,sliding_time)
 		isSliding = true
 		await tween.finished
+		stageMoved.emit()
 		isSliding = false
 		if player:
 			self.remove_collision_exception_with(player)
@@ -145,10 +152,12 @@ func snapToGrid() -> bool:
 func rotateCW(numDegrees : float):
 	if isRotatable:
 		sprite.rotation += numDegrees
+		rotationChanged.emit()
 	
 func rotateCCW(numDegrees : float):
 	if isRotatable:
 		sprite.rotation -= numDegrees
+		rotationChanged.emit()
 
 func getRotation():
 	if isRotatable:
@@ -164,3 +173,4 @@ func togEnergize():
 		else:
 			isEnergized = true
 			update_texture()
+		energizeChanged.emit(isEnergized)

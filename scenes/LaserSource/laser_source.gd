@@ -1,97 +1,119 @@
 extends pushableObject
 
-@export var HALF_HEIGHT = 0.0
-@export var halfAngle = 0.0
-@export var numRaysPerTimeout : int = 1
-@export var rayColor : Vector3 = Vector3(1.0, 0, 1.0)
-@export var timerTimeout : float = 0.063
+@export var beamHalfHeight : int = 0
+@export var numBeams : int = 3
+@export var rayColor : Vector3 = Vector3(1.0, 0, 0.0)
 @export var packetEnergy : float = 1.0
+
 @onready var barrelShape = $Stage/laserBarrel/barrelArea/barrelShape
 @onready var barrel = $Stage/laserBarrel
-@onready var timer = $Timer
-@onready var ray = preload("res://scenes/LightPacket/light_packet.tscn")
+@onready var beam = preload("res://scenes/LightBeam/light_beam.tscn")
 
-var rng = RandomNumberGenerator.new()
+#var rng = RandomNumberGenerator.new()
 var isPaused = false
-var laserParent= null
-const halfHeight = 32.0
+var raysInstanced : bool = false
+
 var normEnergy = Vector3.ZERO
 
 func _ready():
-	#halfHeight = BARREL_WIDTH * self.scale.x
-	#print(halfHeight)
-	#isEnergized = true
 	if not isRotatable and initialAngle != 0:
 		barrel.rotation=deg_to_rad(initialAngle)
-	halfAngle = deg_to_rad(halfAngle)
-	laserParent = get_parent()
-	timer.wait_time=timerTimeout
+		
 	normEnergy = rayColor/rayColor.length_squared() * packetEnergy
+	energizeChanged.connect(handleEnergizeChanged)
+	rotationChanged.connect(handleRotationChange)
+	stageMoved.connect(handleMotion)
+	await get_tree().process_frame
+	if isEnergized:
+		_generateRays()
+		raysInstanced = true
+	print("Laser ready")
 	
-func _ray_hit(photonObj:Object, _collPoint:Vector2, _collNormal:Vector2, _collider:Object):
-	photonObj.rayDying = true
+func _ray_hit(photonObj:Object, collPoint:Vector2, _collNormal:Vector2, _collider:Object):
+	photonObj.stopBeam(collPoint)
 
 func setPaused(val):
 	if val:
-		timer.stop()
+		_killRays()
 		isPaused = true
 	else:
-		timer.start()
+		_generateRays()
 		isPaused = false
 		
-func _on_timer_timeout():
-	var angle = 0
-	var instanceRed = null
-	var instanceGreen = null
-	var instanceBlue = null
-	var yLoc
+func _getCorrectAngle() -> float:
 	var angleToUse = 0.0
 	if isRotatable:
 		angleToUse = sprite.rotation
 	else:
 		angleToUse = barrel.rotation
+	return angleToUse
+
+func getRayStartLocs() -> Array:
+	var startLocs = []
+	
+	var angleToUse = _getCorrectAngle()	
+	var barrelPosition = Vector2(barrelShape.position.x+(barrelShape.shape.size[0]/2.0+1.0)*cos(angleToUse),barrelShape.position.y-(barrelShape.shape.size[0]/2.0+1.0)*sin(angleToUse))
+
+	for i in range(numBeams):
+		var yLoc = -beamHalfHeight + (2.0*beamHalfHeight*i)/(numBeams-1)
+		startLocs.append(Vector2(barrelPosition.x+yLoc*sin(angleToUse), -barrelPosition.y-yLoc*cos(angleToUse)))
+	return startLocs
+
+func handleEnergizeChanged(val:bool):
+	if val:
+		if raysInstanced:
+			_updateRayPaths()
+		else:
+			_generateRays()
+	else:
+		_killRays()
+
+func handleRotationChange():
+	if isEnergized:
+		if raysInstanced:
+			_killRays()
+		_generateRays()
 		
-	if (isEnergized):
+func handleMotion():
+	if isEnergized:
+		if raysInstanced:
+			_killRays()
 		
-		var barrelPosition = Vector2(barrelShape.position.x+(barrelShape.shape.size[0]/2.0+1.0)*cos(angleToUse),barrelShape.position.y-(barrelShape.shape.size[0]/2.0+1.0)*sin(angleToUse))
-		for i in numRaysPerTimeout:
-			if halfAngle > 0:
-				angle = rng.randf_range(-halfAngle,halfAngle)
+		_generateRays()
+
+	#var startingLocs = getRayStartLocs()
+	#var i = 0
+	#for child in get_children():
+		#if child is LightBeam:
+			#child.propDir =  Vector2(cos(_getCorrectAngle()),sin(_getCorrectAngle()))
+			#child.sourcePos = startingLocs[i]
+			#
+			#child.propagateBeam()
+			#print(child.numPoints)
+			#i += 1
 			
-			if HALF_HEIGHT > 0:
-				yLoc = max(min(halfHeight,rng.randfn(0,HALF_HEIGHT/2.0)),-halfHeight)
-			else:
-				yLoc = 0
-			#print("Timeout. Angle: ",angle)
-			if normEnergy[0] > 0.1:
-				instanceRed = ray.instantiate()
-				instanceRed.propDir = Vector2(cos(angle+angleToUse),sin(angle+angleToUse))
-				instanceRed.position = to_global(Vector2(barrelPosition.x+yLoc*sin(angleToUse), -barrelPosition.y-yLoc*cos(angleToUse)))
-				instanceRed.rayColor = Vector3(1,0,0)
-				instanceRed.energy = normEnergy[0]
-				instanceRed.lightSource = "laser"
+func _generateRays():
+	raysInstanced = true
+	var startingLocs = getRayStartLocs()
+	var propDirection = Vector2(cos(_getCorrectAngle()),sin(_getCorrectAngle()))
+	for i in range(numBeams):
+		var instance = beam.instantiate()
+		instance.propDir = propDirection
+		instance.sourcePos = startingLocs[i]
+		instance.rayColor = rayColor
+		instance.energy = normEnergy[0]
+		add_child(instance)
+	_updateRayPaths()
+		
+func _killRays():
+	raysInstanced = false
+	for child in get_children():
+		if child is LightBeam:
+			child.clearBeam()
+			child.free()
 			
-			if normEnergy[1] > 0.1:
-				instanceGreen = ray.instantiate()
-				instanceGreen.propDir = Vector2(cos(angle+angleToUse),sin(angle+angleToUse))
-				instanceGreen.position = to_global(Vector2(barrelPosition.x+yLoc*sin(angleToUse), -barrelPosition.y-yLoc*cos(angleToUse)))
-				instanceGreen.rayColor = Vector3(0,1,0)
-				instanceGreen.energy = normEnergy[1]
-				instanceGreen.lightSource = "laser"
-			
-			if normEnergy[2] > 0.1:
-				instanceBlue = ray.instantiate()
-				instanceBlue.propDir = Vector2(cos(angle+angleToUse),sin(angle+angleToUse))
-				instanceBlue.position = to_global(Vector2(barrelPosition.x+yLoc*sin(angleToUse), -barrelPosition.y-yLoc*cos(angleToUse)))
-				instanceBlue.rayColor = Vector3(0,0,1)
-				instanceBlue.energy = normEnergy[2]
-				instanceBlue.lightSource = "laser"
-			#instance.scale[0] = 1.0/self.scale[0]
-			#instance.scale[1] = 1.0 / self.scale[1]
-			if laserParent:
-				if instanceRed:
-					laserParent.add_child(instanceRed)
-				if instanceGreen:
-					laserParent.add_child(instanceGreen)
-				if instanceBlue:
-					laserParent.add_child(instanceBlue)
+func _updateRayPaths():
+	for child in get_children():
+		if child is LightBeam:
+			child.propagateBeam()
+

@@ -83,7 +83,7 @@ func _ray_hit(photonObj:Object, collPoint:Vector2, collNormal:Vector2, collider:
 		else:
 			photonObj.reflectRay(collNormal,collPoint)
 	else:
-		photonObj.rayDying = true
+		photonObj.stopBeam(collPoint)
 		
 func update_texture():
 	super.update_texture()
