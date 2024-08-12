@@ -21,7 +21,6 @@ func _ready():
 			#child.energizeChanged.emit(child.isEnergized)
 			if child is PointDetector:
 				child.goalMetChanged.connect(_toggleDoor)
-	print("Level ready")
 				
 			
 func _toggleDoor(val):

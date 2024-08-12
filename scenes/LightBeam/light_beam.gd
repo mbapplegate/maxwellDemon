@@ -24,6 +24,17 @@ var lightSource = ""
 
 func _ready():
 	line.default_color = Color(rayColor[0], rayColor[1], rayColor[2], _getAlpha(energy))
+
+func defineBeam(location:Vector2, color:Vector3, newEnergy:float, direction:Vector2):
+	propDir = direction
+	sourcePos = location
+	rayColor = color
+	energy = newEnergy
+	line.default_color = Color(rayColor[0], rayColor[1], rayColor[2], _getAlpha(energy))
+	
+func moveBeam(location:Vector2, direction:Vector2):
+	propDir = direction
+	sourcePos = location
 	
 func propagateBeam():
 	propDone = false
@@ -37,6 +48,7 @@ func propagateBeam():
 	cast.set_target_position(propDir.normalized()*BEAM_STEP)
 	cast.force_raycast_update()
 	beamGoing = true
+	beamDying = false
 	var numIters = 0
 	while not beamDying and numIters < 4:
 		numIters += 1
@@ -161,9 +173,11 @@ func clearBeam():
 	line.clear_points()
 	numPoints = 0
 	beamLength = 0
-	$Path2D.curve.clear_points()
 	propDone = false
 	beamGoing = false
 	lastCollider = null
+	$Path2D/PathFollow2D/Sprite2D.visible = false
+	$Path2D/PathFollow2D.progress_ratio = 0
+	$Path2D.curve.clear_points()
 	
 	

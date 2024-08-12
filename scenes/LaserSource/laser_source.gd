@@ -12,6 +12,10 @@ extends pushableObject
 #var rng = RandomNumberGenerator.new()
 var isPaused = false
 var raysInstanced : bool = false
+signal registerRays(pos:Array, color:Vector3, energy:float, direction:Vector2, source:Object)
+signal stopRays(source:Object)
+signal startRays(source:Object)
+signal sourceMoved(newLocation:Array,newDirection:Vector2,source:Object)
 
 var normEnergy = Vector3.ZERO
 
@@ -24,20 +28,17 @@ func _ready():
 	rotationChanged.connect(handleRotationChange)
 	stageMoved.connect(handleMotion)
 	await get_tree().process_frame
-	if isEnergized:
-		_generateRays()
-		raysInstanced = true
-	print("Laser ready")
+	registerBeams()
 	
 func _ray_hit(photonObj:Object, collPoint:Vector2, _collNormal:Vector2, _collider:Object):
 	photonObj.stopBeam(collPoint)
 
 func setPaused(val):
 	if val:
-		_killRays()
+		stopRays.emit(self)
 		isPaused = true
 	else:
-		_generateRays()
+		startRays.emit(self)
 		isPaused = false
 		
 func _getCorrectAngle() -> float:
@@ -56,64 +57,34 @@ func getRayStartLocs() -> Array:
 
 	for i in range(numBeams):
 		var yLoc = -beamHalfHeight + (2.0*beamHalfHeight*i)/(numBeams-1)
-		startLocs.append(Vector2(barrelPosition.x+yLoc*sin(angleToUse), -barrelPosition.y-yLoc*cos(angleToUse)))
+		startLocs.append(to_global(Vector2(barrelPosition.x+yLoc*sin(angleToUse), -barrelPosition.y-yLoc*cos(angleToUse))))
 	return startLocs
 
 func handleEnergizeChanged(val:bool):
 	if val:
-		if raysInstanced:
-			_updateRayPaths()
-		else:
-			_generateRays()
+		startRays.emit(self)
 	else:
-		_killRays()
+		stopRays.emit(self)
 
 func handleRotationChange():
-	if isEnergized:
-		if raysInstanced:
-			_killRays()
-		_generateRays()
+	handleMotion()
 		
 func handleMotion():
-	if isEnergized:
-		if raysInstanced:
-			_killRays()
-		
-		_generateRays()
+	var startLocs = getRayStartLocs()
+	var angleToUse = 0.0
+	if isRotatable:
+		angleToUse = sprite.rotation
+	else:
+		angleToUse = barrel.rotation
+	sourceMoved.emit(startLocs,Vector2(cos(angleToUse),sin(angleToUse)),self)
 
-	#var startingLocs = getRayStartLocs()
-	#var i = 0
-	#for child in get_children():
-		#if child is LightBeam:
-			#child.propDir =  Vector2(cos(_getCorrectAngle()),sin(_getCorrectAngle()))
-			#child.sourcePos = startingLocs[i]
-			#
-			#child.propagateBeam()
-			#print(child.numPoints)
-			#i += 1
 			
-func _generateRays():
-	raysInstanced = true
-	var startingLocs = getRayStartLocs()
-	var propDirection = Vector2(cos(_getCorrectAngle()),sin(_getCorrectAngle()))
-	for i in range(numBeams):
-		var instance = beam.instantiate()
-		instance.propDir = propDirection
-		instance.sourcePos = startingLocs[i]
-		instance.rayColor = rayColor
-		instance.energy = normEnergy[0]
-		add_child(instance)
-	_updateRayPaths()
-		
-func _killRays():
-	raysInstanced = false
-	for child in get_children():
-		if child is LightBeam:
-			child.clearBeam()
-			child.free()
-			
-func _updateRayPaths():
-	for child in get_children():
-		if child is LightBeam:
-			child.propagateBeam()
-
+func registerBeams():
+	var startLocs = getRayStartLocs()
+	var angleToUse = 0.0
+	if isRotatable:
+		angleToUse = sprite.rotation
+	else:
+		angleToUse = barrel.rotation
+	
+	registerRays.emit(startLocs,rayColor,1.0,Vector2(cos(angleToUse),sin(angleToUse)),self)
