@@ -12,7 +12,7 @@ extends pushableObject
 #var rng = RandomNumberGenerator.new()
 var isPaused = false
 var raysInstanced : bool = false
-signal registerRays(pos:Array, color:Vector3, energy:float, direction:Vector2, source:Object)
+signal registerRays(pos:Array, color:Vector3, energy:float, direction:Vector2, IOR:float, source:Object)
 signal stopRays(source:Object)
 signal startRays(source:Object)
 signal sourceMoved(newLocation:Array,newDirection:Vector2,source:Object)
@@ -54,9 +54,13 @@ func getRayStartLocs() -> Array:
 	
 	var angleToUse = _getCorrectAngle()	
 	var barrelPosition = Vector2(barrelShape.position.x+(barrelShape.shape.size[0]/2.0+1.0)*cos(angleToUse),barrelShape.position.y-(barrelShape.shape.size[0]/2.0+1.0)*sin(angleToUse))
-
+	
 	for i in range(numBeams):
-		var yLoc = -beamHalfHeight + (2.0*beamHalfHeight*i)/(numBeams-1)
+		var yLoc
+		if numBeams == 1:
+			yLoc = 0
+		else:
+			yLoc = -beamHalfHeight + (2.0*beamHalfHeight*i)/(numBeams-1)
 		startLocs.append(to_global(Vector2(barrelPosition.x+yLoc*sin(angleToUse), -barrelPosition.y-yLoc*cos(angleToUse))))
 	return startLocs
 
@@ -87,4 +91,4 @@ func registerBeams():
 	else:
 		angleToUse = barrel.rotation
 	
-	registerRays.emit(startLocs,rayColor,1.0,Vector2(cos(angleToUse),sin(angleToUse)),self)
+	registerRays.emit(startLocs,rayColor,1.0,Vector2(cos(angleToUse),sin(angleToUse)),1.0,self)

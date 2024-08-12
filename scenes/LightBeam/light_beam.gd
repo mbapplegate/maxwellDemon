@@ -25,11 +25,12 @@ var lightSource = ""
 func _ready():
 	line.default_color = Color(rayColor[0], rayColor[1], rayColor[2], _getAlpha(energy))
 
-func defineBeam(location:Vector2, color:Vector3, newEnergy:float, direction:Vector2):
+func defineBeam(location:Vector2, color:Vector3, newEnergy:float, direction:Vector2, IOR:float):
 	propDir = direction
 	sourcePos = location
 	rayColor = color
 	energy = newEnergy
+	index_of_refraction = IOR
 	line.default_color = Color(rayColor[0], rayColor[1], rayColor[2], _getAlpha(energy))
 	
 func moveBeam(location:Vector2, direction:Vector2):
@@ -38,7 +39,7 @@ func moveBeam(location:Vector2, direction:Vector2):
 	
 func propagateBeam():
 	propDone = false
-	lastCollider = null
+	#lastCollider = null
 	line.clear_points()
 	beamLength = 0
 	numPoints = 0
@@ -50,7 +51,7 @@ func propagateBeam():
 	beamGoing = true
 	beamDying = false
 	var numIters = 0
-	while not beamDying and numIters < 4:
+	while not beamDying and numIters < 6:
 		numIters += 1
 		if not cast.is_colliding():
 			beamAddPoint(cast.position+cast.target_position)
@@ -100,6 +101,7 @@ func getReflectionDirection(normalAngle : Vector2)->Vector2:
 		return propDir
 		
 func refractRay(normalAngle, objectIOR,collisionPoint):
+	
 	if objectIOR == MEDIUM_INDEX:
 		pass
 	else:
@@ -121,10 +123,12 @@ func refractRay(normalAngle, objectIOR,collisionPoint):
 			theta2 = asin(MEDIUM_INDEX/objectIOR*sin(theta1))
 			index_of_refraction = objectIOR
 		#Add the point to the photon packet
+		
 		if not internalReflection:
 			var newDir = normalIn.rotated(theta2)
 			propDir = newDir
 			beamAddPoint(to_local(collisionPoint))
+		
 			
 func beamAddPoint(newPointLoc : Vector2):
 	line.add_point(newPointLoc)
@@ -147,14 +151,13 @@ func stopBeam(globalStopLoc : Vector2):
 	beamDying = true
 	beamGoing = false
 		
-	
 func _getAlpha(beamEnergy : float) -> float:
 	if beamEnergy > .9:
-		return .5
+		return .6
 	elif beamEnergy < .1:
 		return 0
 	else:
-		return 0.2 + (1-beamEnergy)/.2
+		return .3
 
 func _on_timer_timeout():
 	if propDone:
@@ -176,6 +179,7 @@ func clearBeam():
 	propDone = false
 	beamGoing = false
 	lastCollider = null
+	index_of_refraction = 1.0
 	$Path2D/PathFollow2D/Sprite2D.visible = false
 	$Path2D/PathFollow2D.progress_ratio = 0
 	$Path2D.curve.clear_points()
