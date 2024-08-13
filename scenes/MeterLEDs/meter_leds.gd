@@ -46,7 +46,7 @@ func _ready():
 	$Goal.position.x = goalXPos
 	panelWidth = $Panel.texture.get_width() - 2*PANEL_BOORDER_SIZE
 	$avgPower.position.x = led1.position.x
-	$Panel/ColorRect.size.x =0
+	#$Panel/ColorRect.size.x =0
 	if not goalOnTop:
 		$avgPower.position.y = -$avgPower.position.y
 		$Goal.position.y = -$Goal.position.y
@@ -74,9 +74,16 @@ func _turnLEDRed(ledIndex : int):
 	
 func rayDetected(en : float):
 	energyDetected += en
+	updateMeter()
 	
 func rayBlocked(en : float):
 	energyBlocked += en
+	updateMeter()
+	
+func clearMeter():
+	energyDetected = 0
+	energyBlocked = 0
+	updateMeter()
 
 func _getArrayAvg(arr, arrLen)->float:
 	var sum = 0.0
@@ -84,7 +91,7 @@ func _getArrayAvg(arr, arrLen)->float:
 		sum += arr[i]
 	return sum/float(arrLen)
 	
-func _on_timer_timeout():
+func updateMeter():
 	#Calculate which LEDs should be lit
 	var totalEnergy = energyBlocked + energyDetected
 	
@@ -102,28 +109,28 @@ func _on_timer_timeout():
 		else:
 			_turnLEDOff(i)
 	#Update average
-	detectedArray[avgIdx] = energyDetected
-	var arrAvg = _getArrayAvg(detectedArray,NUM_TO_AVG)
+	#detectedArray[avgIdx] = energyDetected
+	#var arrAvg = _getArrayAvg(detectedArray,NUM_TO_AVG)
 	#print(energyBlocked, ", ", energyDetected, ", ", arrAvg)
 	#Update index
-	avgIdx += 1
-	if avgIdx >= NUM_TO_AVG:
-		avgIdx = 0
+	#avgIdx += 1
+	#if avgIdx >= NUM_TO_AVG:
+	#	avgIdx = 0
 		
 	#Send goal met signal
-	if arrAvg >= goalEnergy and not goalMet:
+	if energyDetected >= goalEnergy and not goalMet:
 		goalMet = true
 		goalMetChanged.emit(goalMet)
 		$Goal.texture = load("res://scenes/MeterLEDs/goalOn.png")
-	elif arrAvg < goalEnergy and goalMet:
+	elif energyDetected < goalEnergy and goalMet:
 		goalMet = false
 		goalMetChanged.emit(goalMet)
 		$Goal.texture = load("res://scenes/MeterLEDs/goalOff.png")
 		
 	#Place average marker
-	var markerXVal = arrAvg/maxEnergy * (led10.position.x-led1.position.x) + led1.position.x
-	$avgPower.position.x = max(led1.position.x,min(led10.position.x,markerXVal))
-	$Panel/ColorRect.size.x =  max(0,min(panelWidth,arrAvg/maxEnergy*panelWidth))
+	#var markerXVal = arrAvg/maxEnergy * (led10.position.x-led1.position.x) + led1.position.x
+	#$avgPower.position.x = max(led1.position.x,min(led10.position.x,markerXVal))
+	#$Panel/ColorRect.size.x =  max(0,min(panelWidth,arrAvg/maxEnergy*panelWidth))
 	#Reset vars
-	energyBlocked = 0
-	energyDetected = 0
+	#energyBlocked = 0
+	#energyDetected = 0

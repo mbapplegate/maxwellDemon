@@ -15,6 +15,7 @@ goalOnTop = false
 texture = ExtResource("1_jf3a2")
 
 [node name="ColorRect" type="ColorRect" parent="Panel"]
+visible = false
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
@@ -79,5 +80,3 @@ visible = false
 position = Vector2(210, -200)
 scale = Vector2(3, 3)
 texture = ExtResource("4_2qxgv")
-
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

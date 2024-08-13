@@ -20,10 +20,13 @@ func _ready():
 
 func runRays(sourceObj:Object):
 	if instancedRays.has(sourceObj):
-		if instancedRays.has("Temp") and instancedRays["Temp"].size > 0:
-			for i in range(instancedRays["Temp"].size()):
-				instancedRays["Temp"][i].queue_free()
-			instancedRays["Temp"] = []
+		_clearMeters()
+		
+		if instancedRays.has("Temp"):
+			if instancedRays["Temp"].size() > 0:
+				for i in range(instancedRays["Temp"].size()):
+					instancedRays["Temp"][i].queue_free()
+				instancedRays["Temp"] = []
 			
 		for i in instancedRays[sourceObj].size():
 			instancedRays[sourceObj][i].clearBeam()
@@ -39,27 +42,31 @@ func runAllRays():
 	
 func handleSourceMoved(newLocation:Array,newDirection:Vector2,sourceObj:Object):
 	if instancedRays.has(sourceObj):
+		_clearMeters()
 		for i in range(instancedRays[sourceObj].size()):
 			instancedRays[sourceObj][i].clearBeam()
 			instancedRays[sourceObj][i].moveBeam(newLocation[i],newDirection)
 		if instancedRays.has("Temp"):
-			for i in range(instancedRays["Temp"].size()):
-				instancedRays["Temp"][i].queue_free()
-			instancedRays["Temp"] = []
+			if instancedRays["Temp"].size() > 0:
+				for i in range(instancedRays["Temp"].size()):
+					instancedRays["Temp"][i].queue_free()
+				instancedRays["Temp"] = []
 		if sourceObj.isEnergized:
 			runRays(sourceObj)
 				 
 func haltRays(sourceObj:Object):
 	if instancedRays.has(sourceObj):
+		_clearMeters()
 		for i in range(instancedRays[sourceObj].size()):
 			instancedRays[sourceObj][i].clearBeam()
 	if instancedRays.has("Temp"):
-		for i in range(instancedRays[sourceObj].size()):
-			instancedRays["Temp"][i].queue_free()
-		instancedRays["Temp"] = []
+		if instancedRays["Temp"].size() > 0:
+			for i in range(instancedRays[sourceObj].size()):
+				instancedRays["Temp"][i].queue_free()
+			instancedRays["Temp"] = []
 		
 func splitRay(splitRatio:float, splitDirection:Vector2, splitLocation:Vector2, originalBeam:Object):
-	print("Splitting in manager")
+	#print("Splitting in manager")
 	var instance = beamScene.instantiate()
 	instancedRays["Temp"] = []
 	instancedRays["Temp"].append(instance)
@@ -90,3 +97,10 @@ func makeBeams(locations:Array,color:Vector3,energy:float,direction:Vector2,IOR:
 			instancedRays[sourceObj][i].defineBeam(locations[i],color,energy,direction,IOR)
 	if sourceObj.isEnergized:
 		runRays(sourceObj)
+		
+func _clearMeters():
+	for child in get_children():
+		if child is PointDetector:
+			for grandchild in child.get_children():
+				if grandchild is DigitalMeter:
+					grandchild.clearMeter()
