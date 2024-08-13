@@ -1,7 +1,7 @@
 extends Node2D
 class_name LightBeam
 
-@export var propDir : Vector2 = Vector2.RIGHT
+@export var originalPropDir : Vector2 = Vector2.RIGHT
 @export var rayColor : Vector3 = Vector3(1.0,0.0,0.0)
 @export var sourcePos : Vector2 = Vector2.ZERO
 
@@ -20,13 +20,15 @@ var numPoints : int = 0
 var lastCollider : Object = null
 var beamGoing : bool = false
 var propDone : bool = false
+var propDir = Vector2.RIGHT
 var lightSource = ""
 
 func _ready():
+	propDir = originalPropDir
 	line.default_color = Color(rayColor[0], rayColor[1], rayColor[2], _getAlpha(energy))
 
 func defineBeam(location:Vector2, color:Vector3, newEnergy:float, direction:Vector2, IOR:float):
-	propDir = direction
+	originalPropDir = direction
 	sourcePos = location
 	rayColor = color
 	energy = newEnergy
@@ -34,7 +36,7 @@ func defineBeam(location:Vector2, color:Vector3, newEnergy:float, direction:Vect
 	line.default_color = Color(rayColor[0], rayColor[1], rayColor[2], _getAlpha(energy))
 	
 func moveBeam(location:Vector2, direction:Vector2):
-	propDir = direction
+	originalPropDir = direction
 	sourcePos = location
 	
 func propagateBeam():
@@ -50,6 +52,7 @@ func propagateBeam():
 	cast.force_raycast_update()
 	beamGoing = true
 	beamDying = false
+	
 	var numIters = 0
 	while not beamDying and numIters < 6:
 		numIters += 1
@@ -73,10 +76,11 @@ func propagateBeam():
 				cast.position = to_local(cast.get_collision_point()+propDir.normalized()*10)
 				cast.set_target_position(propDir.normalized()*512)
 				cast.force_raycast_update()
+		#print(propDir,", ", originalPropDir)
 		#print(cast.position, ", ", cast.target_position)
-		
 		#$Sprite2D.position = cast.position
 	_beamToPath()
+
 	propDone = true
 
 func _beamToPath():
@@ -180,8 +184,9 @@ func clearBeam():
 	beamGoing = false
 	lastCollider = null
 	index_of_refraction = 1.0
+	propDir = originalPropDir
 	$Path2D/PathFollow2D/Sprite2D.visible = false
 	$Path2D/PathFollow2D.progress_ratio = 0
-	$Path2D.curve.clear_points()
+	#$Path2D.curve.clear_points()
 	
 	

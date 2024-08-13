@@ -20,7 +20,7 @@ func _ready():
 
 func runRays(sourceObj:Object):
 	if instancedRays.has(sourceObj):
-		if instancedRays.has("Temp"):
+		if instancedRays.has("Temp") and instancedRays["Temp"].size > 0:
 			for i in range(instancedRays["Temp"].size()):
 				instancedRays["Temp"][i].queue_free()
 			instancedRays["Temp"] = []
@@ -48,7 +48,7 @@ func handleSourceMoved(newLocation:Array,newDirection:Vector2,sourceObj:Object):
 			instancedRays["Temp"] = []
 		if sourceObj.isEnergized:
 			runRays(sourceObj)
-				
+				 
 func haltRays(sourceObj:Object):
 	if instancedRays.has(sourceObj):
 		for i in range(instancedRays[sourceObj].size()):

@@ -85,7 +85,7 @@ func move_grid(direction:String):
 	#print(validate_movement(newPos, inputs[direction]))	
 	if validate_movement(newPos, inputs[direction]):
 		var tween = get_tree().create_tween()
-		tween.set_ease(Tween.EASE_IN)
+		tween.set_ease(Tween.EASE_IN_OUT)
 		tween.set_trans(Tween.TRANS_CUBIC)
 		#print(itemActive)
 		#if itemActive and Input.is_action_pressed("pull"):

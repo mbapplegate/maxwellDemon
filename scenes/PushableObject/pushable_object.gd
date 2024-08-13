@@ -6,7 +6,7 @@ const TILE_SIZE : int = 32
 const NUDGE_DISTANCE : int = 2
 const ROTATION_INCREMENT = deg_to_rad(15)
 
-@export var sliding_time = 0.2
+@export var sliding_time = .2
 @export var initialAngle = 0.0
 @export var isPushable = true
 @export var isRotatable = true
@@ -45,7 +45,7 @@ func push(motion:Vector2):
 	if can_move(motion):
 		var tween = get_tree().create_tween()
 		
-		tween.set_ease(Tween.EASE_IN)
+		tween.set_ease(Tween.EASE_IN_OUT)
 		tween.set_trans(Tween.TRANS_CUBIC)
 		tween.tween_property(self,"global_position",self.global_position+motion,sliding_time)
 		isSliding = true
@@ -67,7 +67,7 @@ func pull(direction:Vector2,player:Object):
 	if can_move(to_local(globalTargetLoc)):
 		var tween = get_tree().create_tween()
 		
-		tween.set_ease(Tween.EASE_IN)
+		tween.set_ease(Tween.EASE_IN_OUT)
 		tween.set_trans(Tween.TRANS_CUBIC)
 		tween.tween_property(self,"global_position",globalTargetLoc,sliding_time)
 		isSliding = true
@@ -93,9 +93,9 @@ func nudgePull(direction:Vector2,player:Object):
 	if can_move(to_local(globalTargetLoc)):
 		var tween = get_tree().create_tween()
 		
-		tween.set_ease(Tween.EASE_IN)
+		tween.set_ease(Tween.EASE_IN_OUT)
 		tween.set_trans(Tween.TRANS_CUBIC)
-		tween.tween_property(self,"global_position",globalTargetLoc,sliding_time)
+		tween.tween_property(self,"global_position",globalTargetLoc,sliding_time/4.0)
 		isSliding = true
 		await tween.finished
 		stageMoved.emit()
@@ -151,12 +151,26 @@ func snapToGrid() -> bool:
 	
 func rotateCW(numDegrees : float):
 	if isRotatable:
-		sprite.rotation += numDegrees
+		var tween = get_tree().create_tween()
+		tween.set_ease(Tween.EASE_IN_OUT)
+		tween.set_trans(Tween.TRANS_CUBIC)
+		tween.tween_property(sprite,"rotation",sprite.rotation + numDegrees,sliding_time)
+		isSliding = true
+		await tween.finished
+		isSliding = false
+		#sprite.rotation -= numDegrees
 		rotationChanged.emit()
 	
 func rotateCCW(numDegrees : float):
 	if isRotatable:
-		sprite.rotation -= numDegrees
+		var tween = get_tree().create_tween()
+		tween.set_ease(Tween.EASE_IN_OUT)
+		tween.set_trans(Tween.TRANS_CUBIC)
+		tween.tween_property(sprite,"rotation",sprite.rotation - numDegrees,sliding_time)
+		isSliding = true
+		await tween.finished
+		isSliding = false
+		#sprite.rotation -= numDegrees
 		rotationChanged.emit()
 
 func getRotation():

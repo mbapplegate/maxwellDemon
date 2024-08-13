@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://bmj32g8o7vpdm" path="res://tiles/laser/laserBody_64px.png" id="3_r2j4g"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ko6ym"]
-size = Vector2(126, 64)
+size = Vector2(120, 60)
 
 [node name="LaserSource" instance=ExtResource("1_moxnu")]
 script = ExtResource("2_3djyt")
