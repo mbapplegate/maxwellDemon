@@ -150,7 +150,7 @@ func snapToGrid() -> bool:
 		return false
 	
 func rotateCW(numDegrees : float):
-	if isRotatable:
+	if isRotatable and not isSliding:
 		var tween = get_tree().create_tween()
 		tween.set_ease(Tween.EASE_IN_OUT)
 		tween.set_trans(Tween.TRANS_CUBIC)
@@ -162,7 +162,7 @@ func rotateCW(numDegrees : float):
 		rotationChanged.emit()
 	
 func rotateCCW(numDegrees : float):
-	if isRotatable:
+	if isRotatable and not isSliding:
 		var tween = get_tree().create_tween()
 		tween.set_ease(Tween.EASE_IN_OUT)
 		tween.set_trans(Tween.TRANS_CUBIC)

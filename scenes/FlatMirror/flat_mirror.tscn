@@ -26,7 +26,6 @@ offset = Vector2(0, 9)
 position = Vector2(0, 5)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Stage/Sprite2D/Front" index="0"]
-position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_6aj0s")
 
 [node name="Back" type="StaticBody2D" parent="Stage/Sprite2D" index="1"]
