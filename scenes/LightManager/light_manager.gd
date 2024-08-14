@@ -66,12 +66,14 @@ func haltRays(sourceObj:Object):
 			instancedRays["Temp"] = []
 		
 func splitRay(splitRatio:float, splitDirection:Vector2, splitLocation:Vector2, originalBeam:Object):
-	#print("Splitting in manager")
+	
 	var instance = beamScene.instantiate()
-	instancedRays["Temp"] = []
+	if not instancedRays.has("Temp"):
+		instancedRays["Temp"] = []
 	instancedRays["Temp"].append(instance)
 	add_child(instancedRays["Temp"][-1])
 	instancedRays["Temp"][-1].lastCollider = originalBeam.lastCollider
+	instancedRays["Temp"][-1].propDir = originalBeam.propDir
 	instancedRays["Temp"][-1].defineBeam(splitLocation,originalBeam.rayColor,1-splitRatio,originalBeam.propDir,originalBeam.index_of_refraction)
 	instancedRays["Temp"][-1].propagateBeam()
 	
@@ -80,8 +82,10 @@ func splitRay(splitRatio:float, splitDirection:Vector2, splitLocation:Vector2, o
 	instancedRays["Temp"].append(splitInstance)
 	add_child(instancedRays["Temp"][-1])
 	instancedRays["Temp"][-1].lastCollider = originalBeam.lastCollider
+	instancedRays["Temp"][-1].propDir = splitDirection
 	instancedRays["Temp"][-1].defineBeam(splitLocation+Vector2(2,2),originalBeam.rayColor,splitRatio,splitDirection,originalBeam.index_of_refraction)
 	instancedRays["Temp"][-1].propagateBeam()
+	#print(len(instancedRays["Temp"]))
 	
 	
 func makeBeams(locations:Array,color:Vector3,energy:float,direction:Vector2,IOR:float,sourceObj:Object):

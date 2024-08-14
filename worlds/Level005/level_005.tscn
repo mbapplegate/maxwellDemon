@@ -52,8 +52,8 @@ isEnergizeable = false
 
 [node name="MeterLEDs" parent="LightManager/PointDetector2" instance=ExtResource("5_ir66n")]
 position = Vector2(0, 80)
-maxEnergy = 5.0
-goalEnergy = 1.75
+maxEnergy = 2.5
+goalEnergy = 2.5
 
 [node name="PointDetector" parent="LightManager" instance=ExtResource("5_0joy3")]
 position = Vector2(1216, 560)
@@ -64,11 +64,12 @@ isEnergizeable = false
 
 [node name="MeterLEDs" parent="LightManager/PointDetector" instance=ExtResource("5_ir66n")]
 position = Vector2(0, 81)
-maxEnergy = 5.0
-goalEnergy = 1.75
+maxEnergy = 2.5
+goalEnergy = 2.5
 
 [node name="LaserSource" parent="LightManager" instance=ExtResource("3_ytnoy")]
 position = Vector2(1216, 214)
-numBeams = 1
+beamHalfHeight = 6
+numBeams = 5
 initialAngle = 90.0
 isPushable = false

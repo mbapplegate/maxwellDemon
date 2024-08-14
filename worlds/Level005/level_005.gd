@@ -10,6 +10,7 @@ var signalEmitted : bool = false
 
 const THIS_SCENE_ALIAS = "Level005"
 var nextSceneAlias = LevelInfo.GameFlow[THIS_SCENE_ALIAS]
+var allDetectors = []
 
 func _ready():
 	titleText.text = LevelInfo.LevelDictionary[THIS_SCENE_ALIAS].Title
@@ -19,18 +20,19 @@ func _ready():
 			child.initialize()
 			if child is PointDetector:
 				child.goalMetChanged.connect(_toggleDoor)
-			if child is LightManager:
-				for grandchild in child.get_children():
-					if grandchild is PointDetector:
-						grandchild.goalMetChanged.connect(_toggleDoor)
+				allDetectors.append(child)
+		if child is LightManager:
+			for grandchild in child.get_children():
+				if grandchild is PointDetector:
+					grandchild.goalMetChanged.connect(_toggleDoor)
+					allDetectors.append(grandchild)
 			
 func _toggleDoor(val):
 	if val:
 		var allGoalsMet = true
-		for child in get_children():
-			if child is PointDetector:
-				if not child.goalMet:
-					allGoalsMet = false
+		for det in allDetectors:
+			if not det.goalMet:
+				allGoalsMet = false
 		
 		if allGoalsMet:
 			door.openDoor()

@@ -54,7 +54,7 @@ func propagateBeam():
 	beamDying = false
 	
 	var numIters = 0
-	while not beamDying and numIters < 6:
+	while not beamDying and numIters < 15:
 		numIters += 1
 		if not cast.is_colliding():
 			beamAddPoint(cast.position+cast.target_position)

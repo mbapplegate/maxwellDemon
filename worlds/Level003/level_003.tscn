@@ -28,8 +28,7 @@ layer_0/tile_data = PackedInt32Array(2097152, 1, 0, 2031616, 1, 0, 1966080, 1, 0
 
 [node name="LaserSource" parent="LightManager" instance=ExtResource("3_0hbdy")]
 position = Vector2(1248, 320)
-beamHalfHeight = 3
-numBeams = 2
+beamHalfHeight = 5
 isRotatable = false
 
 [node name="PointDetector" parent="LightManager" instance=ExtResource("5_5mtrj")]
@@ -40,8 +39,8 @@ isEnergizeable = false
 
 [node name="MeterLEDs" parent="LightManager/PointDetector" instance=ExtResource("5_5d3f2")]
 position = Vector2(0, -81)
-maxEnergy = 10.0
-goalEnergy = 7.0
+maxEnergy = 3.0
+goalEnergy = 3.0
 goalOnTop = true
 
 [node name="Player" parent="." instance=ExtResource("6_xdtn4")]
