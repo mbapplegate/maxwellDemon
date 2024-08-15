@@ -12,7 +12,7 @@ extends pushableObject
 #var rng = RandomNumberGenerator.new()
 var isPaused = false
 var raysInstanced : bool = false
-signal registerRays(pos:Array, color:Vector3, energy:float, direction:Vector2, IOR:float, source:Object)
+signal registerRays(pos:Array, color:Vector3, energy:float, direction:Array, IOR:float, source:Object)
 signal stopRays(source:Object)
 signal startRays(source:Object)
 signal sourceMoved(newLocation:Array,newDirection:Vector2,source:Object)
@@ -80,15 +80,25 @@ func handleMotion():
 		angleToUse = sprite.rotation
 	else:
 		angleToUse = barrel.rotation
-	sourceMoved.emit(startLocs,Vector2(cos(angleToUse),sin(angleToUse)),self)
+	
+	var startDirections = []
+	startDirections.resize(numBeams)
+	startDirections.fill(Vector2(cos(angleToUse),sin(angleToUse)))
+	
+	sourceMoved.emit(startLocs,startDirections,self)
 
 			
 func registerBeams():
 	var startLocs = getRayStartLocs()
+	
 	var angleToUse = 0.0
 	if isRotatable:
 		angleToUse = sprite.rotation
 	else:
 		angleToUse = barrel.rotation
 	
-	registerRays.emit(startLocs,rayColor,1.0,Vector2(cos(angleToUse),sin(angleToUse)),1.0,self)
+	var startDirections = []
+	startDirections.resize(numBeams)
+	startDirections.fill(Vector2(cos(angleToUse),sin(angleToUse)))
+	
+	registerRays.emit(startLocs,rayColor,1.0,startDirections,1.0,self)

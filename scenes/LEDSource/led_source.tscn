@@ -11,9 +11,9 @@ size = Vector2(16, 96)
 [node name="LEDSource" instance=ExtResource("1_b7dse")]
 position = Vector2(91, 89)
 script = ExtResource("2_w07lc")
-numRaysPerTimeout = 10
+numBeams = 5
 rayColor = Vector3(0, 1, 0)
-timerTimeout = 0.125
+HalfAngleDeg = 60.0
 isEnergized = true
 
 [node name="backingSprite" type="Sprite2D" parent="Stage" index="0"]
@@ -28,9 +28,3 @@ shape = SubResource("RectangleShape2D_wgl05")
 
 [node name="EmitterSprite" type="Sprite2D" parent="Stage" index="1"]
 texture = ExtResource("3_ibsm5")
-
-[node name="Timer" type="Timer" parent="." index="4"]
-wait_time = 0.125
-autostart = true
-
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

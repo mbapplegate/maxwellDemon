@@ -77,8 +77,8 @@ goalOnTop = true
 
 [node name="LaserSource" parent="LightManager" instance=ExtResource("3_ixe0d")]
 position = Vector2(928, 198)
-beamHalfHeight = 5
-numBeams = 5
+beamHalfHeight = 7
+numBeams = 6
 rayColor = Vector3(1, 0.5, 0)
 initialAngle = 90.0
 isPushable = false

@@ -11,6 +11,7 @@ class_name LightBeam
 const MEDIUM_INDEX : float = 1.0
 const BEAM_STEP : int = 1024
 const PULSE_SPEED : int = 512
+const MAX_ITERS : int = 20
 
 var energy : float = 1.0
 var index_of_refraction : float = 1.0
@@ -54,7 +55,7 @@ func propagateBeam():
 	beamDying = false
 	
 	var numIters = 0
-	while not beamDying and numIters < 15:
+	while not beamDying and numIters < MAX_ITERS:
 		numIters += 1
 		if not cast.is_colliding():
 			beamAddPoint(cast.position+cast.target_position)
@@ -79,6 +80,8 @@ func propagateBeam():
 		#print(propDir,", ", originalPropDir)
 		#print(cast.position, ", ", cast.target_position)
 		#$Sprite2D.position = cast.position
+	if numIters == MAX_ITERS-1:
+		print("Too many bounces")
 	_beamToPath()
 
 	propDone = true

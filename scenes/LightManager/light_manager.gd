@@ -40,12 +40,12 @@ func runAllRays():
 		if key is Object:
 			runRays(key)
 	
-func handleSourceMoved(newLocation:Array,newDirection:Vector2,sourceObj:Object):
+func handleSourceMoved(newLocation:Array,newDirection:Array,sourceObj:Object):
 	if instancedRays.has(sourceObj):
 		_clearMeters()
 		for i in range(instancedRays[sourceObj].size()):
 			instancedRays[sourceObj][i].clearBeam()
-			instancedRays[sourceObj][i].moveBeam(newLocation[i],newDirection)
+			instancedRays[sourceObj][i].moveBeam(newLocation[i],newDirection[i])
 		if instancedRays.has("Temp"):
 			if instancedRays["Temp"].size() > 0:
 				for i in range(instancedRays["Temp"].size()):
@@ -88,17 +88,17 @@ func splitRay(splitRatio:float, splitDirection:Vector2, splitLocation:Vector2, o
 	#print(len(instancedRays["Temp"]))
 	
 	
-func makeBeams(locations:Array,color:Vector3,energy:float,direction:Vector2,IOR:float,sourceObj:Object):
+func makeBeams(locations:Array,color:Vector3,energy:float,direction:Array,IOR:float,sourceObj:Object):
 	if instancedRays.has(sourceObj):
 		for i in instancedRays[sourceObj].size():
-			instancedRays[sourceObj][i].defineBeam(locations[i],color,energy,direction, IOR)
+			instancedRays[sourceObj][i].defineBeam(locations[i],color,energy,direction[i], IOR)
 	else:
 		instancedRays[sourceObj] = []
 		for i in locations.size():
 			var instance = beamScene.instantiate()
 			instancedRays[sourceObj].append(instance)
 			add_child(instancedRays[sourceObj][i])
-			instancedRays[sourceObj][i].defineBeam(locations[i],color,energy,direction,IOR)
+			instancedRays[sourceObj][i].defineBeam(locations[i],color,energy,direction[i],IOR)
 	if sourceObj.isEnergized:
 		runRays(sourceObj)
 		

@@ -41,6 +41,13 @@ position = Vector2(1856, 480)
 
 [node name="LightManager" parent="." instance=ExtResource("5_2yfdp")]
 
+[node name="LaserSource" parent="LightManager" instance=ExtResource("3_efkor")]
+position = Vector2(928, 198)
+beamHalfHeight = 20
+numBeams = 5
+isPushable = false
+isRotatable = false
+
 [node name="LensPlanoConcave" parent="LightManager" instance=ExtResource("11_c2a61")]
 position = Vector2(1472, 480)
 focalLength = -155.2
@@ -84,10 +91,3 @@ initialAngle = -135.0
 isPushable = false
 isRotatable = false
 isEnergizeable = false
-
-[node name="LaserSource" parent="LightManager" instance=ExtResource("3_efkor")]
-position = Vector2(928, 198)
-beamHalfHeight = 20
-numBeams = 5
-isPushable = false
-isRotatable = false
