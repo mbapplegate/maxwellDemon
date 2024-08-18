@@ -35,26 +35,20 @@ vertical_alignment = 1
 
 [node name="LaserSource" parent="." instance=ExtResource("5_3w7aa")]
 position = Vector2(768, 736)
-HALF_HEIGHT = 2.0
 rayColor = Vector3(0, 1, 1)
-timerTimeout = 0.088
 packetEnergy = 2.0
 initialAngle = -41.6
 isEnergized = false
 
 [node name="LaserSource2" parent="." instance=ExtResource("5_3w7aa")]
 position = Vector2(768, 864)
-HALF_HEIGHT = 2.0
-timerTimeout = 0.088
 packetEnergy = 2.0
 initialAngle = -41.6
 isEnergized = false
 
 [node name="LaserSource3" parent="." instance=ExtResource("5_3w7aa")]
 position = Vector2(1088, 768)
-HALF_HEIGHT = 2.0
 rayColor = Vector3(1, 1, 0)
-timerTimeout = 0.088
 packetEnergy = 2.0
 initialAngle = -161.6
 

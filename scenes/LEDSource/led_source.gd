@@ -16,6 +16,9 @@ var ledParent = null
 var ledEnergy = Vector3.ZERO
 var rng = RandomNumberGenerator.new()
 func _ready():
+	if not isRotatable and initialAngle != 0:
+		$Stage/backingSprite.rotation=deg_to_rad(initialAngle)
+		emitterSprite.rotation=deg_to_rad(initialAngle)
 	ledParent = get_parent()
 	emitterSprite.modulate = Color(rayColor[0], rayColor[1],rayColor[2])
 	ledEnergy = rayColor/rayColor.length_squared()

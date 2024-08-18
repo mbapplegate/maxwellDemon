@@ -71,4 +71,5 @@ initialAngle = -100.0
 
 [node name="LEDSource" parent="LightManager" instance=ExtResource("12_p88v4")]
 position = Vector2(352, 640)
-HalfAngleDeg = 60.0
+initialAngle = 20.0
+isRotatable = false

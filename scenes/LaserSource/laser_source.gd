@@ -17,13 +17,13 @@ signal stopRays(source:Object)
 signal startRays(source:Object)
 signal sourceMoved(newLocation:Array,newDirection:Vector2,source:Object)
 
-var normEnergy = Vector3.ZERO
+#var normEnergy = Vector3.ZERO
 
 func _ready():
 	if not isRotatable and initialAngle != 0:
 		barrel.rotation=deg_to_rad(initialAngle)
 		
-	normEnergy = rayColor/rayColor.length_squared() * packetEnergy
+	#normEnergy = rayColor/rayColor.length_squared() * packetEnergy
 	energizeChanged.connect(handleEnergizeChanged)
 	rotationChanged.connect(handleRotationChange)
 	stageMoved.connect(handleMotion)
@@ -101,4 +101,4 @@ func registerBeams():
 	startDirections.resize(numBeams)
 	startDirections.fill(Vector2(cos(angleToUse),sin(angleToUse)))
 	
-	registerRays.emit(startLocs,rayColor,1.0,startDirections,1.0,self)
+	registerRays.emit(startLocs,rayColor,packetEnergy,startDirections,1.0,self)

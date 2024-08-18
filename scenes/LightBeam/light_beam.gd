@@ -106,35 +106,47 @@ func getReflectionDirection(normalAngle : Vector2)->Vector2:
 		return propDir.reflect(normalAngle.rotated(PI/2).normalized()).normalized()
 	else:
 		return propDir
-		
-func refractRay(normalAngle, objectIOR,collisionPoint):
-	
+
+func getRefractionInfo(normalAngle,objectIOR) -> Array:
 	if objectIOR == MEDIUM_INDEX:
-		pass
+		return [propDir, MEDIUM_INDEX]
 	else:
+		var newDirection :Vector2
 		var normalIn = -normalAngle;
 		var theta1 = normalIn.angle_to(propDir)
 		var theta2
 		var internalReflection = false
+		var newIndex
 		#Going from high index to low index
 		if index_of_refraction > MEDIUM_INDEX:
 			var arg =  objectIOR/MEDIUM_INDEX * sin(theta1)
 			if abs(arg) <= 1.0:
 				theta2 = asin(objectIOR/MEDIUM_INDEX * sin(theta1))
-				index_of_refraction = MEDIUM_INDEX
+				newIndex = MEDIUM_INDEX
 			else:
-				reflectRay(normalAngle,collisionPoint)
+				newDirection = getReflectionDirection(normalAngle)
 				internalReflection=true
+				newIndex = index_of_refraction
 		#Going from low index to high index
 		else:
 			theta2 = asin(MEDIUM_INDEX/objectIOR*sin(theta1))
-			index_of_refraction = objectIOR
+			newIndex = objectIOR
 		#Add the point to the photon packet
 		
 		if not internalReflection:
-			var newDir = normalIn.rotated(theta2)
-			propDir = newDir
-			beamAddPoint(to_local(collisionPoint))
+			newDirection = normalIn.rotated(theta2)
+		
+		return [newDirection, newIndex]
+	
+func refractRay(normalAngle, objectIOR,collisionPoint):
+	
+	var refractInfo = getRefractionInfo(normalAngle,objectIOR)
+	index_of_refraction = refractInfo[1]
+	var newDir = refractInfo[0]	
+		
+	propDir = newDir
+	beamAddPoint(to_local(collisionPoint))
+	
 		
 			
 func beamAddPoint(newPointLoc : Vector2):

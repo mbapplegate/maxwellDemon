@@ -17,6 +17,9 @@ func _ready():
 			else:
 				child.connect("rotationChanged", runAllRays)
 				child.connect("stageMoved", runAllRays)
+				
+			if child.has_method("_dispersionNeeded"):
+				child.connect("disperseBeam",disperseRay)
 
 func runRays(sourceObj:Object):
 	if instancedRays.has(sourceObj):
@@ -87,6 +90,22 @@ func splitRay(splitRatio:float, splitDirection:Vector2, splitLocation:Vector2, o
 	instancedRays["Temp"][-1].propagateBeam()
 	#print(len(instancedRays["Temp"]))
 	
+func disperseRay(dispLocation:Vector2,dispDirection:Array, IOR:Vector3, energies:Vector3, originalBeam:Object):
+	if not instancedRays.has("Temp"):
+		instancedRays["Temp"] = []
+	#print(energies)
+	for i in range(3):
+		if energies[i] > 0:
+			var instance = beamScene.instantiate()
+			var dispColor = Vector3.ZERO
+			dispColor[i] = 1
+			instancedRays["Temp"].append(instance)	
+			add_child(instancedRays["Temp"][-1])
+			instancedRays["Temp"][-1].lastCollider = originalBeam.lastCollider
+			instancedRays["Temp"][-1].propDir = dispDirection[i]
+			instancedRays["Temp"][-1].index_of_refraction = IOR[i]
+			instancedRays["Temp"][-1].defineBeam(dispLocation+Vector2(2,2),dispColor,energies[i],dispDirection[i],IOR[i])
+			instancedRays["Temp"][-1].propagateBeam()
 	
 func makeBeams(locations:Array,color:Vector3,energy:float,direction:Array,IOR:float,sourceObj:Object):
 	if instancedRays.has(sourceObj):

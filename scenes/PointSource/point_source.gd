@@ -1,16 +1,21 @@
 extends pushableObject
 
 @export var angleRangeDeg : Vector2 = Vector2(-90,90)
-@export var numRaysPerTimeout : int = 1
+@export var numBeams : int = 1
 @export var rayColor : Vector3 = Vector3(1.0, 0, 1.0)
-@onready var ray = preload("res://scenes/LightPacket/light_packet.tscn")
+
 @onready var sourceBall = $sourceBall
 
 var sourceParent = null
 var pointEnergy = Vector3.ZERO
-var rng = RandomNumberGenerator.new()
 var angleRange = Vector2.ZERO
+
 const POINT_RADIUS = 8
+
+signal registerRays(pos:Array, color:Vector3, energy:float, direction:Vector2, IOR:float, source:Object)
+signal startRays(source:Object)
+signal stopRays(source:Object)
+signal sourceMoved(newLocation:Array,newDirection:Vector2,source:Object)
 
 func _ready():
 	sourceParent = get_parent()
@@ -18,48 +23,47 @@ func _ready():
 	isRotatable=false
 	sourceBall.modulate = Color(rayColor[0], rayColor[1],rayColor[2])
 	pointEnergy = rayColor/rayColor.length_squared()
+	energizeChanged.connect(handleEnergizeChanged)
+	stageMoved.connect(handleMotion)
+	await get_tree().process_frame
+	registerBeams()
 
-func _on_timer_timeout():
-	var angle = 0.0
-	var instanceRed = null
-	var instanceGreen = null
-	var instanceBlue = null
-	if (isEnergized):
-		for i in numRaysPerTimeout:
-			
-			angle = rng.randf_range(angleRange[0],angleRange[1])
+func handleEnergizeChanged(val):
+	if val:
+		startRays.emit(self)
+	else:
+		stopRays.emit(self)
 		
-			#print("Timeout. Angle: ",angle)
-			if pointEnergy[0] > 0.1:
-				instanceRed = ray.instantiate()
-				instanceRed.propDir = Vector2(POINT_RADIUS*cos(angle),POINT_RADIUS*sin(angle))
-				instanceRed.position = to_global(Vector2.ZERO)
-				instanceRed.rayColor = Vector3(1.0,0.0,0.0)
-				instanceRed.energy = pointEnergy[0]
-				instanceRed.lightSource = "point"
-			if pointEnergy[1] > 0.1:
-				instanceGreen = ray.instantiate()
-				instanceGreen.propDir = Vector2(POINT_RADIUS*cos(angle),POINT_RADIUS*sin(angle))
-				instanceGreen.position = to_global(Vector2.ZERO)
-				instanceGreen.rayColor =  Vector3(0.0,1.0,0.0)
-				instanceGreen.energy = pointEnergy[1]
-				instanceGreen.lightSource = "point"
-			if pointEnergy[2] > 0.1:
-				instanceBlue = ray.instantiate()
-				instanceBlue.propDir = Vector2(POINT_RADIUS*cos(angle),POINT_RADIUS*sin(angle))
-				instanceBlue.position = to_global(Vector2.ZERO)
-				instanceBlue.rayColor =  Vector3(0.0,0.0,1.0)
-				instanceBlue.energy = pointEnergy[2]
-				instanceBlue.lightSource = "point"
-			#instance.scale[0] = 1.0/self.scale[0]
-			#instance.scale[1] = 1.0 / self.scale[1]
-			if sourceParent:
-				if instanceRed:
-					sourceParent.add_child(instanceRed)
-				if instanceGreen:
-					sourceParent.add_child(instanceGreen)
-				if instanceBlue:
-					sourceParent.add_child(instanceBlue)
+func handleMotion():
+	var locs = getStartingLocations()
+	var startDirs = getPropagationDirections()
+	sourceMoved.emit(locs,startDirs,self)
+		
+func getPropagationDirections() -> Array:
+	var totalAngle = angleRange[1]-angleRange[0]
+	var angleSpacing = totalAngle/numBeams
+	
+	var directions = []
+	directions.resize(numBeams)
+	for i in range(numBeams):
+		var angle = angleRange[0] + i*angleSpacing
+		directions[i] = Vector2(cos(angle),sin(angle))
+	return directions
 
-func _ray_hit(photonObj:Object, _collPoint:Vector2, _collNormal:Vector2, _collider:Object):
-	photonObj.rayDying = true
+func getStartingLocations() -> Array:
+	var locs = []
+	locs.resize(numBeams)
+	locs.fill(to_global(Vector2.ZERO))
+	return locs
+		
+func registerBeams():
+		var dirs = getPropagationDirections()
+		var locs = getStartingLocations()
+		registerRays.emit(locs,rayColor,1.0,dirs,1.0,self)
+			
+	
+		
+
+
+func _ray_hit(photonObj:Object, collPoint:Vector2, _collNormal:Vector2, _collider:Object):
+	photonObj.stopBeam(collPoint)

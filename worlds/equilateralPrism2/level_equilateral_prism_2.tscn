@@ -59,9 +59,9 @@ vertical_alignment = 1
 
 [node name="LaserSource" parent="." instance=ExtResource("5_thwrn")]
 position = Vector2(352, 608)
-HALF_HEIGHT = 2.0
+beamHalfHeight = 2
+numBeams = 4
 rayColor = Vector3(1, 1, 1)
-timerTimeout = 0.088
 packetEnergy = 3.0
 initialAngle = -41.6
 isPushable = false
@@ -83,8 +83,8 @@ isRotatable = false
 [node name="MeterLEDs" parent="PointDetector3" instance=ExtResource("8_i17lo")]
 position = Vector2(80, 0)
 rotation = -1.5708
-maxEnergy = 10.0
-goalEnergy = 5.0
+maxEnergy = 4.0
+goalEnergy = 4.0
 goalOnTop = true
 updateTime = 0.5
 
