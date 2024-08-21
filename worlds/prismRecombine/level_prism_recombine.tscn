@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://drd6tsamuxp3r"]
+[gd_scene load_steps=12 format=3 uid="uid://drd6tsamuxp3r"]
 
 [ext_resource type="Script" path="res://worlds/prismRecombine/level_prism_recombine.gd" id="1_e3m7w"]
 [ext_resource type="PackedScene" uid="uid://fkwew1tbysym" path="res://worlds/BaseTileMap.tscn" id="2_oh2er"]
 [ext_resource type="PackedScene" uid="uid://ojfv06ceqv2a" path="res://scenes/Player/player.tscn" id="3_v1l2v"]
 [ext_resource type="PackedScene" uid="uid://dns1nq8hlfau" path="res://scenes/Doorway/doorway.tscn" id="4_kumf2"]
+[ext_resource type="PackedScene" uid="uid://cd1x0uh4fi1jh" path="res://scenes/LightManager/light_manager.tscn" id="5_eukld"]
 [ext_resource type="PackedScene" uid="uid://2ai0r6raovox" path="res://scenes/LaserSource/laser_source.tscn" id="5_o4ls8"]
 [ext_resource type="PackedScene" uid="uid://bltgirirfegq2" path="res://scenes/PrismTriangular/prism_triangular.tscn" id="6_otmpa"]
 [ext_resource type="PackedScene" uid="uid://b6navnb20xork" path="res://scenes/Lens_PlanoConvex/lens_plano_convex.tscn" id="7_2rnxx"]
@@ -33,37 +34,35 @@ text = "L1"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="LaserSource" parent="." instance=ExtResource("5_o4ls8")]
-position = Vector2(96, 128)
-HALF_HEIGHT = 1.0
-rayColor = Vector3(1, 1, 1)
-timerTimeout = 0.088
-packetEnergy = 3.0
-initialAngle = -11.6
-isPushable = false
-isRotatable = false
+[node name="LightManager" parent="." instance=ExtResource("5_eukld")]
 
-[node name="PrismTriangular" parent="." instance=ExtResource("6_otmpa")]
-position = Vector2(256, 128)
-sideLength = 160.0
-prismIOR = Vector3(1.5, 1.55, 1.6)
-initialAngle = 10.8
-isPushable = false
+[node name="FlatMirror" parent="LightManager" instance=ExtResource("9_5uurr")]
+position = Vector2(1472, 576)
+initialAngle = -54.5
 isRotatable = false
 isEnergizeable = false
 
-[node name="PointDetector" parent="." instance=ExtResource("7_g4mkr")]
+[node name="PrismTriangular2" parent="LightManager" instance=ExtResource("6_otmpa")]
+position = Vector2(1216, 576)
+sideLength = 160.0
+prismIOR = Vector3(1.5, 1.55, 1.6)
+initialAngle = 170.8
+isRotatable = false
+
+[node name="PointDetector" parent="LightManager" instance=ExtResource("7_g4mkr")]
 position = Vector2(768, 864)
 initialAngle = 180.0
 isPushable = false
 isRotatable = false
 
-[node name="MeterLEDs" parent="PointDetector" instance=ExtResource("8_ve2cy")]
+[node name="MeterLEDs" parent="LightManager/PointDetector" instance=ExtResource("8_ve2cy")]
 position = Vector2(0, -80)
+maxEnergy = 1.0
+goalEnergy = 1.0
 goalOnTop = true
 updateTime = 0.5
 
-[node name="LensPlanoConvex" parent="." instance=ExtResource("7_2rnxx")]
+[node name="LensPlanoConvex" parent="LightManager" instance=ExtResource("7_2rnxx")]
 position = Vector2(768, 384)
 LENS_HEIGHT = 256.0
 focalLength = 260.75
@@ -72,15 +71,19 @@ initialAngle = -150.0
 isPushable = false
 isRotatable = false
 
-[node name="PrismTriangular2" parent="." instance=ExtResource("6_otmpa")]
-position = Vector2(1216, 576)
+[node name="PrismTriangular" parent="LightManager" instance=ExtResource("6_otmpa")]
+position = Vector2(256, 128)
 sideLength = 160.0
 prismIOR = Vector3(1.5, 1.55, 1.6)
-initialAngle = 170.8
-isRotatable = false
-
-[node name="FlatMirror" parent="." instance=ExtResource("9_5uurr")]
-position = Vector2(1472, 576)
-initialAngle = -54.5
+initialAngle = 10.8
+isPushable = false
 isRotatable = false
 isEnergizeable = false
+
+[node name="LaserSource" parent="LightManager" instance=ExtResource("5_o4ls8")]
+position = Vector2(96, 128)
+numBeams = 1
+rayColor = Vector3(1, 1, 1)
+initialAngle = -11.6
+isPushable = false
+isRotatable = false

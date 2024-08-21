@@ -77,7 +77,7 @@ func _ray_hit(photonObj:Object, collPoint:Vector2, collNormal:Vector2, _collider
 		photonObj.refractRay(collNormal, indexToUse, collPoint)
 	else:
 		photonObj.stopBeam(collPoint)
-		print(photonObj.energy)
+		#print(photonObj.energy)
 		var normEnergy = photonObj.rayColor/photonObj.rayColor.length_squared() * photonObj.energy
 		var dispersionDirection:Array[Vector2]= []
 		var newIORs:Vector3 = Vector3(-1,-1,-1)

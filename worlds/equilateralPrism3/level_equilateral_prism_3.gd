@@ -7,7 +7,7 @@ const THIS_SCENE_ALIAS = "LevelEquiPrism3"
 var nextSceneAlias = LevelInfo.GameFlow[THIS_SCENE_ALIAS]
 signal nextScene(sceneAlias)
 var signalEmitted : bool = false
-
+var allDetectors = []
 func _ready():
 	titleText.text = LevelInfo.LevelDictionary[THIS_SCENE_ALIAS].Title
 	player.levelComplete.connect(nextLevel)
@@ -17,17 +17,22 @@ func _ready():
 			child.initialize()
 			if child is PointDetector:
 				child.goalMetChanged.connect(_toggleDoor)
+				allDetectors.append(child)
+		if child is LightManager:
+			for grandchild in child.get_children():
+				if grandchild is PointDetector:
+					grandchild.goalMetChanged.connect(_toggleDoor)
+					allDetectors.append(grandchild)
 				
-	$PointDetector.position += Vector2(0,-5)
-	$PointDetector3.position += Vector2(10,0)
+	$LightManager/PointDetector.position += Vector2(0,-5)
+	$LightManager/PointDetector3.position += Vector2(10,0)
 			
 func _toggleDoor(val):
 	if val:
 		var allGoalsMet = true
-		for child in get_children():
-			if child is PointDetector:
-				if not child.goalMet:
-					allGoalsMet = false
+		for det in allDetectors:
+			if not det.goalMet:
+				allGoalsMet = false
 		
 		if allGoalsMet:
 			door.openDoor()

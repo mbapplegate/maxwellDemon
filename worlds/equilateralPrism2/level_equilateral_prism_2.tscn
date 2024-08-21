@@ -1,10 +1,11 @@
-[gd_scene load_steps=14 format=3 uid="uid://cxpw77hax6sdx"]
+[gd_scene load_steps=15 format=3 uid="uid://cxpw77hax6sdx"]
 
 [ext_resource type="Script" path="res://worlds/equilateralPrism2/level_equilateral_prism_2.gd" id="1_ktw57"]
 [ext_resource type="PackedScene" uid="uid://fkwew1tbysym" path="res://worlds/BaseTileMap.tscn" id="2_uubr7"]
 [ext_resource type="PackedScene" uid="uid://ojfv06ceqv2a" path="res://scenes/Player/player.tscn" id="3_2ls6o"]
 [ext_resource type="PackedScene" uid="uid://dns1nq8hlfau" path="res://scenes/Doorway/doorway.tscn" id="4_t6l61"]
 [ext_resource type="PackedScene" uid="uid://2ai0r6raovox" path="res://scenes/LaserSource/laser_source.tscn" id="5_thwrn"]
+[ext_resource type="PackedScene" uid="uid://cd1x0uh4fi1jh" path="res://scenes/LightManager/light_manager.tscn" id="6_sn1gn"]
 [ext_resource type="PackedScene" uid="uid://bltgirirfegq2" path="res://scenes/PrismTriangular/prism_triangular.tscn" id="6_v2y3f"]
 [ext_resource type="PackedScene" uid="uid://bq36hxil0t1vi" path="res://scenes/DetectorPoint/point_detector.tscn" id="7_gt0tu"]
 [ext_resource type="PackedScene" uid="uid://chlytrwdjaffi" path="res://scenes/MeterLEDs/meter_leds.tscn" id="8_i17lo"]
@@ -57,45 +58,6 @@ text = "L1"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="LaserSource" parent="." instance=ExtResource("5_thwrn")]
-position = Vector2(352, 608)
-beamHalfHeight = 2
-numBeams = 4
-rayColor = Vector3(1, 1, 1)
-packetEnergy = 3.0
-initialAngle = -41.6
-isPushable = false
-isRotatable = false
-
-[node name="PrismTriangular" parent="." instance=ExtResource("6_v2y3f")]
-position = Vector2(480, 544)
-sideLength = 160.0
-prismIOR = Vector3(1.475, 1.55, 1.615)
-initialAngle = -20.81
-isPushable = false
-isEnergizeable = false
-
-[node name="PointDetector3" parent="." instance=ExtResource("7_gt0tu")]
-position = Vector2(1504, 512)
-isPushable = false
-isRotatable = false
-
-[node name="MeterLEDs" parent="PointDetector3" instance=ExtResource("8_i17lo")]
-position = Vector2(80, 0)
-rotation = -1.5708
-maxEnergy = 4.0
-goalEnergy = 4.0
-goalOnTop = true
-updateTime = 0.5
-
-[node name="FilterAbsorption2" parent="." instance=ExtResource("9_vkdsr")]
-position = Vector2(1312, 512)
-filterIndex = 1.0
-filterAbsorbance = Color(0, 1, 1, 1)
-isPushable = false
-isRotatable = false
-isEnergizeable = false
-
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
 offset_left = 32.0
 offset_top = 192.0
@@ -140,3 +102,43 @@ offset_top = 49.0
 offset_right = 310.0
 offset_bottom = 149.0
 texture = SubResource("Texture2D_pv4kb")
+
+[node name="LightManager" parent="." instance=ExtResource("6_sn1gn")]
+
+[node name="PointDetector3" parent="LightManager" instance=ExtResource("7_gt0tu")]
+position = Vector2(1504, 544)
+isPushable = false
+isRotatable = false
+
+[node name="MeterLEDs" parent="LightManager/PointDetector3" instance=ExtResource("8_i17lo")]
+position = Vector2(80, 0)
+rotation = -1.5708
+maxEnergy = 4.0
+goalEnergy = 4.0
+goalOnTop = true
+updateTime = 0.5
+
+[node name="FilterAbsorption2" parent="LightManager" instance=ExtResource("9_vkdsr")]
+position = Vector2(1280, 544)
+filterAbsorbance = Color(0, 1, 1, 1)
+isPushable = false
+isRotatable = false
+isEnergizeable = false
+
+[node name="PrismTriangular" parent="LightManager" instance=ExtResource("6_v2y3f")]
+position = Vector2(480, 544)
+sideLength = 160.0
+prismIOR = Vector3(1.475, 1.55, 1.615)
+initialAngle = -20.81
+isPushable = false
+isEnergizeable = false
+
+[node name="LaserSource" parent="LightManager" instance=ExtResource("5_thwrn")]
+position = Vector2(352, 608)
+beamHalfHeight = 2
+numBeams = 4
+rayColor = Vector3(1, 1, 1)
+packetEnergy = 3.0
+initialAngle = -41.6
+isPushable = false
+isRotatable = false

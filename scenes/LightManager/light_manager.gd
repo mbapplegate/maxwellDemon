@@ -10,10 +10,12 @@ func _ready():
 			if child.has_method("registerBeams"):
 				child.connect("registerRays", makeBeams)
 				child.connect("stopRays", haltRays)		
-				child.connect("startRays", runRays)
+				child.connect("startRays", runAllRays)
 				child.connect("sourceMoved", handleSourceMoved)
-			elif child is BeamSplitter:
+			elif (child is BeamSplitter):
 				child.connect("splitBeam",splitRay)
+			elif (child is AbsorbFilter):
+				child.connect("attenuateBeam",attenuateRay)
 			else:
 				child.connect("rotationChanged", runAllRays)
 				child.connect("stageMoved", runAllRays)
@@ -22,51 +24,42 @@ func _ready():
 				child.connect("disperseBeam",disperseRay)
 
 func runRays(sourceObj:Object):
-	if instancedRays.has(sourceObj):
-		_clearMeters()
-		
-		if instancedRays.has("Temp"):
-			if instancedRays["Temp"].size() > 0:
-				for i in range(instancedRays["Temp"].size()):
-					instancedRays["Temp"][i].queue_free()
-				instancedRays["Temp"] = []
-			
+	if instancedRays.has(sourceObj):	
 		for i in instancedRays[sourceObj].size():
 			instancedRays[sourceObj][i].clearBeam()
 			instancedRays[sourceObj][i].propagateBeam()
 	else:
 		pass
 
-func runAllRays():
+func runAllRays(_optional:Object = self):
+	_clearMeters()
+		
+	if instancedRays.has("Temp"):
+		if instancedRays["Temp"].size() > 0:
+			for i in range(instancedRays["Temp"].size()):
+				instancedRays["Temp"][i].queue_free()
+			instancedRays["Temp"] = []
 	#var raySources = instancedRays.keys()
 	for key in instancedRays:
 		if key is Object:
-			runRays(key)
+			if key.isEnergized:
+				runRays(key)
 	
 func handleSourceMoved(newLocation:Array,newDirection:Array,sourceObj:Object):
 	if instancedRays.has(sourceObj):
-		_clearMeters()
 		for i in range(instancedRays[sourceObj].size()):
 			instancedRays[sourceObj][i].clearBeam()
 			instancedRays[sourceObj][i].moveBeam(newLocation[i],newDirection[i])
-		if instancedRays.has("Temp"):
-			if instancedRays["Temp"].size() > 0:
-				for i in range(instancedRays["Temp"].size()):
-					instancedRays["Temp"][i].queue_free()
-				instancedRays["Temp"] = []
-		if sourceObj.isEnergized:
-			runRays(sourceObj)
+		
+		runAllRays()
 				 
 func haltRays(sourceObj:Object):
 	if instancedRays.has(sourceObj):
-		_clearMeters()
+		#_clearMeters()
 		for i in range(instancedRays[sourceObj].size()):
 			instancedRays[sourceObj][i].clearBeam()
-	if instancedRays.has("Temp"):
-		if instancedRays["Temp"].size() > 0:
-			for i in range(instancedRays[sourceObj].size()):
-				instancedRays["Temp"][i].queue_free()
-			instancedRays["Temp"] = []
+		
+		runAllRays()
 		
 func splitRay(splitRatio:float, splitDirection:Vector2, splitLocation:Vector2, originalBeam:Object):
 	
@@ -119,7 +112,20 @@ func makeBeams(locations:Array,color:Vector3,energy:float,direction:Array,IOR:fl
 			add_child(instancedRays[sourceObj][i])
 			instancedRays[sourceObj][i].defineBeam(locations[i],color,energy,direction[i],IOR)
 	if sourceObj.isEnergized:
-		runRays(sourceObj)
+		runAllRays(sourceObj)
+		
+func attenuateRay(beamLocation:Vector2, beamColor:Vector3, beamEnergy:float, originalBeam:Object):
+	
+	var instance = beamScene.instantiate()
+	if not instancedRays.has("Temp"):
+		instancedRays["Temp"] = []
+	instancedRays["Temp"].append(instance)
+	add_child(instancedRays["Temp"][-1])
+	instancedRays["Temp"][-1].lastCollider = originalBeam.lastCollider
+	instancedRays["Temp"][-1].propDir = originalBeam.propDir
+	instancedRays["Temp"][-1].rayColor = beamColor
+	instancedRays["Temp"][-1].defineBeam(beamLocation,beamColor,beamEnergy,originalBeam.propDir,originalBeam.index_of_refraction)
+	instancedRays["Temp"][-1].propagateBeam()
 		
 func _clearMeters():
 	for child in get_children():

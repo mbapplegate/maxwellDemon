@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://u8eddjfq7li6"]
+[gd_scene load_steps=12 format=3 uid="uid://u8eddjfq7li6"]
 
 [ext_resource type="Script" path="res://worlds/equilateralPrism3/level_equilateral_prism_3.gd" id="1_sack6"]
 [ext_resource type="PackedScene" uid="uid://fkwew1tbysym" path="res://worlds/BaseTileMap.tscn" id="2_ahavm"]
 [ext_resource type="PackedScene" uid="uid://ojfv06ceqv2a" path="res://scenes/Player/player.tscn" id="3_6kwp2"]
 [ext_resource type="PackedScene" uid="uid://dns1nq8hlfau" path="res://scenes/Doorway/doorway.tscn" id="4_fxp72"]
 [ext_resource type="PackedScene" uid="uid://2ai0r6raovox" path="res://scenes/LaserSource/laser_source.tscn" id="5_3w7aa"]
+[ext_resource type="PackedScene" uid="uid://cd1x0uh4fi1jh" path="res://scenes/LightManager/light_manager.tscn" id="5_6761n"]
 [ext_resource type="PackedScene" uid="uid://bltgirirfegq2" path="res://scenes/PrismTriangular/prism_triangular.tscn" id="6_7n1rx"]
 [ext_resource type="PackedScene" uid="uid://bq36hxil0t1vi" path="res://scenes/DetectorPoint/point_detector.tscn" id="7_tpqdy"]
 [ext_resource type="PackedScene" uid="uid://chlytrwdjaffi" path="res://scenes/MeterLEDs/meter_leds.tscn" id="8_evyo2"]
@@ -33,75 +34,9 @@ text = "L1"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="LaserSource" parent="." instance=ExtResource("5_3w7aa")]
-position = Vector2(768, 736)
-rayColor = Vector3(0, 1, 1)
-packetEnergy = 2.0
-initialAngle = -41.6
-isEnergized = false
+[node name="LightManager" parent="." instance=ExtResource("5_6761n")]
 
-[node name="LaserSource2" parent="." instance=ExtResource("5_3w7aa")]
-position = Vector2(768, 864)
-packetEnergy = 2.0
-initialAngle = -41.6
-isEnergized = false
-
-[node name="LaserSource3" parent="." instance=ExtResource("5_3w7aa")]
-position = Vector2(1088, 768)
-rayColor = Vector3(1, 1, 0)
-packetEnergy = 2.0
-initialAngle = -161.6
-
-[node name="PrismTriangular" parent="." instance=ExtResource("6_7n1rx")]
-position = Vector2(928, 672)
-sideLength = 160.0
-prismIOR = Vector3(1.475, 1.55, 1.615)
-initialAngle = -20.8
-isPushable = false
-isRotatable = false
-isEnergizeable = false
-
-[node name="PointDetector" parent="." instance=ExtResource("7_tpqdy")]
-position = Vector2(1632, 608)
-isPushable = false
-isRotatable = false
-isEnergizeable = false
-
-[node name="MeterLEDs" parent="PointDetector" instance=ExtResource("8_evyo2")]
-position = Vector2(80, 0)
-rotation = -1.5708
-maxEnergy = 10.0
-goalOnTop = true
-updateTime = 0.5
-
-[node name="PointDetector3" parent="." instance=ExtResource("7_tpqdy")]
-position = Vector2(960, 96)
-initialAngle = -90.0
-isPushable = false
-isRotatable = false
-isEnergizeable = false
-
-[node name="MeterLEDs" parent="PointDetector3" instance=ExtResource("8_evyo2")]
-position = Vector2(80, 0)
-rotation = -1.5708
-maxEnergy = 10.0
-goalOnTop = true
-updateTime = 0.5
-
-[node name="PointDetector4" parent="." instance=ExtResource("7_tpqdy")]
-position = Vector2(608, 128)
-initialAngle = -120.0
-isPushable = false
-isRotatable = false
-
-[node name="MeterLEDs" parent="PointDetector4" instance=ExtResource("8_evyo2")]
-position = Vector2(80, 0)
-rotation = -1.5708
-maxEnergy = 10.0
-goalOnTop = true
-updateTime = 0.5
-
-[node name="FilterAbsorption" parent="." instance=ExtResource("9_rdu6f")]
+[node name="FilterAbsorption" parent="LightManager" instance=ExtResource("9_rdu6f")]
 position = Vector2(1216, 608)
 filterWidth = 24
 filterAbsorbance = Color(0, 1, 0, 1)
@@ -109,7 +44,7 @@ isPushable = false
 isRotatable = false
 isEnergizeable = false
 
-[node name="FilterAbsorption2" parent="." instance=ExtResource("9_rdu6f")]
+[node name="FilterAbsorption2" parent="LightManager" instance=ExtResource("9_rdu6f")]
 position = Vector2(960, 512)
 filterIndex = 1.0
 filterWidth = 24
@@ -118,7 +53,7 @@ isPushable = false
 isRotatable = false
 isEnergizeable = false
 
-[node name="FilterAbsorption3" parent="." instance=ExtResource("9_rdu6f")]
+[node name="FilterAbsorption3" parent="LightManager" instance=ExtResource("9_rdu6f")]
 position = Vector2(800, 512)
 filterIndex = 1.0
 filterWidth = 24
@@ -127,14 +62,14 @@ initialAngle = 60.0
 isPushable = false
 isEnergizeable = false
 
-[node name="LensPlanoConvex" parent="." instance=ExtResource("9_eqwet")]
+[node name="LensPlanoConvex" parent="LightManager" instance=ExtResource("9_eqwet")]
 position = Vector2(1344, 608)
 focalLength = 180.0
 lensIndex = Vector3(2, 2, 2)
 isPushable = false
 isRotatable = false
 
-[node name="LensPlanoConvex2" parent="." instance=ExtResource("9_eqwet")]
+[node name="LensPlanoConvex2" parent="LightManager" instance=ExtResource("9_eqwet")]
 position = Vector2(960, 384)
 focalLength = 155.0
 lensIndex = Vector3(2, 2, 2)
@@ -142,10 +77,85 @@ initialAngle = 90.0
 isPushable = false
 isRotatable = false
 
-[node name="LensPlanoConvex3" parent="." instance=ExtResource("9_eqwet")]
+[node name="LensPlanoConvex3" parent="LightManager" instance=ExtResource("9_eqwet")]
 position = Vector2(736, 384)
 focalLength = 160.0
 lensIndex = Vector3(2, 2, 2)
 initialAngle = 60.0
 isPushable = false
 isRotatable = false
+
+[node name="PointDetector4" parent="LightManager" instance=ExtResource("7_tpqdy")]
+position = Vector2(608, 128)
+initialAngle = -120.0
+isPushable = false
+isRotatable = false
+
+[node name="MeterLEDs" parent="LightManager/PointDetector4" instance=ExtResource("8_evyo2")]
+position = Vector2(80, 0)
+rotation = -1.5708
+maxEnergy = 6.0
+goalEnergy = 6.0
+goalOnTop = true
+updateTime = 0.5
+
+[node name="PointDetector3" parent="LightManager" instance=ExtResource("7_tpqdy")]
+position = Vector2(960, 96)
+initialAngle = -90.0
+isPushable = false
+isRotatable = false
+isEnergizeable = false
+
+[node name="MeterLEDs" parent="LightManager/PointDetector3" instance=ExtResource("8_evyo2")]
+position = Vector2(80, 0)
+rotation = -1.5708
+maxEnergy = 6.0
+goalEnergy = 6.0
+goalOnTop = true
+updateTime = 0.5
+
+[node name="PointDetector" parent="LightManager" instance=ExtResource("7_tpqdy")]
+position = Vector2(1632, 608)
+isPushable = false
+isRotatable = false
+isEnergizeable = false
+
+[node name="MeterLEDs" parent="LightManager/PointDetector" instance=ExtResource("8_evyo2")]
+position = Vector2(80, 0)
+rotation = -1.5708
+maxEnergy = 6.0
+goalEnergy = 6.0
+goalOnTop = true
+updateTime = 0.5
+
+[node name="PrismTriangular" parent="LightManager" instance=ExtResource("6_7n1rx")]
+position = Vector2(928, 672)
+sideLength = 160.0
+prismIOR = Vector3(1.475, 1.55, 1.615)
+initialAngle = -20.8
+isPushable = false
+isRotatable = false
+isEnergizeable = false
+
+[node name="LaserSource" parent="LightManager" instance=ExtResource("5_3w7aa")]
+position = Vector2(768, 736)
+beamHalfHeight = 1
+rayColor = Vector3(0, 1, 1)
+packetEnergy = 2.0
+initialAngle = -41.6
+isEnergized = false
+
+[node name="LaserSource2" parent="LightManager" instance=ExtResource("5_3w7aa")]
+position = Vector2(768, 866)
+beamHalfHeight = 1
+rayColor = Vector3(1, 0, 1)
+packetEnergy = 2.0
+initialAngle = -41.6
+isEnergized = false
+
+[node name="LaserSource3" parent="LightManager" instance=ExtResource("5_3w7aa")]
+position = Vector2(1088, 768)
+beamHalfHeight = 1
+rayColor = Vector3(1, 1, 0)
+packetEnergy = 2.0
+initialAngle = -161.6
