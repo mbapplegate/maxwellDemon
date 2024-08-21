@@ -172,11 +172,11 @@ func stopBeam(globalStopLoc : Vector2):
 		
 func _getAlpha(beamEnergy : float) -> float:
 	if beamEnergy > .9:
-		return .6
+		return .7
 	elif beamEnergy < .1:
 		return 0
 	else:
-		return .3
+		return .5
 
 func _on_timer_timeout():
 	if propDone:
