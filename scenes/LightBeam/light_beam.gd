@@ -7,10 +7,12 @@ class_name LightBeam
 
 @onready var line = $lightLine
 @onready var cast = $lightCast
+@onready var pulseTexture = preload("res://scenes/LightBeam/pulseTexture.png")
 
 const MEDIUM_INDEX : float = 1.0
 const BEAM_STEP : int = 1024
-const PULSE_SPEED : int = 512
+const PULSE_SPEED : int = 300
+const PULSE_SPACING : int = 128
 const MAX_ITERS : int = 20
 
 var energy : float = 1.0
@@ -23,8 +25,10 @@ var beamGoing : bool = false
 var propDone : bool = false
 var propDir = Vector2.RIGHT
 var lightSource = ""
+var pulseArrived : bool = false
 
 func _ready():
+	$Timer.wait_time = PULSE_SPACING/float(PULSE_SPEED)
 	propDir = originalPropDir
 	line.default_color = Color(rayColor[0], rayColor[1], rayColor[2], _getAlpha(energy))
 
@@ -53,7 +57,6 @@ func propagateBeam():
 	cast.force_raycast_update()
 	beamGoing = true
 	beamDying = false
-	
 	var numIters = 0
 	while not beamDying and numIters < MAX_ITERS:
 		numIters += 1
@@ -83,8 +86,9 @@ func propagateBeam():
 	if numIters == MAX_ITERS-1:
 		print("Too many bounces")
 	_beamToPath()
-
 	propDone = true
+	_on_timer_timeout()
+	
 
 func _beamToPath():
 	$Path2D.curve.clear_points()
@@ -172,20 +176,41 @@ func stopBeam(globalStopLoc : Vector2):
 		
 func _getAlpha(beamEnergy : float) -> float:
 	if beamEnergy > .9:
-		return .7
+		return .3
 	elif beamEnergy < .1:
 		return 0
 	else:
-		return .5
-
+		return 0.2
+		
+func _spawnPulse()->Object:
+	var followInstance = PathFollow2D.new()
+	$Path2D.add_child(followInstance)
+	var spriteInstance = Sprite2D.new()
+	spriteInstance.texture = pulseTexture
+	spriteInstance.scale = Vector2.ONE*0.2
+	spriteInstance.self_modulate = Color(rayColor[0],rayColor[1],rayColor[2])
+	spriteInstance.material = CanvasItemMaterial.new()
+	spriteInstance.material.blend_mode = CanvasItemMaterial.BLEND_MODE_ADD
+	followInstance.add_child(spriteInstance)
+	return followInstance
+	
 func _on_timer_timeout():
 	if propDone:
-		$Path2D/PathFollow2D/Sprite2D.visible = true
+		var pulseFollow = _spawnPulse()
+		pulseFollow.progress_ratio = 0
 		var t = create_tween().set_trans(Tween.TRANS_LINEAR)
-		t.tween_property($Path2D/PathFollow2D,'progress_ratio',1,beamLength/PULSE_SPEED)
-		await t.finished
-		$Path2D/PathFollow2D/Sprite2D.visible = false
-		$Path2D/PathFollow2D.progress_ratio = 0
+		t.tween_property(pulseFollow,'progress_ratio',1,beamLength/PULSE_SPEED)
+		t.finished.connect(_destroyPulse.bind(pulseFollow))
+		$Timer.start()
+
+func _destroyPulse(followNode):
+	if is_instance_valid(followNode):
+		pulseArrived = true
+		followNode.queue_free()
+
+func _destroyPulseNoSignal(followNode):	
+	if is_instance_valid(followNode):
+		followNode.queue_free()
 		
 func update_energy(val : float):
 	energy = val
@@ -198,10 +223,13 @@ func clearBeam():
 	propDone = false
 	beamGoing = false
 	lastCollider = null
+	pulseArrived = false
 	index_of_refraction = 1.0
 	propDir = originalPropDir
-	$Path2D/PathFollow2D/Sprite2D.visible = false
-	$Path2D/PathFollow2D.progress_ratio = 0
+	for child in $Path2D.get_children():
+		if child is PathFollow2D:
+			_destroyPulseNoSignal(child)
+	$Timer.stop()
 	#$Path2D.curve.clear_points()
 	
 	
