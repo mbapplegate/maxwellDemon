@@ -67,7 +67,8 @@ position = Vector2(621, 0)
 texture = ExtResource("2_shm76")
 
 [node name="Timer" type="Timer" parent="."]
-autostart = true
+wait_time = 0.25
+one_shot = true
 
 [node name="avgPower" type="Sprite2D" parent="."]
 visible = false

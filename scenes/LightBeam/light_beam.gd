@@ -85,16 +85,17 @@ func propagateBeam():
 		#$Sprite2D.position = cast.position
 	if numIters == MAX_ITERS-1:
 		print("Too many bounces")
-	_beamToPath()
+	_beamToPath($Path2D)
 	propDone = true
-	_on_timer_timeout()
+	if $Timer.is_stopped():
+		_on_timer_timeout()
 	
 
-func _beamToPath():
-	$Path2D.curve.clear_points()
+func _beamToPath(pathObject:Path2D):
+	pathObject.curve.clear_points()
 	#$Path2D/PathFollow2D/Sprite2D.position = line.get_point_position(0)
 	for i in range(numPoints):
-		$Path2D.curve.add_point(line.get_point_position(i))
+		pathObject.curve.add_point(line.get_point_position(i))
 		
 func reflectRay(normalAngle, collisionPoint) ->Vector2:
 	if normalAngle:
@@ -182,33 +183,41 @@ func _getAlpha(beamEnergy : float) -> float:
 	else:
 		return 0.2
 		
-func _spawnPulse()->Object:
+func _spawnPulse()->Array:
+	var isDetected = false
+	var pathInstance = Path2D.new()
+	pathInstance.curve = $Path2D.curve.duplicate()
+	add_child(pathInstance)
 	var followInstance = PathFollow2D.new()
-	$Path2D.add_child(followInstance)
+	pathInstance.add_child(followInstance)
 	var spriteInstance = Sprite2D.new()
 	spriteInstance.texture = pulseTexture
 	spriteInstance.scale = Vector2.ONE*0.2
 	spriteInstance.self_modulate = Color(rayColor[0],rayColor[1],rayColor[2])
 	spriteInstance.material = CanvasItemMaterial.new()
 	spriteInstance.material.blend_mode = CanvasItemMaterial.BLEND_MODE_ADD
+	spriteInstance.position = Vector2(-(spriteInstance.texture.get_width()*0.1), 0.0)
 	followInstance.add_child(spriteInstance)
-	return followInstance
+	if lastCollider.name == "activeArea":
+		isDetected = true
+	return [pathInstance,followInstance, isDetected]
 	
 func _on_timer_timeout():
 	if propDone:
-		var pulseFollow = _spawnPulse()
-		pulseFollow.progress_ratio = 0
+		var pulseObjects = _spawnPulse()
+		pulseObjects[1].progress_ratio = 0
 		var t = create_tween().set_trans(Tween.TRANS_LINEAR)
-		t.tween_property(pulseFollow,'progress_ratio',1,beamLength/PULSE_SPEED)
-		t.finished.connect(_destroyPulse.bind(pulseFollow))
+		t.tween_property(pulseObjects[1],'progress_ratio',1,beamLength/PULSE_SPEED)
+		t.finished.connect(_destroyPulse.bind(pulseObjects[0],pulseObjects[2]))
 		$Timer.start()
 
-func _destroyPulse(followNode):
+func _destroyPulse(followNode:Path2D, isDetected:bool):
 	if is_instance_valid(followNode):
 		followNode.queue_free()
-		var realCollider = _get_functional_collider(lastCollider)
-		if realCollider is PointDetector:
-			realCollider.pulseHit(energy,self)
+		if lastCollider:
+			var realCollider = _get_functional_collider(lastCollider)
+			if realCollider is PointDetector and isDetected:
+				realCollider.pulseHit(energy,self)
 
 func _destroyPulseNoSignal(followNode):	
 	if is_instance_valid(followNode):
@@ -228,10 +237,10 @@ func clearBeam():
 	pulseArrived = false
 	index_of_refraction = 1.0
 	propDir = originalPropDir
-	for child in $Path2D.get_children():
-		if child is PathFollow2D:
-			_destroyPulseNoSignal(child)
-	$Timer.stop()
+	#for child in $Path2D.get_children():
+		#if child is PathFollow2D:
+			#_destroyPulseNoSignal(child)
+	#$Timer.stop()
 	#$Path2D.curve.clear_points()
 	
 	
