@@ -24,6 +24,7 @@ const PANEL_BOORDER_SIZE : int = 19
 @onready var offTexture = preload("res://scenes/MeterLEDs/offLED.png")
 @onready var redTexture = preload("res://scenes/MeterLEDs/redLED.png")
 @onready var greenTexture = preload("res://scenes/MeterLEDs/greenLED.png")
+@onready var yellowTexture = preload("res://scenes/MeterLEDs/yellowLED.png")
 
 var ledArray = []
 var energyDetected : float = 0.0
@@ -32,6 +33,7 @@ var detectedArray : Array = []
 var avgIdx : int = 0
 var goalMet = false
 var panelWidth = 10.0
+var areLEDsGreen = false
 
 signal goalMetChanged(val:bool)
 
@@ -57,6 +59,7 @@ func _ready():
 	if meterParent is PointDetector:
 		meterParent.photonDetected.connect(rayDetected)
 		meterParent.photonMissed.connect(rayBlocked)
+		meterParent.photonWillHit.connect(rayWillBeDetected)
 		for child in get_parent().get_children():
 			if child is FreeAperture:
 				child.rayHit.connect(rayBlocked)
@@ -72,8 +75,16 @@ func _turnLEDGreen(ledIndex : int):
 func _turnLEDRed(ledIndex : int):
 	ledArray[ledIndex].texture = redTexture
 	
-func rayDetected(en : float):
+func _turnLEDYellow(ledIndex : int):
+	ledArray[ledIndex].texture = yellowTexture
+
+func rayWillBeDetected(en : float):
 	energyDetected += en
+	updateMeter()
+	
+func rayDetected(_en : float):
+	#energyDetected += en
+	areLEDsGreen = true
 	updateMeter()
 	
 func rayBlocked(en : float):
@@ -83,6 +94,7 @@ func rayBlocked(en : float):
 func clearMeter():
 	energyDetected = 0
 	energyBlocked = 0
+	areLEDsGreen = false
 	updateMeter()
 
 func _getArrayAvg(arr, arrLen)->float:
@@ -103,7 +115,10 @@ func updateMeter():
 	#print(energyDetected, ", ", energyBlocked)
 	for i in ledArray.size():
 		if i < numGreen:
-			_turnLEDGreen(i)
+			if areLEDsGreen:
+				_turnLEDGreen(i)
+			else:
+				_turnLEDYellow(i)
 		elif i < numGreen+numRed:
 			_turnLEDRed(i)
 		else:
@@ -118,7 +133,7 @@ func updateMeter():
 	#	avgIdx = 0
 		
 	#Send goal met signal
-	if energyDetected >= goalEnergy and not goalMet:
+	if energyDetected >= goalEnergy and areLEDsGreen and not goalMet:
 		goalMet = true
 		goalMetChanged.emit(goalMet)
 		$Goal.texture = load("res://scenes/MeterLEDs/goalOn.png")

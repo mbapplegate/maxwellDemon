@@ -205,8 +205,10 @@ func _on_timer_timeout():
 
 func _destroyPulse(followNode):
 	if is_instance_valid(followNode):
-		pulseArrived = true
 		followNode.queue_free()
+		var realCollider = _get_functional_collider(lastCollider)
+		if realCollider is PointDetector:
+			realCollider.pulseHit(energy,self)
 
 func _destroyPulseNoSignal(followNode):	
 	if is_instance_valid(followNode):

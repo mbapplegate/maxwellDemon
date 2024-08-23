@@ -130,6 +130,7 @@ func attenuateRay(beamLocation:Vector2, beamColor:Vector3, beamEnergy:float, ori
 func _clearMeters():
 	for child in get_children():
 		if child is PointDetector:
+			child.resetBeamDetected()
 			for grandchild in child.get_children():
 				if grandchild is DigitalMeter:
 					grandchild.clearMeter()

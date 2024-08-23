@@ -37,41 +37,6 @@ vertical_alignment = 1
 
 [node name="LightManager" parent="." instance=ExtResource("5_kxaai")]
 
-[node name="LensPlanoConvex2" parent="LightManager" instance=ExtResource("11_ksj72")]
-position = Vector2(448, 576)
-LENS_HEIGHT = 256.0
-focalLength = 272.0
-lensIndex = Vector3(2, 2, 2)
-focalSpriteColor = Color(1, 1, 1, 1)
-isPushable = false
-isRotatable = false
-
-[node name="LensPlanoConvex" parent="LightManager" instance=ExtResource("11_ksj72")]
-position = Vector2(800, 576)
-LENS_HEIGHT = 256.0
-focalLength = 256.0
-lensIndex = Vector3(2, 2, 2)
-focalSpriteColor = Color(1, 1, 1, 1)
-initialAngle = 180.0
-isPushable = false
-isRotatable = false
-
-[node name="parabolicMirror2" parent="LightManager" instance=ExtResource("9_yvego")]
-position = Vector2(1056, 928)
-focalLength = 256.0
-mirrorHeight = 200.0
-focalSpriteColor = Color(1, 1, 0, 1)
-initialAngle = -15.0
-isEnergizeable = false
-
-[node name="parabolicMirror" parent="LightManager" instance=ExtResource("9_yvego")]
-position = Vector2(96, 256)
-mirrorHeight = 128.0
-focalSpriteColor = Color(1, 1, 0, 1)
-isPushable = false
-isRotatable = false
-isEnergizeable = false
-
 [node name="FlatMirror" parent="LightManager" instance=ExtResource("10_1thxo")]
 position = Vector2(1056, 252)
 MirrorLength = 200
@@ -85,6 +50,41 @@ position = Vector2(1052.66, 567.06)
 MirrorLength = 32
 initialAngle = -135.0
 isPushable = false
+
+[node name="LensPlanoConvex" parent="LightManager" instance=ExtResource("11_ksj72")]
+position = Vector2(800, 576)
+LENS_HEIGHT = 256.0
+focalLength = 256.0
+lensIndex = Vector3(2, 2, 2)
+focalSpriteColor = Color(1, 1, 1, 1)
+initialAngle = 180.0
+isPushable = false
+isRotatable = false
+
+[node name="LensPlanoConvex2" parent="LightManager" instance=ExtResource("11_ksj72")]
+position = Vector2(448, 576)
+LENS_HEIGHT = 256.0
+focalLength = 272.0
+lensIndex = Vector3(2, 2, 2)
+focalSpriteColor = Color(1, 1, 1, 1)
+isPushable = false
+isRotatable = false
+
+[node name="parabolicMirror" parent="LightManager" instance=ExtResource("9_yvego")]
+position = Vector2(96, 256)
+mirrorHeight = 128.0
+focalSpriteColor = Color(1, 1, 0, 1)
+isPushable = false
+isRotatable = false
+isEnergizeable = false
+
+[node name="parabolicMirror2" parent="LightManager" instance=ExtResource("9_yvego")]
+position = Vector2(1056, 928)
+focalLength = 256.0
+mirrorHeight = 200.0
+focalSpriteColor = Color(1, 1, 0, 1)
+initialAngle = -15.0
+isEnergizeable = false
 
 [node name="PointSource" parent="LightManager" instance=ExtResource("8_dvwrt")]
 position = Vector2(216, 260)

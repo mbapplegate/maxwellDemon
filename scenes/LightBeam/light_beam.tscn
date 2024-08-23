@@ -14,7 +14,7 @@ script = ExtResource("1_3odju")
 
 [node name="lightLine" type="Line2D" parent="."]
 material = SubResource("CanvasItemMaterial_vq1tk")
-width = 1.0
+width = 2.0
 
 [node name="lightCast" type="RayCast2D" parent="."]
 collide_with_areas = true
