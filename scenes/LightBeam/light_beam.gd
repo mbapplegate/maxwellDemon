@@ -26,6 +26,8 @@ var propDone : bool = false
 var propDir = Vector2.RIGHT
 var lightSource = ""
 var pulseArrived : bool = false
+var numPulses : int = 0
+var freeBeamFlag : bool = false
 
 func _ready():
 	$Timer.wait_time = PULSE_SPACING/float(PULSE_SPEED)
@@ -196,10 +198,11 @@ func _spawnPulse()->Array:
 	spriteInstance.self_modulate = Color(rayColor[0],rayColor[1],rayColor[2])
 	spriteInstance.material = CanvasItemMaterial.new()
 	spriteInstance.material.blend_mode = CanvasItemMaterial.BLEND_MODE_ADD
-	spriteInstance.position = Vector2(-(spriteInstance.texture.get_width()*0.1), 0.0)
+	spriteInstance.position = Vector2(-(spriteInstance.texture.get_width()*0.05), 0.0)
 	followInstance.add_child(spriteInstance)
 	if lastCollider.name == "activeArea":
 		isDetected = true
+	numPulses += 1
 	return [pathInstance,followInstance, isDetected]
 	
 func _on_timer_timeout():
@@ -214,14 +217,26 @@ func _on_timer_timeout():
 func _destroyPulse(followNode:Path2D, isDetected:bool):
 	if is_instance_valid(followNode):
 		followNode.queue_free()
+		numPulses -=1
 		if lastCollider:
 			var realCollider = _get_functional_collider(lastCollider)
 			if realCollider is PointDetector and isDetected:
 				realCollider.pulseHit(energy,self)
-
-func _destroyPulseNoSignal(followNode):	
-	if is_instance_valid(followNode):
-		followNode.queue_free()
+				
+		if numPulses == 0 and freeBeamFlag:
+			self.queue_free()
+#
+#func _destroyPulseNoSignal(followNode):	
+	#if is_instance_valid(followNode):
+		#followNode.queue_free()
+		#numPulses -= 1
+		#if numPulses == 0 and freeBeamFlag:
+			#self.queue_free()
+		
+func killBeam():
+	clearBeam()
+	freeBeamFlag = true
+	
 		
 func update_energy(val : float):
 	energy = val

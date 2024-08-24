@@ -37,7 +37,7 @@ func runAllRays(_optional:Object = self):
 	if instancedRays.has("Temp"):
 		if instancedRays["Temp"].size() > 0:
 			for i in range(instancedRays["Temp"].size()):
-				instancedRays["Temp"][i].queue_free()
+				instancedRays["Temp"][i].killBeam()
 			instancedRays["Temp"] = []
 	#var raySources = instancedRays.keys()
 	for key in instancedRays:

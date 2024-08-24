@@ -94,8 +94,8 @@ isRotatable = false
 [node name="MeterLEDs" parent="LightManager/PointDetector4" instance=ExtResource("8_evyo2")]
 position = Vector2(80, 0)
 rotation = -1.5708
-maxEnergy = 6.0
-goalEnergy = 6.0
+maxEnergy = 4.0
+goalEnergy = 4.0
 goalOnTop = true
 updateTime = 0.5
 
@@ -109,8 +109,8 @@ isEnergizeable = false
 [node name="MeterLEDs" parent="LightManager/PointDetector3" instance=ExtResource("8_evyo2")]
 position = Vector2(80, 0)
 rotation = -1.5708
-maxEnergy = 6.0
-goalEnergy = 6.0
+maxEnergy = 4.0
+goalEnergy = 4.0
 goalOnTop = true
 updateTime = 0.5
 
@@ -123,8 +123,8 @@ isEnergizeable = false
 [node name="MeterLEDs" parent="LightManager/PointDetector" instance=ExtResource("8_evyo2")]
 position = Vector2(80, 0)
 rotation = -1.5708
-maxEnergy = 6.0
-goalEnergy = 6.0
+maxEnergy = 4.0
+goalEnergy = 4.0
 goalOnTop = true
 updateTime = 0.5
 
@@ -140,6 +140,7 @@ isEnergizeable = false
 [node name="LaserSource" parent="LightManager" instance=ExtResource("5_3w7aa")]
 position = Vector2(768, 736)
 beamHalfHeight = 1
+numBeams = 2
 rayColor = Vector3(0, 1, 1)
 packetEnergy = 2.0
 initialAngle = -41.6
@@ -148,6 +149,7 @@ isEnergized = false
 [node name="LaserSource2" parent="LightManager" instance=ExtResource("5_3w7aa")]
 position = Vector2(768, 866)
 beamHalfHeight = 1
+numBeams = 2
 rayColor = Vector3(1, 0, 1)
 packetEnergy = 2.0
 initialAngle = -41.6
@@ -156,6 +158,7 @@ isEnergized = false
 [node name="LaserSource3" parent="LightManager" instance=ExtResource("5_3w7aa")]
 position = Vector2(1088, 768)
 beamHalfHeight = 1
+numBeams = 2
 rayColor = Vector3(1, 1, 0)
 packetEnergy = 2.0
 initialAngle = -161.6
