@@ -27,7 +27,11 @@ func runRays(sourceObj:Object):
 	if instancedRays.has(sourceObj):	
 		for i in instancedRays[sourceObj].size():
 			instancedRays[sourceObj][i].clearBeam()
+			instancedRays[sourceObj][i].fadeOldPulses(0.5)
 			instancedRays[sourceObj][i].propagateBeam()
+			#instancedRays[sourceObj][i].swapPulseLines()
+			
+			
 	else:
 		pass
 
@@ -37,6 +41,7 @@ func runAllRays(_optional:Object = self):
 	if instancedRays.has("Temp"):
 		if instancedRays["Temp"].size() > 0:
 			for i in range(instancedRays["Temp"].size()):
+				instancedRays["Temp"][i].fadeOldPulses(.1)
 				instancedRays["Temp"][i].killBeam()
 			instancedRays["Temp"] = []
 	#var raySources = instancedRays.keys()

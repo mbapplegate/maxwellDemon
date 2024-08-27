@@ -185,6 +185,25 @@ func _getAlpha(beamEnergy : float) -> float:
 	else:
 		return 0.2
 		
+func swapPulseLines():
+	for child in get_children():
+		if child is Path2D:
+			if child != $Path2D:
+				child.curve = $Path2D.curve.duplicate()
+				
+func fadeOldPulses(fadeTime:float):
+	for child in get_children():
+		if child is Path2D:
+			if child != $Path2D:
+				for gchild in child.get_children():
+					if gchild is PathFollow2D:
+						for ggchild in gchild.get_children():
+							if ggchild is Sprite2D:	
+								var t2 = get_tree().create_tween()
+								t2.set_trans(Tween.TRANS_LINEAR)
+								t2.tween_property(ggchild,'self_modulate',Color(rayColor[0],rayColor[1],rayColor[2],0),fadeTime)
+								t2.finished.connect(_destroyPulse.bind(child,false))
+		
 func _spawnPulse()->Array:
 	var isDetected = false
 	var pathInstance = Path2D.new()
@@ -198,7 +217,8 @@ func _spawnPulse()->Array:
 	spriteInstance.self_modulate = Color(rayColor[0],rayColor[1],rayColor[2])
 	spriteInstance.material = CanvasItemMaterial.new()
 	spriteInstance.material.blend_mode = CanvasItemMaterial.BLEND_MODE_ADD
-	spriteInstance.position = Vector2(-(spriteInstance.texture.get_width()*0.05), 0.0)
+	spriteInstance.position =Vector2.ZERO# Vector2(-(spriteInstance.texture.get_width()*0.05), 0.0)
+	
 	followInstance.add_child(spriteInstance)
 	if lastCollider.name == "activeArea":
 		isDetected = true
@@ -214,7 +234,7 @@ func _on_timer_timeout():
 		t.finished.connect(_destroyPulse.bind(pulseObjects[0],pulseObjects[2]))
 		$Timer.start()
 
-func _destroyPulse(followNode:Path2D, isDetected:bool):
+func _destroyPulse(followNode, isDetected:bool):
 	if is_instance_valid(followNode):
 		followNode.queue_free()
 		numPulses -=1

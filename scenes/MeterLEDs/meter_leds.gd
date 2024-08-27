@@ -35,6 +35,7 @@ var goalMet = false
 var panelWidth = 10.0
 var areLEDsGreen = false
 var lastEnergy : float = 0.0
+var justCleared : bool = false
 
 signal goalMetChanged(val:bool)
 
@@ -93,12 +94,13 @@ func rayBlocked(en : float):
 	updateMeter()
 	
 func clearMeter():
+	justCleared = true
 	energyDetected = 0
 	energyBlocked = 0
 	areLEDsGreen = false
-	#updateMeter()
+	updateMeter()
 
-func _getArrayAvg(arr, arrLen)->float:
+func _getArrayAvg(arr:Array, arrLen:int)->float:
 	var sum = 0.0
 	for i in arrLen:
 		sum += arr[i]
@@ -126,9 +128,10 @@ func updateMeter():
 		else:
 			_turnLEDOff(i)
 			
-	if lastEnergy == totalEnergy:
-		checkDoor()
-		
+	if lastEnergy == totalEnergy and not justCleared:
+		if not (goalMet and energyDetected > goalEnergy):
+			checkDoor()
+	justCleared = false
 	lastEnergy = totalEnergy
 	#Update average
 	#detectedArray[avgIdx] = energyDetected

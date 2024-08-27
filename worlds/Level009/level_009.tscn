@@ -98,6 +98,5 @@ initialAngle = 180.0
 position = Vector2(92, 313)
 beamHalfHeight = 16
 numBeams = 10
-rayColor = Vector3(0, 0, 1)
 isPushable = false
 isRotatable = false
