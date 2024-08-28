@@ -22,6 +22,10 @@ func _ready():
 				
 			if child.has_method("_dispersionNeeded"):
 				child.connect("disperseBeam",disperseRay)
+		elif child is InvisibleSource:
+			child.connect("registerRays", makeBeams)
+			child.connect("stopRays", haltRays)		
+			child.connect("startRays", runAllRays)
 
 func runRays(sourceObj:Object):
 	if instancedRays.has(sourceObj):	
@@ -106,6 +110,7 @@ func disperseRay(dispLocation:Vector2,dispDirection:Array, IOR:Vector3, energies
 			instancedRays["Temp"][-1].propagateBeam()
 	
 func makeBeams(locations:Array,color:Vector3,energy:float,direction:Array,IOR:float,sourceObj:Object):
+	#print("Making beams")
 	if instancedRays.has(sourceObj):
 		for i in instancedRays[sourceObj].size():
 			instancedRays[sourceObj][i].defineBeam(locations[i],color,energy,direction[i], IOR)
@@ -116,6 +121,7 @@ func makeBeams(locations:Array,color:Vector3,energy:float,direction:Array,IOR:fl
 			instancedRays[sourceObj].append(instance)
 			add_child(instancedRays[sourceObj][i])
 			instancedRays[sourceObj][i].defineBeam(locations[i],color,energy,direction[i],IOR)
+	#print(sourceObj.isEnergized)
 	if sourceObj.isEnergized:
 		runAllRays(sourceObj)
 		

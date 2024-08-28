@@ -34,8 +34,11 @@ func _on_timer_timeout():
 	if hasRed == 0 and hasGreen == 0 and hasBlue == 0:
 		hasRed = 1.0
 
-	$InvisibleSource2.sourceColor = Vector3(hasRed,hasGreen,hasBlue)
-	$InvisibleSource3.sourceColor = Vector3(hasRed,hasGreen,hasBlue)
-	$InvisibleSource4.sourceColor = Vector3(hasRed,hasGreen,hasBlue)
+	$LightManager/InvisibleSource2.sourceColor = Vector3(hasRed,hasGreen,hasBlue)
+	$LightManager/InvisibleSource3.sourceColor = Vector3(hasRed,hasGreen,hasBlue)
+	$LightManager/InvisibleSource4.sourceColor = Vector3(hasRed,hasGreen,hasBlue)
+	$LightManager/InvisibleSource2.registerBeams()
+	$LightManager/InvisibleSource3.registerBeams()
+	$LightManager/InvisibleSource4.registerBeams()
 	
 	

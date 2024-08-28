@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://ceeicvunoq27t"]
+[gd_scene load_steps=5 format=3 uid="uid://ceeicvunoq27t"]
 
 [ext_resource type="Script" path="res://lessons/convexLens/convex_lens_lesson.gd" id="1_78lu6"]
 [ext_resource type="PackedScene" uid="uid://b6navnb20xork" path="res://scenes/Lens_PlanoConvex/lens_plano_convex.tscn" id="2_hhjx2"]
+[ext_resource type="PackedScene" uid="uid://cd1x0uh4fi1jh" path="res://scenes/LightManager/light_manager.tscn" id="2_qt4e8"]
 [ext_resource type="PackedScene" uid="uid://bt1eicy7gakub" path="res://scenes/InvisibleSource/invisible_source.tscn" id="3_8lqxb"]
 
 [node name="ConvexLensLesson" type="Node2D"]
@@ -19,23 +20,20 @@ offset_bottom = 552.0
 theme_override_font_sizes/normal_font_size = 24
 text = "Any key to continue . . ."
 
-[node name="InvisibleSource" parent="." instance=ExtResource("3_8lqxb")]
+[node name="LightManager" parent="." instance=ExtResource("2_qt4e8")]
+
+[node name="InvisibleSource" parent="LightManager" instance=ExtResource("3_8lqxb")]
 position = Vector2(32, 256)
 rotation = 1.5708
 scale = Vector2(2, 2)
 propagationDirection = Vector2(1, 0)
-timerTimeout = 0.25
 
-[node name="InvisibleSource2" parent="." instance=ExtResource("3_8lqxb")]
+[node name="InvisibleSource2" parent="LightManager" instance=ExtResource("3_8lqxb")]
 position = Vector2(32, 320)
 rotation = 1.5708
 propagationDirection = Vector2(1, 0)
-timerTimeout = 0.25
 
-[node name="Timer" type="Timer" parent="."]
-wait_time = 0.5
-
-[node name="LensPlanoConvex2" parent="." instance=ExtResource("2_hhjx2")]
+[node name="LensPlanoConvex2" parent="LightManager" instance=ExtResource("2_hhjx2")]
 position = Vector2(256, 288)
 LENS_HEIGHT = 200.0
 focalLength = 256.0
@@ -43,6 +41,9 @@ lensIndex = Vector3(2, 2, 2)
 initialAngle = 180.0
 isPushable = false
 isRotatable = false
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
 
 [node name="explan1" type="RichTextLabel" parent="."]
 offset_left = 512.0

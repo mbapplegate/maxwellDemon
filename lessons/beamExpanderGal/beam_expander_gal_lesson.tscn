@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://bkqfcf5eoevwn"]
+[gd_scene load_steps=6 format=3 uid="uid://bkqfcf5eoevwn"]
 
 [ext_resource type="Script" path="res://lessons/beamExpanderGal/beam_expander_gal_lesson.gd" id="1_8ages"]
+[ext_resource type="PackedScene" uid="uid://cd1x0uh4fi1jh" path="res://scenes/LightManager/light_manager.tscn" id="2_b0ljr"]
 [ext_resource type="PackedScene" uid="uid://bt1eicy7gakub" path="res://scenes/InvisibleSource/invisible_source.tscn" id="2_p36wg"]
 [ext_resource type="PackedScene" uid="uid://b6navnb20xork" path="res://scenes/Lens_PlanoConvex/lens_plano_convex.tscn" id="3_8g376"]
 [ext_resource type="PackedScene" uid="uid://to3hq200c5kj" path="res://scenes/LensPlanoConcave/lens_plano_concave.tscn" id="4_h8wrx"]
@@ -29,21 +30,6 @@ theme_override_font_sizes/normal_font_size = 40
 bbcode_enabled = true
 text = "Galilean  Beam Expander"
 
-[node name="InvisibleSource" parent="." instance=ExtResource("2_p36wg")]
-position = Vector2(96, 212)
-rotation = 1.5708
-propagationDirection = Vector2(1, 0)
-sourceColor = Vector3(0, 0, 1)
-sourceWidth = 3
-timerTimeout = 0.25
-
-[node name="InvisibleSource2" parent="." instance=ExtResource("2_p36wg")]
-position = Vector2(96, 236)
-rotation = 1.5708
-propagationDirection = Vector2(1, 0)
-sourceWidth = 3
-timerTimeout = 0.25
-
 [node name="RichTextLabel2" type="RichTextLabel" parent="."]
 offset_left = 64.0
 offset_top = 384.0
@@ -54,7 +40,22 @@ bbcode_enabled = true
 text = "[fill]Takes up less space than a Keplerian beam expander and doesn't flip the beam.[/fill]"
 scroll_active = false
 
-[node name="LensPlanoConvex" parent="." instance=ExtResource("3_8g376")]
+[node name="LightManager" parent="." instance=ExtResource("2_b0ljr")]
+
+[node name="InvisibleSource" parent="LightManager" instance=ExtResource("2_p36wg")]
+position = Vector2(96, 212)
+rotation = 1.5708
+propagationDirection = Vector2(1, 0)
+sourceColor = Vector3(0, 0, 1)
+beamHalfHeight = 0
+
+[node name="InvisibleSource2" parent="LightManager" instance=ExtResource("2_p36wg")]
+position = Vector2(96, 236)
+rotation = 1.5708
+propagationDirection = Vector2(1, 0)
+beamHalfHeight = 0
+
+[node name="LensPlanoConvex" parent="LightManager" instance=ExtResource("3_8g376")]
 position = Vector2(512, 224)
 LENS_HEIGHT = 200.0
 focalLength = 320.0
@@ -63,7 +64,7 @@ focalSpriteColor = Color(1, 0, 0, 1)
 isPushable = false
 isRotatable = false
 
-[node name="LensPlanoConcave" parent="." instance=ExtResource("4_h8wrx")]
+[node name="LensPlanoConcave" parent="LightManager" instance=ExtResource("4_h8wrx")]
 position = Vector2(256, 224)
 LENS_HEIGHT = 64.0
 focalLength = -64.0

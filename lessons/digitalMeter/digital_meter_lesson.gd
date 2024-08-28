@@ -31,6 +31,9 @@ func changeLegend(goalMet):
 
 	
 func _on_timer_timeout():
-	meter.rayDetected(abs(rng.randfn(6.0,2.0)))
-	meter.rayBlocked(abs(rng.randfn(2.0,2.0)))
+	meter.clearMeter()
+	meter.areLEDsGreen =rng.randf() > 0.5
+	meter.rayWillBeDetected(abs(rng.randfn(4.0,2.0)))
+	meter.rayBlocked(abs(rng.randfn(2.0,1.0)))
+	
 	

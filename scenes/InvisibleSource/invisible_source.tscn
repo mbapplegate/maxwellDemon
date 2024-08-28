@@ -5,7 +5,6 @@
 [node name="InvisibleSource" type="Node2D"]
 position = Vector2(192, 96)
 script = ExtResource("1_oxv8m")
-sourceWidth = 0
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.1

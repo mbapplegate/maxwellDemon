@@ -69,28 +69,32 @@ func update_line2(new_pos):
 func update_line3(new_pos):
 	$Line2D3.set_point_position(0, new_pos)
 
-
+func _updateBeams():
+	$LightManager.runAllRays(self)
+	
 func _on_timer_3_timeout():
 	$Line2D.visible = false
 	$Line2D2.visible = false
 	$Line2D3.visible = false
 	$explan3.visible = true
 	#$LensPlanoConvex.visible = true
-	$LensPlanoConcave/Stage/focusSprite.self_modulate = Color(1.0,1.0,1.0,0.0)
-	$LensPlanoConcave/Stage/focusSprite2.self_modulate = Color(1.0,1.0,1.0,0.0)
+	$LightManager/LensPlanoConcave/Stage/focusSprite.self_modulate = Color(1.0,1.0,1.0,0.0)
+	$LightManager/LensPlanoConcave/Stage/focusSprite2.self_modulate = Color(1.0,1.0,1.0,0.0)
 	#$LensPlanoConvex.position = Vector2(256,352)
 	var tween1 = get_tree().create_tween()
 	tween1.set_ease(Tween.EASE_IN_OUT)
 	tween1.set_trans(Tween.TRANS_CUBIC)
-	tween1.tween_property($LensPlanoConvex,"position", Vector2(256,352),1).set_delay(.5)
+	tween1.tween_property($LightManager/LensPlanoConvex,"position", Vector2(256,352),1).set_delay(.5)
+	tween1.finished.connect(_updateBeams)
 	
 	var tween2 = get_tree().create_tween()
 	tween2.set_ease(Tween.EASE_IN_OUT)
 	tween2.set_trans(Tween.TRANS_CUBIC)
-	tween2.tween_property($LensPlanoConcave,"position", Vector2(416,480),1)
-	
+	tween2.tween_property($LightManager/LensPlanoConcave,"position", Vector2(416,480),1)
+	tween2.finished.connect(_updateBeams)
 	var tween3 = get_tree().create_tween()
 	tween3.set_ease(Tween.EASE_IN_OUT)
 	tween3.set_trans(Tween.TRANS_CUBIC)
-	tween3.tween_property($LensPlanoConcave,"position", Vector2(416,352),1).set_delay(5)
+	tween3.tween_property($LightManager/LensPlanoConcave,"position", Vector2(416,352),1).set_delay(5)
+	tween3.finished.connect(_updateBeams)
 	

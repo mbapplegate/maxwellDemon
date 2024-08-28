@@ -220,8 +220,9 @@ func _spawnPulse()->Array:
 	spriteInstance.position =Vector2.ZERO# Vector2(-(spriteInstance.texture.get_width()*0.05), 0.0)
 	
 	followInstance.add_child(spriteInstance)
-	if lastCollider.name == "activeArea":
-		isDetected = true
+	if lastCollider:
+		if lastCollider.name == "activeArea":
+			isDetected = true
 	numPulses += 1
 	return [pathInstance,followInstance, isDetected]
 	

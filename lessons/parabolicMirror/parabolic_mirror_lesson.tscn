@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://b6s3i4vrc0gjw"]
+[gd_scene load_steps=5 format=3 uid="uid://b6s3i4vrc0gjw"]
 
 [ext_resource type="Script" path="res://lessons/parabolicMirror/parabolic_mirror_lesson.gd" id="1_n7ioe"]
 [ext_resource type="PackedScene" uid="uid://bt1eicy7gakub" path="res://scenes/InvisibleSource/invisible_source.tscn" id="2_j1u1l"]
+[ext_resource type="PackedScene" uid="uid://cd1x0uh4fi1jh" path="res://scenes/LightManager/light_manager.tscn" id="2_q73mg"]
 [ext_resource type="PackedScene" uid="uid://catkndynfd4s5" path="res://scenes/ParabolicMirror/parabolic_mirror.tscn" id="3_kfm5d"]
 
 [node name="ParabolicMirrorLesson" type="Node2D"]
@@ -35,17 +36,6 @@ offset_bottom = 98.0
 theme_override_font_sizes/normal_font_size = 40
 text = "Parabolic Mirrors"
 
-[node name="parabolicMirror" parent="." instance=ExtResource("3_kfm5d")]
-position = Vector2(640, 320)
-mirrorHeight = 128.0
-isPushable = false
-
-[node name="parabolicMirror2" parent="." instance=ExtResource("3_kfm5d")]
-position = Vector2(288, 320)
-mirrorHeight = 128.0
-initialAngle = 180.0
-isPushable = false
-
 [node name="explan2" type="RichTextLabel" parent="."]
 offset_left = 512.0
 offset_top = 128.0
@@ -54,30 +44,37 @@ offset_bottom = 192.0
 theme_override_font_sizes/normal_font_size = 18
 text = "Rays passing through the focus become a collimated beam (neither converging or diverging)"
 
-[node name="InvisibleSource" parent="." instance=ExtResource("2_j1u1l")]
+[node name="LightManager" parent="." instance=ExtResource("2_q73mg")]
+
+[node name="InvisibleSource" parent="LightManager" instance=ExtResource("2_j1u1l")]
 position = Vector2(32, 272)
 propagationDirection = Vector2(1, 0)
-timerTimeout = 0.75
+beamHalfHeight = 0
 
-[node name="InvisibleSource3" parent="." instance=ExtResource("2_j1u1l")]
+[node name="InvisibleSource3" parent="LightManager" instance=ExtResource("2_j1u1l")]
 position = Vector2(32, 368)
 propagationDirection = Vector2(1, 0)
 sourceColor = Vector3(0, 0, 1)
-timerTimeout = 0.75
+beamHalfHeight = 0
 
-[node name="InvisibleSource2" parent="." instance=ExtResource("2_j1u1l")]
+[node name="InvisibleSource2" parent="LightManager" instance=ExtResource("2_j1u1l")]
 position = Vector2(864, 288)
 propagationDirection = Vector2(-3, 1)
 sourceColor = Vector3(0, 0, 1)
-timerTimeout = 1.5
+beamHalfHeight = 0
 
-[node name="InvisibleSource4" parent="." instance=ExtResource("2_j1u1l")]
-position = Vector2(864, 320)
-propagationDirection = Vector2(-1, 0)
-sourceColor = Vector3(0, 1, 0)
-timerTimeout = 1.5
-
-[node name="InvisibleSource5" parent="." instance=ExtResource("2_j1u1l")]
+[node name="InvisibleSource5" parent="LightManager" instance=ExtResource("2_j1u1l")]
 position = Vector2(864, 352)
 propagationDirection = Vector2(-3, -1)
-timerTimeout = 1.5
+beamHalfHeight = 0
+
+[node name="parabolicMirror2" parent="LightManager" instance=ExtResource("3_kfm5d")]
+position = Vector2(288, 320)
+mirrorHeight = 128.0
+initialAngle = 180.0
+isPushable = false
+
+[node name="parabolicMirror" parent="LightManager" instance=ExtResource("3_kfm5d")]
+position = Vector2(640, 320)
+mirrorHeight = 128.0
+isPushable = false

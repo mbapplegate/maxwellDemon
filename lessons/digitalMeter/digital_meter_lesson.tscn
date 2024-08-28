@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cqa5syijramtk"]
+[gd_scene load_steps=10 format=3 uid="uid://cqa5syijramtk"]
 
 [ext_resource type="Script" path="res://lessons/digitalMeter/digital_meter_lesson.gd" id="1_vhxrh"]
 [ext_resource type="Texture2D" uid="uid://vapunxkmmwwy" path="res://scenes/MeterLEDs/greenLED.png" id="2_xhwex"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://chlytrwdjaffi" path="res://scenes/MeterLEDs/meter_leds.tscn" id="6_wfg1c"]
 [ext_resource type="Texture2D" uid="uid://beqikbwr1x3yq" path="res://scenes/MeterLEDs/redLED.png" id="7_2cm6w"]
 [ext_resource type="Texture2D" uid="uid://dle8bqng3uccv" path="res://scenes/MeterLEDs/avgMarker.png" id="8_1pptw"]
+[ext_resource type="Texture2D" uid="uid://dqgjefhfh8dch" path="res://scenes/MeterLEDs/yellowLED.png" id="9_omgtv"]
 
 [node name="DigitalMeterLesson" type="Node2D"]
 script = ExtResource("1_vhxrh")
@@ -30,14 +31,14 @@ autostart = true
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
 offset_left = 606.0
-offset_top = 122.0
+offset_top = 274.0
 offset_right = 958.0
-offset_bottom = 162.0
+offset_bottom = 314.0
 theme_override_font_sizes/normal_font_size = 23
 text = "Detected Power"
 
 [node name="InstantLegend" type="Sprite2D" parent="."]
-position = Vector2(542, 136)
+position = Vector2(542, 288)
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("2_xhwex")
 
@@ -124,12 +125,12 @@ scale = Vector2(0.25, 0.25)
 texture = ExtResource("7_2cm6w")
 
 [node name="RichTextLabel5" type="RichTextLabel" parent="."]
-offset_left = 606.0
-offset_top = 282.0
-offset_right = 958.0
-offset_bottom = 322.0
+offset_left = 608.0
+offset_top = 124.0
+offset_right = 960.0
+offset_bottom = 164.0
 theme_override_font_sizes/normal_font_size = 23
-text = "Average Power"
+text = "Ray Aligned"
 
 [node name="InstantLegend3" type="Sprite2D" parent="."]
 visible = false
@@ -145,18 +146,9 @@ offset_bottom = 98.0
 theme_override_font_sizes/normal_font_size = 40
 text = "Power Meter"
 
-[node name="ColorRect" type="ColorRect" parent="."]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 538.0
-offset_top = 268.0
-offset_right = 546.0
-offset_bottom = 328.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0.45098, 1, 1)
+[node name="InstantLegend4" type="Sprite2D" parent="."]
+position = Vector2(542, 142)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("9_omgtv")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

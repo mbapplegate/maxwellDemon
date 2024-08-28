@@ -15,8 +15,8 @@ func _ready():
 			child.initialize()
 	#$InvisibleSource/Timer.stop()
 	#$InvisibleSource5/Timer.stop()
-	$InvisibleSource2/Timer.stop()
-	$InvisibleSource3/Timer.stop()
+	$LightManager/InvisibleSource2.deEnergizeBeam()
+	$LightManager/InvisibleSource3.deEnergizeBeam()
 	#initialY = $InvisibleSource5.position.y
 
 func _input(event):
@@ -28,8 +28,8 @@ func _input(event):
 
 func _on_timer_timeout():
 	$Timer2.start()
-	$InvisibleSource2/Timer.start()
+	$LightManager/InvisibleSource2.energizeBeam()
 
 
 func _on_timer_2_timeout():
-	$InvisibleSource3/Timer.start()
+	$LightManager/InvisibleSource3.energizeBeam() 	
