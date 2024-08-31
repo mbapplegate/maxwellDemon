@@ -11,9 +11,11 @@ class_name LightBeam
 
 const MEDIUM_INDEX : float = 1.0
 const BEAM_STEP : int = 1024
-const PULSE_SPEED : int = 300
-const PULSE_SPACING : int = 128
+const PULSE_SPEED : int = 512
+const PULSE_SPACING : int = 200
 const MAX_ITERS : int = 20
+
+signal pulseDestroyed()
 
 var energy : float = 1.0
 var index_of_refraction : float = 1.0
@@ -27,6 +29,7 @@ var propDir = Vector2.RIGHT
 var lightSource = ""
 var pulseArrived : bool = false
 var numPulses : int = 0
+var isPulsing : bool = true
 var freeBeamFlag : bool = false
 
 func _ready():
@@ -89,7 +92,8 @@ func propagateBeam():
 		print("Too many bounces")
 	_beamToPath($Path2D)
 	propDone = true
-	if $Timer.is_stopped():
+	#print("  PROP DONE  ")
+	if $Timer.is_stopped() and isPulsing:
 		_on_timer_timeout()
 	
 
@@ -146,7 +150,7 @@ func getRefractionInfo(normalAngle,objectIOR) -> Array:
 		return [newDirection, newIndex]
 	
 func refractRay(normalAngle, objectIOR,collisionPoint):
-	
+	#print(propDir)
 	var refractInfo = getRefractionInfo(normalAngle,objectIOR)
 	index_of_refraction = refractInfo[1]
 	var newDir = refractInfo[0]	
@@ -203,7 +207,17 @@ func fadeOldPulses(fadeTime:float):
 								t2.set_trans(Tween.TRANS_LINEAR)
 								t2.tween_property(ggchild,'self_modulate',Color(rayColor[0],rayColor[1],rayColor[2],0),fadeTime)
 								t2.finished.connect(_destroyPulse.bind(child,false))
-		
+
+func startPulsing():
+	if not isPulsing:
+		isPulsing = true
+		_on_timer_timeout()
+	
+func stopPulsing():
+	if isPulsing:
+		$Timer.stop()
+		isPulsing = false
+	
 func _spawnPulse()->Array:
 	var isDetected = false
 	var pathInstance = Path2D.new()
@@ -239,6 +253,7 @@ func _destroyPulse(followNode, isDetected:bool):
 	if is_instance_valid(followNode):
 		followNode.queue_free()
 		numPulses -=1
+		pulseDestroyed.emit()
 		if lastCollider:
 			var realCollider = _get_functional_collider(lastCollider)
 			if realCollider is PointDetector and isDetected:
@@ -273,6 +288,7 @@ func clearBeam():
 	pulseArrived = false
 	index_of_refraction = 1.0
 	propDir = originalPropDir
+	#print("BEAM CLEAR")
 	#for child in $Path2D.get_children():
 		#if child is PathFollow2D:
 			#_destroyPulseNoSignal(child)

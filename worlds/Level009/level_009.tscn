@@ -75,7 +75,7 @@ isEnergizeable = false
 position = Vector2(515, 801)
 LENS_HEIGHT = 360.0
 focalLength = 392.0
-lensIndex = Vector3(2.05, 2, 2)
+lensIndex = Vector3(2.05, 2.05, 2)
 focalSpriteColor = Color(1, 1, 1, 1)
 isPushable = false
 isRotatable = false
@@ -83,14 +83,14 @@ isRotatable = false
 [node name="LensPlanoConvex" parent="LightManager" instance=ExtResource("7_7xemi")]
 position = Vector2(416, 128)
 focalLength = 96.0
-lensIndex = Vector3(2.05, 2, 2)
+lensIndex = Vector3(2.05, 2.05, 2)
 focalSpriteColor = Color(1, 1, 0, 1)
 
 [node name="LensPlanoConvex2" parent="LightManager" instance=ExtResource("7_7xemi")]
 position = Vector2(864, 128)
 LENS_HEIGHT = 256.0
 focalLength = 512.0
-lensIndex = Vector3(2.05, 2, 2)
+lensIndex = Vector3(2.05, 2.05, 2)
 focalSpriteColor = Color(1, 1, 0, 1)
 initialAngle = 180.0
 

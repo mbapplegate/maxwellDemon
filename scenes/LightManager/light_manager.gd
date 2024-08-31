@@ -7,6 +7,11 @@ func _ready():
 		if child is pushableObject:
 			
 			child.initialize()
+			child.connect("rotationChanged", runAllRays)
+			child.connect("stageMoved", runAllRays)
+			if child.has_method("_dispersionNeeded"):
+				child.connect("disperseBeam",disperseRay)
+				child.connect("pulseChildRays", pulseTemp)
 			if child.has_method("registerBeams"):
 				child.connect("registerRays", makeBeams)
 				child.connect("stopRays", haltRays)		
@@ -14,14 +19,11 @@ func _ready():
 				child.connect("sourceMoved", handleSourceMoved)
 			elif (child is BeamSplitter):
 				child.connect("splitBeam",splitRay)
+				child.connect("pulseSplitRays", pulseTemp)
 			elif (child is AbsorbFilter):
 				child.connect("attenuateBeam",attenuateRay)
-			else:
-				child.connect("rotationChanged", runAllRays)
-				child.connect("stageMoved", runAllRays)
 				
-			if child.has_method("_dispersionNeeded"):
-				child.connect("disperseBeam",disperseRay)
+			
 		elif child is InvisibleSource:
 			child.connect("registerRays", makeBeams)
 			child.connect("stopRays", haltRays)		
@@ -80,6 +82,7 @@ func splitRay(splitRatio:float, splitDirection:Vector2, splitLocation:Vector2, o
 	instancedRays["Temp"][-1].lastCollider = originalBeam.lastCollider
 	instancedRays["Temp"][-1].propDir = originalBeam.propDir
 	instancedRays["Temp"][-1].defineBeam(splitLocation,originalBeam.rayColor,1-splitRatio,originalBeam.propDir,originalBeam.index_of_refraction)
+	instancedRays["Temp"][-1].isPulsing = false
 	instancedRays["Temp"][-1].propagateBeam()
 	
 	#print(instancedRays["Temp"][-1], ", ", splitLocation)
@@ -89,7 +92,12 @@ func splitRay(splitRatio:float, splitDirection:Vector2, splitLocation:Vector2, o
 	instancedRays["Temp"][-1].lastCollider = originalBeam.lastCollider
 	instancedRays["Temp"][-1].propDir = splitDirection
 	instancedRays["Temp"][-1].defineBeam(splitLocation+Vector2(2,2),originalBeam.rayColor,splitRatio,splitDirection,originalBeam.index_of_refraction)
+	instancedRays["Temp"][-1].isPulsing = false
 	instancedRays["Temp"][-1].propagateBeam()
+	
+	#await originalBeam.pulseDestroyed
+	#instancedRays["Temp"][-1].startPulsing()
+	#instancedRays["Temp"][-2].startPulsing()
 	#print(len(instancedRays["Temp"]))
 	
 func disperseRay(dispLocation:Vector2,dispDirection:Array, IOR:Vector3, energies:Vector3, originalBeam:Object):
@@ -108,7 +116,8 @@ func disperseRay(dispLocation:Vector2,dispDirection:Array, IOR:Vector3, energies
 			instancedRays["Temp"][-1].index_of_refraction = IOR[i]
 			instancedRays["Temp"][-1].defineBeam(dispLocation+Vector2(2,2),dispColor,energies[i],dispDirection[i],IOR[i])
 			instancedRays["Temp"][-1].propagateBeam()
-	
+			instancedRays["Temp"][-1].isPulsing = false
+			
 func makeBeams(locations:Array,color:Vector3,energy:float,direction:Array,IOR:float,sourceObj:Object):
 	#print("Making beams")
 	if instancedRays.has(sourceObj):
@@ -137,7 +146,12 @@ func attenuateRay(beamLocation:Vector2, beamColor:Vector3, beamEnergy:float, ori
 	instancedRays["Temp"][-1].rayColor = beamColor
 	instancedRays["Temp"][-1].defineBeam(beamLocation,beamColor,beamEnergy,originalBeam.propDir,originalBeam.index_of_refraction)
 	instancedRays["Temp"][-1].propagateBeam()
-		
+
+func pulseTemp():
+	for ray in instancedRays["Temp"]:
+		if not ray.isPulsing:
+			ray.startPulsing()
+			
 func _clearMeters():
 	for child in get_children():
 		if child is PointDetector:

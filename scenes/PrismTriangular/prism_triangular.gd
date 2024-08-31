@@ -6,6 +6,7 @@ extends pushableObject
 const COLLISION_THICKNESS = 4.0
 
 signal disperseBeam(dispLocation:Vector2,dispDirection:Array, IOR:Vector3, energies:Vector3, originalBeam:Object)
+signal pulseChildRays()
 
 func _ready():
 	isEnergizeable = false
@@ -90,4 +91,6 @@ func _ray_hit(photonObj:Object, collPoint:Vector2, collNormal:Vector2, _collider
 				dispersionDirection[i] = dispInformation[0]
 				newIORs[i] = dispInformation[1]
 		disperseBeam.emit(collPoint,dispersionDirection, newIORs, normEnergy, photonObj)
+		await photonObj.pulseDestroyed
+		pulseChildRays.emit()
 	#print(photonObj.index_of_refraction)

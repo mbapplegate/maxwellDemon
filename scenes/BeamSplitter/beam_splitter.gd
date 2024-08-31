@@ -10,6 +10,7 @@ class_name BeamSplitter
 const mediumIndex = 1.0     #Index of the medium surrounding the beam splitter
 var splitterParent = null   #Parent object of the beamsplitter
 signal splitBeam(splitRatio:float, splitLocation:Vector2, splitDirection:Vector2, originalBeam:Object)
+signal pulseSplitRays()
 
 func _ready():
 	#Not energizeable
@@ -33,8 +34,11 @@ func _ray_hit(photonObj:Object, collPoint:Vector2, collNormal:Vector2, collider:
 			#Reflect off the splitter
 			var newDir = photonObj.getReflectionDirection(collNormal)
 			#create new ray
-			splitBeam.emit(reflectivity,newDir,collPoint,photonObj)
 			photonObj.stopBeam(collPoint)
+			splitBeam.emit(reflectivity,newDir,collPoint,photonObj)
+			await photonObj.pulseDestroyed
+			pulseSplitRays.emit()
+			
 			#instance.propDir =newDir
 			#instance.position = collPoint
 			#instance.update_energy(instance.energy*reflectivity)
