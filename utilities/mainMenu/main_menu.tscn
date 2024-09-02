@@ -28,6 +28,7 @@ text = "Start Game"
 layout_mode = 2
 focus_next = NodePath("../selectLevel")
 focus_previous = NodePath("../startGame")
+disabled = true
 text = "Load Game	"
 
 [node name="selectLevel" type="Button" parent="VBoxContainer"]

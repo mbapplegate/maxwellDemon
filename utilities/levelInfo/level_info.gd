@@ -42,7 +42,8 @@ var LevelDictionary = {
 	"LevelEquiPrism3" : {"Path" : "res://worlds/equilateralPrism3/level_equilateral_prism_3.tscn", "Title" : "Source Spectra", "Section" : "Dispersion"},
 	"LevelPrismRecombine" :{"Path": "res://worlds/prismRecombine/level_prism_recombine.tscn", "Title" : "Newton's Prism Experiment", "Section" : "Dispersion"},
 	"TriangularPrismLesson" : {"Path": "res://lessons/prism/triangular_prism_lesson.tscn", "Title" : "Prism Lesson", "Section":"Lessons"},
-	"FilterLesson" : {"Path" : "res://lessons/filtersAbs/filter_lesson.tscn", "Title" : "Filter Lesson", "Section":"Lessons"}
+	"FilterLesson" : {"Path" : "res://lessons/filtersAbs/filter_lesson.tscn", "Title" : "Filter Lesson", "Section":"Lessons"},
+	"ComingSoon"   : {"Path" : "res://utilities/comingSoon/coming_soon.tscn", "Title" : "Coming Soon", "Section" : "Menus"}
 }
 
 var SectionOrdering = ["Menus", "Tutorial", "Lenses and Mirrors","Dispersion", "Colors", "Lessons", "Debug"]
@@ -74,7 +75,8 @@ var GameFlow = {
 	"LevelEquiPrism2"       : "FilterLesson",
 	"FilterLesson"          : "LevelEquiPrism3",
 	"LevelEquiPrism3"       : "LevelPrismRecombine",
-	"LevelPrismRecombine"   : "MainMenu"
+	"LevelPrismRecombine"   : "ComingSoon",
+	"ComingSoon"            : "MainMenu"
 	
 }
 var inImagingMode: bool = false

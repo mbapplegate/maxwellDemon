@@ -29,6 +29,11 @@ window/size/mode=3
 window/size/resizable=false
 window/stretch/mode="viewport"
 
+[editor]
+
+movie_writer/movie_file="C:/Users/matth/Documents/Godot/maxwellDemon/media/gameplay.avi"
+movie_writer/fps=50
+
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/controller_icons/plugin.cfg", "res://addons/debug_menu/plugin.cfg")
