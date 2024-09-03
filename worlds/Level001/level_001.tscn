@@ -78,6 +78,12 @@ isPushable = false
 isRotatable = false
 isEnergized = false
 
+[node name="MeterLEDs" parent="PointDetector" instance=ExtResource("5_nu83y")]
+position = Vector2(-0.999878, -82)
+maxEnergy = 10.0
+goalEnergy = 5.0
+goalOnTop = true
+
 [node name="Player" parent="." instance=ExtResource("5_ar0j5")]
 position = Vector2(1216, 192)
 
