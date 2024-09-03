@@ -1,7 +1,8 @@
 extends Node2D
 
-@export var nextSceneAlias = "Level008"
+
 const THIS_SCENE_ALIAS = "ConvexLensLesson"
+var nextSceneAlias = LevelInfo.GameFlow[THIS_SCENE_ALIAS]
 
 var signalEmitted : bool = false
 var yComponent = 0.0
@@ -34,12 +35,14 @@ func _input(event):
 func _on_timer_timeout():
 	#if numLensesInAction  > 1:
 	if yIncreasing:
-		yComponent += 0.01
+		yComponent += 0.02
 	else:
-		yComponent -= 0.01
+		yComponent -= 0.02
 		
-	$InvisibleSource.propagationDirection.y = yComponent
-	$InvisibleSource2.propagationDirection.y = -yComponent
+	$LightManager/InvisibleSource.propagationDirection.y = yComponent
+	$LightManager/InvisibleSource2.propagationDirection.y = -yComponent
+	$LightManager/InvisibleSource.registerBeams()
+	$LightManager/InvisibleSource2.registerBeams()
 	#print(yComponent)
 	#if round(yComponent*100.0)/100.0 == 0:
 		#$InvisibleSource.sourceColor = Vector3(1.0,0.0,0.0)
@@ -47,9 +50,9 @@ func _on_timer_timeout():
 	#else:
 		#$InvisibleSource.sourceColor = Vector3(1.0,1.0,0.0)
 		#$InvisibleSource2.sourceColor = Vector3(1.0,1.0,0.0) 
-	if yComponent == 0.08:
+	if yComponent >= 0.08:
 		yIncreasing = false
-	elif yComponent == -0.08:
+	elif yComponent <= -0.08:
 		yIncreasing = true
 			
 	#if numLensesInAction > 2:
@@ -81,8 +84,8 @@ func _on_timer_2_timeout():
 	tween.set_trans(Tween.TRANS_CUBIC)
 	tween.tween_property($explan2,"self_modulate",Color(1.0,1.0,1.0,1.0),0.5)
 	
-	$InvisibleSource.sourceColor = Vector3(1.0,1.0,0.0)
-	$InvisibleSource2.sourceColor = Vector3(1.0,1.0,0.0) 
+	#$InvisibleSource.changeSourceColor(Vector3(0.0,1.0,0.0))
+	#$InvisibleSource2.changeSourceColor(Vector3(0.0,1.0,0.0))
 	$Timer.start()
 
 

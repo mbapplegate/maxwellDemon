@@ -1,7 +1,7 @@
 extends Node2D
 
-@export var nextSceneAlias = "Level012Filters"
 const THIS_SCENE_ALIAS = "ParabolicMirrorLesson"
+var nextSceneAlias = LevelInfo.GameFlow[THIS_SCENE_ALIAS]
 
 var signalEmitted : bool = false
 var yComponent = 0.0

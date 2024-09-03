@@ -14,7 +14,7 @@ position = Vector2(88, 77)
 script = ExtResource("2_ljto7")
 LENS_HEIGHT = 128.0
 focalLength = 128.0
-lensIndex = 2.0
+lensIndex = Vector3(2.05, 2, 1.95)
 focalSpriteColor = Color(0, 0, 1, 1)
 isEnergizeable = false
 

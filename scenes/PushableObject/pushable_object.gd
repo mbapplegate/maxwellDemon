@@ -1,11 +1,12 @@
 extends CharacterBody2D
 class_name pushableObject
 
-const OBJECT_SIZE = 128
-const TILE_SIZE = 32
+const OBJECT_SIZE : int = 128
+const TILE_SIZE : int = 32
+const NUDGE_DISTANCE : int = 2
 const ROTATION_INCREMENT = deg_to_rad(15)
 
-@export var sliding_time = 0.2
+@export var sliding_time = .2
 @export var initialAngle = 0.0
 @export var isPushable = true
 @export var isRotatable = true
@@ -15,6 +16,10 @@ const ROTATION_INCREMENT = deg_to_rad(15)
 @onready var sprite = $Stage
 @onready var bg = $Background
 @onready var indicator = $Indicator
+
+signal energizeChanged(val)
+signal rotationChanged()
+signal stageMoved()
 
 var isActive = false
 
@@ -36,15 +41,16 @@ func calculate_destination(dir:Vector2):
 func push(motion:Vector2):
 	if isSliding or not isPushable:
 		return false
-		
+	
 	if can_move(motion):
 		var tween = get_tree().create_tween()
 		
-		tween.set_ease(Tween.EASE_IN)
+		tween.set_ease(Tween.EASE_IN_OUT)
 		tween.set_trans(Tween.TRANS_CUBIC)
 		tween.tween_property(self,"global_position",self.global_position+motion,sliding_time)
 		isSliding = true
 		await tween.finished
+		stageMoved.emit()
 		isSliding = false
 		return true
 	else:
@@ -61,11 +67,12 @@ func pull(direction:Vector2,player:Object):
 	if can_move(to_local(globalTargetLoc)):
 		var tween = get_tree().create_tween()
 		
-		tween.set_ease(Tween.EASE_IN)
+		tween.set_ease(Tween.EASE_IN_OUT)
 		tween.set_trans(Tween.TRANS_CUBIC)
 		tween.tween_property(self,"global_position",globalTargetLoc,sliding_time)
 		isSliding = true
 		await tween.finished
+		stageMoved.emit()
 		isSliding = false
 		if player:
 			self.remove_collision_exception_with(player)
@@ -74,7 +81,33 @@ func pull(direction:Vector2,player:Object):
 		if player:
 			self.remove_collision_exception_with(player)
 		return false
+
+func nudgePull(direction:Vector2,player:Object):
+	if isSliding or not isPushable:
+		return false
+	if player:
+		self.add_collision_exception_with(player)	
 	
+	var globalTargetLoc = global_position + direction.normalized()*NUDGE_DISTANCE
+	#print("Pulling: ",direction, ", ", to_local(globalTargetLoc),", ",can_move(to_local(globalTargetLoc)))
+	if can_move(to_local(globalTargetLoc)):
+		var tween = get_tree().create_tween()
+		
+		tween.set_ease(Tween.EASE_IN_OUT)
+		tween.set_trans(Tween.TRANS_CUBIC)
+		tween.tween_property(self,"global_position",globalTargetLoc,sliding_time/4.0)
+		isSliding = true
+		await tween.finished
+		stageMoved.emit()
+		isSliding = false
+		if player:
+			self.remove_collision_exception_with(player)
+		return true
+	else:
+		if player:
+			self.remove_collision_exception_with(player)
+		return false
+		
 func can_move(localDestination:Vector2):
 	var collInfo =  move_and_collide(localDestination, true)
 	if collInfo:
@@ -109,14 +142,36 @@ func update_texture():
 	else:
 		indicator.texture = null
 
-
-func rotateCW():
-	if isRotatable:
-		sprite.rotation += ROTATION_INCREMENT
+func snapToGrid() -> bool:
+	if isPushable:
+		self.global_position = global_position.snapped(Vector2(TILE_SIZE,TILE_SIZE))
+		return true
+	else:
+		return false
 	
-func rotateCCW():
-	if isRotatable:
-		sprite.rotation -= ROTATION_INCREMENT
+func rotateCW(numDegrees : float):
+	if isRotatable and not isSliding:
+		var tween = get_tree().create_tween()
+		tween.set_ease(Tween.EASE_IN_OUT)
+		tween.set_trans(Tween.TRANS_CUBIC)
+		tween.tween_property(sprite,"rotation",sprite.rotation + numDegrees,sliding_time)
+		isSliding = true
+		await tween.finished
+		isSliding = false
+		#sprite.rotation -= numDegrees
+		rotationChanged.emit()
+	
+func rotateCCW(numDegrees : float):
+	if isRotatable and not isSliding:
+		var tween = get_tree().create_tween()
+		tween.set_ease(Tween.EASE_IN_OUT)
+		tween.set_trans(Tween.TRANS_CUBIC)
+		tween.tween_property(sprite,"rotation",sprite.rotation - numDegrees,sliding_time)
+		isSliding = true
+		await tween.finished
+		isSliding = false
+		#sprite.rotation -= numDegrees
+		rotationChanged.emit()
 
 func getRotation():
 	if isRotatable:
@@ -132,3 +187,4 @@ func togEnergize():
 		else:
 			isEnergized = true
 			update_texture()
+		energizeChanged.emit(isEnergized)

@@ -7,7 +7,7 @@ extends Node2D
 @onready var imagingLens = $LensPlanoConvex
 
 const THIS_SCENE_ALIAS = "Level010"
-@export var nextSceneAlias = "Level012Filters"
+var nextSceneAlias = LevelInfo.GameFlow[THIS_SCENE_ALIAS]
 signal nextScene(sceneAlias)
 var signalEmitted : bool = false
 

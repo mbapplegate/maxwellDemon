@@ -1,0 +1,118 @@
+[gd_scene load_steps=6 format=3 uid="uid://c1aiovf0kwfef"]
+
+[ext_resource type="Script" path="res://lessons/concaveLens/concave_lens_lesson.gd" id="1_67plr"]
+[ext_resource type="PackedScene" uid="uid://bt1eicy7gakub" path="res://scenes/InvisibleSource/invisible_source.tscn" id="2_mce03"]
+[ext_resource type="PackedScene" uid="uid://cd1x0uh4fi1jh" path="res://scenes/LightManager/light_manager.tscn" id="2_uc0mu"]
+[ext_resource type="PackedScene" uid="uid://to3hq200c5kj" path="res://scenes/LensPlanoConcave/lens_plano_concave.tscn" id="3_31y64"]
+[ext_resource type="PackedScene" uid="uid://b6navnb20xork" path="res://scenes/Lens_PlanoConvex/lens_plano_convex.tscn" id="4_8wmby"]
+
+[node name="ConcaveLensLesson" type="Node2D"]
+script = ExtResource("1_67plr")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(480, 288)
+zoom = Vector2(2, 2)
+
+[node name="RichTextLabel4" type="RichTextLabel" parent="."]
+offset_left = 672.0
+offset_top = 512.0
+offset_right = 1024.0
+offset_bottom = 552.0
+theme_override_font_sizes/normal_font_size = 24
+text = "Any key to continue . . ."
+
+[node name="explan1" type="RichTextLabel" parent="."]
+offset_left = 512.0
+offset_top = 96.0
+offset_right = 928.0
+offset_bottom = 128.0
+theme_override_font_sizes/normal_font_size = 18
+text = "Concave (negative) lenses spread light out . . ."
+
+[node name="explan2" type="RichTextLabel" parent="."]
+offset_left = 512.0
+offset_top = 160.0
+offset_right = 928.0
+offset_bottom = 224.0
+theme_override_font_sizes/normal_font_size = 18
+text = "Rays traced backward converge on the focal point . . ."
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = 16.0
+offset_top = 29.0
+offset_right = 480.0
+offset_bottom = 98.0
+theme_override_font_sizes/normal_font_size = 40
+text = "Plano-Concave Lenses"
+
+[node name="LightManager" parent="." instance=ExtResource("2_uc0mu")]
+
+[node name="InvisibleSource3" parent="LightManager" instance=ExtResource("2_mce03")]
+position = Vector2(224, 352)
+rotation = 1.5708
+propagationDirection = Vector2(1, 0)
+beamHalfHeight = 0
+
+[node name="LensPlanoConvex" parent="LightManager" instance=ExtResource("4_8wmby")]
+position = Vector2(256, 480)
+focalLength = 240.0
+lensIndex = Vector3(2, 2, 1.95)
+focalSpriteColor = Color(0.921569, 0.909804, 0, 1)
+initialAngle = 180.0
+isPushable = false
+isRotatable = false
+
+[node name="InvisibleSource2" parent="LightManager" instance=ExtResource("2_mce03")]
+z_index = 1
+position = Vector2(224, 384)
+rotation = 1.5708
+propagationDirection = Vector2(1, 0)
+beamHalfHeight = 0
+
+[node name="InvisibleSource" parent="LightManager" instance=ExtResource("2_mce03")]
+z_index = 2
+position = Vector2(224, 320)
+rotation = 1.5708
+scale = Vector2(2, 2)
+propagationDirection = Vector2(1, 0)
+beamHalfHeight = 0
+
+[node name="LensPlanoConcave" parent="LightManager" instance=ExtResource("3_31y64")]
+position = Vector2(416, 352)
+lensIndex = Vector3(2, 2, 1.95)
+isRotatable = false
+
+[node name="Line2D" type="Line2D" parent="."]
+z_index = 2
+points = PackedVector2Array(288, 352, 768, 221)
+width = 2.0
+
+[node name="Line2D2" type="Line2D" parent="."]
+z_index = 2
+points = PackedVector2Array(288, 352, 768, 483)
+width = 2.0
+
+[node name="Timer2" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+autostart = true
+
+[node name="Timer3" type="Timer" parent="."]
+wait_time = 4.0
+one_shot = true
+
+[node name="explan3" type="RichTextLabel" parent="."]
+offset_left = 512.0
+offset_top = 224.0
+offset_right = 928.0
+offset_bottom = 288.0
+theme_override_font_sizes/normal_font_size = 18
+text = "Negative lenses close to positive lenses can  increase focal lengths"
+
+[node name="Line2D3" type="Line2D" parent="."]
+z_index = 2
+points = PackedVector2Array(288, 352, 768, 352)
+width = 2.0
+
+[connection signal="timeout" from="Timer2" to="." method="_on_timer_2_timeout"]
+[connection signal="timeout" from="Timer3" to="." method="_on_timer_3_timeout"]

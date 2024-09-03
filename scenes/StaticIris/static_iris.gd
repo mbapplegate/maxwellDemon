@@ -36,7 +36,7 @@ func _ready():
 	botTex.position = botShape.position
 	botTex.region_rect = Rect2(botShape.position.x,botShape.position.y,thickness, shapeHt)
 	
-func _ray_hit(photonObj:Object, _collPoint:Vector2, _collNormal:Vector2, _collider:Object):
+func _ray_hit(photonObj:Object, collPoint:Vector2, _collNormal:Vector2, _collider:Object):
 	rayHit.emit(photonObj.energy)
-	photonObj.rayDying = true
+	photonObj.stopBeam(collPoint)
 

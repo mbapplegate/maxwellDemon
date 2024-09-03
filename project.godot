@@ -19,18 +19,24 @@ config/icon="res://icon.svg"
 
 ControllerIcons="*res://addons/controller_icons/ControllerIcons.gd"
 LevelInfo="*res://utilities/levelInfo/level_info.tscn"
+DebugMenu="*res://addons/debug_menu/debug_menu.tscn"
 
 [display]
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
 window/size/mode=3
-window/stretch/mode="canvas_items"
-window/stretch/scale_mode="integer"
+window/size/resizable=false
+window/stretch/mode="viewport"
+
+[editor]
+
+movie_writer/movie_file="C:/Users/matth/Documents/Godot/maxwellDemon/media/gameplay.avi"
+movie_writer/fps=50
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/controller_icons/plugin.cfg")
+enabled=PackedStringArray("res://addons/controller_icons/plugin.cfg", "res://addons/debug_menu/plugin.cfg")
 
 [filesystem]
 
@@ -98,5 +104,20 @@ imageMode={
 nextLevel={
 "deadzone": 0.5,
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":61,"key_label":0,"unicode":61,"echo":false,"script":null)
+]
+}
+nudge={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194326,"key_label":0,"unicode":0,"echo":false,"script":null)
+]
+}
+snap={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":67,"key_label":0,"unicode":99,"echo":false,"script":null)
+]
+}
+skipLevel={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":39,"key_label":0,"unicode":39,"echo":false,"script":null)
 ]
 }

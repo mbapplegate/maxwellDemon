@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
   push:
     branches:
-      - release
+      - main
 
 jobs:
   web:
@@ -47,13 +47,13 @@ jobs:
           commit_message: "UPDATE GITHUB PAGES"
 
       - name: Zip Web artifacts
-        run: zip -r game_web.zip build/web
+        run: zip -r DemonMaxwell_web.zip build/web
 
       - name: Upload Web artifacts
         uses: actions/upload-artifact@v3
         with:
-          name: game_web
-          path: game_web.zip
+          name: DemonMaxwell_web
+          path: DemonMaxwell_web.zip
   linux:
     runs-on: ubuntu-latest
     permissions:
@@ -74,16 +74,16 @@ jobs:
         run: mkdir -v -p build/linux
 
       - name: Build for Linux
-        run: godot -v --export-release --headless "Linux/X11" --path . --output "build/linux/game.x86_64"
+        run: godot -v --export-release --headless "Linux/X11" --path . --output "build/linux/DemonMaxwell.x86_64"
 
       - name: Zip Linux artifacts
-        run: zip -r game_linux.zip build/linux
+        run: zip -r DemonMaxwell_linux.zip build/linux
 
       - name: Upload Linux artifacts
         uses: actions/upload-artifact@v3
         with:
-          name: game_linux
-          path: game_linux.zip
+          name: DemonMaxwell_linux
+          path: DemonMaxwell_linux.zip
   windows:
     runs-on: ubuntu-latest
     permissions:
@@ -104,16 +104,16 @@ jobs:
         run: mkdir -v -p build/windows
 
       - name: Build for windows
-        run: godot -v --export-release --headless "Windows Desktop" --path . --output "build/windows/game.x86_64"
+        run: godot -v --export-release --headless "Windows Desktop" --path . --output "build/windows/DemonMaxwell.exe"
 
       - name: Zip Windows artifacts
-        run: zip -r game_windows.zip build/windows
+        run: zip -r DemonMaxwell_windows.zip build/windows
 
       - name: Upload windows artifacts
         uses: actions/upload-artifact@v3
         with:
-          name: game_windows
-          path: game_windows.zip
+          name: DemonMaxwell_windows
+          path: DemonMaxwell_windows.zip
   release:
     needs: [web, linux, windows]
     runs-on: ubuntu-latest
@@ -143,17 +143,17 @@ jobs:
       - name: Download artifacts
         uses: actions/download-artifact@v3
         with:
-          name: game_web
+          name: DemonMaxwell_web
 
       - name: Download Linux artifacts
         uses: actions/download-artifact@v3
         with:
-          name: game_linux
+          name: DemonMaxwell_linux
 
       - name: Download Windows artifacts
         uses: actions/download-artifact@v3
         with:
-          name: game_windows
+          name: DemonMaxwell_windows
 
       - name: Create Release
         id: create_release
@@ -175,8 +175,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: game_web.zip
-          asset_name: Godot_Game_Web.zip
+          asset_path: DemonMaxwell_web.zip
+          asset_name: DemonMaxwell_Web.zip
           asset_content_type: application/zip
 
       - name: Upload Linux Release Asset
@@ -186,8 +186,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: game_linux.zip
-          asset_name: Godot_Game_Linux.zip
+          asset_path: DemonMaxwell_linux.zip
+          asset_name: DemonMaxwell_Linux.zip
           asset_content_type: application/zip
 
       - name: Upload Windows Release Asset
@@ -197,6 +197,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: game_windows.zip
-          asset_name: Godot_Game_Windows.zip
+          asset_path: DemonMaxwell_windows.zip
+          asset_name: DemonMaxwell_Windows.zip
           asset_content_type: application/zip

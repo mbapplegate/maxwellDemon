@@ -1,15 +1,30 @@
-[gd_scene load_steps=4 format=3 uid="uid://chlytrwdjaffi"]
+[gd_scene load_steps=6 format=3 uid="uid://chlytrwdjaffi"]
 
 [ext_resource type="Script" path="res://scenes/MeterLEDs/meter_leds.gd" id="1_b7sq0"]
 [ext_resource type="Texture2D" uid="uid://ibl8wahpqb2l" path="res://scenes/MeterLEDs/meterPanel.png" id="1_jf3a2"]
 [ext_resource type="Texture2D" uid="uid://bv0ynywgkkwgr" path="res://scenes/MeterLEDs/offLED.png" id="2_shm76"]
+[ext_resource type="Texture2D" uid="uid://dl8l822f7uerm" path="res://scenes/MeterLEDs/goalOff.png" id="4_2qxgv"]
+[ext_resource type="Texture2D" uid="uid://dle8bqng3uccv" path="res://scenes/MeterLEDs/avgMarker.png" id="4_3cqhy"]
 
 [node name="MeterLEDs" type="Node2D"]
-scale = Vector2(0.1, 0.1)
+scale = Vector2(0.088, 0.088)
 script = ExtResource("1_b7sq0")
+goalOnTop = false
 
 [node name="Panel" type="Sprite2D" parent="."]
 texture = ExtResource("1_jf3a2")
+
+[node name="ColorRect" type="ColorRect" parent="Panel"]
+visible = false
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -705.0
+offset_top = -302.0
+offset_right = 364.0
+offset_bottom = -16.0
+grow_vertical = 2
+color = Color(0, 0.45098, 1, 1)
 
 [node name="LED01" type="Sprite2D" parent="Panel"]
 position = Vector2(-621, 0)
@@ -52,6 +67,17 @@ position = Vector2(621, 0)
 texture = ExtResource("2_shm76")
 
 [node name="Timer" type="Timer" parent="."]
-autostart = true
+wait_time = 0.25
+one_shot = true
 
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[node name="avgPower" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(0, -200)
+scale = Vector2(3, 3)
+texture = ExtResource("4_3cqhy")
+
+[node name="Goal" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(210, -200)
+scale = Vector2(3, 3)
+texture = ExtResource("4_2qxgv")

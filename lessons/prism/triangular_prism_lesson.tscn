@@ -1,0 +1,92 @@
+[gd_scene load_steps=5 format=3 uid="uid://blfvwmys2novj"]
+
+[ext_resource type="Script" path="res://lessons/prism/triangular_prism_lesson.gd" id="1_hg0s5"]
+[ext_resource type="PackedScene" uid="uid://cd1x0uh4fi1jh" path="res://scenes/LightManager/light_manager.tscn" id="2_xjot4"]
+[ext_resource type="PackedScene" uid="uid://bt1eicy7gakub" path="res://scenes/InvisibleSource/invisible_source.tscn" id="3_d3ccy"]
+[ext_resource type="PackedScene" uid="uid://bltgirirfegq2" path="res://scenes/PrismTriangular/prism_triangular.tscn" id="3_gjy38"]
+
+[node name="TriangularPrismLesson" type="Node2D"]
+script = ExtResource("1_hg0s5")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(480, 288)
+zoom = Vector2(2, 2)
+
+[node name="RichTextLabel4" type="RichTextLabel" parent="."]
+offset_left = 672.0
+offset_top = 512.0
+offset_right = 1024.0
+offset_bottom = 552.0
+theme_override_font_sizes/normal_font_size = 24
+text = "Any key to continue . . ."
+
+[node name="explan1" type="RichTextLabel" parent="."]
+offset_left = 160.0
+offset_top = 128.0
+offset_right = 736.0
+offset_bottom = 192.0
+theme_override_font_sizes/normal_font_size = 18
+bbcode_enabled = true
+text = "Prisms separate light into its constituent parts (In reality there is a continuum of colors instead of just red, green, and blue.)"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = 16.0
+offset_top = 29.0
+offset_right = 384.0
+offset_bottom = 98.0
+theme_override_font_sizes/normal_font_size = 40
+text = "Triangular Prisms"
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[node name="Timer2" type="Timer" parent="."]
+one_shot = true
+
+[node name="LightManager" parent="." instance=ExtResource("2_xjot4")]
+
+[node name="InvisibleSource" parent="LightManager" instance=ExtResource("3_d3ccy")]
+position = Vector2(32, 224)
+propagationDirection = Vector2(1, 0.4)
+sourceColor = Vector3(1, 1, 1)
+packetEnergy = 3.0
+beamHalfHeight = 0
+
+[node name="PrismTriangular" parent="LightManager" instance=ExtResource("3_gjy38")]
+position = Vector2(128, 304)
+prismIOR = Vector3(1.47, 1.5, 1.53)
+initialAngle = 40.0
+isPushable = false
+isRotatable = false
+
+[node name="InvisibleSource2" parent="LightManager" instance=ExtResource("3_d3ccy")]
+position = Vector2(352, 224)
+propagationDirection = Vector2(1, 0.4)
+sourceColor = Vector3(1, 0, 1)
+packetEnergy = 3.0
+beamHalfHeight = 0
+
+[node name="PrismTriangular2" parent="LightManager" instance=ExtResource("3_gjy38")]
+position = Vector2(448, 304)
+prismIOR = Vector3(1.47, 1.5, 1.53)
+initialAngle = 40.0
+isPushable = false
+isRotatable = false
+
+[node name="InvisibleSource3" parent="LightManager" instance=ExtResource("3_d3ccy")]
+position = Vector2(672, 224)
+propagationDirection = Vector2(1, 0.4)
+sourceColor = Vector3(0, 1, 1)
+packetEnergy = 3.0
+beamHalfHeight = 0
+
+[node name="PrismTriangular3" parent="LightManager" instance=ExtResource("3_gjy38")]
+position = Vector2(768, 304)
+prismIOR = Vector3(1.47, 1.5, 1.53)
+initialAngle = 40.0
+isPushable = false
+isRotatable = false
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="Timer2" to="." method="_on_timer_2_timeout"]

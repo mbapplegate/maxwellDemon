@@ -13,23 +13,17 @@ position = Vector2(103, 98)
 scale = Vector2(0.5, 0.5)
 script = ExtResource("2_mk28k")
 angleRangeDeg = Vector2(-90, 90)
-numRaysPerTimeout = 1
+numBeams = 1
 rayColor = Vector3(1, 0, 1)
 isEnergized = true
 
 [node name="Pedestal" type="Sprite2D" parent="." index="4"]
 texture = ExtResource("2_6jece")
 
-[node name="Timer" type="Timer" parent="." index="5"]
-wait_time = 0.05
-autostart = true
-
-[node name="sourceBall" type="Sprite2D" parent="." index="6"]
+[node name="sourceBall" type="Sprite2D" parent="." index="5"]
 texture = ExtResource("4_6043a")
 
-[node name="Area2D" type="Area2D" parent="." index="7"]
+[node name="Area2D" type="Area2D" parent="." index="6"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="0"]
 shape = SubResource("CircleShape2D_xtcof")
-
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -7,7 +7,7 @@ const mediumIndex = 1.0
 
 @export var LENS_HEIGHT : float = 128
 @export var focalLength : float = 128
-@export var lensIndex = 2.0
+@export var lensIndex : Vector3 = Vector3(2.05,2.0,1.95)
 @export var focalSpriteColor : Color = Color.BLUE
 
 var halfAngle = 1.0
@@ -23,7 +23,7 @@ var minX = 1.0
 
 func _ready():
 	isEnergizeable = false
-	lensRadius = focalLength * (lensIndex - mediumIndex)
+	lensRadius = focalLength * (lensIndex[1] - mediumIndex)
 	set_geometry(lensRadius,LENS_HEIGHT,Vector2.ZERO)
 	#$Line2D.set_point_position(0,Vector2(0,-LENS_HEIGHT/2.0))
 	#$Line2D.set_point_position(1,Vector2(0,LENS_HEIGHT/2.0))
@@ -34,6 +34,10 @@ func _ready():
 		$Stage/curveFaceArea.rotation=deg_to_rad(initialAngle)
 		$Stage/flatFaceArea.rotation = deg_to_rad(initialAngle)
 		$Stage/LensOutline.rotation= deg_to_rad(initialAngle)
+		var focalLocs = getFocusPositions()
+		frontFocusSprite.position = focalLocs[0]
+		rearFocusSprite.position = focalLocs[1]
+		
 	
 func set_geometry(newRadius:float, lens_height:float, center:Vector2):
 	halfAngle = asin(lens_height / (2.0 * newRadius))
@@ -45,9 +49,10 @@ func set_geometry(newRadius:float, lens_height:float, center:Vector2):
 	#if maxY < lens_height:
 		#lens_height = 2*maxY
 	var lensThickness = minX+4.0*FRONT_THICKNESS
+	#print("Thickness: ", lensThickness, ", Radius: ", newRadius, ", minX: ", minX)
 	#Distance from lens at theta=0 to principal plane
 	#I want this to be located at Zero
-	var apexToPlane = lensThickness/lensIndex
+	var apexToPlane = lensThickness/lensIndex[1]
 	frontFocusSprite.position = Vector2(focalLength,0.0)
 	rearFocusSprite.position = Vector2(-focalLength,0.0)
 	#print(apexToPlane, ", ", minX)
@@ -91,6 +96,14 @@ func get_face_polygon():
 	return curveShape.polygon
 	
 func _ray_hit(photonObj:Object, collPoint:Vector2, collNormal:Vector2, _collider:Object):
+	var thisIndex = 1.0
+	if photonObj.rayColor[0] > 0:
+		thisIndex = lensIndex[0]
+	elif photonObj.rayColor[1] > 0:
+		thisIndex = lensIndex[1]
+	else:
+		thisIndex = lensIndex[2]
+		
 	if _collider.name == "curveFaceArea":
 		#Local collision point
 		var locPt = to_local(collPoint)
@@ -107,7 +120,7 @@ func _ray_hit(photonObj:Object, collPoint:Vector2, collNormal:Vector2, _collider
 		if photonObj.propDir.dot(perpDir) > 0:
 		#	isChanged = true
 			perpDir = -perpDir#-Vector2(cos(-2*correctedTheta),sin(-2*correctedTheta))
-		photonObj.refractRay(perpDir, lensIndex, collPoint)
+		photonObj.refractRay(perpDir, thisIndex, collPoint)
 		#### DEBUG STUFF ###########
 		#$Sprite2D.position = Vector2(-4*FRONT_THICKNESS+distToPrinPlane,-rad*sin(halfAngle))
 		#$Sprite2D.position = locPt#Vector2(25*cos(correctedTheta),25*sin(correctedTheta)) + locPt
@@ -117,7 +130,7 @@ func _ray_hit(photonObj:Object, collPoint:Vector2, collNormal:Vector2, _collider
 		#print(rad_to_deg(correctedTheta), ", ",rotatedOrigin,", ", perpDir,", ",collNormal)
 		#################################
 	else:
-		photonObj.refractRay(collNormal, lensIndex, collPoint)
+		photonObj.refractRay(collNormal, thisIndex, collPoint)
 	
 func getFocusPositions():
 	var lensAngle = getRotation()

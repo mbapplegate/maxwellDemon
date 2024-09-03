@@ -1,0 +1,54 @@
+[gd_scene load_steps=7 format=3 uid="uid://bltgirirfegq2"]
+
+[ext_resource type="PackedScene" uid="uid://beic3gevjusuj" path="res://scenes/PushableObject/pushable_object.tscn" id="1_lvvxy"]
+[ext_resource type="Script" path="res://scenes/PrismTriangular/prism_triangular.gd" id="2_dfkky"]
+[ext_resource type="Texture2D" uid="uid://cvb38ctmeqcy8" path="res://icon.svg" id="3_35cmv"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_mkoot"]
+a = Vector2(4, -31)
+b = Vector2(18, 8)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_mnnos"]
+a = Vector2(-14, 5)
+b = Vector2(17, 5)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_k3or3"]
+a = Vector2(-14, 5)
+b = Vector2(5, -30)
+
+[node name="PrismTriangular" instance=ExtResource("1_lvvxy")]
+position = Vector2(221, 189)
+script = ExtResource("2_dfkky")
+sideLength = 120.0
+prismIOR = Vector3(1.55, 1.5, 1.45)
+
+[node name="Polygon2D" type="Polygon2D" parent="Stage" index="0"]
+color = Color(0.0705882, 0.619608, 1, 0.501961)
+polygon = PackedVector2Array(0, -54, 43, 42, -52, 42)
+
+[node name="bodyA" type="StaticBody2D" parent="Stage" index="1"]
+
+[node name="sideA" type="CollisionShape2D" parent="Stage/bodyA" index="0"]
+shape = SubResource("SegmentShape2D_mkoot")
+
+[node name="bodyB" type="StaticBody2D" parent="Stage" index="2"]
+
+[node name="sideB" type="CollisionShape2D" parent="Stage/bodyB" index="0"]
+shape = SubResource("SegmentShape2D_mnnos")
+
+[node name="bodyC" type="StaticBody2D" parent="Stage" index="3"]
+
+[node name="sideC" type="CollisionShape2D" parent="Stage/bodyC" index="0"]
+shape = SubResource("SegmentShape2D_k3or3")
+
+[node name="Sprite2D" type="Sprite2D" parent="Stage" index="4"]
+visible = false
+position = Vector2(40, -17)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("3_35cmv")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Stage" index="5"]
+visible = false
+position = Vector2(-36, -6)
+scale = Vector2(0.05, 0.05)
+texture = ExtResource("3_35cmv")

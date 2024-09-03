@@ -22,7 +22,7 @@ size = Vector2(96, 2)
 [node name="BeamSplitter" instance=ExtResource("1_4m76c")]
 script = ExtResource("2_ax1hy")
 reflectivity = 0.5
-splitterIndex = 2.0
+splitterIndex = Vector3(2.05, 2, 1.95)
 
 [node name="Sprite2D" type="Sprite2D" parent="Stage" index="0"]
 texture = ExtResource("3_6svek")

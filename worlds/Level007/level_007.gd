@@ -4,7 +4,8 @@ extends Node2D
 @onready var player = $Player
 @onready var titleText = $titleText
 const THIS_SCENE_ALIAS = "Level007"
-@export var nextSceneAlias = "ConvexLensLesson"
+var nextSceneAlias = LevelInfo.GameFlow[THIS_SCENE_ALIAS]
+
 signal nextScene(sceneAlias)
 var signalEmitted : bool = false
 
@@ -14,14 +15,19 @@ func _ready():
 	for child in get_children():
 		if child is pushableObject:
 			child.initialize()
-		elif child is detectorMeter:
-			child.goalMetChanged.connect(_toggleDoor)
+			if child is PointDetector:
+				child.goalMetChanged.connect(_toggleDoor)
+				
+		if child is LightManager:
+			for grandchild in child.get_children():
+				if grandchild is PointDetector:
+					grandchild.goalMetChanged.connect(_toggleDoor)
 			
 func _toggleDoor(val):
 	if val:
 		var allGoalsMet = true
 		for child in get_children():
-			if child is detectorMeter:
+			if child is PointDetector:
 				if not child.goalMet:
 					allGoalsMet = false
 		

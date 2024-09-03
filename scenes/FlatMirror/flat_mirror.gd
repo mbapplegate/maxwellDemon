@@ -23,6 +23,6 @@ func _ray_hit(photonObj:Object, collPoint:Vector2, collNormal:Vector2, collider:
 			#print(photonObj.propDir)
 			#print(to_local(photonObj.line.get_point_position(photonObj.numPoints-1)))
 		else:
-			photonObj.rayDying = true
+			photonObj.stopBeam(collPoint)
 	else:
-		photonObj.rayDying = true
+		photonObj.stopBeam(collPoint)

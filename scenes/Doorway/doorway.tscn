@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://dns1nq8hlfau"]
+[gd_scene load_steps=6 format=3 uid="uid://dns1nq8hlfau"]
 
 [ext_resource type="Script" path="res://scenes/Doorway/doorway.gd" id="1_etbt3"]
+[ext_resource type="Texture2D" uid="uid://e6j5rsh708yl" path="res://tiles/pushable/offButton.png" id="2_5fa2n"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bv4bs"]
 size = Vector2(32, 128)
@@ -78,5 +79,9 @@ shape = SubResource("RectangleShape2D_375sy")
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="doorBodyOpen"]
 position = Vector2(24, 96)
 shape = SubResource("RectangleShape2D_mb014")
+
+[node name="Indicator" type="Sprite2D" parent="."]
+position = Vector2(48, -77)
+texture = ExtResource("2_5fa2n")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
