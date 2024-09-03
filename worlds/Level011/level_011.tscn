@@ -64,7 +64,7 @@ isRotatable = false
 [node name="LensPlanoConvex2" parent="LightManager" instance=ExtResource("11_ksj72")]
 position = Vector2(448, 576)
 LENS_HEIGHT = 256.0
-focalLength = 272.0
+focalLength = 304.0
 lensIndex = Vector3(2, 2, 2)
 focalSpriteColor = Color(1, 1, 1, 1)
 isPushable = false
@@ -96,7 +96,7 @@ isRotatable = false
 isEnergizeable = false
 
 [node name="PointDetector" parent="LightManager" instance=ExtResource("5_khgv2")]
-position = Vector2(159, 570)
+position = Vector2(128, 576)
 initialAngle = 180.0
 isPushable = false
 isRotatable = false
@@ -104,10 +104,10 @@ isEnergizeable = false
 
 [node name="StaticIris" parent="LightManager/PointDetector" instance=ExtResource("6_1jegh")]
 position = Vector2(16, 0)
-aperture_width = 10
+aperture_width = 12
 snapY = false
 
 [node name="MeterLEDs" parent="LightManager/PointDetector" instance=ExtResource("5_e87vx")]
 position = Vector2(0, 80)
-maxEnergy = 7.0
-goalEnergy = 7.0
+maxEnergy = 6.0
+goalEnergy = 6.0

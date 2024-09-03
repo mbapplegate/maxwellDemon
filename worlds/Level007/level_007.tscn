@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bji2h1oagrx5i"]
+[gd_scene load_steps=12 format=3 uid="uid://bji2h1oagrx5i"]
 
 [ext_resource type="Script" path="res://worlds/Level007/level_007.gd" id="1_dxbp8"]
 [ext_resource type="PackedScene" uid="uid://fkwew1tbysym" path="res://worlds/BaseTileMap.tscn" id="2_0ri1u"]
