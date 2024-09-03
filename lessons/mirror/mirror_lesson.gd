@@ -91,7 +91,7 @@ func _on_timer_2_timeout():
 		mirror.rotateCW(deg_to_rad(15))
 
 func rotationFinished():
-	print(mirror.isSliding)
+	#print(mirror.isSliding)
 	#print("Angle: ",rad_to_deg($FlatMirror.getRotation()))
 	if rad_to_deg(mirror.getRotation()) <= 10:
 		rotatingCCW = false
