@@ -7,6 +7,7 @@ const NUM_ARC_POINTS = 32
 var signalEmitted : bool = false
 var rotatingCCW = true
 @onready var lref = $LeftReflected
+@onready var mirror = $LightManager/FlatMirror
 #@onready var rref = $RightReflected
 
 signal nextScene(sceneAlias)
@@ -15,7 +16,7 @@ func _ready():
 	for child in get_children():
 		if child is pushableObject:
 			child.initialize()
-	var rot = $FlatMirror.getRotation()
+	var rot =mirror.getRotation()
 	var newLoc = changeLineAngle(rot)
 	
 	$LeftIncident.set_point_position(2,newLoc)
@@ -25,6 +26,7 @@ func _ready():
 	$LeftIncident/IncidentArc.points = getArcPoints()
 	$LeftReflected/ReflectedArc.clear_points()
 	$LeftReflected/ReflectedArc.points = getArcPoints()
+	mirror.rotationChanged.connect(rotationFinished)
 
 func _input(event):
 	if not signalEmitted and event.is_pressed():
@@ -35,12 +37,12 @@ func animateLeftForward():
 	var tween = get_tree().create_tween()
 	tween.set_ease(Tween.EASE_IN_OUT)
 	tween.set_trans(Tween.TRANS_CUBIC)
-	tween.tween_property(lref,"rotation",$FlatMirror.getRotation()+PI/2.0,0.75)
+	tween.tween_property(lref,"rotation",mirror.getRotation()+PI/2.0,0.75)
 
 func getArcPoints() -> PackedVector2Array:
 	var points = PackedVector2Array()
 	var endingAngle = PI/2.0
-	var startingAngle = $FlatMirror.getRotation()
+	var startingAngle = mirror.getRotation()
 	for i in range(NUM_ARC_POINTS):
 		var thisAngle = i * (endingAngle-startingAngle)/NUM_ARC_POINTS
 		points.append(Vector2(-(ANGLE_DEMO_LEN-25)*sin(thisAngle),-(ANGLE_DEMO_LEN-25)*cos(thisAngle)))
@@ -84,22 +86,25 @@ func _on_timer_2_timeout():
 	#else:
 		#await animateRightBack()
 	if rotatingCCW:
-		$FlatMirror.rotateCCW(deg_to_rad(15))
+		mirror.rotateCCW(deg_to_rad(15))
 	else:
-		$FlatMirror.rotateCW(deg_to_rad(15))
+		mirror.rotateCW(deg_to_rad(15))
+
+func rotationFinished():
+	#print(mirror.isSliding)
 	#print("Angle: ",rad_to_deg($FlatMirror.getRotation()))
-	if rad_to_deg($FlatMirror.getRotation()) <= 10:
+	if rad_to_deg(mirror.getRotation()) <= 10:
 		rotatingCCW = false
-	if $FlatMirror.getRotation() >= deg_to_rad($FlatMirror.initialAngle-2):
+	if mirror.getRotation() >= deg_to_rad(mirror.initialAngle-2):
 		rotatingCCW = true
 	
-	var newLoc = changeLineAngle($FlatMirror.getRotation())
+	var newLoc = changeLineAngle(mirror.getRotation())
 	#print($LeftIncident.points[2])
 	#var tween = get_tree().create_tween()
 	#tween.set_ease(Tween.EASE_IN_OUT)
 	#tween.set_trans(Tween.TRANS_CUBIC)
 	#tween.tween_property($LeftIncident,"points[2]",newLoc,0.5)
-	var rot = $FlatMirror.getRotation()
+	var rot =mirror.getRotation()
 	$Normal.set_point_position(1,Vector2(85*sin(rot),-85*cos(rot)))
 	$LeftIncident.set_point_position(2,newLoc)
 	$LeftReflected.set_point_position(2,newLoc)

@@ -24,6 +24,7 @@ const PANEL_BOORDER_SIZE : int = 19
 @onready var offTexture = preload("res://scenes/MeterLEDs/offLED.png")
 @onready var redTexture = preload("res://scenes/MeterLEDs/redLED.png")
 @onready var greenTexture = preload("res://scenes/MeterLEDs/greenLED.png")
+@onready var yellowTexture = preload("res://scenes/MeterLEDs/yellowLED.png")
 
 var ledArray = []
 var energyDetected : float = 0.0
@@ -32,6 +33,9 @@ var detectedArray : Array = []
 var avgIdx : int = 0
 var goalMet = false
 var panelWidth = 10.0
+var areLEDsGreen = false
+var lastEnergy : float = 0.0
+var justCleared : bool = false
 
 signal goalMetChanged(val:bool)
 
@@ -46,7 +50,7 @@ func _ready():
 	$Goal.position.x = goalXPos
 	panelWidth = $Panel.texture.get_width() - 2*PANEL_BOORDER_SIZE
 	$avgPower.position.x = led1.position.x
-	$Panel/ColorRect.size.x =0
+	#$Panel/ColorRect.size.x =0
 	if not goalOnTop:
 		$avgPower.position.y = -$avgPower.position.y
 		$Goal.position.y = -$Goal.position.y
@@ -57,6 +61,7 @@ func _ready():
 	if meterParent is PointDetector:
 		meterParent.photonDetected.connect(rayDetected)
 		meterParent.photonMissed.connect(rayBlocked)
+		meterParent.photonWillHit.connect(rayWillBeDetected)
 		for child in get_parent().get_children():
 			if child is FreeAperture:
 				child.rayHit.connect(rayBlocked)
@@ -72,20 +77,38 @@ func _turnLEDGreen(ledIndex : int):
 func _turnLEDRed(ledIndex : int):
 	ledArray[ledIndex].texture = redTexture
 	
-func rayDetected(en : float):
+func _turnLEDYellow(ledIndex : int):
+	ledArray[ledIndex].texture = yellowTexture
+
+func rayWillBeDetected(en : float):
 	energyDetected += en
+	updateMeter()
+	
+func rayDetected(_en : float):
+	#energyDetected += en
+	areLEDsGreen = true
+	updateMeter()
 	
 func rayBlocked(en : float):
 	energyBlocked += en
+	updateMeter()
+	
+func clearMeter():
+	justCleared = true
+	energyDetected = 0
+	energyBlocked = 0
+	areLEDsGreen = false
+	updateMeter()
 
-func _getArrayAvg(arr, arrLen)->float:
+func _getArrayAvg(arr:Array, arrLen:int)->float:
 	var sum = 0.0
 	for i in arrLen:
 		sum += arr[i]
 	return sum/float(arrLen)
 	
-func _on_timer_timeout():
+func updateMeter():
 	#Calculate which LEDs should be lit
+	
 	var totalEnergy = energyBlocked + energyDetected
 	
 	var pctOfMax = totalEnergy/maxEnergy
@@ -96,34 +119,46 @@ func _on_timer_timeout():
 	#print(energyDetected, ", ", energyBlocked)
 	for i in ledArray.size():
 		if i < numGreen:
-			_turnLEDGreen(i)
+			if areLEDsGreen:
+				_turnLEDGreen(i)
+			else:
+				_turnLEDYellow(i)
 		elif i < numGreen+numRed:
 			_turnLEDRed(i)
 		else:
 			_turnLEDOff(i)
+			
+	if lastEnergy == totalEnergy and not justCleared:
+		if not (goalMet and energyDetected > goalEnergy):
+			checkDoor()
+	justCleared = false
+	lastEnergy = totalEnergy
 	#Update average
-	detectedArray[avgIdx] = energyDetected
-	var arrAvg = _getArrayAvg(detectedArray,NUM_TO_AVG)
+	#detectedArray[avgIdx] = energyDetected
+	#var arrAvg = _getArrayAvg(detectedArray,NUM_TO_AVG)
 	#print(energyBlocked, ", ", energyDetected, ", ", arrAvg)
 	#Update index
-	avgIdx += 1
-	if avgIdx >= NUM_TO_AVG:
-		avgIdx = 0
+	#avgIdx += 1
+	#if avgIdx >= NUM_TO_AVG:
+	#	avgIdx = 0
 		
-	#Send goal met signal
-	if arrAvg >= goalEnergy and not goalMet:
-		goalMet = true
-		goalMetChanged.emit(goalMet)
-		$Goal.texture = load("res://scenes/MeterLEDs/goalOn.png")
-	elif arrAvg < goalEnergy and goalMet:
-		goalMet = false
-		goalMetChanged.emit(goalMet)
-		$Goal.texture = load("res://scenes/MeterLEDs/goalOff.png")
+	
 		
 	#Place average marker
-	var markerXVal = arrAvg/maxEnergy * (led10.position.x-led1.position.x) + led1.position.x
-	$avgPower.position.x = max(led1.position.x,min(led10.position.x,markerXVal))
-	$Panel/ColorRect.size.x =  max(0,min(panelWidth,arrAvg/maxEnergy*panelWidth))
+	#var markerXVal = arrAvg/maxEnergy * (led10.position.x-led1.position.x) + led1.position.x
+	#$avgPower.position.x = max(led1.position.x,min(led10.position.x,markerXVal))
+	#$Panel/ColorRect.size.x =  max(0,min(panelWidth,arrAvg/maxEnergy*panelWidth))
 	#Reset vars
-	energyBlocked = 0
-	energyDetected = 0
+	#energyBlocked = 0
+	#energyDetected = 0
+func checkDoor():
+	#Send goal met signal
+	if energyDetected >= goalEnergy and areLEDsGreen and not goalMet:
+		goalMet = true
+		goalMetChanged.emit(goalMet)
+		#$Goal.texture = load("res://scenes/MeterLEDs/goalOn.png")
+	elif energyDetected < goalEnergy and goalMet:
+		#print(energyDetected)
+		goalMet = false
+		goalMetChanged.emit(goalMet)
+		#$Goal.texture = load("res://scenes/MeterLEDs/goalOff.png")

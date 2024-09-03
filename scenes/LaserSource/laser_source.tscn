@@ -5,21 +5,15 @@
 [ext_resource type="Texture2D" uid="uid://bmj32g8o7vpdm" path="res://tiles/laser/laserBody_64px.png" id="3_r2j4g"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ko6ym"]
-size = Vector2(126, 64)
+size = Vector2(120, 60)
 
 [node name="LaserSource" instance=ExtResource("1_moxnu")]
 script = ExtResource("2_3djyt")
-HALF_HEIGHT = 0.0
-halfAngle = 0.0
-numRaysPerTimeout = 1
-rayColor = Vector3(1, 0, 1)
-timerTimeout = 0.063
+beamHalfHeight = 0
+numBeams = 3
+rayColor = Vector3(1, 0, 0)
 packetEnergy = 1.0
 isEnergized = true
-
-[node name="Timer" type="Timer" parent="." index="0"]
-wait_time = 0.063
-autostart = true
 
 [node name="laserBarrel" type="Sprite2D" parent="Stage" index="0"]
 z_index = 1
@@ -29,5 +23,3 @@ texture = ExtResource("3_r2j4g")
 
 [node name="barrelShape" type="CollisionShape2D" parent="Stage/laserBarrel/barrelArea" index="0"]
 shape = SubResource("RectangleShape2D_ko6ym")
-
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

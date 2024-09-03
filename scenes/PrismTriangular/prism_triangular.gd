@@ -5,6 +5,9 @@ extends pushableObject
 
 const COLLISION_THICKNESS = 4.0
 
+signal disperseBeam(dispLocation:Vector2,dispDirection:Array, IOR:Vector3, energies:Vector3, originalBeam:Object)
+signal pulseChildRays()
+
 func _ready():
 	isEnergizeable = false
 	#Altitude of each side
@@ -39,17 +42,55 @@ func _ready():
 		$Stage/bodyB.rotation = radAngle
 		$Stage/bodyC.rotation = radAngle
 		
+func _dispersionNeeded(rayColor:Vector3, IOR:Vector3)->bool:
+	var hasColor = []
+	hasColor.resize(3)
+	var usedIOR = []
+	for i in range(3):
+		if rayColor[i] > 0:
+			hasColor[i] = true
+			usedIOR.append(IOR[i])
+		else:
+			hasColor[i] = false
+			
+	if hasColor.count(true) == 1:
+		return false
+	else:
+		if usedIOR.count(usedIOR[0]) == usedIOR.size():
+			return false
+		else:
+			return true
+
+func _selectIndex(rayColor:Vector3, IOR:Vector3)->float:
+	if not _dispersionNeeded(rayColor,IOR):
+		for i in range(3):
+			if rayColor[i] > 0:
+				return IOR[i]
+		return -1.0
+	else:
+		return -1.0
 	
 func _ray_hit(photonObj:Object, collPoint:Vector2, collNormal:Vector2, _collider:Object):
-	var thisIndex = 1.0
-	
-	if photonObj.rayColor[0] > 0:
-		thisIndex = prismIOR[0]
-	elif photonObj.rayColor[1] > 0:
-		thisIndex = prismIOR[1]
-	else:
-		thisIndex = prismIOR[2]
+	var indexToUse = _selectIndex(photonObj.rayColor,prismIOR)
 	#$Stage/Sprite2D.position = to_local(collPoint)
 	#$Stage/Sprite2D2.position = collNormal*25.0+to_local(collPoint)
-	photonObj.refractRay(collNormal, thisIndex, collPoint)
+	if indexToUse != -1:
+		photonObj.refractRay(collNormal, indexToUse, collPoint)
+	else:
+		photonObj.stopBeam(collPoint)
+		#print(photonObj.energy)
+		var normEnergy = photonObj.rayColor/photonObj.rayColor.length_squared() * photonObj.energy
+		var dispersionDirection:Array[Vector2]= []
+		var newIORs:Vector3 = Vector3(-1,-1,-1)
+		dispersionDirection.resize(3)
+		dispersionDirection.fill(Vector2.ZERO)
+		
+		for i in range(3):
+			if normEnergy[i] > 0:
+				var dispInformation = photonObj.getRefractionInfo(collNormal,prismIOR[i])
+				dispersionDirection[i] = dispInformation[0]
+				newIORs[i] = dispInformation[1]
+		disperseBeam.emit(collPoint,dispersionDirection, newIORs, normEnergy, photonObj)
+		await photonObj.pulseDestroyed
+		pulseChildRays.emit()
 	#print(photonObj.index_of_refraction)

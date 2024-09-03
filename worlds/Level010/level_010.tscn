@@ -33,8 +33,6 @@ vertical_alignment = 1
 
 [node name="LaserSource" parent="." instance=ExtResource("7_4xu5k")]
 position = Vector2(800, 0)
-HALF_HEIGHT = 50.0
-numRaysPerTimeout = 4
 rayColor = Vector3(1, 1, 1)
 initialAngle = 30.0
 isPushable = false

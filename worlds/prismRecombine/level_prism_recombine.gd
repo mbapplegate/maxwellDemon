@@ -16,6 +16,12 @@ func _ready():
 			child.initialize()
 			if child is PointDetector:
 				child.goalMetChanged.connect(_toggleDoor)
+				#allDetectors.append(child)
+		if child is LightManager:
+			for grandchild in child.get_children():
+				if grandchild is PointDetector:
+					grandchild.goalMetChanged.connect(_toggleDoor)
+					#allDetectors.append(grandchild)
 			
 func _toggleDoor(val):
 	if val:

@@ -1,0 +1,38 @@
+[gd_scene load_steps=2 format=3 uid="uid://c41187d4npolo"]
+
+[ext_resource type="Script" path="res://utilities/comingSoon/coming_soon.gd" id="1_p54mt"]
+
+[node name="ComingSoon" type="Node2D"]
+script = ExtResource("1_p54mt")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(480, 266)
+zoom = Vector2(2, 2)
+
+[node name="RichTextLabel4" type="RichTextLabel" parent="."]
+offset_left = 672.0
+offset_top = 494.0
+offset_right = 1024.0
+offset_bottom = 534.0
+theme_override_font_sizes/normal_font_size = 24
+text = "Any key to continue . . ."
+
+[node name="RichTextLabel6" type="RichTextLabel" parent="."]
+offset_left = 16.0
+offset_top = 29.0
+offset_right = 736.0
+offset_bottom = 544.0
+theme_override_font_sizes/normal_font_size = 40
+bbcode_enabled = true
+text = "You solved all the puzzles so far!
+[font_size={30}]
+Coming Soon:
+[ul]Fluorescence
+Stimulated Emission
+Pulsed Lasers
+Telescopes
+Microscopes
+Achromatic Lenses
+Diffraction[/ul]
+[/font_size]
+"

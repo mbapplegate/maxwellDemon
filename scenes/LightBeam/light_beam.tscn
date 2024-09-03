@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://dvstogaisj2wd"]
+
+[ext_resource type="Script" path="res://scenes/LightBeam/light_beam.gd" id="1_3odju"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_vq1tk"]
+resource_local_to_scene = true
+blend_mode = 1
+
+[sub_resource type="Curve2D" id="Curve2D_676ow"]
+resource_local_to_scene = true
+
+[node name="LightBeam" type="Node2D"]
+script = ExtResource("1_3odju")
+
+[node name="lightLine" type="Line2D" parent="."]
+material = SubResource("CanvasItemMaterial_vq1tk")
+width = 3.0
+
+[node name="lightCast" type="RayCast2D" parent="."]
+collide_with_areas = true
+
+[node name="Path2D" type="Path2D" parent="."]
+curve = SubResource("Curve2D_676ow")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

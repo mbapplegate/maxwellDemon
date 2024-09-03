@@ -6,7 +6,7 @@ var thisScene = "res://scenes/LightPacket/light_packet.tscn"
 #@onready var circ = $DEBUG
 #@onready var circ2 = $DEBUG2
 
-const SPEED = 400
+const SPEED = 300
 const LEN = 250
 const RAY_ENERGY_CUTOFF = .1
 const MEDIUM_INDEX = 1.0
@@ -74,17 +74,20 @@ func setPaused(val):
 	else:
 		isPaused = false
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _physics_process(delta):
 	if isPaused:
 		pass
 	else:
 		var speedInMedium = SPEED#(SPEED/index_of_refraction)
+		var thisDist = speedInMedium*delta
+		#if thisDist > 10:
+			#thisDist = 10
 		#Move the second point by one increment                                  #Number of points in the line
 		var currentPointFront = line.get_point_position(numPoints-1)           #Front of ray
-		var nextPointFront = currentPointFront + propDir.normalized()*speedInMedium*delta   #New position of front of ray
+		var nextPointFront = currentPointFront + propDir.normalized()*thisDist   #New position of front of ray
 		var currentPointBack = line.get_point_position(0)
 		var startDirToNextPointBack = line.get_point_position(0).direction_to(line.get_point_position(1))
-		var nextPointBack = currentPointBack+startDirToNextPointBack*speedInMedium*delta
+		var nextPointBack = currentPointBack+startDirToNextPointBack*thisDist
 		var endDirToNextPointBack = nextPointBack.direction_to(line.get_point_position(1))
 		
 		if not endDirToNextPointBack.is_equal_approx(startDirToNextPointBack):
@@ -92,7 +95,7 @@ func _process(delta):
 		#Adjust the raycast
 		if not rayDying:
 			ray.position = currentPointFront
-			ray.set_target_position(propDir.normalized()*speedInMedium*delta)
+			ray.set_target_position(propDir.normalized()*thisDist)
 			ray.force_raycast_update()
 		
 		#Detect interfaces
@@ -142,9 +145,10 @@ func _get_functional_collider(collider:Object):
 		return collider
 		
 func _has_ray_left_screen():
-	var frontPoint = self.to_global(line.get_point_position(numPoints-1))
-	if (frontPoint.x < 0) or (frontPoint.y < 0) or (frontPoint.x > winSize[0]) or (frontPoint.y > winSize[1]):
-		rayDying = true
+	return false
+	#var frontPoint = self.to_global(line.get_point_position(numPoints-1))
+	#if (frontPoint.x < 0) or (frontPoint.y < 0) or (frontPoint.x > winSize[0]) or (frontPoint.y > winSize[1]):
+		#rayDying = true
 		
 func ray_add_point(newPt:Vector2):
 	line.add_point(newPt)
@@ -233,7 +237,7 @@ func reflectRay(normalAngle, collisionPoint) ->Vector2:
 	if normalAngle:
 		var newDir = getReflectionDirection(normalAngle)
 		propDir = newDir
-		ray_add_point(to_local(collisionPoint))
+		ray_add_point(to_local(round(collisionPoint)))
 		return newDir
 	else:
 		return propDir
@@ -271,6 +275,9 @@ func refractRay(normalAngle, objectIOR,collisionPoint):
 			propDir = newDir
 			
 			ray_add_point(to_local(collisionPoint))
+			
+func stopBeam():
+	rayDying = true
 		
 	
 	

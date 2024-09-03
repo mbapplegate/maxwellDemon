@@ -1,4 +1,5 @@
 extends pushableObject
+class_name AbsorbFilter
 
 const mediumIndex = 1.0
 const COLLISION_WIDTH = 6
@@ -14,6 +15,8 @@ const COLLISION_WIDTH = 6
 @onready var ray = preload("res://scenes/LightPacket/light_packet.tscn")
 
 @onready var filterParent = get_parent()
+
+signal attenuateBeam(location:Vector2,color:Vector3,energy:float,object:Object)
 
 func _ready():
 	filterCenterShape.shape.size = Vector2(COLLISION_WIDTH,filterHeight)
@@ -38,44 +41,19 @@ func _ready():
 #Function to handle if a ray collides with either the walls of the cube or the splitter
 func _ray_hit(photonObj:Object, collPoint:Vector2, collNormal:Vector2, collider:Object):
 	if collider == $Stage/Center:
-		var thisAbs = 0.0
-		if photonObj.rayColor[0] > 0:
-			thisAbs = filterAbsorbance[0]
-		elif photonObj.rayColor[1] > 0:
-			thisAbs = filterAbsorbance[1]
-		else:
-			thisAbs = filterAbsorbance[2]
-		#print("Hit Center")
-		#Create new ray
-		if thisAbs == 1.0:
-			photonObj.rayDying = true
-		elif thisAbs == 0.0:
-			pass
-		else:
-			var thisEnergy = photonObj.energy * (1-thisAbs)
-			if thisEnergy < 0.1:
-				photonObj.rayDying = true
-			else:
-				var instance = ray.instantiate()
-				#Color, energy, IOR, and direction are the same as the incoming ray
-				#var absVector = Vector3(filterAbsorbance[0],filterAbsorbance[1], filterAbsorbance[2])
-				instance.rayColor = photonObj.rayColor
-				instance.energy = thisEnergy
-				instance.index_of_refraction = photonObj.index_of_refraction
-				#Reflect off the splitter
-				instance.propDir = photonObj.propDir
-				#Sometimes the collision normal will be NULL, so check that
-				instance.global_position = collPoint
-				#If the splitter isn't root then add the child to the parent
-				if photonObj.get_parent():
-					instance.lightSource = "filterAbs"
-					photonObj.get_parent().add_child(instance)
-				#Otherwise make it a child of itself (mostly for debugging)
-				else:
-					instance.position = to_local(collPoint)
-					add_child(instance)
-				#Update photon packet energies depending on reflectivity
-				instance.update_energy(instance.energy)
-				photonObj.rayDying = true
+		
+		var newColor = Vector3.ZERO
+		for i in range(3):
+			newColor[i] = photonObj.rayColor[i]*(1-filterAbsorbance[i])	
+			
+		if newColor != photonObj.rayColor:
+			var oldEnergyVec = photonObj.rayColor.normalized() * photonObj.energy
+			var newEnergyVec = oldEnergyVec*newColor
+			var newEnergy = newEnergyVec[0]+newEnergyVec[1]+newEnergyVec[2]
+			
+			photonObj.stopBeam(collPoint)
+			if newEnergy > 0.1:
+				attenuateBeam.emit(collPoint,newColor,newEnergy,photonObj)
+			
 	else:
 		photonObj.refractRay(collNormal, filterIndex, collPoint)

@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://div20oyybshkw"]
+[gd_scene load_steps=5 format=3 uid="uid://div20oyybshkw"]
 
 [ext_resource type="Script" path="res://lessons/mirror/mirror_lesson.gd" id="1_byn2p"]
 [ext_resource type="PackedScene" uid="uid://ciufjrc1fmyfi" path="res://scenes/FlatMirror/flat_mirror.tscn" id="2_4lugw"]
+[ext_resource type="PackedScene" uid="uid://cd1x0uh4fi1jh" path="res://scenes/LightManager/light_manager.tscn" id="2_bwtr4"]
 [ext_resource type="PackedScene" uid="uid://bt1eicy7gakub" path="res://scenes/InvisibleSource/invisible_source.tscn" id="3_skcde"]
 
 [node name="MirrorLesson" type="Node2D"]
@@ -11,6 +12,19 @@ script = ExtResource("1_byn2p")
 position = Vector2(480, 288)
 zoom = Vector2(2, 2)
 
+[node name="LightManager" parent="." instance=ExtResource("2_bwtr4")]
+
+[node name="InvisibleSource" parent="LightManager" instance=ExtResource("3_skcde")]
+position = Vector2(288, 32)
+scale = Vector2(2, 2)
+beamHalfHeight = 0
+
+[node name="FlatMirror" parent="LightManager" instance=ExtResource("2_4lugw")]
+position = Vector2(288, 224)
+scale = Vector2(2, 2)
+initialAngle = 70.0
+isPushable = false
+
 [node name="RichTextLabel4" type="RichTextLabel" parent="."]
 offset_left = 672.0
 offset_top = 512.0
@@ -18,17 +32,6 @@ offset_right = 1024.0
 offset_bottom = 552.0
 theme_override_font_sizes/normal_font_size = 24
 text = "Any key to continue . . ."
-
-[node name="FlatMirror" parent="." instance=ExtResource("2_4lugw")]
-position = Vector2(288, 224)
-scale = Vector2(2, 2)
-initialAngle = 70.0
-isPushable = false
-
-[node name="InvisibleSource" parent="." instance=ExtResource("3_skcde")]
-position = Vector2(288, 32)
-scale = Vector2(2, 2)
-timerTimeout = 0.125
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
 offset_left = 15.0

@@ -18,8 +18,15 @@ func _ready():
 	for child in get_children():
 		if child is pushableObject:
 			child.initialize()
+			#child.energizeChanged.emit(child.isEnergized)
 			if child is PointDetector:
 				child.goalMetChanged.connect(_toggleDoor)
+				
+		if child is LightManager:
+			for grandchild in child.get_children():
+				if grandchild is PointDetector:
+					grandchild.goalMetChanged.connect(_toggleDoor)
+				
 			
 func _toggleDoor(val):
 	if val:
