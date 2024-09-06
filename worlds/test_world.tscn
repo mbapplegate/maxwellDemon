@@ -63,6 +63,7 @@ initialAngle = -100.0
 
 [node name="FluorescentSource" parent="LightManager" instance=ExtResource("11_ryot2")]
 position = Vector2(736, 672)
+numBeamsPerRay = 8
 emitColor = Vector3(1, 0, 0)
 absColor = Vector3(0, 1, 0)
 initialAngle = 90.0

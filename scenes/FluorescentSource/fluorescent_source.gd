@@ -20,9 +20,9 @@ func _ready():
 		
 		
 func spawnBurst(globalPos:Vector2):
-	if not isPulsing:
-		isPulsing = true
-		pulseChildRays.emit()
+	#if not isPulsing:
+	isPulsing = true
+	pulseChildRays.emit()
 	var instance = burst.instantiate()
 	add_child(instance)
 	instance.burstGo(globalPos,absColor)

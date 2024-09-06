@@ -283,6 +283,7 @@ func _destroyPulse(followNode, isDetected:bool):
 		
 func killBeam():
 	clearBeam()
+	isPulsing = false
 	freeBeamFlag = true
 	
 		
