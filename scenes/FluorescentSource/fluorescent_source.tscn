@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://g6auhiib1lgu"]
+
+[ext_resource type="PackedScene" uid="uid://beic3gevjusuj" path="res://scenes/PushableObject/pushable_object.tscn" id="1_m3mgb"]
+[ext_resource type="Script" path="res://scenes/FluorescentSource/fluorescent_source.gd" id="2_7rpls"]
+[ext_resource type="Texture2D" uid="uid://cpq7akcjl3eid" path="res://scenes/FluorescentSource/fluorescentBlob.png" id="3_8rixd"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_oxklg"]
+radius = 24.0
+height = 250.0
+
+[node name="FluorescentSource" instance=ExtResource("1_m3mgb")]
+script = ExtResource("2_7rpls")
+numBeamsPerRay = 15
+emitColor = Vector3(0, 1, 0)
+absColor = Vector3(0, 0, 1)
+
+[node name="FluorescentBlob" type="Sprite2D" parent="Stage" index="0"]
+scale = Vector2(0.33, 0.33)
+texture = ExtResource("3_8rixd")
+
+[node name="BlobArea" type="Area2D" parent="Stage/FluorescentBlob" index="0"]
+
+[node name="BlobShape" type="CollisionShape2D" parent="Stage/FluorescentBlob/BlobArea" index="0"]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_oxklg")

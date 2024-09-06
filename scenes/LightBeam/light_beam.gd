@@ -21,6 +21,7 @@ var energy : float = 1.0
 var index_of_refraction : float = 1.0
 var beamLength : float = 0.0
 var beamDying : bool = false
+var deathLocation : Vector2 = Vector2.ZERO
 var numPoints : int = 0
 var lastCollider : Object = null
 var beamGoing : bool = false
@@ -180,6 +181,7 @@ func stopBeam(globalStopLoc : Vector2):
 	beamAddPoint(to_local(globalStopLoc))
 	beamDying = true
 	beamGoing = false
+	deathLocation = globalStopLoc
 		
 func _getAlpha(beamEnergy : float) -> float:
 	if beamEnergy > .9:
@@ -188,6 +190,14 @@ func _getAlpha(beamEnergy : float) -> float:
 		return 0
 	else:
 		return 0.2
+		
+func _getPulseAlpha(beamEnergy : float) -> float:
+	if beamEnergy > .9:
+		return .8
+	elif beamEnergy < .1:
+		return .2
+	else:
+		return 0.5
 		
 func swapPulseLines():
 	for child in get_children():
@@ -228,7 +238,7 @@ func _spawnPulse()->Array:
 	var spriteInstance = Sprite2D.new()
 	spriteInstance.texture = pulseTexture
 	spriteInstance.scale = Vector2.ONE*0.2
-	spriteInstance.self_modulate = Color(rayColor[0],rayColor[1],rayColor[2])
+	spriteInstance.self_modulate = Color(rayColor[0],rayColor[1],rayColor[2],_getPulseAlpha(energy))
 	spriteInstance.material = CanvasItemMaterial.new()
 	spriteInstance.material.blend_mode = CanvasItemMaterial.BLEND_MODE_ADD
 	spriteInstance.position =Vector2.ZERO# Vector2(-(spriteInstance.texture.get_width()*0.05), 0.0)
@@ -258,6 +268,8 @@ func _destroyPulse(followNode, isDetected:bool):
 			var realCollider = _get_functional_collider(lastCollider)
 			if realCollider is PointDetector and isDetected:
 				realCollider.pulseHit(energy,self)
+			elif realCollider.has_method("spawnBurst"):
+				realCollider.spawnBurst(deathLocation)
 				
 		if numPulses == 0 and freeBeamFlag:
 			self.queue_free()

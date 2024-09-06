@@ -12,6 +12,10 @@ func _ready():
 			if child.has_method("_dispersionNeeded"):
 				child.connect("disperseBeam",disperseRay)
 				child.connect("pulseChildRays", pulseTemp)
+			elif child.has_method("doFluorescence"):
+				child.connect("fluoresce", fluoresceRays)
+				child.connect("pulseChildRays", pulseTemp)
+				
 			if child.has_method("registerBeams"):
 				child.connect("registerRays", makeBeams)
 				child.connect("stopRays", haltRays)		
@@ -114,10 +118,28 @@ func disperseRay(dispLocation:Vector2,dispDirection:Array, IOR:Vector3, energies
 			instancedRays["Temp"][-1].lastCollider = originalBeam.lastCollider
 			instancedRays["Temp"][-1].propDir = dispDirection[i]
 			instancedRays["Temp"][-1].index_of_refraction = IOR[i]
+			instancedRays["Temp"][-1].isPulsing = false
 			instancedRays["Temp"][-1].defineBeam(dispLocation+Vector2(2,2),dispColor,energies[i],dispDirection[i],IOR[i])
 			instancedRays["Temp"][-1].propagateBeam()
-			instancedRays["Temp"][-1].isPulsing = false
-			
+		
+
+func fluoresceRays(fluoLocation:Vector2, fluoColor:Vector3, numRays:int, rayEnergies:float, originalBeam:Object):
+	if not instancedRays.has("Temp"):
+		instancedRays["Temp"] = []
+	for i in range(numRays):
+		var instance = beamScene.instantiate()
+		var angle = (i*TAU)/numRays
+		var thisDir = Vector2(cos(angle),sin(angle))
+		instancedRays["Temp"].append(instance)	
+		add_child(instancedRays["Temp"][-1])
+		instancedRays["Temp"][-1].lastCollider = originalBeam.lastCollider
+		instancedRays["Temp"][-1].propDir = thisDir
+		instancedRays["Temp"][-1].index_of_refraction = originalBeam.index_of_refraction
+		instancedRays["Temp"][-1].isPulsing = false
+		instancedRays["Temp"][-1].defineBeam(fluoLocation,fluoColor,rayEnergies,thisDir,originalBeam.index_of_refraction)
+		instancedRays["Temp"][-1].propagateBeam()
+		
+
 func makeBeams(locations:Array,color:Vector3,energy:float,direction:Array,IOR:float,sourceObj:Object):
 	#print("Making beams")
 	if instancedRays.has(sourceObj):

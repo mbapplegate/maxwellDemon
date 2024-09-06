@@ -7,9 +7,9 @@
 [ext_resource type="PackedScene" uid="uid://ciufjrc1fmyfi" path="res://scenes/FlatMirror/flat_mirror.tscn" id="7_hl23f"]
 [ext_resource type="PackedScene" uid="uid://catkndynfd4s5" path="res://scenes/ParabolicMirror/parabolic_mirror.tscn" id="8_d4n6t"]
 [ext_resource type="PackedScene" uid="uid://b6navnb20xork" path="res://scenes/Lens_PlanoConvex/lens_plano_convex.tscn" id="8_t0pox"]
-[ext_resource type="PackedScene" uid="uid://cadtm4ftf8bxq" path="res://scenes/PointSource/point_source.tscn" id="9_olfr5"]
+[ext_resource type="PackedScene" uid="uid://2ai0r6raovox" path="res://scenes/LaserSource/laser_source.tscn" id="10_qolor"]
 [ext_resource type="PackedScene" uid="uid://cd1x0uh4fi1jh" path="res://scenes/LightManager/light_manager.tscn" id="11_7ewao"]
-[ext_resource type="PackedScene" uid="uid://c3mpywrtffsf3" path="res://scenes/LEDSource/led_source.tscn" id="12_p88v4"]
+[ext_resource type="PackedScene" uid="uid://g6auhiib1lgu" path="res://scenes/FluorescentSource/fluorescent_source.tscn" id="11_ryot2"]
 [ext_resource type="PackedScene" uid="uid://dns1nq8hlfau" path="res://scenes/Doorway/doorway.tscn" id="13_c74tw"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3e3qs"]
@@ -51,25 +51,27 @@ position = Vector2(320, 800)
 position = Vector2(992, 64)
 rotation = -1.5708
 
-[node name="LensPlanoConvex" parent="." instance=ExtResource("8_t0pox")]
-position = Vector2(512, 192)
-
-[node name="PointSource" parent="." instance=ExtResource("9_olfr5")]
-position = Vector2(1280, 672)
-rayColor = Vector3(1, 1, 1)
-isEnergized = false
-
 [node name="parabolicMirror" parent="." instance=ExtResource("8_d4n6t")]
 position = Vector2(896, 192)
 initialAngle = 150.0
 
-[node name="FlatMirror" parent="." instance=ExtResource("7_hl23f")]
+[node name="LightManager" parent="." instance=ExtResource("11_7ewao")]
+
+[node name="FlatMirror" parent="LightManager" instance=ExtResource("7_hl23f")]
 position = Vector2(1344, 192)
 initialAngle = -100.0
 
-[node name="LightManager" parent="." instance=ExtResource("11_7ewao")]
+[node name="FluorescentSource" parent="LightManager" instance=ExtResource("11_ryot2")]
+position = Vector2(736, 672)
+emitColor = Vector3(1, 0, 0)
+absColor = Vector3(0, 1, 0)
+initialAngle = 90.0
+isEnergizeable = false
 
-[node name="LEDSource" parent="LightManager" instance=ExtResource("12_p88v4")]
-position = Vector2(352, 640)
-initialAngle = 20.0
-isRotatable = false
+[node name="LaserSource" parent="LightManager" instance=ExtResource("10_qolor")]
+position = Vector2(249.192, 666.57)
+numBeams = 1
+rayColor = Vector3(0, 1, 0)
+
+[node name="LensPlanoConvex" parent="LightManager" instance=ExtResource("8_t0pox")]
+position = Vector2(512, 192)
