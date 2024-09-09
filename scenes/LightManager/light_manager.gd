@@ -24,7 +24,7 @@ func _ready():
 			elif (child is BeamSplitter):
 				child.connect("splitBeam",splitRay)
 				child.connect("pulseSplitRays", pulseTemp)
-			elif (child is AbsorbFilter):
+			elif (child is AbsorbFilter) or child.has_method("doFluorescence"):
 				child.connect("attenuateBeam",attenuateRay)
 				
 			
@@ -157,7 +157,6 @@ func makeBeams(locations:Array,color:Vector3,energy:float,direction:Array,IOR:fl
 		runAllRays(sourceObj)
 		
 func attenuateRay(beamLocation:Vector2, beamColor:Vector3, beamEnergy:float, originalBeam:Object):
-	
 	var instance = beamScene.instantiate()
 	if not instancedRays.has("Temp"):
 		instancedRays["Temp"] = []
@@ -170,9 +169,10 @@ func attenuateRay(beamLocation:Vector2, beamColor:Vector3, beamEnergy:float, ori
 	instancedRays["Temp"][-1].propagateBeam()
 
 func pulseTemp():
-	for ray in instancedRays["Temp"]:
-		if not ray.isPulsing:
-			ray.startPulsing()
+	if instancedRays.has("Temp"):
+		for ray in instancedRays["Temp"]:
+			if not ray.isPulsing:
+				ray.startPulsing()
 			
 func _clearMeters():
 	for child in get_children():

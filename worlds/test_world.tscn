@@ -72,7 +72,7 @@ isEnergizeable = false
 [node name="LaserSource" parent="LightManager" instance=ExtResource("10_qolor")]
 position = Vector2(249.192, 666.57)
 numBeams = 1
-rayColor = Vector3(0, 1, 0)
+rayColor = Vector3(0, 0, 1)
 
 [node name="LensPlanoConvex" parent="LightManager" instance=ExtResource("8_t0pox")]
 position = Vector2(512, 192)

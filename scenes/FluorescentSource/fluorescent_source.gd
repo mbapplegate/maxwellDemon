@@ -10,6 +10,7 @@ extends pushableObject
 var isPulsing : bool = false
 
 signal fluoresce(fluoLocation:Vector2,fluoColor:Vector3, numRays:int, rayEnergies:float, originalBeam:Object)
+signal attenuateBeam(location:Vector2,color:Vector3,energy:float,object:Object)
 signal pulseChildRays()
 
 func _ready():
@@ -43,7 +44,22 @@ func _getNewRayDirections() -> Array:
 
 #Function to handle if a ray collides with either the walls of the cube or the splitter
 func _ray_hit(photonObj:Object, collPoint:Vector2, _collNormal:Vector2, _collider:Object):
-	photonObj.stopBeam(collPoint)
-	fluoresce.emit(collPoint,emitColor,numBeamsPerRay,.2,photonObj)
+	if photonObj.rayColor == absColor:
+		photonObj.stopBeam(collPoint)
+		fluoresce.emit(collPoint,emitColor,numBeamsPerRay,.2,photonObj)
+	else:
+		if photonObj.rayColor.dot(absColor) > 0:
+			photonObj.stopBeam(collPoint)
+			fluoresce.emit(collPoint,emitColor,numBeamsPerRay,.2,photonObj)
+			var newColor = photonObj.rayColor - absColor
+			for i in range(3):
+				if newColor[i] < 0:
+					newColor[i] = 0
+				elif newColor[i] > 1.0:
+					newColor[i] = 1.0
+			attenuateBeam.emit(collPoint,newColor,0.5,photonObj)
+		else:
+			pass
 	
 	
+ 
