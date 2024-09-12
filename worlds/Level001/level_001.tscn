@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://wfkblscm1o7a"]
+[gd_scene load_steps=19 format=3 uid="uid://wfkblscm1o7a"]
 
 [ext_resource type="PackedScene" uid="uid://fkwew1tbysym" path="res://worlds/BaseTileMap.tscn" id="1_18wid"]
 [ext_resource type="Script" path="res://worlds/Level001/level_001.gd" id="1_ogkya"]
@@ -47,6 +47,38 @@ resource_local_to_scene = false
 resource_name = ""
 script = ExtResource("8_cyofn")
 path = "down"
+show_mode = 0
+force_type = 0
+
+[sub_resource type="Texture2D" id="Texture2D_blqwd"]
+resource_local_to_scene = false
+resource_name = ""
+script = ExtResource("8_cyofn")
+path = "key/w"
+show_mode = 0
+force_type = 0
+
+[sub_resource type="Texture2D" id="Texture2D_e8hgh"]
+resource_local_to_scene = false
+resource_name = ""
+script = ExtResource("8_cyofn")
+path = "key/a"
+show_mode = 0
+force_type = 0
+
+[sub_resource type="Texture2D" id="Texture2D_02v3w"]
+resource_local_to_scene = false
+resource_name = ""
+script = ExtResource("8_cyofn")
+path = "key/s"
+show_mode = 0
+force_type = 0
+
+[sub_resource type="Texture2D" id="Texture2D_nd5iq"]
+resource_local_to_scene = false
+resource_name = ""
+script = ExtResource("8_cyofn")
+path = "key/d"
 show_mode = 0
 force_type = 0
 
@@ -135,7 +167,7 @@ vertical_alignment = 1
 offset_left = 800.0
 offset_top = 112.0
 offset_right = 1120.0
-offset_bottom = 304.0
+offset_bottom = 513.0
 
 [node name="left" type="TextureRect" parent="movementHint"]
 layout_mode = 0
@@ -169,8 +201,49 @@ offset_right = 213.0
 offset_bottom = 194.0
 texture = SubResource("Texture2D_o840g")
 
+[node name="w-key" type="TextureRect" parent="movementHint"]
+layout_mode = 0
+offset_left = 116.0
+offset_top = 201.0
+offset_right = 216.0
+offset_bottom = 301.0
+texture = SubResource("Texture2D_blqwd")
+
+[node name="a-key" type="TextureRect" parent="movementHint"]
+layout_mode = 0
+offset_left = 46.0
+offset_top = 269.0
+offset_right = 146.0
+offset_bottom = 369.0
+texture = SubResource("Texture2D_e8hgh")
+
+[node name="s-key" type="TextureRect" parent="movementHint"]
+layout_mode = 0
+offset_left = 116.0
+offset_top = 269.0
+offset_right = 216.0
+offset_bottom = 369.0
+texture = SubResource("Texture2D_02v3w")
+
+[node name="d-key" type="TextureRect" parent="movementHint"]
+layout_mode = 0
+offset_left = 186.0
+offset_top = 268.0
+offset_right = 286.0
+offset_bottom = 368.0
+texture = SubResource("Texture2D_nd5iq")
+
+[node name="Label" type="Label" parent="movementHint"]
+layout_mode = 0
+offset_left = 145.0
+offset_top = 166.0
+offset_right = 186.0
+offset_bottom = 221.0
+theme_override_font_sizes/font_size = 40
+text = "or"
+
 [node name="Timer" type="Timer" parent="."]
-wait_time = 3.0
+wait_time = 0.15
 one_shot = true
 autostart = true
 
