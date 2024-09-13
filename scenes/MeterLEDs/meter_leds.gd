@@ -128,7 +128,7 @@ func updateMeter():
 		else:
 			_turnLEDOff(i)
 			
-	if lastEnergy == totalEnergy and not justCleared:
+	if lastEnergy == totalEnergy:
 		if not (goalMet and energyDetected > goalEnergy):
 			checkDoor()
 	justCleared = false

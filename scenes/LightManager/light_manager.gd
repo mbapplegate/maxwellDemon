@@ -73,7 +73,7 @@ func haltRays(sourceObj:Object):
 		#_clearMeters()
 		for i in range(instancedRays[sourceObj].size()):
 			instancedRays[sourceObj][i].clearBeam()
-		
+		_clearMeters()
 		runAllRays()
 		
 func splitRay(splitRatio:float, splitDirection:Vector2, splitLocation:Vector2, originalBeam:Object):
