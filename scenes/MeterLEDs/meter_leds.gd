@@ -128,9 +128,10 @@ func updateMeter():
 		else:
 			_turnLEDOff(i)
 			
-	if lastEnergy == totalEnergy:
-		if not (goalMet and energyDetected > goalEnergy):
-			checkDoor()
+	#if lastEnergy == totalEnergy:
+	$Timer.start()
+		#if not (goalMet and energyDetected > goalEnergy):
+			#checkDoor()
 	justCleared = false
 	lastEnergy = totalEnergy
 	#Update average
@@ -162,3 +163,7 @@ func checkDoor():
 		goalMet = false
 		goalMetChanged.emit(goalMet)
 		#$Goal.texture = load("res://scenes/MeterLEDs/goalOff.png")
+
+
+func _on_timer_timeout():
+	checkDoor()
