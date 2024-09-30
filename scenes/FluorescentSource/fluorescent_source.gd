@@ -8,6 +8,7 @@ extends pushableObject
 @onready var burst = preload("./light_burst.tscn")
 
 var isPulsing : bool = false
+#var rng = RandomNumberGenerator.new()
 
 signal fluoresce(fluoLocation:Vector2,fluoColor:Vector3, numRays:int, rayEnergies:float, originalBeam:Object)
 signal attenuateBeam(location:Vector2,color:Vector3,energy:float,object:Object)
@@ -44,6 +45,7 @@ func _getNewRayDirections() -> Array:
 
 #Function to handle if a ray collides with either the walls of the cube or the splitter
 func _ray_hit(photonObj:Object, collPoint:Vector2, _collNormal:Vector2, _collider:Object):
+	#collPoint = collPoint + photonObj.propDir.normalized()*32.0*rng.randf()
 	if photonObj.rayColor == absColor:
 		photonObj.stopBeam(collPoint)
 		fluoresce.emit(collPoint,emitColor,numBeamsPerRay,.2,photonObj)

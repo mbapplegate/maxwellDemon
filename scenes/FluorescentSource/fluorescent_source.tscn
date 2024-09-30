@@ -1,12 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://g6auhiib1lgu"]
+[gd_scene load_steps=6 format=3 uid="uid://g6auhiib1lgu"]
 
 [ext_resource type="PackedScene" uid="uid://beic3gevjusuj" path="res://scenes/PushableObject/pushable_object.tscn" id="1_m3mgb"]
 [ext_resource type="Script" path="res://scenes/FluorescentSource/fluorescent_source.gd" id="2_7rpls"]
 [ext_resource type="Texture2D" uid="uid://cpq7akcjl3eid" path="res://scenes/FluorescentSource/fluorescentBlob.png" id="3_8rixd"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_oxklg"]
-radius = 24.0
-height = 250.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y7tpj"]
+size = Vector2(226, 2)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qggjj"]
+size = Vector2(4, 120)
 
 [node name="FluorescentSource" instance=ExtResource("1_m3mgb")]
 script = ExtResource("2_7rpls")
@@ -15,11 +17,14 @@ emitColor = Vector3(0, 1, 0)
 absColor = Vector3(0, 0, 1)
 
 [node name="FluorescentBlob" type="Sprite2D" parent="Stage" index="0"]
-scale = Vector2(0.33, 0.33)
+rotation = -0.122173
+scale = Vector2(0.25, 0.25)
 texture = ExtResource("3_8rixd")
 
-[node name="BlobArea" type="Area2D" parent="Stage/FluorescentBlob" index="0"]
+[node name="BlobHoriz" type="Area2D" parent="Stage/FluorescentBlob" index="0"]
 
-[node name="BlobShape" type="CollisionShape2D" parent="Stage/FluorescentBlob/BlobArea" index="0"]
-rotation = 1.5708
-shape = SubResource("CapsuleShape2D_oxklg")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Stage/FluorescentBlob/BlobHoriz" index="0"]
+shape = SubResource("RectangleShape2D_y7tpj")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Stage/FluorescentBlob/BlobHoriz" index="1"]
+shape = SubResource("RectangleShape2D_qggjj")
