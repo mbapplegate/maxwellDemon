@@ -15,7 +15,7 @@ var outlinePolygonPoints = PackedVector2Array()
 
 @onready var focalSprite = $Stage/FocalSprite
 @onready var frontShape = $Stage/FrontArea/FrontShape
-@onready var rearShape = $Stage/BackArea/BackShape
+#@onready var rearShape = $Stage/BackArea/BackShape
 #@onready var backShape = $Stage/backBody/backArea
 #@onready var topShape = $Stage/backBody/top
 #@onready var botShape = $Stage/backBody/bottom
@@ -23,7 +23,7 @@ var outlinePolygonPoints = PackedVector2Array()
 
 func _ready():
 	isEnergizeable = false
-	#focalSprite.self_modulate = focalSpriteColor
+	focalSprite.self_modulate = focalSpriteColor
 	
 	set_geometry(mirrorRadius,mirrorHeight)
 	if not isRotatable and initialAngle != 0:
@@ -68,7 +68,7 @@ func set_geometry(mirrRadius:float, mirrHeight:float):
 	#outlinePolygonPoints.append(Vector2(-MIRROR_THICKNESS,-mirrorHeight/2.0))
 		
 	frontShape.polygon = frontPolygonPoints
-	rearShape.polygon = rearPolygonPoints
+	#rearShape.polygon = rearPolygonPoints
 	mirrOutline.polygon = outlinePolygonPoints
 	
 func _ray_hit(photonObj:Object, collPoint:Vector2, _collNormal:Vector2, collider:Object):
