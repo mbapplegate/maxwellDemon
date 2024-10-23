@@ -24,6 +24,7 @@ var screen_size
 var itemActive = null
 var tile_map
 var isMoving = false
+var isTeleporting:bool = false
 var teleportTo:Vector2 = Vector2.ZERO
 
 signal rotateCWSignal(numDegrees)
@@ -89,7 +90,7 @@ func move_grid(direction:String):
 	if not isMoving and not Input.is_action_pressed("pull") and not Input.is_action_pressed("nudge"):
 		_set_activation_region(direction)
 	#print(validate_movement(newPos, inputs[direction]))	
-	if validate_movement(newPos, inputs[direction]):
+	if validate_movement(newPos, inputs[direction]) and not isTeleporting:
 		var tween = get_tree().create_tween()
 		tween.set_ease(Tween.EASE_IN_OUT)
 		tween.set_trans(Tween.TRANS_CUBIC)
@@ -115,6 +116,7 @@ func move_grid(direction:String):
 					#print("Winner winner chicken dinner")
 		
 func teleport_to(globalPos:Vector2):
+	isTeleporting = true
 	poofOrigin.make_poof(spriteBottom)
 	poofDest.make_poof(globalPos - global_position+spriteBottom)
 	teleportTo = globalPos
@@ -316,4 +318,5 @@ func _on_activation_region_body_exited(body):
 
 
 func _on_teleport_timer_timeout():
+	isTeleporting = false
 	global_position = teleportTo
