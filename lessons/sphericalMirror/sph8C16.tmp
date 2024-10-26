@@ -1,0 +1,205 @@
+[gd_scene load_steps=7 format=3 uid="uid://dak666sa24hin"]
+
+[ext_resource type="Script" path="res://lessons/sphericalMirror/spherical_mirror_lesson.gd" id="1_pmbu0"]
+[ext_resource type="PackedScene" uid="uid://cd1x0uh4fi1jh" path="res://scenes/LightManager/light_manager.tscn" id="2_fquqb"]
+[ext_resource type="PackedScene" uid="uid://bt1eicy7gakub" path="res://scenes/InvisibleSource/invisible_source.tscn" id="3_pk52y"]
+[ext_resource type="PackedScene" uid="uid://ky4ndfe0by6m" path="res://scenes/SphericalMirror/spherical_mirror.tscn" id="4_0lj2d"]
+[ext_resource type="PackedScene" uid="uid://catkndynfd4s5" path="res://scenes/ParabolicMirror/parabolic_mirror.tscn" id="4_g1vn8"]
+[ext_resource type="TileSet" uid="uid://bra1jbef1cuwb" path="res://worlds/BaseOpticalTable.res" id="6_rbvh1"]
+
+[node name="SphericalMirrorLesson" type="Node2D"]
+script = ExtResource("1_pmbu0")
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource("6_rbvh1")
+format = 2
+layer_0/tile_data = PackedInt32Array(131085, 1, 0, 196621, 1, 0, 262157, 1, 0, 327693, 1, 0, 393229, 1, 0, 458765, 1, 0, 524301, 1, 0, 589837, 1, 0, 655373, 1, 0, 720909, 1, 0, 786445, 1, 0, 851981, 1, 0, 917517, 1, 0, 983053, 1, 0, 1048589, 1, 0)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(480, 828)
+zoom = Vector2(2, 2)
+
+[node name="RichTextLabel4" type="RichTextLabel" parent="."]
+offset_left = 672.0
+offset_top = 512.0
+offset_right = 1024.0
+offset_bottom = 552.0
+theme_override_font_sizes/normal_font_size = 24
+text = "Any key to continue . . ."
+
+[node name="explan1" type="RichTextLabel" parent="."]
+offset_left = 32.0
+offset_top = 128.0
+offset_right = 384.0
+offset_bottom = 192.0
+theme_override_font_sizes/normal_font_size = 18
+text = "Parabolic mirrors focus light to a small point"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = 16.0
+offset_top = 29.0
+offset_right = 448.0
+offset_bottom = 98.0
+theme_override_font_sizes/normal_font_size = 40
+text = "Spherical Mirrors (2/2)"
+
+[node name="explan2" type="RichTextLabel" parent="."]
+offset_left = 512.0
+offset_top = 128.0
+offset_right = 960.0
+offset_bottom = 192.0
+theme_override_font_sizes/normal_font_size = 18
+text = "Spherical mirrors form a messy, low-quality focal point"
+
+[node name="LightManager" parent="." instance=ExtResource("2_fquqb")]
+
+[node name="SphericalMirror" parent="LightManager" instance=ExtResource("4_0lj2d")]
+position = Vector2(704, 320)
+
+[node name="parabolicMirror" parent="LightManager" instance=ExtResource("4_g1vn8")]
+position = Vector2(256, 320)
+mirrorHeight = 200.0
+initialAngle = 180.0
+
+[node name="InvisibleSource" parent="LightManager" instance=ExtResource("3_pk52y")]
+position = Vector2(32, 256)
+propagationDirection = Vector2(1, 0)
+beamHalfHeight = 0
+isEnergized = false
+
+[node name="InvisibleSource3" parent="LightManager" instance=ExtResource("3_pk52y")]
+position = Vector2(32, 384)
+propagationDirection = Vector2(1, 0)
+beamHalfHeight = 0
+isEnergized = false
+
+[node name="InvisibleSource8" parent="LightManager" instance=ExtResource("3_pk52y")]
+position = Vector2(32, 224)
+propagationDirection = Vector2(1, 0)
+beamHalfHeight = 0
+isEnergized = false
+
+[node name="InvisibleSource9" parent="LightManager" instance=ExtResource("3_pk52y")]
+position = Vector2(32, 416)
+propagationDirection = Vector2(1, 0)
+beamHalfHeight = 0
+isEnergized = false
+
+[node name="InvisibleSource2" parent="LightManager" instance=ExtResource("3_pk52y")]
+position = Vector2(480, 256)
+propagationDirection = Vector2(1, 0)
+sourceColor = Vector3(0, 1, 0)
+beamHalfHeight = 0
+isEnergized = false
+
+[node name="InvisibleSource4" parent="LightManager" instance=ExtResource("3_pk52y")]
+position = Vector2(480, 384)
+propagationDirection = Vector2(1, 0)
+sourceColor = Vector3(0, 1, 0)
+beamHalfHeight = 0
+isEnergized = false
+
+[node name="InvisibleSource11" parent="LightManager" instance=ExtResource("3_pk52y")]
+position = Vector2(480, 224)
+propagationDirection = Vector2(1, 0)
+sourceColor = Vector3(0, 1, 0)
+beamHalfHeight = 0
+isEnergized = false
+
+[node name="InvisibleSource12" parent="LightManager" instance=ExtResource("3_pk52y")]
+position = Vector2(480, 416)
+propagationDirection = Vector2(1, 0)
+sourceColor = Vector3(0, 1, 0)
+beamHalfHeight = 0
+isEnergized = false
+
+[node name="explan4" type="RichTextLabel" parent="."]
+offset_left = 192.0
+offset_top = 448.0
+offset_right = 320.0
+offset_bottom = 512.0
+theme_override_font_sizes/normal_font_size = 24
+text = "Parabolic"
+
+[node name="explan3" type="RichTextLabel" parent="."]
+offset_left = 640.0
+offset_top = 448.0
+offset_right = 768.0
+offset_bottom = 512.0
+theme_override_font_sizes/normal_font_size = 24
+text = "Spherical"
+
+[node name="RichTextLabel5" type="RichTextLabel" parent="."]
+offset_left = 656.0
+offset_top = 1059.0
+offset_right = 1008.0
+offset_bottom = 1099.0
+theme_override_font_sizes/normal_font_size = 24
+text = "Any key to continue . . ."
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="."]
+offset_top = 576.0
+offset_right = 432.0
+offset_bottom = 645.0
+theme_override_font_sizes/normal_font_size = 40
+text = "Spherical Mirrors (1/2)"
+
+[node name="explan5" type="RichTextLabel" parent="."]
+offset_left = 32.0
+offset_top = 640.0
+offset_right = 864.0
+offset_bottom = 704.0
+theme_override_font_sizes/normal_font_size = 18
+text = "A spherical mirror is a portion of a sphere centered at an origin (O) with radius R"
+
+[node name="LightManager2" parent="." instance=ExtResource("2_fquqb")]
+
+[node name="InvisibleSource" parent="LightManager2" instance=ExtResource("3_pk52y")]
+position = Vector2(416, 864)
+propagationDirection = Vector2(3, 1)
+isEnergized = false
+
+[node name="InvisibleSource2" parent="LightManager2" instance=ExtResource("3_pk52y")]
+position = Vector2(416, 928)
+propagationDirection = Vector2(3, -1)
+sourceColor = Vector3(1, 0, 1)
+isEnergized = false
+
+[node name="InvisibleSource3" parent="LightManager2" instance=ExtResource("3_pk52y")]
+position = Vector2(416, 880)
+propagationDirection = Vector2(3, 0.5)
+sourceColor = Vector3(0, 1, 0)
+isEnergized = false
+
+[node name="InvisibleSource4" parent="LightManager2" instance=ExtResource("3_pk52y")]
+position = Vector2(416, 912)
+propagationDirection = Vector2(3, -0.5)
+sourceColor = Vector3(0, 0, 1)
+isEnergized = false
+
+[node name="SphericalMirror" parent="LightManager2" instance=ExtResource("4_0lj2d")]
+position = Vector2(704, 896)
+mirrorRadius = 192.0
+mirrorHeight = 128.0
+focalSpriteColor = Color(1, 1, 1, 1)
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="."]
+offset_left = 512.0
+offset_top = 899.0
+offset_right = 552.0
+offset_bottom = 939.0
+theme_override_font_sizes/normal_font_size = 24
+text = "O"
+
+[node name="Arc" type="Line2D" parent="."]
+z_index = 2
+position = Vector2(512, 896)
+width = 2.0
+default_color = Color(1, 0, 0, 1)
+
+[node name="Radius" type="Line2D" parent="."]
+z_index = 2
+position = Vector2(512, 896)
+points = PackedVector2Array(0, 0, 0, 192)
+width = 3.0
+default_color = Color(0, 1, 1, 1)

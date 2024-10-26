@@ -15,6 +15,7 @@ var outlinePolygonPoints = PackedVector2Array()
 
 @onready var focalSprite = $Stage/FocalSprite
 @onready var frontShape = $Stage/FrontArea/FrontShape
+@onready var halfRadShape = $Stage/DEBUG
 #@onready var rearShape = $Stage/BackArea/BackShape
 #@onready var backShape = $Stage/backBody/backArea
 #@onready var topShape = $Stage/backBody/top
@@ -32,12 +33,14 @@ func _ready():
 		#$Stage/backBody.rotation = deg_to_rad(initialAngle)
 		#$Stage/surfaceArea.rotation = deg_to_rad(initialAngle)
 		focalSprite.rotation = deg_to_rad(initialAngle)
+		halfRadShape.rotation = deg_to_rad(initialAngle)
 	
 	
 func set_geometry(mirrRadius:float, mirrHeight:float):
 	#Equation for mirror is x = Ay^2
 	#var xMax = (quadConst * mirrHeight * mirrHeight) / 4.0
 	focalSprite.position = Vector2(-mirrRadius,0.0).rotated(getRotation())
+	halfRadShape.position= Vector2(-mirrRadius/2.0,0.0).rotated(getRotation())
 	var minAngle = asin(mirrHeight/(2.0*mirrRadius))
 	var angleSpacing = (2*minAngle)/(NUM_POINTS-1)
 
@@ -71,16 +74,16 @@ func set_geometry(mirrRadius:float, mirrHeight:float):
 	#rearShape.polygon = rearPolygonPoints
 	mirrOutline.polygon = outlinePolygonPoints
 	
-func _ray_hit(photonObj:Object, collPoint:Vector2, _collNormal:Vector2, collider:Object):
+func _ray_hit(photonObj:Object, collPoint:Vector2, _collNormal:Vector2, _collider:Object):
 	var ref = 0.0
 	if reflectivity < 1.0:
 		ref = randf()
 		
 	if (ref < reflectivity):
 		#print(collPoint)
-		var locPt = to_local(collPoint)
+		#var locPt = to_local(collPoint)
 		var perpVec =collPoint.direction_to(to_global(Vector2(-mirrorRadius,0.0).rotated(getRotation())))
-		$Stage/DEBUG.global_position = collPoint
+		#$Stage/DEBUG.global_position = collPoint
 		$Stage/DEBUG2.global_position = collPoint + 64*perpVec
 		#if collider.name == "BackArea":
 		#	perpVec.y = -perpVec.y

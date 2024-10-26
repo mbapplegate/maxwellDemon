@@ -30,7 +30,6 @@ visible = false
 texture = ExtResource("3_i64ic")
 
 [node name="DEBUG" type="Sprite2D" parent="Stage" index="4"]
-visible = false
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("3_b3o70")
 
