@@ -20,7 +20,7 @@ func _ready():
 	#arc.points = getArcPoints(PI/2,0, 192,32)
 	radiusTween.set_ease(Tween.EASE_IN_OUT)
 	radiusTween.set_trans(Tween.TRANS_LINEAR)
-	radiusTween.tween_property($Radius,"rotation",-PI,1.75)
+	radiusTween.tween_property($Radius,"rotation",-3*PI/2,1.75)
 	await radiusTween.finished
 	var tween = get_tree().create_tween()
 	tween.set_ease(Tween.EASE_IN_OUT)
@@ -36,6 +36,7 @@ func _ready():
 	for child in $LightManager2.get_children():
 		if child is InvisibleSource:
 			child.energizeBeam()
+			await get_tree().create_timer(1.0).timeout
 	#$InvisibleSource/Timer.stop()
 	#$InvisibleSource5/Timer.stop()
 	#$InvisibleSource2/Timer.stop()
@@ -44,8 +45,8 @@ func _ready():
 func _process(delta):
 	if not signalEmitted and radiusTween.is_running():
 		var t = radiusTween.get_total_elapsed_time()
-		var currentAngle = Tween.interpolate_value(0.0,-PI,t,1.75,Tween.TRANS_LINEAR,Tween.EASE_IN_OUT)
-		arc.points = getArcPoints(currentAngle+PI/2.0,PI/2.0,192.0,32)
+		var currentAngle = Tween.interpolate_value(0.0,-3*PI/2.0,t,1.75,Tween.TRANS_LINEAR,Tween.EASE_IN_OUT)
+		arc.points = getArcPoints(currentAngle+PI/2.0,PI/2.0,192.0,48)
 
 func getArcPoints(endAngle:float,startAngle:float, radius : float, numPoints:int)->PackedVector2Array:
 	var anglePoints:PackedVector2Array = []
@@ -79,7 +80,9 @@ func switchSlide():
 	await tween.finished
 	for child in $LightManager.get_children():
 		if child is InvisibleSource:
+			await get_tree().create_timer(0.25).timeout
 			child.energizeBeam()
+	
 	
 	for child in $LightManager2.get_children():
 		if child is InvisibleSource:

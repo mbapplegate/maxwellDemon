@@ -47,11 +47,11 @@ var LevelDictionary = {
 	"LevelFluorescence001" : {"Path" : "res://worlds/Fluorescence001/fluorescence_001.tscn", "Title" : "Fluorescence", "Section" : "Fluorescence"},
 	"LevelFluorescence002" : {"Path" : "res://worlds/Fluorescence002/fluorescence_002.tscn", "Title" : "Fluorescent Beam", "Section" : "Fluorescence"},
 	"LevelLamp001"         : {"Path" : "res://worlds/arcLamp001/lamp_001.tscn", "Title" : "Arc Lamp I", "Section" : "Lenses and Mirrors"},
-	"LevelLamp002"         : {"Path" : "res://worlds/arcLamp001/lamp_002.tscn", "Title" : "Arc Lamp II", "Section" : "Lenses and Mirrors"},
+	"LevelLamp002"         : {"Path" : "res://worlds/arcLamp002/lamp_002.tscn", "Title" : "Arc Lamp II", "Section" : "Lenses and Mirrors"},
 	"SphericalMirrorLesson" : {"Path" : "res://lessons/sphericalMirror/spherical_mirror_lesson.tscn", "Title" : "Spherical Mirror Lesson", "Section" : "Lessons"},
 }
 
-var SectionOrdering = ["Menus", "Tutorial", "Lenses and Mirrors","Dispersion","Fluorescence", "Colors", "Lessons", "Debug"]
+var SectionOrdering = ["Tutorial", "Lenses and Mirrors","Dispersion","Fluorescence", "Colors", "Lessons", "Debug"]
 
 var GameFlow = {
 	"Level001"              : "Level002",

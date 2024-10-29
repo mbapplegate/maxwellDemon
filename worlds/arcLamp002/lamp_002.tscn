@@ -52,6 +52,8 @@ LENS_HEIGHT = 200.0
 focalLength = 192.0
 lensIndex = Vector3(2, 2, 2)
 initialAngle = -90.0
+isPushable = false
+isRotatable = false
 
 [node name="PointSource" parent="LightManager" instance=ExtResource("8_e4a0q")]
 position = Vector2(898, 352)
@@ -65,6 +67,8 @@ isRotatable = false
 position = Vector2(892, 815)
 MirrorLength = 240
 initialAngle = 45.0
+isRotatable = false
+isEnergizeable = false
 
 [node name="LensPlanoConvex2" parent="LightManager" instance=ExtResource("7_wg0dr")]
 position = Vector2(1375, 809)

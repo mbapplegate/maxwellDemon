@@ -15,7 +15,7 @@ var outlinePolygonPoints = PackedVector2Array()
 
 @onready var focalSprite = $Stage/FocalSprite
 @onready var frontShape = $Stage/FrontArea/FrontShape
-@onready var halfRadShape = $Stage/DEBUG
+@onready var halfRadShape = $Stage/CenterOfCurve
 #@onready var rearShape = $Stage/BackArea/BackShape
 #@onready var backShape = $Stage/backBody/backArea
 #@onready var topShape = $Stage/backBody/top
@@ -25,6 +25,7 @@ var outlinePolygonPoints = PackedVector2Array()
 func _ready():
 	isEnergizeable = false
 	focalSprite.self_modulate = focalSpriteColor
+	halfRadShape.self_modulate = focalSpriteColor
 	
 	set_geometry(mirrorRadius,mirrorHeight)
 	if not isRotatable and initialAngle != 0:
@@ -39,8 +40,8 @@ func _ready():
 func set_geometry(mirrRadius:float, mirrHeight:float):
 	#Equation for mirror is x = Ay^2
 	#var xMax = (quadConst * mirrHeight * mirrHeight) / 4.0
-	focalSprite.position = Vector2(-mirrRadius,0.0).rotated(getRotation())
-	halfRadShape.position= Vector2(-mirrRadius/2.0,0.0).rotated(getRotation())
+	focalSprite.position = Vector2(-mirrRadius/2.0,0.0).rotated(getRotation())
+	halfRadShape.position= Vector2(-mirrRadius,0.0).rotated(getRotation())
 	var minAngle = asin(mirrHeight/(2.0*mirrRadius))
 	var angleSpacing = (2*minAngle)/(NUM_POINTS-1)
 

@@ -61,9 +61,10 @@ isPushable = false
 isRotatable = false
 
 [node name="FlatMirror" parent="LightManager" instance=ExtResource("9_t7eng")]
-position = Vector2(1511, 264)
+position = Vector2(576, 717)
 MirrorLength = 240
 initialAngle = 45.0
+isRotatable = false
 
 [node name="LensPlanoConvex2" parent="LightManager" instance=ExtResource("9_ynrmx")]
 position = Vector2(1375, 809)
