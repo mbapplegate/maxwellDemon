@@ -77,6 +77,14 @@ func haltRays(sourceObj:Object):
 		
 		runAllRays()
 		
+func stopAllRays():
+	if instancedRays.has("Temp"):
+		instancedRays["Temp"] = []
+	for source in instancedRays:
+		for i in range(instancedRays[source].size()):
+			instancedRays[source][i].clearBeam()
+	runAllRays()
+		
 func splitRay(splitRatio:float, splitDirection:Vector2, splitLocation:Vector2, originalBeam:Object):
 	
 	var instance = beamScene.instantiate()

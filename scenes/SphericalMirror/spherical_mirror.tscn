@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://ky4ndfe0by6m"]
+[gd_scene load_steps=6 format=3 uid="uid://ky4ndfe0by6m"]
 
 [ext_resource type="PackedScene" uid="uid://beic3gevjusuj" path="res://scenes/PushableObject/pushable_object.tscn" id="1_0ynn2"]
 [ext_resource type="Script" path="res://scenes/SphericalMirror/spherical_mirror.gd" id="2_r0yoj"]
 [ext_resource type="Texture2D" uid="uid://cvb38ctmeqcy8" path="res://icon.svg" id="3_b3o70"]
+[ext_resource type="Texture2D" uid="uid://ciqfgqswil4p2" path="res://scenes/Lens_PlanoConvex/focalSpot_white_16x16.png" id="3_i64ic"]
+[ext_resource type="Texture2D" uid="uid://coql3a6iufenl" path="res://scenes/SphericalMirror/centerOfCurvature32x32.png" id="4_ma406"]
 
 [node name="SphericalMirror" instance=ExtResource("1_0ynn2")]
 position = Vector2(805, 260)
@@ -18,19 +20,21 @@ focalSpriteColor = Color(0, 0, 1, 1)
 polygon = PackedVector2Array(-42, 0, -35, -16, -11, -28, 20, -27, 45, -2, 35, 0, 17, -21, -12, -22, -29, -9, -34, 0, -34, 0)
 
 [node name="BackArea" type="Area2D" parent="Stage" index="1"]
+visible = false
 
 [node name="BackShape" type="CollisionPolygon2D" parent="Stage/BackArea" index="0"]
+visible = false
 
 [node name="MirrorPolygon" type="Polygon2D" parent="Stage" index="2"]
 
 [node name="FocalSprite" type="Sprite2D" parent="Stage" index="3"]
-scale = Vector2(0.1, 0.1)
-texture = ExtResource("3_b3o70")
+texture = ExtResource("3_i64ic")
 
-[node name="DEBUG" type="Sprite2D" parent="Stage" index="4"]
-scale = Vector2(0.2, 0.2)
-texture = ExtResource("3_b3o70")
+[node name="CenterOfCurve" type="Sprite2D" parent="Stage" index="4"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("4_ma406")
 
 [node name="DEBUG2" type="Sprite2D" parent="Stage" index="5"]
+visible = false
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("3_b3o70")
