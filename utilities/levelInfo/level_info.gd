@@ -84,8 +84,8 @@ var GameFlow = {
 	"FilterLesson"          : "LevelEquiPrism3",
 	"LevelEquiPrism3"       : "LevelPrismRecombine",
 	"LevelPrismRecombine"   : "LevelFluorescence001",
-	"LevelFluorescence001"  : "LevelFluorescence002",
-	"LevelFluorescence002"  : "ComingSoon",
+	"LevelFluorescence001"  : "ComingSoon",
+	#"LevelFluorescence002"  : "ComingSoon",
 	"ComingSoon"            : "MainMenu"
 	
 }
