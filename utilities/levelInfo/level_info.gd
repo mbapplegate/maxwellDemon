@@ -49,6 +49,7 @@ var LevelDictionary = {
 	"LevelLamp001"         : {"Path" : "res://worlds/arcLamp001/lamp_001.tscn", "Title" : "Arc Lamp I", "Section" : "Lenses and Mirrors"},
 	"LevelLamp002"         : {"Path" : "res://worlds/arcLamp002/lamp_002.tscn", "Title" : "Arc Lamp II", "Section" : "Lenses and Mirrors"},
 	"SphericalMirrorLesson" : {"Path" : "res://lessons/sphericalMirror/spherical_mirror_lesson.tscn", "Title" : "Spherical Mirror Lesson", "Section" : "Lessons"},
+	"LevelImaging001" : {"Path" : "res://worlds/Imaging001/imaging_001.tscn", "Title" : "Imaging I", "Section" : "Imaging"},
 }
 
 var SectionOrdering = ["Tutorial", "Lenses and Mirrors","Dispersion","Fluorescence", "Colors", "Lessons", "Debug"]
@@ -84,7 +85,8 @@ var GameFlow = {
 	"FilterLesson"          : "LevelEquiPrism3",
 	"LevelEquiPrism3"       : "LevelPrismRecombine",
 	"LevelPrismRecombine"   : "LevelFluorescence001",
-	"LevelFluorescence001"  : "ComingSoon",
+	"LevelFluorescence001"  : "LevelImaging001",
+	"LevelImaging001"            : "ComingSoon",
 	#"LevelFluorescence002"  : "ComingSoon",
 	"ComingSoon"            : "MainMenu"
 	
