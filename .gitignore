@@ -16,3 +16,6 @@ mono_crash.*.json
 
 # Media
 *.avi
+
+# Binaries
+build/

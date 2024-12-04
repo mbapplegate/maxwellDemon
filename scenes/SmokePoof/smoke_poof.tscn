@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=3 uid="uid://bvfudmo0clwn2"]
+
+[ext_resource type="Texture2D" uid="uid://ciqfgqswil4p2" path="res://scenes/Lens_PlanoConvex/focalSpot_white_16x16.png" id="1_fk45l"]
+[ext_resource type="Script" path="res://scenes/SmokePoof/smoke_poof.gd" id="1_u20o1"]
+
+[sub_resource type="Curve" id="Curve_xmn74"]
+_data = [Vector2(0, 0.384615), 0.0, 0.0, 0, 0, Vector2(0.884393, 1), 0.0, 0.0, 0, 0, Vector2(0.913295, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_nc1pt"]
+colors = PackedColorArray(1, 1, 0, 1, 0.607843, 0, 0, 0.501961)
+
+[node name="SmokePoof" type="Node2D"]
+script = ExtResource("1_u20o1")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 64
+lifetime = 0.5
+one_shot = true
+explosiveness = 0.57
+randomness = 0.11
+lifetime_randomness = 0.66
+texture = ExtResource("1_fk45l")
+emission_shape = 3
+emission_rect_extents = Vector2(32, 0)
+direction = Vector2(0.5, 1)
+spread = 180.0
+gravity = Vector2(0, -1000)
+initial_velocity_min = 20.0
+initial_velocity_max = 60.0
+damping_min = 10.0
+damping_max = 10.0
+scale_amount_min = 2.0
+scale_amount_max = 2.0
+scale_amount_curve = SubResource("Curve_xmn74")
+color = Color(1, 0.741176, 0, 1)
+color_ramp = SubResource("Gradient_nc1pt")

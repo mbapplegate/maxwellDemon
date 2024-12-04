@@ -35,6 +35,7 @@ func _toggleDoor(val):
 					allGoalsMet = false
 		
 		if allGoalsMet:
+			player.teleport_to($Doorway.global_position+Vector2(-64,-32))
 			door.openDoor()
 	else:
 		door.closeDoor()

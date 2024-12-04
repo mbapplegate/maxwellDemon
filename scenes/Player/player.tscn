@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://ojfv06ceqv2a"]
+[gd_scene load_steps=27 format=3 uid="uid://ojfv06ceqv2a"]
 
 [ext_resource type="Script" path="res://scenes/Player/player.gd" id="1_ne1mb"]
 [ext_resource type="Texture2D" uid="uid://cnqlh4khsclsx" path="res://scenes/Player/maxwelll_Idle_ver01.png" id="1_wd2n5"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://dox7qedlaefmk" path="res://scenes/Player/maxwell_Walk_Right_ver01.png" id="3_vvd2d"]
 [ext_resource type="Texture2D" uid="uid://cvo1a3ktgmk7w" path="res://scenes/Player/maxwell_Walk_Up_ver01.png" id="4_yl1dd"]
 [ext_resource type="Texture2D" uid="uid://cvb38ctmeqcy8" path="res://icon.svg" id="6_gqex6"]
+[ext_resource type="PackedScene" uid="uid://bvfudmo0clwn2" path="res://scenes/SmokePoof/smoke_poof.tscn" id="7_qrsvh"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2hanx"]
 atlas = ExtResource("1_wd2n5")
@@ -189,5 +190,14 @@ visible = false
 scale = Vector2(0.05, 0.05)
 texture = ExtResource("6_gqex6")
 
+[node name="SmokePoofStart" parent="." instance=ExtResource("7_qrsvh")]
+
+[node name="SmokePoofDest" parent="." instance=ExtResource("7_qrsvh")]
+
+[node name="TeleportTimer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
 [connection signal="body_entered" from="MaxwellBody/ActivationRegion" to="." method="_on_activation_region_body_entered"]
 [connection signal="body_exited" from="MaxwellBody/ActivationRegion" to="." method="_on_activation_region_body_exited"]
+[connection signal="timeout" from="TeleportTimer" to="." method="_on_teleport_timer_timeout"]

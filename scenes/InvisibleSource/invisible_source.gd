@@ -6,6 +6,7 @@ class_name InvisibleSource
 @export var packetEnergy : float = 1.0
 @export var beamHalfHeight : int = 32
 @export var numBeams : int = 1
+@export var isEnergized : bool = true
 #@export var numRaysPerTimeout : int = 1
 #@export var timerTimeout : float = 1.0
 
@@ -19,7 +20,7 @@ signal startRays(source:Object)
 var rng = RandomNumberGenerator.new()
 var invisParent = null
 var srcEnergy = Vector3.ZERO
-var isEnergized : bool = true
+
 func _ready():
 	invisParent = get_parent()
 	#timer.wait_time = timerTimeout

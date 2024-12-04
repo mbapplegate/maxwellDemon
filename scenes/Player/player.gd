@@ -5,6 +5,8 @@ extends Node2D
 @onready var _player_body = $MaxwellBody
 @onready var _cast = $MaxwellBody/checkCollision
 @onready var _cast2 = $MaxwellBody/checkCollision2
+@onready var poofOrigin = $SmokePoofStart
+@onready var poofDest = $SmokePoofDest
 
 @export var SPEED = 400.0
 @export var PUSH_SPEED = 200.0
@@ -12,7 +14,8 @@ const SPRITE_SIZE = Vector2(64,64)
 const ACTIVATION_SIZE = 30
 const SEC_TO_IDLE = 2
 const TILE_SIZE = 32
-const NUDGE_DISTANCE = 2	
+const NUDGE_DISTANCE = 2
+const spriteBottom = Vector2(32,48)
 
 var idle = false
 var idleCount = 0
@@ -21,6 +24,8 @@ var screen_size
 var itemActive = null
 var tile_map
 var isMoving = false
+var isTeleporting:bool = false
+var teleportTo:Vector2 = Vector2.ZERO
 
 signal rotateCWSignal(numDegrees)
 signal rotateCCWSignal(numDegrees)
@@ -48,6 +53,8 @@ func _ready():
 	drawSize.x = SPRITE_SIZE.x * self.scale.x
 	drawSize.y = SPRITE_SIZE.y * self.scale.y
 	_activate_region.shape.size =Vector2(ACTIVATION_SIZE,ACTIVATION_SIZE)
+	poofOrigin.position = Vector2(32,64)
+	poofDest.position = Vector2(32,64)
 	
 func snap_position():
 	self.position = self.position.snapped(Vector2.ONE * TILE_SIZE)
@@ -83,7 +90,7 @@ func move_grid(direction:String):
 	if not isMoving and not Input.is_action_pressed("pull") and not Input.is_action_pressed("nudge"):
 		_set_activation_region(direction)
 	#print(validate_movement(newPos, inputs[direction]))	
-	if validate_movement(newPos, inputs[direction]):
+	if validate_movement(newPos, inputs[direction]) and not isTeleporting:
 		var tween = get_tree().create_tween()
 		tween.set_ease(Tween.EASE_IN_OUT)
 		tween.set_trans(Tween.TRANS_CUBIC)
@@ -108,6 +115,13 @@ func move_grid(direction:String):
 					levelComplete.emit()
 					#print("Winner winner chicken dinner")
 		
+func teleport_to(globalPos:Vector2):
+	isTeleporting = true
+	poofOrigin.make_poof(spriteBottom)
+	poofDest.make_poof(globalPos - global_position+spriteBottom)
+	teleportTo = globalPos
+	$TeleportTimer.start()
+
 	
 func validate_movement(testLoc:Vector2, direction:Vector2):
 	if isMoving:
@@ -301,3 +315,8 @@ func _on_activation_region_body_exited(body):
 			if energizeSignal.is_connected(obj.togEnergize):
 				energizeSignal.disconnect(obj.togEnergize)
 			obj.update_texture()
+
+
+func _on_teleport_timer_timeout():
+	isTeleporting = false
+	global_position = teleportTo
