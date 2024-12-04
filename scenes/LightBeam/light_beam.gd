@@ -7,6 +7,7 @@ class_name LightBeam
 
 @onready var line = $lightLine
 @onready var cast = $lightCast
+#@onready var screenNotifier = $VisibleOnScreenNotifier2D
 @onready var pulseTexture = preload("res://scenes/LightBeam/pulseTexture.png")
 
 const MEDIUM_INDEX : float = 1.0
@@ -32,6 +33,7 @@ var pulseArrived : bool = false
 var numPulses : int = 0
 var isPulsing : bool = true
 var freeBeamFlag : bool = false
+var rayBoundingRect : Rect2 = Rect2()
 
 func _ready():
 	$Timer.wait_time = PULSE_SPACING/float(PULSE_SPEED)
@@ -92,12 +94,36 @@ func propagateBeam():
 	if numIters == MAX_ITERS-1:
 		print("Too many bounces")
 	_beamToPath($Path2D)
+	rayBoundingRect = _getBoundingRect(line)
 	propDone = true
 	#print("  PROP DONE  ")
 	if $Timer.is_stopped() and isPulsing:
 		_on_timer_timeout()
 	
-
+func _getBoundingRect(boundLine:Line2D) -> Rect2:
+	var newRect : Rect2 = Rect2()
+	if numPoints < 2:
+		newRect = Rect2(0,0,0,0)
+	else:
+		var firstPoint = boundLine.get_point_position(0)
+		var minX : float = firstPoint.x
+		var minY : float = firstPoint.y
+		var maxX : float = firstPoint.x
+		var maxY : float = firstPoint.y
+		for i in range(numPoints-1):
+			var thisPos = boundLine.get_point_position(i+1)
+			if thisPos.x > maxX:
+				maxX = thisPos.x
+			if thisPos.x < minX:
+				minX = thisPos.x
+			if thisPos.y > maxY:
+				maxY = thisPos.y
+			if thisPos.y < minY:
+				minY = thisPos.y
+		newRect = Rect2(minX,minY,(maxX-minX), (maxY-minY))
+	print(newRect)
+	return newRect#Rect2(0,0,64,64)
+	
 func _beamToPath(pathObject:Path2D):
 	pathObject.curve.clear_points()
 	#$Path2D/PathFollow2D/Sprite2D.position = line.get_point_position(0)
@@ -252,12 +278,17 @@ func _spawnPulse()->Array:
 	
 func _on_timer_timeout():
 	if propDone:
-		var pulseObjects = _spawnPulse()
-		pulseObjects[1].progress_ratio = 0
-		var t = create_tween().set_trans(Tween.TRANS_LINEAR)
-		t.tween_property(pulseObjects[1],'progress_ratio',1,beamLength/PULSE_SPEED)
-		t.finished.connect(_destroyPulse.bind(pulseObjects[0],pulseObjects[2]))
-		$Timer.start()
+		print(get_viewport().canvas_transform.origin) 
+		if not isPulsing: #and not rayBoundingRect.intersects(vizRect):
+			print("Out of frame")
+			stopPulsing()
+		else:
+			var pulseObjects = _spawnPulse()
+			pulseObjects[1].progress_ratio = 0
+			var t = create_tween().set_trans(Tween.TRANS_LINEAR)
+			t.tween_property(pulseObjects[1],'progress_ratio',1,beamLength/PULSE_SPEED)
+			t.finished.connect(_destroyPulse.bind(pulseObjects[0],pulseObjects[2]))
+			$Timer.start()
 
 func _destroyPulse(followNode, isDetected:bool):
 	if is_instance_valid(followNode):
@@ -307,5 +338,3 @@ func clearBeam():
 			#_destroyPulseNoSignal(child)
 	#$Timer.stop()
 	#$Path2D.curve.clear_points()
-	
-	

@@ -65,6 +65,6 @@ func registerBeams():
 		
 
 
-func _ray_hit(photonObj:Object, collPoint:Vector2, _collNormal:Vector2, _collider:Object):
+func _ray_hit(_photonObj:Object, _collPoint:Vector2, _collNormal:Vector2, _collider:Object):
 	pass
 	#photonObj.stopBeam(collPoint)
